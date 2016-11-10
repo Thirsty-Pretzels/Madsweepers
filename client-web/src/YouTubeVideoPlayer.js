@@ -36,7 +36,7 @@ export default class YouTube extends Component {
 
     }
     if (NextProps.playerState) {
-      this.player.startVideo();
+      this.player.playVideo();
     } else {
       this.player.pauseVideo();
     }
