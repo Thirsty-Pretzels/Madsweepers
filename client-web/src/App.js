@@ -8,7 +8,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      CurrentTime: 0,
+      currentTime: 0,
       playerState: true
     }
   }
@@ -20,7 +20,8 @@ class App extends Component {
 
   updateCurrentTime(timeText) {
     const currentTime = Number(timeText);
-    console.log('updateCurrentTime:' );
+    console.log('updateCurrentTime:', currentTime);
+    this.setState({currentTime});
   }
 
 
@@ -34,12 +35,12 @@ class App extends Component {
 
         <YouTubePlayer
           YTid='a-Zt_oGTm4I'
-          currentTime={this.state.CurrentTime}
+          currentTime={this.state.currentTime}
           playerState={this.state.playerState}
           onStateChange={this.onStateChange.bind(this)} />
         <YouTubePlayer
           YTid='a-Zt_oGTm4I'
-          currentTime={this.state.CurrentTime}
+          currentTime={this.state.currentTime}
           playerState={this.state.playerState}
           onStateChange={this.onStateChange.bind(this)} />
         <div>{this.state.playerState}: {this.state.CurrentTime}</div>
