@@ -11,11 +11,11 @@ class Board extends Component {
     if ( event.key.slice(0, 5) === 'Arrow' ) {
       if (event.key === 'ArrowUp' && this.props.playerLocation.y > 0 ) {
         keyPress = 'UP';
-      } else if (event.key === 'ArrowDown' && this.props.playerLocation.y < 9) {
+      } else if (event.key === 'ArrowDown' && this.props.playerLocation.y < this.props.board.length - 1) {
         keyPress = 'DOWN';
       } else if (event.key === 'ArrowLeft' && this.props.playerLocation.x > 0) {
         keyPress = 'LEFT';
-      } else if (event.key === 'ArrowRight' && this.props.playerLocation.x < 9) {
+      } else if (event.key === 'ArrowRight' && this.props.playerLocation.x < this.props.board[0].length - 1) {
         keyPress = 'RIGHT';
       }
 
