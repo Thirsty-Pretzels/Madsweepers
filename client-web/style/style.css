@@ -8,4 +8,20 @@
 
 .gameBoard {
   outline: none;
+  position: relative;
+}
+
+.playGround {
+  position: absolute;
+  outline: none;
+}
+
+#player {
+  width: 50px;
+  height: 50px;
+  background-image: url('../images/Mario.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition-duration: 1s;
+  border-width: 0;
 }
