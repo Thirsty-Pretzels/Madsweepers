@@ -2,13 +2,44 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Row from '../components/board_row';
 
+import { movePlayer } from '../actions/index';
+import { bindActionCreators } from 'redux';
+
 class Board extends Component {
+  keyDown(event) {
+    var keyPress;
+    if ( event.key.slice(0, 5) === 'Arrow' ) {
+      if (event.key === 'ArrowUp' && this.props.playerLocation.y > 0 ) {
+        keyPress = 'UP';
+      } else if (event.key === 'ArrowDown' && this.props.playerLocation.y < 9) {
+        keyPress = 'DOWN';
+      } else if (event.key === 'ArrowLeft' && this.props.playerLocation.x > 0) {
+        keyPress = 'LEFT';
+      } else if (event.key === 'ArrowRight' && this.props.playerLocation.x < 9) {
+        keyPress = 'RIGHT';
+      }
+
+      this.props.movePlayer(keyPress, this.props.playerLocation)
+
+    }
+  }
+
   render() {
     return (
-      <div>{
-        this.props.board.map(function(row) {
+      <div
+        id='gameBoard'
+        className='gameBoard'
+        tabIndex='0'
+        autoFocus={true}
+        onKeyDown={ this.keyDown.bind(this) }
+      >{
+        this.props.board.map((row, index) => {
           return (
-            <Row row={row} />
+            <Row
+              key={index}
+              rowIndex={index}
+              row={row}
+              playerLocation={this.props.playerLocation} />
           )
         })
       }</div>
@@ -16,10 +47,15 @@ class Board extends Component {
   }
 }
 
-var mapStateToProps = function(state) {
+var mapStateToProps = (state) => {
   return {
-    board: state.board
+    board: state.board,
+    playerLocation: state.playerLocation
   }
 };
 
-export default connect(mapStateToProps)(Board);
+var mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ movePlayer: movePlayer }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Board);
