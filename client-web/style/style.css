@@ -24,4 +24,5 @@
   background-repeat: no-repeat;
   transition-duration: 1s;
   border-width: 0;
+  z-index: 1;
 }
