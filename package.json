@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/TimZeng/Something-about-video/issues"
   },
-  "homepage": "https://github.com/TimZeng/Something-about-video#readme"
+  "homepage": "https://github.com/TimZeng/Something-about-video#readme",
+  "dependencies": {
+    "socket.io": "^1.5.1"
+  }
 }
