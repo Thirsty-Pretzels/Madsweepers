@@ -6,28 +6,28 @@ import { movePlayer } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 class Board extends Component {
-  keyDown(event) {
-    var keyPress;
-    if ( event.key.slice(0, 5) === 'Arrow' ) {
-      if (event.key === 'ArrowUp' && this.props.playerLocation.y > 0 ) {
-        keyPress = 'UP';
-      } else if (event.key === 'ArrowDown' && this.props.playerLocation.y < this.props.board.length - 1) {
-        keyPress = 'DOWN';
-      } else if (event.key === 'ArrowLeft' && this.props.playerLocation.x > 0) {
-        keyPress = 'LEFT';
-      } else if (event.key === 'ArrowRight' && this.props.playerLocation.x < this.props.board[0].length - 1) {
-        keyPress = 'RIGHT';
-      }
+  // keyDown(event) {
+  //   var keyPress;
+  //   if ( event.key.slice(0, 5) === 'Arrow' ) {
+  //     if (event.key === 'ArrowUp' && this.props.playerLocation.y > 0 ) {
+  //       keyPress = 'UP';
+  //     } else if (event.key === 'ArrowDown' && this.props.playerLocation.y < this.props.board.length - 1) {
+  //       keyPress = 'DOWN';
+  //     } else if (event.key === 'ArrowLeft' && this.props.playerLocation.x > 0) {
+  //       keyPress = 'LEFT';
+  //     } else if (event.key === 'ArrowRight' && this.props.playerLocation.x < this.props.board[0].length - 1) {
+  //       keyPress = 'RIGHT';
+  //     }
 
-      if (!!keyPress) {
-        socket.emit('movePlayer', this.props.playerLocation);
-        socket.on('movePlayer', (data) => {
-          this.props.movePlayer(keyPress, data);
-        });
-      }
+  //     if (!!keyPress) {
+  //       socket.emit('movePlayer', this.props.playerLocation);
+  //       socket.on('movePlayer', (data) => {
+  //         this.props.movePlayer(keyPress, data);
+  //       });
+  //     }
 
-    }
-  }
+  //   }
+  // }
 
   render() {
     return (
@@ -36,7 +36,7 @@ class Board extends Component {
         className='gameBoard'
         tabIndex='0'
         autoFocus={true}
-        onKeyDown={ this.keyDown.bind(this) }
+        onKeyDown={ (e) => this.props.movePlayer(e.key, this.props.playerLocation, this.props.board) }
       >{
         this.props.board.map((row, index) => {
           return (
