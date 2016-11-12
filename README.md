@@ -1,29 +1,50 @@
-Video Sync
+# Project Name
 
-## Heading ##
-Syncing video playback across multiple devices
+Multiplayer Minesweeper
 
-## Sub-Heading ##
-Watch the same video at the same time
+## Team
 
-## Summary ##
+  - __Product Owner__: Tim Zeng
+  - __Scrum Master__: Bruce Yang
+  - __Development Team Members__: MJ Png, David Minehan
 
-You have an exciting video to share with the 10 friends around you. All of you crowd around a mobile phone, and can barely see anything on the tiny screen. With video sync, send a link to your friends and view the video at the same time, on your own devices. 
+## Table of Contents
 
-## Problem ##
-It is difficult to play a video at the same time as someone else when you're on different devices. 
+1. [Usage](#Usage)
+1. [Requirements](#requirements)
+1. [Development](#development)
+    1. [Installing Dependencies](#installing-dependencies)
+    1. [Tasks](#tasks)
+1. [Team](#team)
+1. [Contributing](#contributing)
 
-## Solution ##
+## Usage
 
-- Video synchronization
-- Real time comments
-- Video streaming
+Connect to the server and play!  Use the arrow keys to move, space to reveal tiles and 'm' to mark mines.
 
-## Quote from You ##
-Changing the video sharing experience. 
+## Requirements
 
-## Customer Quote ##
-Great product! It is sooo much easier to watch a video with my girlfriend now!
+- Node 0.10.x
+- Redis 2.6.x
+- Postgresql 9.1.x
 
-## Closing and Call to Action ##
-Give our product a try today
+## Development
+
+### Installing Dependencies
+
+From within the root directory:
+
+```sh
+sudo npm install -g bower
+npm install
+bower install
+```
+
+### Roadmap
+
+View the project roadmap [here](https://github.com/Thirsty-Pretzels/thesis/issues)
+
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
