@@ -19,7 +19,12 @@ class Board extends Component {
         keyPress = 'RIGHT';
       }
 
-      this.props.movePlayer(keyPress, this.props.playerLocation)
+      if (!!keyPress) {
+        socket.emit('movePlayer', this.props.playerLocation);
+        socket.on('movePlayer', (data) => {
+          this.props.movePlayer(keyPress, data);
+        });
+      }
 
     }
   }

@@ -1,5 +1,5 @@
 {
-  "name": "Mad Minesweeper",
+  "name": "Mad_Minesweeper",
   "version": "1.0.0",
   "description": "Multi-player minesweeper",
   "main": "index.js",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/TimZeng/Something-about-video#readme",
   "dependencies": {
+    "express": "^4.14.0",
     "socket.io": "^1.5.1"
   }
 }
