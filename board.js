@@ -51,7 +51,7 @@ Board.prototype.generate = function (n, m, d) {
   // console.log(JSON.stringify(this.board));
 
   // uncomment to log board values to the console on generation:
-  // console.log(this.board.reduce(function(a, c){ return a.concat([c.reduce(function(b, d){ return b.concat(d['val'])}, [])]) }, []));
+  console.log(this.board.reduce(function(a, c){ return a.concat([c.reduce(function(b, d){ return b.concat(d['val'])}, [])]) }, []));
 }
 
 //reveal a tile
@@ -133,8 +133,8 @@ Board.prototype.tally = function(){
 }
 
 // uncomment to generate a sample board on startup
-// var hjk = new Board();
-// hjk.generate(30, 30, .2);
-// hjk.flag(12, 12, 'heyooo');
+var hjk = new Board();
+hjk.generate(30, 30, .2);
+hjk.flag(12, 12, 'heyooo');
 
 module.exports = Board;
