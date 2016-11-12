@@ -11,24 +11,24 @@ export function movePlayer(key, location, board) {
       keyPress = 'RIGHT';
     }
 
-    if (!!keyPress) {
-      socket.emit('movePlayer', location);
-      socket.on('movePlayer', (data) => {
-        console.log('keyPress: ', keyPress);
-        console.log('payload: ', data);
-        return {
-          type: keyPress,
-          payload: data
-        }
-      });
+    // if (!!keyPress) {
+    //   socket.emit('movePlayer', location);
+    //   socket.on('movePlayer', (data) => {
+    //     console.log('keyPress: ', keyPress);
+    //     console.log('payload: ', data);
+    //     return {
+    //       type: keyPress,
+    //       payload: data
+    //     }
+    //   });
 
-    }
+    // }
 
   }
 
-  // return {
-  //   type: keyPress,
-  //   payload: location
-  // }
+  return {
+    type: keyPress,
+    payload: location
+  }
 
 }
