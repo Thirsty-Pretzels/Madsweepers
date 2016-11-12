@@ -15,6 +15,13 @@ io.on('connection', function(socket){
     // to send stuff back to client side
     io.emit('eventNameHere', data)
   })
+
+  socket.on('movePlayer', function(data) {
+    console.log(data, 'received data from movePlayer');
+    // to send stuff back to client side
+    io.emit('movePlayer', data)
+  })
+
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
