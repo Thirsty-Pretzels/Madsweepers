@@ -105,6 +105,10 @@ Board.prototype.unloot = function(x, y, loot){
   return temp;
 }
 
+Board.prototype.tileVal = function(x, y){
+  return this.board[x][y]['val'];
+}
+
 //get tallies for flagged mines
 Board.prototype.tally = function(){
   var tallies = {};
