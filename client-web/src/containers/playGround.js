@@ -5,6 +5,8 @@ import { movePlayer } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import Player from '../components/player';
 
+var playerId = 1;
+
 class PlayGround extends Component {
   render() {
     return (
@@ -13,10 +15,13 @@ class PlayGround extends Component {
         id='playGround'
         tabIndex='0'
         onKeyDown={ (e) =>
-          this.props.movePlayer(e.key, this.props.playerLocation, this.props.board)
-        }>
-        <Player playerLocation={this.props.playerLocation} />
-      </div>
+          this.props.movePlayer(playerId, e.key, this.props.playerLocation, this.props.board)
+        }>{
+
+          this.props.playerLocation.map((player) =>
+            <Player key={player.id} playerLocation={player} />
+          )
+      }</div>
     )
   }
 }
