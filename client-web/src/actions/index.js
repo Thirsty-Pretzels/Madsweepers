@@ -1,13 +1,14 @@
-export function movePlayer(key, location, board) {
-  var keyPress;
+export function movePlayer(playerId, key, location, board) {
+  var keyPress = 'STAY';
+
   if ( key.slice(0, 5) === 'Arrow' ) {
-    if (key === 'ArrowUp' && location.y > 0 ) {
+    if (key === 'ArrowUp' && location[playerId].y > 0 ) {
       keyPress = 'UP';
-    } else if (key === 'ArrowDown' && location.y < board.length - 1) {
+    } else if (key === 'ArrowDown' && location[playerId].y < board.length - 1) {
       keyPress = 'DOWN';
-    } else if (key === 'ArrowLeft' && location.x > 0) {
+    } else if (key === 'ArrowLeft' && location[playerId].x > 0) {
       keyPress = 'LEFT';
-    } else if (key === 'ArrowRight' && location.x < board[0].length - 1) {
+    } else if (key === 'ArrowRight' && location[playerId].x < board[0].length - 1) {
       keyPress = 'RIGHT';
     }
 
@@ -26,8 +27,11 @@ export function movePlayer(key, location, board) {
 
   }
 
+  console.log(keyPress);
+
   return {
     type: keyPress,
+    playerId: playerId,
     payload: location
   }
 
