@@ -9,8 +9,7 @@ Board.prototype.generate = function (n, m, d) {
     d = d ? d : .175
   }
   var mines = n * m * d;
-  this.todos = n * m - mines;
-
+  this.todos = n * m - mines;  //total number of non-mine tiles to uncover
   this.board = [];
 
   //generate empty board
@@ -52,9 +51,10 @@ Board.prototype.generate = function (n, m, d) {
   // console.log(JSON.stringify(this.board));
 
   // uncomment to log board values to the console on generation:
-  console.log(this.board.reduce(function(a, c){ return a.concat([c.reduce(function(b, d){ return b.concat(d['val'])}, [])]) }, []));
+  // console.log(this.board.reduce(function(a, c){ return a.concat([c.reduce(function(b, d){ return b.concat(d['val'])}, [])]) }, []));
 }
 
+//reveal a tile
 Board.prototype.uncover = function(x, y) {
   if (this.board[x][y]['revealed'] === false) {
     this.board[x][y]['revealed'] = true;
@@ -63,11 +63,26 @@ Board.prototype.uncover = function(x, y) {
   return this.board[x][y]['val'];
 }
 
+Board.prototype.explode = function(x, y){
+  this.board[x][y]['status'] = 4;
+  this.board[x][y]['flaggedBy'] = null;
+  this.board[x][y]['surface'] = null;
+  for (var i = -1; i < 2; i++){
+    for (var j = -1; j < 2; j++){
+      if (x + i >= 0 && x + i < this.board.length && y + j >= 0 && y + j < this.board[0].length){
+        this.board[x+i][y+j]['surface'] = null;
+      }
+    }
+  }
+}
+
+//generate loot on board
 Board.prototype.loot = function(x, y) {
   var items = [{name: 'banana'}, {name: 'shield'}, {name: 'cannon'}];
   this.board[x][y]['surface'] = items[Math.floor(Math.random * items.length)];
 }
 
+//flag a mine
 Board.prototype.flag = function(x, y, name){
   if (this.board[x][y]['flaggedBy'] === null){
     this.board[x][y]['flaggedBy'] = name;
@@ -75,12 +90,22 @@ Board.prototype.flag = function(x, y, name){
   }
 }
 
+//unflag a mine, can only be performed by person who originally flagged.
+Board.prototype.unflag = function(x, y, name){
+  if (this.board[x][y]['flaggedBy'] === name) {
+    this.board[x][y]['flaggedBy'] = null;
+    this.board[x][y]['status'] = 0;
+  }
+}
+
+//remove loot from board
 Board.prototype.unloot = function(x, y, loot){
   var temp = this.board[x][y]['surface'];
   this.board[x][y]['surface'] = null;
   return temp;
 }
 
+//get tallies for flagged mines
 Board.prototype.tally = function(){
   var tallies = {};
   var name;
@@ -105,7 +130,7 @@ Board.prototype.tally = function(){
 
 // uncomment to generate a sample board on startup
 // var hjk = new Board();
-// hjk.generate(30, 30, .15);
+// hjk.generate(30, 30, .2);
 // hjk.flag(12, 12, 'heyooo');
 
 module.exports = Board;
