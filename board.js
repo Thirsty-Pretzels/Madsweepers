@@ -1,10 +1,16 @@
 var Board = function () {
   this.board = [];
+  this.todos = 0;
 }
 
-//generate a random board, takes two arguments for x and y dimensions
-Board.prototype.generate = function (n, m) {
-  var mines = n * m * .2;
+//generate a random board, takes two arguments for x and y dimensions and an optional danger factor
+Board.prototype.generate = function (n, m, d) {
+  if (d === undefined || d > .9 || d < 0) {
+    d = d ? d : .175
+  }
+  var mines = n * m * d;
+  this.todos = n * m - mines;
+
   this.board = [];
 
   //generate empty board
@@ -42,16 +48,64 @@ Board.prototype.generate = function (n, m) {
       }
     }
   }
-  // uncomment to log board to console:
+  // uncomment to log stringified board to console:
   // console.log(JSON.stringify(this.board));
 
   // uncomment to log board values to the console on generation:
-  // console.log(this.board.reduce(function(a, c){ return a.concat([c.reduce(function(b, d){ return b.concat(d['val'])}, [])]) }, []));
+  console.log(this.board.reduce(function(a, c){ return a.concat([c.reduce(function(b, d){ return b.concat(d['val'])}, [])]) }, []));
 }
 
-Board.prototype.uncover = function(point) {
-  this.board[point[0]][point[1]]['revealed'] = true;
+Board.prototype.uncover = function(x, y) {
+  if (this.board[x][y]['revealed'] === false) {
+    this.board[x][y]['revealed'] = true;
+    this.todos--;
+  }
+  return this.board[x][y]['val'];
 }
+
+Board.prototype.loot = function(x, y) {
+  var items = [{name: 'banana'}, {name: 'shield'}, {name: 'cannon'}];
+  this.board[x][y]['surface'] = items[Math.floor(Math.random * items.length)];
+}
+
+Board.prototype.flag = function(x, y, name){
+  if (this.board[x][y]['flaggedBy'] === null){
+    this.board[x][y]['flaggedBy'] = name;
+    this.board[x][y]['status'] = 1;
+  }
+}
+
+Board.prototype.unloot = function(x, y, loot){
+  var temp = this.board[x][y]['surface'];
+  this.board[x][y]['surface'] = null;
+  return temp;
+}
+
+Board.prototype.tally = function(){
+  var tallies = {};
+  var name;
+  var err = 0;
+  for (var i = 0; i < this.board.length; i++){
+    for (var j = 0; j < this.board[i].length; j++){
+      name = this.board[i][j]['flaggedBy'];
+      if (this.board[i][j]['val'] === 9 && name !== null){
+        tallies[name] = tallies.hasOwnProperty(name) ? tallies[name] + 1 : 1;
+      }
+      if (this.board[i][j]['revealed'] === false && this.board[i][j]['val'] !== 9){
+        err ++;
+      }
+    }
+  }
+  if (err) {
+    this.todos = err;
+    return err
+  }
+  return tallies;
+}
+
+// uncomment to generate a sample board on startup
 // var hjk = new Board();
-// hjk.generate(10, 10);
+// hjk.generate(30, 30, .15);
+// hjk.flag(12, 12, 'heyooo');
+
 module.exports = Board;
