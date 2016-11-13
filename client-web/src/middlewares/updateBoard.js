@@ -11,6 +11,11 @@ export function boardMiddleware(store) {
       socket.emit('movePlayer', [action.type, action.playerId , action.payload, action.board]);
     }
 
+    if (action.type === 'OPEN-SPACE') {
+      console.log('inside OPEN-SPACE middleware');
+      socket.emit('OPEN-SPACE', [action.playerId, action.location, action.payload]);
+    }
+
     return next(action);
   };
 }
@@ -20,5 +25,9 @@ export default function(store) {
   socket.on('update', data => {
   	//when data is received from socket server, fire another action by store.dispatch
     store.dispatch(actions.updateLocation(data[1], 'ARROW'+data[0] , data[2], data[3]));
+  });
+
+  socket.on('updateBoard', newBoard => {
+    store.dispatch(actions.updateBoard(newBoard));
   });
 }

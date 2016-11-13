@@ -8,9 +8,13 @@
 // }
 
 
-export default function() {
+export default function(state, action) {
   console.log('inside reducer_board');
-  return [
+  if (action.type === 'UPDATE-BOARD') {
+      return action.payload;
+  }
+
+  return state ? state : [
     [
       {"val":0,"status":0,"flaggedBy":null,"surface":null},
       {"val":0,"status":0,"flaggedBy":null,"surface":null},
