@@ -44,13 +44,12 @@ export function updateLocation(playerId, key, location, board) {
   }
 }
 
-export function openSpace(playerId, location, board) {
+export function openSpace(playerId, location) {
 
   return {
     type: 'OPEN-SPACE',
     playerId: playerId,
-    location: location,
-    payload: board
+    location: location
   }
 }
 
@@ -65,7 +64,15 @@ export function updateBoard(newBoard) {
 export function getNewBoard() {
   console.log('inside getNewBoard action');
   return {
-    type: 'GET-NEW-BOARD',
-    playload: null
+    type: 'GET-NEW-BOARD'
+  }
+}
+
+export function dropFlag(playerId, location) {
+  console.log('inside dropFlag action');
+  return {
+    type: 'DROP-FLAG',
+    playerId: playerId,
+    location: location
   }
 }

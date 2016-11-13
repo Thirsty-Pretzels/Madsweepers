@@ -77,7 +77,20 @@ io.on('connection', function(socket){
     var playerId = data[0];
     var location = data[1];
 
-    board.board[location.y][location.x].status = 2;
+    if (board.board[location.y][location.x].status === 0) {
+      board.board[location.y][location.x].status = 2;
+    }
+
+    io.emit('updateBoard', board.board);
+  });
+
+  socket.on('DROP-FLAG', function(data){
+    var playerId = data[0];
+    var location = data[1];
+
+    if ( board.board[location.y][location.x].status === 0 ) {
+      board.board[location.y][location.x].status = 1;
+    }
 
     io.emit('updateBoard', board.board);
   });

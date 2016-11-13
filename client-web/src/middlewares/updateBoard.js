@@ -7,17 +7,20 @@ import * as actions from '../actions/index';
 export function boardMiddleware(store) {
   return next => action => {
     //when action.type is UP, DOWN, LEFT, RIGHT, socket.emit will be fired
-    if (action.type === 'UP' || action.type === 'DOWN' || action.type === 'LEFT' || action.type === 'RIGHT') {
+    if ( action.type === 'UP' || action.type === 'DOWN' || action.type === 'LEFT' || action.type === 'RIGHT' ) {
       socket.emit('movePlayer', [action.type, action.playerId , action.payload, action.board]);
     }
 
-    if (action.type === 'OPEN-SPACE') {
-      socket.emit('OPEN-SPACE', [action.playerId, action.location, action.payload]);
+    if ( action.type === 'OPEN-SPACE' ) {
+      socket.emit('OPEN-SPACE', [action.playerId, action.location]);
     }
 
-    if (action.type === 'GET-NEW-BOARD') {
-      console.log('inside GET-NEW-BOARD middleware');
+    if ( action.type === 'GET-NEW-BOARD' ) {
       socket.emit('GET-NEW-BOARD');
+    }
+
+    if ( action.type === 'DROP-FLAG' ) {
+      socket.emit('DROP-FLAG', [action.playerId, action.location]);
     }
 
     return next(action);
