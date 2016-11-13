@@ -30,7 +30,8 @@ io.on('connection', function(socket){
 
   socket.on('movePlayer', function(data) {
     console.log(data, 'received data from movePlayer');
-    io.emit('movePlayer', data)
+    // to send stuff back to client side
+    io.emit('update', data)
   })
 
   socket.on('disconnect', function(){
