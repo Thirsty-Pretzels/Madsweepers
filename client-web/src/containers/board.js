@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Row from '../components/board_row';
-
+import { connect } from 'react-redux';
 import { movePlayer } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
