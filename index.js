@@ -27,9 +27,7 @@ io.on('connection', function(socket){
   }
 
   socket.on('GET-NEW-BOARD', function() {
-    console.log('getting board on server')
     // to send stuff back to client side
-
     io.emit('updateBoard', board.board);
   });
 
