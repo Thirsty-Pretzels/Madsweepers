@@ -7,7 +7,9 @@ import ReduxPromise from 'redux-promise';
 import App from './components/app';
 import reducers from './reducers';
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+import { boardMiddleware } from './middlewares/updateBoard';
+
+const createStoreWithMiddleware = applyMiddleware(boardMiddleware)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
