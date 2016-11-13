@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { movePlayer, openSpace } from '../actions/index';
+import { movePlayer, openSpace, dropFlag } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import Player from '../components/player';
 
@@ -14,7 +14,11 @@ class PlayGround extends Component {
     }
 
     if ( e.key === ' ' ) {
-      this.props.openSpace(playerId, this.props.playerLocation[playerId], this.props.board);
+      this.props.openSpace(playerId, this.props.playerLocation[playerId]);
+    }
+
+    if ( e.key === 'f' ) {
+      this.props.dropFlag(playerId, this.props.playerLocation[playerId]);
     }
 
   }
@@ -43,7 +47,11 @@ var mapStateToProps = (state) => {
 };
 
 var mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ movePlayer: movePlayer, openSpace: openSpace }, dispatch)
+  return bindActionCreators({
+    movePlayer: movePlayer,
+    openSpace: openSpace,
+    dropFlag: dropFlag
+  }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayGround);
