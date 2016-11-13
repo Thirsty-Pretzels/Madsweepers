@@ -136,5 +136,6 @@ Board.prototype.tally = function(){
 // var hjk = new Board();
 // hjk.generate(30, 30, .2);
 // hjk.flag(12, 12, 'heyooo');
+// console.log(hjk);
 
 module.exports = Board;

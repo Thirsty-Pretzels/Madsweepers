@@ -12,8 +12,12 @@ export function boardMiddleware(store) {
     }
 
     if (action.type === 'OPEN-SPACE') {
-      console.log('inside OPEN-SPACE middleware');
       socket.emit('OPEN-SPACE', [action.playerId, action.location, action.payload]);
+    }
+
+    if (action.type === 'GET-NEW-BOARD') {
+      console.log('inside GET-NEW-BOARD middleware');
+      socket.emit('GET-NEW-BOARD');
     }
 
     return next(action);
