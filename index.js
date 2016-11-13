@@ -7,8 +7,8 @@ var Board = require('./board.js');
 // Arguments currently hardcoded but can be randomly generated or chosen by user
 var board = null;
 function createBoard() {
-  var rows = 30;
-  var columns = 30;
+  var rows = 16;
+  var columns = 22;
   var dangerFactor = 0.2;
   var mineRow = 12;
   var mineCol = 12;
@@ -16,17 +16,19 @@ function createBoard() {
   board = new Board();
   board.generate(rows, columns, dangerFactor);
   board.flag(mineRow, mineCol, 'bigFatMine');
+  console.log('created newboard');
 }
-
-createBoard();
 
 io.on('connection', function(socket){
   console.log('a user connected');
-  socket.on('getBoard', function() {
-    console.log('getting board on server')
-    // to send stuff back to client side
 
-    io.emit('getBoard', board)
+  if ( !board ) {
+    createBoard();
+  }
+
+  socket.on('GET-NEW-BOARD', function() {
+    // to send stuff back to client side
+    io.emit('updateBoard', board.board);
   });
 
   socket.on('movePlayer', function(data) {
@@ -68,20 +70,16 @@ io.on('connection', function(socket){
         {id:'player2', x: 9, y: 9},
         {id:'player3', x: 5, y: 5}];
 
-    console.log('newPosition: ', newPlayerLocation);
-    console.log(data[0], data[1]);
     io.emit('update', [data[0], data[1], newPlayerLocation, data[3]])
   });
 
   socket.on('OPEN-SPACE', function(data){
     var playerId = data[0];
     var location = data[1];
-    var board = data[2];
 
-    board[location.y][location.x].status = 2;
-    console.log('newboard => ', board[location.y][location.x]);
+    board.board[location.y][location.x].status = 2;
 
-    io.emit('updateBoard', board);
+    io.emit('updateBoard', board.board);
   });
 
   socket.on('disconnect', function(){

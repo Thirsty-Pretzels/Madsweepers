@@ -9,7 +9,6 @@
 
 
 export default function(state, action) {
-  console.log('inside reducer_board');
   if (action.type === 'UPDATE-BOARD') {
       return action.payload;
   }

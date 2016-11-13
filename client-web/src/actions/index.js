@@ -45,7 +45,6 @@ export function updateLocation(playerId, key, location, board) {
 }
 
 export function openSpace(playerId, location, board) {
-  console.log('inside openSpace action');
 
   return {
     type: 'OPEN-SPACE',
@@ -56,10 +55,17 @@ export function openSpace(playerId, location, board) {
 }
 
 export function updateBoard(newBoard) {
-  console.log('inside updateBoard action');
-
+  console.log('received a new board');
   return {
     type: 'UPDATE-BOARD',
     payload: newBoard
+  }
+}
+
+export function getNewBoard() {
+  console.log('inside getNewBoard action');
+  return {
+    type: 'GET-NEW-BOARD',
+    playload: null
   }
 }
