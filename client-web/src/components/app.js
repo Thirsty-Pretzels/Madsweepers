@@ -4,7 +4,7 @@ import PlayGround from '../containers/playGround';
 
 export default class App extends Component {
   componentDidMount() {
-    socket.emit('eventNameHere', 'testMessagehere');
+    //
   }
 
   render() {
