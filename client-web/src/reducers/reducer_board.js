@@ -9,7 +9,7 @@
 
 
 export default function() {
-
+  console.log('inside reducer_board');
   return [
     [
       {"val":0,"status":0,"flaggedBy":null,"surface":null},

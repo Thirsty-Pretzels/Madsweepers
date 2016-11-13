@@ -29,9 +29,47 @@ io.on('connection', function(socket){
   })
 
   socket.on('movePlayer', function(data) {
-    console.log(data, 'received data from movePlayer');
-    // to send stuff back to client side
-    io.emit('update', data)
+    //data process:
+    const playerId = `player${data[1] + 1}`;
+    var newPlayerLocation = data[2];
+
+    switch(data[0]) {
+      case 'UP':
+        newPlayerLocation[data[1]] = {
+          id: playerId,
+          x: data[2][data[1]].x,
+          y: data[2][data[1]].y - 1}
+        break;
+      case 'DOWN':
+        newPlayerLocation[data[1]] = {
+          id: playerId,
+          x: data[2][data[1]].x,
+          y: data[2][data[1]].y + 1}
+        break;
+      case 'LEFT':
+        newPlayerLocation[data[1]] = {
+          id: playerId,
+          x: data[2][data[1]].x - 1,
+          y: data[2][data[1]].y}
+        break;
+      case 'RIGHT':
+        newPlayerLocation[data[1]] = {
+          id: playerId,
+          x: data[2][data[1]].x + 1,
+          y: data[2][data[1]].y}
+        break;
+      default:
+        break;
+    }
+
+    newPlayerLocation = newPlayerLocation ? newPlayerLocation :
+      [ {id:'player1', x: 0, y: 0},
+        {id:'player2', x: 9, y: 9},
+        {id:'player3', x: 5, y: 5}];
+    
+    console.log('newPosition: ', newPlayerLocation);
+    console.log(data[0], data[1]);
+    io.emit('update', [data[0], data[1], newPlayerLocation, data[3]])
   })
 
   socket.on('disconnect', function(){
