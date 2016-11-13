@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import Row from '../components/board_row';
 import { connect } from 'react-redux';
-import { movePlayer } from '../actions/index';
+import { getNewBoard } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 class Board extends Component {
+  componentWillMount() {
+    console.log('need a new board');
+    this.props.getNewBoard();
+  }
+
   render() {
     return (
       <div
@@ -16,8 +21,7 @@ class Board extends Component {
             <Row
               key={index}
               rowIndex={index}
-              row={row}
-              playerLocation={this.props.playerLocation} />
+              row={row} />
           )
         })
       }</div>
@@ -27,13 +31,12 @@ class Board extends Component {
 
 var mapStateToProps = (state) => {
   return {
-    board: state.board,
-    playerLocation: state.playerLocation
+    board: state.board
   }
 };
 
 var mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ movePlayer: movePlayer }, dispatch)
+  return bindActionCreators({ getNewBoard: getNewBoard }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board);
