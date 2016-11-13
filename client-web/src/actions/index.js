@@ -1,5 +1,6 @@
 export function movePlayer(playerId, key, location, board) {
   var keyPress = 'STAY';
+  console.log(key);
 
   if ( key.slice(0, 5) === 'Arrow' ) {
     if (key === 'ArrowUp' && location[playerId].y > 0 ) {
@@ -15,6 +16,16 @@ export function movePlayer(playerId, key, location, board) {
 
   return {
     type: keyPress,
+    playerId: playerId,
+    payload: location,
+    //to be deleted
+    board: board
+  }
+}
+
+export function updateLocation(playerId, key, location, board) {
+  return {
+    type: key,
     playerId: playerId,
     payload: location,
     //to be deleted
