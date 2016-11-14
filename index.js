@@ -12,16 +12,13 @@ var scoreWrongFlag = -3;
 // Generate a new Board with these dimensions
 // Arguments currently hardcoded but can be randomly generated or chosen by user
 var board = null;
-function createBoard() {
-  var rows = 12;
-  var columns = 12;
-  var dangerFactor = 0.2;
-  var mineRow = 10;
-  var mineCol = 10;
+function createBoard(rows, columns, dangerFactor) {
+  rows = rows ? rows : 12;
+  columns = columns ? columns : 12;
+  dangerFactor = dangerFactor ? dangerFactor : 0.2;
 
   board = new Board();
   board.generate(rows, columns, dangerFactor);
-  board.flag(mineRow, mineCol, 'bigFatMine');
   console.log('created newboard');
 }
 
@@ -130,7 +127,7 @@ io.on('connection', function(socket){
 });
 
 http.listen(3000, function(){
-  console.log('listening on *:3000');
+  console.log('IAM listening on *:3000, AMA');
 });
 
 module.exports = board;
