@@ -82,9 +82,8 @@ export function updateScore(scoreChange) {
   }
 };
 
-// export function updateStatus(status) {
-//   return {
-//     type: 'UPDATE-STATUS',
-//     scoreChange: scoreChange
-//   }
-// };
+export function countMines() {
+  return {
+    type: 'COUNT-MINES',
+  }
+};

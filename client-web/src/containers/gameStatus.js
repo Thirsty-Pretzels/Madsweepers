@@ -6,7 +6,7 @@ class GameStatus extends Component {
     return (
       <div id='gameStatus'>
         <h2>Game Status</h2>
-        Mines Left: {this.props.mines}
+        Mines Left: {this.props.minesLeft}
       </div>
     )
   }
@@ -14,7 +14,7 @@ class GameStatus extends Component {
 
 var mapStateToProps = (state) => {
   return {
-    mines: state.mines
+    minesLeft: state.minesLeft
   };
 };
 
