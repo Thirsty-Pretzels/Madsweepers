@@ -4,10 +4,10 @@ var io = require('socket.io')(http);
 var Board = require('./board.js');
 
 // define score amounts by each operation
-var scoreRevealMine = -5;
+var scoreRevealMine = -10;
 var scoreRevealspace = 1;
 var scoreRightFlag = 10;
-var scoreWrongFlag = -3;
+var scoreWrongFlag = -5;
 
 // Generate a new Board with these dimensions
 // Arguments currently hardcoded but can be randomly generated or chosen by user
@@ -23,12 +23,11 @@ function createBoard(rows, columns, dangerFactor) {
 }
 
 io.on('connection', function(socket){
-  console.log('a user connected');
+  console.log('a user connected: ', socket);
 
   if ( !board ) {
     createBoard();
   }
-
   socket.on('GET-NEW-BOARD', function() {
     // to send stuff back to client side
     io.emit('updateBoard', board.board);
@@ -38,7 +37,6 @@ io.on('connection', function(socket){
     //data process:
     const playerId = `player${data[1] + 1}`;
     var newPlayerLocation = data[2];
-
     switch(data[0]) {
       case 'UP':
         newPlayerLocation[data[1]] = {
@@ -119,6 +117,7 @@ io.on('connection', function(socket){
         }, 300);
       }
     }
+    console.log(board.todos, board.minesLeft);
   });
 
   socket.on('disconnect', function(){

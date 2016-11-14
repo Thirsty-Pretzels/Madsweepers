@@ -8,7 +8,7 @@ Board.prototype.generate = function (n, m, d) {
   if (d === undefined || d > .9 || d < 0) {
     d = d ? d : .175
   }
-  var mines = n * m * d;
+  var mines = Math.ceil(n * m * d);
   this.todos = n * m - mines;  //total number of non-mine tiles to uncover
   this.board = [];
   this.minesLeft = mines;
