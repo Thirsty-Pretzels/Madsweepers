@@ -5,6 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 
 import App from './components/app';
 import reducers from './reducers';
+import routes from './components/router';
 
 // import the customized middleware
 import startBoard, { boardMiddleware } from './middlewares/updateBoard';
@@ -16,8 +17,10 @@ const store = createStoreWithMiddleware(reducers);
 // initialize store
 startBoard(store);
 
+// Render the router instead of any component.
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    {routes}
   </Provider>
   , document.querySelector('.container'));
+

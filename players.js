@@ -47,9 +47,10 @@ Players.prototype.move = function(playerId, direction) {
 
 module.exports = Players;
 
-randomPlayer = new Players;
-randomPlayer.addPlayer('newPlayer');
-randomPlayer.addPlayer('newPlayer');
-randomPlayer.addPlayer('newPlayer2');
-randomPlayer.move('newPlayer', 'UP');
-randomPlayer.move('newPlayer2', 'LEFT');
+// Uncomment for example.
+// randomPlayer = new Players;
+// randomPlayer.addPlayer('newPlayer');
+// randomPlayer.addPlayer('newPlayer');
+// randomPlayer.addPlayer('newPlayer2');
+// randomPlayer.move('newPlayer', 'UP');
+// randomPlayer.move('newPlayer2', 'LEFT');
