@@ -4,7 +4,8 @@ import playerLocationReducer from './reducer_player_location';
 
 const rootReducer = combineReducers({
   board: boardReducer,
-  playerLocation: playerLocationReducer
+  playerLocation: playerLocationReducer,
+  // score: updateScoreReduce
 });
 
 export default rootReducer;

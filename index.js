@@ -89,10 +89,20 @@ io.on('connection', function(socket){
     var location = data[1];
 
     if ( board.board[location.y][location.x].status === 0 ) {
-      board.board[location.y][location.x].status = 1;
+      // if the flag is dropped at a correct place
+      if ( board.board[location.y][location.x].val === 9 ) {
+        board.board[location.y][location.x].status = 1;
+        io.emit('updateBoard', board.board);
+      } else {
+      // if the flag is dropped at a wrong place
+        board.board[location.y][location.x].status = 3;
+        io.emit('updateBoard', board.board);
+        setTimeout(() => {
+          board.board[location.y][location.x].status = 0;
+          io.emit('updateBoard', board.board);
+        }, 300);
+      }
     }
-
-    io.emit('updateBoard', board.board);
   });
 
   socket.on('disconnect', function(){
