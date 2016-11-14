@@ -5,6 +5,8 @@ var Board = function () {
 
 //generate a random board, takes two arguments for x and y dimensions and an optional danger factor
 Board.prototype.generate = function (n, m, d) {
+  n = n ? n : 12;
+  m = m ? m : 12;
   if (d === undefined || d > .9 || d < 0) {
     d = d ? d : .175
   }

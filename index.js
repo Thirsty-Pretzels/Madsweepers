@@ -74,8 +74,13 @@ io.on('connection', function(socket){
       //update the score according to the result;
       if(board.board[location.y][location.x].val === 9) {
         io.emit('updateScore', {id: playerId, scoreChange: scoreRevealMine});
+        board.minesLeft--;
       } else {
         io.emit('updateScore', {id: 'player'+playerId, scoreChange: scoreRevealspace});
+        board.todos--;
+      }
+      if (board.minesLeft === 0){
+        board.generate();
       }
     }
 
