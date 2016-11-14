@@ -81,3 +81,10 @@ export function updateScore(scoreChange) {
     scoreChange: scoreChange
   }
 };
+
+// export function updateStatus(status) {
+//   return {
+//     type: 'UPDATE-STATUS',
+//     scoreChange: scoreChange
+//   }
+// };
