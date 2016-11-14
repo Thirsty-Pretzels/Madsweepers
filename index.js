@@ -2,6 +2,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var Board = require('./board.js');
+var Players = require('./players.js');
 
 // define score amounts by each operation
 var scoreRevealMine = -10;
@@ -22,56 +23,44 @@ function createBoard(rows, columns, dangerFactor) {
   console.log('created newboard');
 }
 
+// Generate Players object to manage player locations and potentially status.
+var players = null;
+function createPlayers() {
+  players = new Players();
+}
+
 io.on('connection', function(socket){
   console.log('a user connected: ', socket);
-
+  // create a new board if no board exists.
   if ( !board ) {
     createBoard();
   }
+  // create a new players object if none exists.
+  if ( !players ) {
+    createPlayers();
+  }
+
   socket.on('GET-NEW-BOARD', function() {
     // to send stuff back to client side
     io.emit('updateBoard', board.board);
   });
 
+  socket.on('CREATE-PLAYER', function(playerId) {
+    playerId = playerId || ( '' + Math.floor( Math.random() * 10 ) );
+    players.addPlayer(playerId);
+
+    io.emit('updatePlayerLocations', players.playerLocations);
+  })
+
   socket.on('movePlayer', function(data) {
     //data process:
-    const playerId = `player${data[1] + 1}`;
-    var newPlayerLocation = data[2];
-    switch(data[0]) {
-      case 'UP':
-        newPlayerLocation[data[1]] = {
-          id: playerId,
-          x: data[2][data[1]].x,
-          y: data[2][data[1]].y - 1}
-        break;
-      case 'DOWN':
-        newPlayerLocation[data[1]] = {
-          id: playerId,
-          x: data[2][data[1]].x,
-          y: data[2][data[1]].y + 1}
-        break;
-      case 'LEFT':
-        newPlayerLocation[data[1]] = {
-          id: playerId,
-          x: data[2][data[1]].x - 1,
-          y: data[2][data[1]].y}
-        break;
-      case 'RIGHT':
-        newPlayerLocation[data[1]] = {
-          id: playerId,
-          x: data[2][data[1]].x + 1,
-          y: data[2][data[1]].y}
-        break;
-      default:
-        break;
-    }
+    console.log('Tring to move a player, ', data);
+    const playerId = data[0];
+    const direction = data[1];
 
-    newPlayerLocation = newPlayerLocation ? newPlayerLocation :
-      [ {id:'player1', x: 0, y: 0},
-        {id:'player2', x: 9, y: 9},
-        {id:'player3', x: 5, y: 5}];
+    players.move(playerId, direction);
 
-    io.emit('update', [data[0], data[1], newPlayerLocation, data[3]])
+    io.emit('updatePlayerLocations', players.playerLocations);
   });
 
   socket.on('OPEN-SPACE', function(data){
