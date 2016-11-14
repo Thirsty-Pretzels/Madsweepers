@@ -5,7 +5,7 @@ import LoginPage from './loginPage';
 // import RoomListPage from './roomListPage'
 import GamePlay from './gamePlay';
 
-
+// basic setup of router.
 const routes = (
   <Router history={browserHistory}>
     <Route path='/' component={App}>
