@@ -1,3 +1,13 @@
+#section1 {
+  display: inline-block;
+  float: left;
+}
+
+#section2 {
+  display: inline-block;
+  float:right;
+}
+
 .grid {
   display: inline-block;
   width: 50px;

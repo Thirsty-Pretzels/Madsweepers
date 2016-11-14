@@ -45,7 +45,6 @@ export function updateLocation(playerId, key, location, board) {
 }
 
 export function openSpace(playerId, location) {
-
   return {
     type: 'OPEN-SPACE',
     playerId: playerId,
@@ -54,7 +53,6 @@ export function openSpace(playerId, location) {
 }
 
 export function updateBoard(newBoard) {
-  console.log('received a new board');
   return {
     type: 'UPDATE-BOARD',
     payload: newBoard
@@ -62,17 +60,23 @@ export function updateBoard(newBoard) {
 }
 
 export function getNewBoard() {
-  console.log('inside getNewBoard action');
   return {
     type: 'GET-NEW-BOARD'
   }
 }
 
 export function dropFlag(playerId, location) {
-  console.log('inside dropFlag action');
   return {
     type: 'DROP-FLAG',
     playerId: playerId,
     location: location
   }
 }
+
+// define updateScore actions
+export function updateScore(scoreChange) {
+  return {
+    type: 'UPDATE-SCORE',
+    scoreChange: scoreChange
+  }
+};
