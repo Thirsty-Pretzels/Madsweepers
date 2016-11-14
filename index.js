@@ -90,6 +90,8 @@ io.on('connection', function(socket){
 
     if ( board.board[location.y][location.x].status === 0 ) {
       board.board[location.y][location.x].status = 1;
+    } else if ( board.board[location.y][location.x].status === 1 ) {
+      board.board[location.y][location.x].status = 0;
     }
 
     io.emit('updateBoard', board.board);
