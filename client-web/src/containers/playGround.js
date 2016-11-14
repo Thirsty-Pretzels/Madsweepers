@@ -17,7 +17,7 @@ class PlayGround extends Component {
       this.props.openSpace(playerId, this.props.playerLocation[playerId]);
     }
 
-    if ( e.key === 'f' ) {
+    if ( e.key === 'f' || e.key === 'F') {
       this.props.dropFlag(playerId, this.props.playerLocation[playerId]);
     }
 
@@ -55,5 +55,3 @@ var mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayGround);
-
-// (e) => this.props.movePlayer(e.key, this.props.playerLocation, this.props.board)

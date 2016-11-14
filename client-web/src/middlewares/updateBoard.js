@@ -37,4 +37,9 @@ export default function(store) {
   socket.on('updateBoard', newBoard => {
     store.dispatch(actions.updateBoard(newBoard));
   });
+
+  socket.on('updateScore', scoreChange => {
+    //update score panel when new score is received
+    store.dispatch(actions.updateScore(scoreChange));
+  });
 }

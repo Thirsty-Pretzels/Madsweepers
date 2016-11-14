@@ -3,15 +3,21 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var Board = require('./board.js');
 
+// define score amounts by each operation
+var scoreRevealMine = -5;
+var scoreRevealspace = 1;
+var scoreRightFlag = 10;
+var scoreWrongFlag = -3;
+
 // Generate a new Board with these dimensions
 // Arguments currently hardcoded but can be randomly generated or chosen by user
 var board = null;
 function createBoard() {
-  var rows = 16;
-  var columns = 22;
+  var rows = 12;
+  var columns = 12;
   var dangerFactor = 0.2;
-  var mineRow = 12;
-  var mineCol = 12;
+  var mineRow = 10;
+  var mineCol = 10;
 
   board = new Board();
   board.generate(rows, columns, dangerFactor);
@@ -79,6 +85,12 @@ io.on('connection', function(socket){
 
     if (board.board[location.y][location.x].status === 0) {
       board.board[location.y][location.x].status = 2;
+      //update the score according to the result;
+      if(board.board[location.y][location.x].val === 9) {
+        io.emit('updateScore', {id: playerId, scoreChange: scoreRevealMine});
+      } else {
+        io.emit('updateScore', {id: 'player'+playerId, scoreChange: scoreRevealspace});
+      }
     }
 
     io.emit('updateBoard', board.board);
@@ -92,11 +104,18 @@ io.on('connection', function(socket){
       // if the flag is dropped at a correct place
       if ( board.board[location.y][location.x].val === 9 ) {
         board.board[location.y][location.x].status = 1;
+        //update board
         io.emit('updateBoard', board.board);
+        //update score
+        io.emit('updateScore', {id: 'player'+playerId, scoreChange: scoreRightFlag});
       } else {
       // if the flag is dropped at a wrong place
         board.board[location.y][location.x].status = 3;
+        //update board
         io.emit('updateBoard', board.board);
+        //update score
+        io.emit('updateScore', {id: 'player'+playerId, scoreChange: scoreWrongFlag});
+        //after 0.3, reset the corresponing grid to initial
         setTimeout(() => {
           board.board[location.y][location.x].status = 0;
           io.emit('updateBoard', board.board);
