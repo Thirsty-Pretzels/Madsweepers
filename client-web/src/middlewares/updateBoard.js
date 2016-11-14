@@ -8,7 +8,7 @@ export function boardMiddleware(store) {
   return next => action => {
     //when action.type is UP, DOWN, LEFT, RIGHT, socket.emit will be fired
     if ( action.type === 'UP' || action.type === 'DOWN' || action.type === 'LEFT' || action.type === 'RIGHT' ) {
-      socket.emit('movePlayer', [action.type, action.playerId , action.payload, action.board]);
+      socket.emit('movePlayer', [action.payload, action.type]);
     }
 
     if ( action.type === 'OPEN-SPACE' ) {
@@ -17,6 +17,10 @@ export function boardMiddleware(store) {
 
     if ( action.type === 'GET-NEW-BOARD' ) {
       socket.emit('GET-NEW-BOARD');
+    }
+
+    if ( action.type === 'CREATE-PLAYER' ) {
+      socket.emit('CREATE-PLAYER', action.payload);
     }
 
     if ( action.type === 'DROP-FLAG' ) {
@@ -29,9 +33,10 @@ export function boardMiddleware(store) {
 
 // define the initializing middleware function
 export default function(store) {
-  socket.on('update', data => {
+  socket.on('updatePlayerLocations', newLocations => {
   	//when data is received from socket server, fire another action by store.dispatch
-    store.dispatch(actions.updateLocation(data[1], 'ARROW'+data[0] , data[2], data[3]));
+    console.log('received newLocations => ', newLocations);
+    store.dispatch(actions.updateLocation(newLocations));
   });
 
   socket.on('updateBoard', newBoard => {

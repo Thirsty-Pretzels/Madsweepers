@@ -19,10 +19,7 @@ export function movePlayer(playerId, key, location, board) {
 
   return {
     type: keyPress,
-    playerId: playerId,
-    payload: location,
-    //to be deleted
-    board: board
+    payload: playerId
   }
 }
 
@@ -34,13 +31,11 @@ export function movePlayer(playerId, key, location, board) {
 // in middleware, actions of type (UP, DOWN, LEFT AND RIGHT) will lead to socket.emit
 // while actions of type (ARROWUP, ARROWDOWN, ARROWLEFT, ARROWRIGHT) will bypass middleware
 // commented added by Bruce
-export function updateLocation(playerId, key, location, board) {
+export function updateLocation(newLocations) {
+  console.log('inside updateLocation action');
   return {
-    type: key,
-    playerId: playerId,
-    payload: location,
-    //to be deleted
-    board: board
+    type: 'updatePlayerLocations',
+    payload: newLocations,
   }
 }
 
@@ -70,6 +65,14 @@ export function dropFlag(playerId, location) {
     type: 'DROP-FLAG',
     playerId: playerId,
     location: location
+  }
+}
+
+export function createNewPlayer(playerId) {
+  console.log('inside createNewPlayer action');
+  return {
+    type: 'CREATE-PLAYER',
+    payload: playerId
   }
 }
 
