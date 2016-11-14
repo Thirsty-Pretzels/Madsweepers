@@ -14,6 +14,8 @@
   height: 50px;
   border-width: 1px;
   border-style: solid;
+  font-size: 225%;
+  text-align: center;
 }
 
 .gameBoard {
