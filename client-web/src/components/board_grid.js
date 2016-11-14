@@ -13,7 +13,7 @@ export default class Grid extends Component {
 
     } else if ( this.props.grid.status === 3) {
       // status 3: player put a flag on a wrong spot
-      return (<img className='wrong-flag'></img>);
+      return (<img className='grid-wrongFlag'></img>);
 
     } else if ( this.props.grid.status === 2 ) {
       // status 2: the grid has been revealed

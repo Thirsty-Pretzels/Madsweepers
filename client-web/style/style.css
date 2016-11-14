@@ -41,6 +41,13 @@
   vertical-align: top;
 }
 
+.grid-wrongFlag {
+  width: 50px;
+  height: 50px;
+  content: url('../images/redCross.png');
+  vertical-align: top;
+}
+
 .grid-explosion {
   width: 50px;
   height: 50px;
