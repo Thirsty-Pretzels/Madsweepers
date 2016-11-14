@@ -8,9 +8,10 @@ Board.prototype.generate = function (n, m, d) {
   if (d === undefined || d > .9 || d < 0) {
     d = d ? d : .175
   }
-  var mines = n * m * d;
+  var mines = Math.ceil(n * m * d);
   this.todos = n * m - mines;  //total number of non-mine tiles to uncover
   this.board = [];
+  this.minesLeft = mines;
 
   //generate empty board
   for (var i = 0; i < n; i++){
@@ -60,6 +61,9 @@ Board.prototype.uncover = function(x, y) {
     this.board[x][y]['revealed'] = true;
     this.todos--;
   }
+  if (this.board[x][y]['val'] === 9){
+    this.minesLeft --;
+  }
   return this.board[x][y]['val'];
 }
 
@@ -87,6 +91,9 @@ Board.prototype.flag = function(x, y, name){
   if (this.board[x][y]['flaggedBy'] === null){
     this.board[x][y]['flaggedBy'] = name;
     this.board[x][y]['status'] = 1;
+  }
+  if (this.board[x][y]['val'] === 9) {
+    this.minesLeft --;
   }
 }
 

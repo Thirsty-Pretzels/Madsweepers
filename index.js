@@ -5,24 +5,21 @@ var Board = require('./board.js');
 var Players = require('./players.js');
 
 // define score amounts by each operation
-var scoreRevealMine = -5;
+var scoreRevealMine = -10;
 var scoreRevealspace = 1;
 var scoreRightFlag = 10;
-var scoreWrongFlag = -3;
+var scoreWrongFlag = -5;
 
 // Generate a new Board with these dimensions
 // Arguments currently hardcoded but can be randomly generated or chosen by user
 var board = null;
-function createBoard() {
-  var rows = 12;
-  var columns = 12;
-  var dangerFactor = 0.2;
-  var mineRow = 10;
-  var mineCol = 10;
+function createBoard(rows, columns, dangerFactor) {
+  rows = rows ? rows : 12;
+  columns = columns ? columns : 12;
+  dangerFactor = dangerFactor ? dangerFactor : 0.2;
 
   board = new Board();
   board.generate(rows, columns, dangerFactor);
-  board.flag(mineRow, mineCol, 'bigFatMine');
   console.log('created newboard');
 }
 
@@ -33,7 +30,7 @@ function createPlayers() {
 }
 
 io.on('connection', function(socket){
-  console.log('a user connected');
+  console.log('a user connected: ', socket);
   // create a new board if no board exists.
   if ( !board ) {
     createBoard();
@@ -109,6 +106,7 @@ io.on('connection', function(socket){
         }, 300);
       }
     }
+    console.log(board.todos, board.minesLeft);
   });
 
   socket.on('disconnect', function(){
@@ -117,7 +115,7 @@ io.on('connection', function(socket){
 });
 
 http.listen(3000, function(){
-  console.log('listening on *:3000');
+  console.log('IAM listening on *:3000, AMA');
 });
 
 module.exports = board;
