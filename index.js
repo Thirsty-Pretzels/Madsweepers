@@ -89,12 +89,18 @@ io.on('connection', function(socket){
     var location = data[1];
 
     if ( board.board[location.y][location.x].status === 0 ) {
-      board.board[location.y][location.x].status = 1;
-    } else if ( board.board[location.y][location.x].status === 1 ) {
-      board.board[location.y][location.x].status = 0;
+      if ( board.board[location.y][location.x] === 9 ) {
+        board.board[location.y][location.x].status = 1;
+        io.emit('updateBoard', board.board);
+      } else {
+        board.board[location.y][location.x].status = 3;
+        io.emit('updateBoard', board.board);
+        setTimeout(() => {
+          board.board[location.y][location.x].status = 0;
+          io.emit('updateBoard', board.board);
+        }, 1000);
+      }
     }
-
-    io.emit('updateBoard', board.board);
   });
 
   socket.on('disconnect', function(){
