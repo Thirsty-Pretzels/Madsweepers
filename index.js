@@ -111,8 +111,7 @@ io.on('connection', function(socket){
     console.log(board.todos, board.minesLeft);
   });
 
-  socket.on('disconnect', function(...test){
-    console.log('user disconnected', test);
+  socket.on('disconnect', function(){
     clients.forEach(function(x, i){
       if (x['socket'] === socket){
         players.removePlayer(x['playerId']);

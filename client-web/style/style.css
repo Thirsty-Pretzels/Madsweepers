@@ -1,3 +1,28 @@
+body {
+}
+
+.App-Components {
+  animation-duration: 2s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+
+@font-face {
+  font-family: BirdyGame;
+  src: url('../fonts/Birdy_Game.ttf');
+}
+
 #section1 {
   display: inline-block;
   float: left;
@@ -14,11 +39,13 @@
   height: 50px;
   border-width: 1px;
   border-style: solid;
+  border-color: white;
   font-size: 225%;
   text-align: center;
 }
 
 .gameBoard {
+  font-family: BirdyGame;
   outline: none;
   position: relative;
 }
@@ -34,7 +61,7 @@
   background-image: url('../images/Mario.png');
   background-size: contain;
   background-repeat: no-repeat;
-  transition-duration: 1s;
+  transition-duration: .2s;
   border-width: 0;
   z-index: 1;
 }

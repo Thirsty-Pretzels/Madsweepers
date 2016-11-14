@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
-import Board from '../containers/board';
-import PlayGround from '../containers/playGround';
-import ScoreBoard from '../containers/scoreBoard';
+import { browserHistory } from 'react-router';
 
 export default class App extends Component {
-// added a second section for scoreboard. can someone please help me with CSS? 
+  //used for for the home button icon
+  redirect(pageTo) {
+    browserHistory.push('/' + pageTo);
+  }
+
   render() {
     return (
-      <div>
-        <div id='section1'>
-          <PlayGround />
-          <Board />
-        </div>
-        <div id='section2'>
-          <ScoreBoard />
+      <div className="App">
+        <h1>This is the app component</h1>
+
+        <div className="App-Content">
+          {this.props.children && React.cloneElement(this.props.children, {
+            // this is where to pass props to all children components
+            redirect: this.redirect
+          })}
         </div>
       </div>
+
     );
   }
 }
-

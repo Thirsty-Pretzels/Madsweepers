@@ -5,7 +5,7 @@ import { movePlayer, openSpace, dropFlag, createNewPlayer } from '../actions/ind
 import { bindActionCreators } from 'redux';
 import Player from '../components/player';
 
-const playerId = Math.floor( Math.random() * 10 );
+const playerId = Date.now().toString(36);
 
 class PlayGround extends Component {
   componentWillMount() {
