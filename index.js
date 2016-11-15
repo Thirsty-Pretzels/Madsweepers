@@ -24,25 +24,25 @@ var clients = [];
 
 // Now the room name is hard coded
 // we need to send the room name along with every communciation
-const roomName = 'newRoom';
+const roomName = 'roomA';
 
 io.on('connection', function(socket){
   console.log('a user connected');
-  // create a new room if the room does not exist.
-  if ( !gameManager.rooms[roomName] ) {
-    gameManager.createRoom(roomName);
-  }
 
   socket.on('selectRoom', function (roomName) {
     roomName  = roomName;
     console.log('updated room name to: ', roomName);
-  });
+    // create a new room if the room does not exist.
+    if ( !gameManager.rooms[roomName] ) {
+      gameManager.createRoom(roomName);
 
   socket.on('getNewBoard', function() {
     //type 0 means that sending the whole board
     //type 1 means that sending the changes
     io.emit('updateBoard', {type: 0, board: gameManager.rooms[roomName].board.board});  // to send stuff back to client side
     io.emit('countMines', [gameManager.rooms[roomName].board.minesLeft, gameManager.rooms[roomName].board.minesCount]); //add total mine count
+
+ 
   });
 
   socket.on('createPlayer', function(playerId) {
