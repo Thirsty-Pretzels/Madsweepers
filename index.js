@@ -50,6 +50,7 @@ io.on('connection', function(socket){
 
   socket.on('GET-NEW-BOARD', function() {
     io.emit('updateBoard', board.board);  // to send stuff back to client side
+    io.emit('countMines', board.minesLeft);
   });
 
   socket.on('CREATE-PLAYER', function(playerId) {

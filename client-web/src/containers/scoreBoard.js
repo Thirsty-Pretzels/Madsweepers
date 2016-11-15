@@ -7,12 +7,16 @@ class ScoreBoard extends Component {
     return (
       <div id='scoreBoard'>
         <h2>LeaderBoard</h2>
-        <ul>
+        <div>
         {
           this.props.scores.map((score) =>
-            <li><text className='textPlayerId'>{score.id}      </text><text className='textScore'>{score.score}</text></li>)
+          <ul>
+          <li><text className='textPlayerId'>{score.id} </text></li>
+          <li><text className='textScore'>Score: {score.score} </text></li>
+          </ul>
+          )
         }
-        </ul>
+        </div>
       </div>
     )
   }
