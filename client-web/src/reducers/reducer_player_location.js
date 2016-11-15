@@ -3,7 +3,6 @@ export default function(state = [ {id:'player1', x: 0, y: 0},
 
   //action.type === updatePlayerLocations means new data is received from server, render new positions by updating states.
   if( action.type === 'updatePlayerLocations') {
-    console.log('inside player location reducer', action.payload);
     return action.payload;
   } else {
     return state;

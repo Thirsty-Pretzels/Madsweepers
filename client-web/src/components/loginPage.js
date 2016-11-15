@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 
-var LoginPage
-export default LoginPage = ({redirect}) => (
+export default class LoginPage extends Component {
+  componentWillUnmount() {
+    console.log(this);
+  }
+
+  render() {
+    return (
       <div className='App-Components'>
         <h2
-          onClick={ () => redirect('gamePlay') }>
+          onClick={ () => this.props.redirect('gamePlay') }>
           this is the loginPage
         </h2>
       </div>
-);
+    );
+  }
+};
