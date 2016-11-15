@@ -36,7 +36,7 @@ export default class App extends Component {
             username: this.state.username,
             updateUsername: this.updateUsername
           })}
-      <div>
+        </div>
         <div id='section1'>
           <PlayGround />
           <Board />

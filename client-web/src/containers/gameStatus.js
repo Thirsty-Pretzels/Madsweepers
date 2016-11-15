@@ -12,10 +12,13 @@ class GameStatus extends Component {
   }
 }
 
+// Connect redux state to component props
 var mapStateToProps = (state) => {
   return {
-    minesLeft: state.minesLeft
+    //gameStatus is the key of the gameStatus reducer under combineReducers
+    minesLeft: state.gameStatus
   };
 };
 
+// Connect component
 export default connect(mapStateToProps)(GameStatus);

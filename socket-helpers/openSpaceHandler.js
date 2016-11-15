@@ -10,6 +10,7 @@ module.exports = function(io, board, data) {
       io.emit('updateScore', {id: playerId, scoreChange: scoreRevealMine});
       board.minesLeft--;
       console.log('mines left: ', board.minesLeft);
+      io.emit('countMines', board.minesLeft);
     } else {
       io.emit('updateScore', {id: 'player'+playerId, scoreChange: scoreRevealspace});
       board.todos--;
