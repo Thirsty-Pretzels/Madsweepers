@@ -6,7 +6,9 @@ class GameStatus extends Component {
     return (
       <div id='gameStatus'>
         <h2>Game Status</h2>
-        Mines Left: {this.props.minesLeft}
+        <ul>
+        <li> Mines Left: {this.props.minesLeft} </li>
+        </ul>
       </div>
     )
   }
