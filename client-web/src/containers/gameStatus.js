@@ -6,9 +6,29 @@ class GameStatus extends Component {
     return (
       <div id='gameStatus'>
         <h2>Game Status</h2>
-        <text>  {this.props.minesInfo[0]} / {this.props.minesInfo[1]} </text>
+        <text>  {this.props.minesInfo[1] - this.props.minesInfo[0]} / {this.props.minesInfo[1]} </text>
+        <progress 
+          className={classNameDecider(this.props.minesInfo[1] - this.props.minesInfo[0], this.props.minesInfo[1])}
+          value={this.props.minesInfo[1] - this.props.minesInfo[0]} 
+          max={this.props.minesInfo[1]}
+        >
+        </progress>
       </div>
     )
+  }
+}
+
+var classNameDecider = function(progress, total) {
+  if (progress / total < 0.3) {
+    return 'progress progress-animated progress-striped progress-success';
+  } else if (progress / total < 0.55) {
+    return 'progress progress-animated progress-striped progress-info';
+  } else if (progress / total < 0.8) {
+    return 'progress progress-animated progress-striped';
+  } else if (progress / total < 0.92) {
+    return 'progress progress-animated progress-striped progress-warning';
+  } else {
+    return 'progress progress-animated progress-striped warning';
   }
 }
 
