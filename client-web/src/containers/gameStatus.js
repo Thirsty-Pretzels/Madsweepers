@@ -6,9 +6,7 @@ class GameStatus extends Component {
     return (
       <div id='gameStatus'>
         <h2>Game Status</h2>
-        <ul>
-        <li> Mines Left: {this.props.minesLeft} </li>
-        </ul>
+        <text>  {this.props.minesInfo[0]} / {this.props.minesInfo[1]} </text>
       </div>
     )
   }
@@ -18,7 +16,7 @@ class GameStatus extends Component {
 var mapStateToProps = (state) => {
   return {
     //gameStatus is the key of the gameStatus reducer under combineReducers
-    minesLeft: state.gameStatus
+    minesInfo: state.gameStatus
   };
 };
 

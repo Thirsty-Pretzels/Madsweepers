@@ -48,7 +48,7 @@ export default function(store) {
     store.dispatch(actions.updateScore(scoreChange));
   });
 
-  socket.on('countMines', minesLeft => {
-    store.dispatch(actions.countMines(minesLeft));
+  socket.on('countMines', minesInfo => {
+    store.dispatch(actions.countMines(minesInfo));
   });
 }

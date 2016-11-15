@@ -42,7 +42,7 @@ io.on('connection', function(socket){
     //type 0 means that sending the whole board
     //type 1 means that sending the changes
     io.emit('updateBoard', {type: 0, board: gameManager.rooms[roomName].board.board});  // to send stuff back to client side
-    io.emit('countMines', gameManager.rooms[roomName].board.minesLeft);
+    io.emit('countMines', [gameManager.rooms[roomName].board.minesLeft, gameManager.rooms[roomName].board.minesCount]); //add total mine count
   });
 
   socket.on('createPlayer', function(playerId) {

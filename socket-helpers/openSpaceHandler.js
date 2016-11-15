@@ -14,7 +14,7 @@ module.exports = function(io, board, currentScores, data) {
       io.emit('updateScore', {id: playerId, scoreChange: scoreRevealMine});
       board.minesLeft--;
       console.log('mines left: ', board.minesLeft);
-      io.emit('countMines', board.minesLeft);
+      io.emit('countMines', [board.minesLeft, board.minesCount]);
     } else {
       // update currentScores then emit the change
       updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreRevealspace});
