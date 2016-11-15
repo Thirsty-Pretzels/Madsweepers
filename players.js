@@ -16,10 +16,10 @@ Players.prototype.addPlayer = function(playerId) {
 };
 
 Players.prototype.removePlayer = function(playerId) {
-    console.log('deadifying player ' + playerId);
-    delete this.playerLocations[playerId];
-    this.playerCount--;
-}
+  console.log('deadifying player ' + playerId);
+  delete this.playerLocations[playerId];
+  this.playerCount--;
+};
 
 Players.prototype.createPlayer = function(playerId) {
   // body...

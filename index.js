@@ -3,6 +3,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var Board = require('./board.js');
 var Players = require('./players.js');
+var GameManager = require('./gameManager.js');
 
 // import helper function
 var dropFlagHandler = require('./socket-helpers/dropFlagHandler');
@@ -17,60 +18,44 @@ global.scoreRevealspace = 1;
 global.scoreRightFlag = 10;
 global.scoreWrongFlag = -5;
 
-// Generate a new Board with these dimensions
-// Arguments currently hardcoded but can be randomly generated or chosen by user
-var board = null;
+// Create gameManager when server starts
+var gameManager = new GameManager();
 var clients = [];
-function createBoard(rows, columns, dangerFactor) {
-  rows = rows ? rows : 12;
-  columns = columns ? columns : 12;
-  dangerFactor = dangerFactor ? dangerFactor : 0.2;
 
-  board = new Board();
-  board.generate(rows, columns, dangerFactor);
-  console.log('created newboard');
-}
-
-// Generate Players object to manage player locations and potentially status.
-var players = null;
-function createPlayers() {
-  players = new Players();
-}
+// Now the room name is hard coded
+// we need to send the room name along with every communciation
+const roomName = 'newRoom';
 
 io.on('connection', function(socket){
   console.log('a user connected');
-  // create a new board if no board exists.
-  if ( !board ) {
-    createBoard();
-  }
-  // create a new players object if none exists.
-  if ( !players ) {
-    createPlayers();
+  // create a new room if the room does not exist.
+  if ( !gameManager.rooms[roomName] ) {
+    gameManager.createRoom(roomName);
   }
 
   socket.on('GET-NEW-BOARD', function() {
-    io.emit('updateBoard', board.board);  // to send stuff back to client side
-    io.emit('countMines', board.minesLeft);
+    io.emit('updateBoard', gameManager.rooms[roomName].board.board);  // to send stuff back to client side
+    io.emit('countMines', gameManager.rooms[roomName].board.minesLeft);
   });
 
   socket.on('CREATE-PLAYER', function(playerId) {
-    createPlayerHandler(io, players, clients, socket, playerId);
+    createPlayerHandler(io, gameManager.rooms[roomName].players, clients, socket, playerId);
   })
 
   socket.on('movePlayer', function(data) {
-    movePlayerHandler(io, players, data);
+    movePlayerHandler(io, gameManager.rooms[roomName].players, data);
   });
 
   socket.on('OPEN-SPACE', function(data){
-    openSpaceHandler(io, board, data);
+    openSpaceHandler(io, gameManager.rooms[roomName].board, data);
   });
 
   socket.on('DROP-FLAG', function(data){
-    dropFlagHandler(io, board, data);
+    dropFlagHandler(io, gameManager.rooms[roomName].board, data);
   });
 
   socket.on('disconnect', function(){
-    disconnectHandler(players, clients, socket);
+    disconnectHandler(gameManager.rooms[roomName].players, clients, socket);
   });
 });
 
@@ -78,4 +63,4 @@ http.listen(3000, function(){
   console.log('IAM listening on *:3000, AMA');
 });
 
-module.exports = board;
+// module.exports = board;

@@ -18,18 +18,6 @@ body {
   }
 }
 
-@keyframes slideout {
-  from {
-    margin-left: 0%;
-    width: 100%;
-  }
-
-  to {
-    margin-left: -300%;
-    width: 100%;
-  }
-}
-
 @font-face {
   font-family: BirdyGame;
   src: url('../fonts/Birdy_Game.ttf');

@@ -10,9 +10,13 @@ export default class GamePlay extends Component {
     document.getElementById('playGround').focus();
   }
 
+  reFocus() {
+    document.getElementById('playGround').focus();
+  }
+
   render() {
     return (
-      <div className='App-Components'>
+      <div className='App-Components' onClick={ this.reFocus }>
         <div id='section1'>
           <PlayGround />
           <Board />
