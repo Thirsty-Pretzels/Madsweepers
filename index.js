@@ -7,6 +7,9 @@ var Players = require('./players.js');
 // import helper function
 var dropFlagHandler = require('./socket-helpers/dropFlagHandler');
 var openSpaceHandler = require('./socket-helpers/openSpaceHandler');
+var movePlayerHandler = require('./socket-helpers/movePlayerHandler');
+var disconnectHandler = require('./socket-helpers/disconnectHandler');
+var createPlayerHandler = require('./socket-helpers/createPlayerHandler');
 
 // define score amounts by each operation
 global.scoreRevealMine = -10;
@@ -46,26 +49,15 @@ io.on('connection', function(socket){
   }
 
   socket.on('GET-NEW-BOARD', function() {
-    // to send stuff back to client side
-    io.emit('updateBoard', board.board);
+    io.emit('updateBoard', board.board);  // to send stuff back to client side
   });
 
   socket.on('CREATE-PLAYER', function(playerId) {
-    playerId = playerId || ( '' + Math.floor( Math.random() * 10 ) );
-    players.addPlayer(playerId);
-    clients.push({'socket': socket, 'playerId': playerId})
-    io.emit('updatePlayerLocations', players.playerLocations);
+    createPlayerHandler(io, players, clients, socket, playerId);
   })
 
   socket.on('movePlayer', function(data) {
-    //data process:
-    console.log('Tring to move a player, ', data);
-    const playerId = data[0];
-    const direction = data[1];
-
-    players.move(playerId, direction);
-
-    io.emit('updatePlayerLocations', players.playerLocations);
+    movePlayerHandler(io, players, data);
   });
 
   socket.on('OPEN-SPACE', function(data){
@@ -77,13 +69,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('disconnect', function(){
-    clients.forEach(function(x, i){
-      if (x['socket'] === socket){
-        players.removePlayer(x['playerId']);
-        clients.splice(i, 1);
-      }
-    });
-    console.log('user disconnected');
+    disconnectHandler(players, clients);
   });
 });
 
