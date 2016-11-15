@@ -9,11 +9,11 @@ var scoreRevealMine = -10;
 var scoreRevealspace = 1;
 var scoreRightFlag = 10;
 var scoreWrongFlag = -5;
-var clients = [];
 
 // Generate a new Board with these dimensions
 // Arguments currently hardcoded but can be randomly generated or chosen by user
 var board = null;
+var clients = [];
 function createBoard(rows, columns, dangerFactor) {
   rows = rows ? rows : 12;
   columns = columns ? columns : 12;
@@ -31,12 +31,11 @@ function createPlayers() {
 }
 
 io.on('connection', function(socket){
-  console.log('a user connected');
+  console.log('a user connected: ', socket);
   // create a new board if no board exists.
   if ( !board ) {
     createBoard();
   }
-
   // create a new players object if none exists.
   if ( !players ) {
     createPlayers();
@@ -50,7 +49,7 @@ io.on('connection', function(socket){
   socket.on('CREATE-PLAYER', function(playerId) {
     playerId = playerId || ( '' + Math.floor( Math.random() * 10 ) );
     players.addPlayer(playerId);
-    clients.push({'socket': socket, 'playerId': playerId})
+
     io.emit('updatePlayerLocations', players.playerLocations);
   })
 
@@ -125,12 +124,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('disconnect', function(){
-    clients.forEach(function(x, i){
-      if (x['socket'] === socket){
-        players.removePlayer(x['playerId']);
-        clients.splice(i, 1);
-      }
-    });
+    console.log('user disconnected');
   });
 });
 
