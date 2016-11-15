@@ -35,6 +35,9 @@ module.exports = function(io, board, currentScores, data) {
     }
     if (board.minesLeft === 0){
       board.generate();
+      setTimeout(function(){
+        io.emit('updateBoard', {type: 0, board: board.board});
+      }, 300);
     }
   }
 };
