@@ -5,11 +5,10 @@ import { movePlayer, openSpace, dropFlag, createNewPlayer } from '../actions/ind
 import { bindActionCreators } from 'redux';
 import Player from '../components/player';
 
-const playerId = Math.floor( Math.random() * 10 );
+const playerId = Date.now().toString(36);
 
 class PlayGround extends Component {
   componentWillMount() {
-    console.log('need new player');
     this.props.createNewPlayer(playerId);
   }
 
@@ -30,8 +29,6 @@ class PlayGround extends Component {
 
   renderPlayers() {
     var playersArr = Object.keys(this.props.playerLocation);
-
-    console.log('playGround component => ', this.props.playerLocation);
 
     return playersArr.map( (player) =>
       <Player key={player} playerLocation={this.props.playerLocation[player]} />

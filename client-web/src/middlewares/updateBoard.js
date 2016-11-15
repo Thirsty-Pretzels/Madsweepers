@@ -35,7 +35,6 @@ export function boardMiddleware(store) {
 export default function(store) {
   socket.on('updatePlayerLocations', newLocations => {
   	//when data is received from socket server, fire another action by store.dispatch
-    console.log('received newLocations => ', newLocations);
     store.dispatch(actions.updateLocation(newLocations));
   });
 
