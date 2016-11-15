@@ -33,6 +33,11 @@ io.on('connection', function(socket){
     gameManager.createRoom(roomName);
   }
 
+  socket.on('SELECT-ROOM', function (roomName) {
+    roomName  = roomName;
+    console.log('updated room name to: ', roomName);
+  });
+
   socket.on('GET-NEW-BOARD', function() {
     io.emit('updateBoard', gameManager.rooms[roomName].board.board);  // to send stuff back to client side
     io.emit('countMines', gameManager.rooms[roomName].board.minesLeft);
