@@ -6,6 +6,7 @@ var Players = require('./players.js');
 
 // import helper function
 var dropFlagHandler = require('./socket-helpers/dropFlagHandler');
+var openSpaceHandler = require('./socket-helpers/openSpaceHandler');
 
 // define score amounts by each operation
 global.scoreRevealMine = -10;
@@ -68,28 +69,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('OPEN-SPACE', function(data){
-    var playerId = data[0];
-    var location = data[1];
-
-    if (board.board[location.y][location.x].status === 0) {
-      board.board[location.y][location.x].status = 2;
-      //update the score according to the result;
-      if(board.board[location.y][location.x].val === 9) {
-        io.emit('updateScore', {id: playerId, scoreChange: scoreRevealMine});
-        board.minesLeft--;
-        console.log('mines left: ', board.minesLeft);
-      } else {
-        io.emit('updateScore', {id: 'player'+playerId, scoreChange: scoreRevealspace});
-        board.todos--;
-      }
-      if (board.minesLeft === 0){
-        board.generate();
-        setTimeout(function(){
-          io.emit('updateBoard', board.board);
-        }, 300);
-      }
-    }
-    io.emit('updateBoard', board.board);
+    openSpaceHandler(io, board, data);
   });
 
   socket.on('DROP-FLAG', function(data){

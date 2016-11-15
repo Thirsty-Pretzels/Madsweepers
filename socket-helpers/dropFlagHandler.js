@@ -1,4 +1,4 @@
-// socket helper function: 
+// socket helper function: drop flag
 module.exports = function(io, board, data) {
   var playerId = data[0];
   var location = data[1];
