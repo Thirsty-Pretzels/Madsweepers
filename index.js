@@ -28,34 +28,19 @@ const roomName = 'newRoom';
 
 io.on('connection', function(socket){
   console.log('a user connected');
-<<<<<<< 4771114f7ef99fb0a03513364ea2f4b787c966c1
   // create a new room if the room does not exist.
   if ( !gameManager.rooms[roomName] ) {
     gameManager.createRoom(roomName);
-=======
-
-  // create a new board if no board exists.
-  if ( !board ) {
-    createBoard();
-  }
-  // create a new players object if none exists.
-  if ( !players ) {
-    createPlayers();
->>>>>>> Start on multi-room socket connection
   }
 
-  //join a specific room. currently hardcoded
-  socket.join('roomA');
+  socket.on('SELECT-ROOM', function (roomName) {
+    roomName  = roomName;
+    console.log('updated room name to: ', roomName);
+  });
 
   socket.on('GET-NEW-BOARD', function() {
-<<<<<<< 4771114f7ef99fb0a03513364ea2f4b787c966c1
     io.emit('updateBoard', gameManager.rooms[roomName].board.board);  // to send stuff back to client side
     io.emit('countMines', gameManager.rooms[roomName].board.minesLeft);
-=======
-    // send messages to room A 
-    io.to('roomA').emit('updateBoard', board.board);  // to send stuff back to client side
-    io.to('roomA').emit('countMines', board.minesLeft);
->>>>>>> Start on multi-room socket connection
   });
 
   socket.on('CREATE-PLAYER', function(playerId) {
