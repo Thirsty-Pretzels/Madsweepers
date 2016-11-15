@@ -1,13 +1,3 @@
-//MJ in progress: getting board from server to load
-// export default function() {
-//   socket.emit('getBoard');
-//   socket.on('getBoard', function(board) {
-//     console.log(JSON.stringify(board.board), 'receiving board from server');
-//     return board.board;
-//   })
-// }
-
-
 export default function(state, action) {
   if (action.type === 'UPDATE-BOARD') {
       return action.payload;

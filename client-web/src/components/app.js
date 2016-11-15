@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
+import Board from '../containers/board';
+import PlayGround from '../containers/playGround';
+import ScoreBoard from '../containers/scoreBoard';
+import GameStatus from '../containers/gameStatus';
 
 export default class App extends Component {
   //used for for the home button icon
@@ -32,6 +36,14 @@ export default class App extends Component {
             // this is where to pass props to all children components
             redirect: this.redirect,
           })}
+        </div>
+        <div id='section1'>
+          <PlayGround />
+          <Board />
+        </div>
+        <div id='section2'>
+          <ScoreBoard />
+          <GameStatus />
         </div>
       </div>
 
