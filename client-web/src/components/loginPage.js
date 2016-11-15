@@ -40,8 +40,8 @@ class LoginPage extends Component {
           <div>
             <p> Join Room: </p>
             <select onChange={this.handleRoom}>
-              <option value= 'RoomA'> Room A </option>
-              <option value= 'RoomB'> Room B </option>
+              <option value='RoomA'> Room A </option>
+              <option value='RoomB'> Room B </option>
             </select>
           </div>
           <div>
@@ -52,7 +52,7 @@ class LoginPage extends Component {
             />
           </div>
         </div>
-        
+
         <div className = "username">
           <form>
             <input
