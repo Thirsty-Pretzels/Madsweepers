@@ -4,24 +4,36 @@ import { connect } from 'react-redux';
 // define the ScoreBoard Component
 // change: use table, instead of ul
 class ScoreBoard extends Component {
+  renderScore() {
+    console.log('inside renderScore');
+
+    return this.props.scores.sort((a, b) => a.score < b.score)
+    .map(score => {
+      if ( score.id === this.props.username ) {
+        console.log('this is the user\'s score');
+        return (
+          <div key={score.id} id='playerScore' className='scoreItem'>
+            <div className='scoreboard-score'>{score.score} </div>
+            <div className='scoreboard-id'>{score.id}</div>
+          </div>
+        )
+      } else {
+        return (
+          <div key={score.id} className='scoreItem'>
+            <div className='scoreboard-score'>{score.score} </div>
+            <div className='scoreboard-id'>{score.id}</div>
+          </div>
+        )
+      }
+    })
+  }
+
   render() {
     return (
       <div id='scoreBoard'>
         <h2>LeaderBoard</h2>
         <div>
-          <table>
-            <tr>
-              <td>Player</td><td>Score</td>
-            </tr>
-            {
-              this.props.scores.sort(function(a, b) {return a.score < b.score}).map((score) =>
-                <tr>
-                  <td>{score.id}</td>
-                  <td>{score.score}</td>
-                </tr>
-            )
-          }
-          </table>
+          { this.renderScore() }
         </div>
       </div>
     )
@@ -30,8 +42,15 @@ class ScoreBoard extends Component {
 
 var mapStateToProps = (state) => {
   return {
-    scores: state.scores
+    scores: state.scores,
+    username: state.username
   };
 };
 
 export default connect(mapStateToProps)(ScoreBoard);
+          // <table>
+          //   <tr>
+          //     <td>Player</td><td>Score</td>
+          //   </tr>
+          //   { this.renderScore() }
+          // </table>
