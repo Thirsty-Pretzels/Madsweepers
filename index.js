@@ -33,7 +33,7 @@ io.on('connection', function(socket){
     gameManager.createRoom(roomName);
   }
 
-  socket.on('SELECT-ROOM', function (roomName) {
+  socket.on('selectRoom', function (roomName) {
     roomName  = roomName;
     console.log('updated room name to: ', roomName);
   });
