@@ -22,7 +22,7 @@ export default class App extends Component {
             redirect: this.redirect,
           })}
         </div>
-        
+
       </div>
 
     );
