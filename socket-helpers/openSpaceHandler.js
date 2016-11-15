@@ -7,11 +7,13 @@ module.exports = function(io, board, data) {
     board.board[location.y][location.x].status = 2;
     //update the score according to the result;
     if(board.board[location.y][location.x].val === 9) {
+      console.log('playerId: ', playerId);
       io.emit('updateScore', {id: playerId, scoreChange: scoreRevealMine});
       board.minesLeft--;
       console.log('mines left: ', board.minesLeft);
       io.emit('countMines', board.minesLeft);
     } else {
+      console.log('playerId: ', playerId);
       io.emit('updateScore', {id: playerId, scoreChange: scoreRevealspace});
       board.todos--;
     }
@@ -24,5 +26,3 @@ module.exports = function(io, board, data) {
   }
   io.emit('updateBoard', board.board);
 }
-
-

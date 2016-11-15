@@ -13,6 +13,7 @@ module.exports = function(io, board, data) {
       io.emit('countMines', board.minesLeft);
       io.emit('updateBoard', board.board);
       //update score
+      console.log('playerId: ', playerId);
       io.emit('updateScore', {id: playerId, scoreChange: scoreRightFlag});
     } else {
     // if the flag is dropped at a wrong place
@@ -20,6 +21,7 @@ module.exports = function(io, board, data) {
       //update board
       io.emit('updateBoard', board.board);
       //update score
+      console.log('playerId: ', playerId);
       io.emit('updateScore', {id: playerId, scoreChange: scoreWrongFlag});
       //after 0.3, reset the corresponing grid to initial
       setTimeout(() => {
