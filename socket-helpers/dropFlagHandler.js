@@ -8,6 +8,8 @@ module.exports = function(io, board, data) {
     if ( board.board[location.y][location.x].val === 9 ) {
       board.board[location.y][location.x].status = 1;
       //update board
+      board.minesLeft--;
+      console.log('mines left: ', board.minesLeft);
       io.emit('updateBoard', board.board);
       //update score
       io.emit('updateScore', {id: 'player'+playerId, scoreChange: scoreRightFlag});
@@ -23,6 +25,9 @@ module.exports = function(io, board, data) {
         board.board[location.y][location.x].status = 0;
         io.emit('updateBoard', board.board);
       }, 300);
+    }
+    if (board.minesLeft === 0){
+      board.generate();
     }
   }
 };
