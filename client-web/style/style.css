@@ -2,7 +2,7 @@ body {
 }
 
 .App-Components {
-  animation-duration: 2s;
+  animation-duration: 1s;
   animation-name: slidein;
 }
 
