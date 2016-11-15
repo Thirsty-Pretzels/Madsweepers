@@ -12,7 +12,7 @@ module.exports = function(io, board, data) {
       console.log('mines left: ', board.minesLeft);
       io.emit('countMines', board.minesLeft);
     } else {
-      io.emit('updateScore', {id: 'player'+playerId, scoreChange: scoreRevealspace});
+      io.emit('updateScore', {id: playerId, scoreChange: scoreRevealspace});
       board.todos--;
     }
     if (board.minesLeft === 0){
