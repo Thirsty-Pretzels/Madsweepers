@@ -39,7 +39,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('CREATE-PLAYER', function(playerId) {
-    createPlayerHandler(io, gameManager.rooms[roomName].players, clients, socket, playerId);
+    createPlayerHandler(io, gameManager.rooms[roomName].players, clients, socket, playerId, gameManager.rooms[roomName]['currentScores']);
   })
 
   socket.on('movePlayer', function(data) {
@@ -47,15 +47,15 @@ io.on('connection', function(socket){
   });
 
   socket.on('OPEN-SPACE', function(data){
-    openSpaceHandler(io, gameManager.rooms[roomName].board, data);
+    openSpaceHandler(io, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data);
   });
 
   socket.on('DROP-FLAG', function(data){
-    dropFlagHandler(io, gameManager.rooms[roomName].board, data);
+    dropFlagHandler(io, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data);
   });
 
   socket.on('disconnect', function(){
-    disconnectHandler(gameManager.rooms[roomName].players, clients, socket);
+    disconnectHandler(io, gameManager.rooms[roomName].players, gameManager.rooms[roomName]['currentScores'], clients, socket);
   });
 });
 

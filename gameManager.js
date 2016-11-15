@@ -28,6 +28,8 @@ GameManager.prototype.createRoom = function(roomName) {
   var board = createBoard();
   var players = createPlayers();
   this.rooms[roomName] = {board, players};
+  //need to store the current score for the current game inside this game;
+  this.rooms[roomName]['currentScores'] = [];
 
   console.log('created new room ', this.rooms[roomName]);
 };
