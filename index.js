@@ -97,6 +97,12 @@ io.on('connection', function(socket){
   });
 
   socket.on('disconnect', function(){
+    clients.forEach(function(x, i){
+      if (x['socket'] === socket){
+        players.removePlayer(x['playerId']);
+        clients.splice(i, 1);
+      }
+    });
     console.log('user disconnected');
   });
 });
