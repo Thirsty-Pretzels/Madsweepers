@@ -28,12 +28,12 @@ class PlayGround extends Component {
   }
 
   renderPlayers() {
+    console.log('props.playerLocation', this.props.playerLocation);
     var playersArr = Object.keys(this.props.playerLocation);
 
     return playersArr.map( (player) =>
       <Player
         key={player}
-        status={ false }
         username={this.props.username}
         playerLocation={this.props.playerLocation[player]} />
     );

@@ -66,11 +66,47 @@ body {
   z-index: 1;
 }
 
-.player-moving {
+.player-up {
   position: absolute;
   width: 50px;
   height: 50px;
-  background-image: url('../images/walk.gif');
+  background-image: url('../images/walk_up.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition-duration: .2s;
+  border-width: 0;
+  z-index: 1;
+}
+
+.player-down {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-image: url('../images/walk_down.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition-duration: .2s;
+  border-width: 0;
+  z-index: 1;
+}
+
+.player-left {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-image: url('../images/walk_left.gif');
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: .2s;
+  border-width: 0;
+  z-index: 1;
+}
+
+.player-right {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-image: url('../images/walk_right.gif');
   background-size: contain;
   background-repeat: no-repeat;
   transition-duration: .2s;
@@ -81,7 +117,6 @@ body {
 .grid-initial {
   width: 50px;
   height: 50px;
-  /*content: url('../images/block.png');*/
   background-color: #F5D25C;
   vertical-align: top;
 }
@@ -132,7 +167,6 @@ body {
   border-radius: 25px;
   border-width: 2px;
   border-color: black;
-  /*background-color: grey;*/
 }
 
 .scoreboard-id {
