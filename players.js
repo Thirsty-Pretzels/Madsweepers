@@ -24,6 +24,7 @@ Players.prototype.removePlayer = function(playerId) {
 Players.prototype.createPlayer = function(playerId) {
   // body...
   return {
+    status: 0,
     x: Math.floor( Math.random() * 10 ),
     y: Math.floor( Math.random() * 10 )
   };
@@ -33,15 +34,19 @@ Players.prototype.move = function(playerId, direction) {
   // body...
   switch(direction) {
     case 'UP':
+      this.playerLocations[playerId].status = 1;
       this.playerLocations[playerId].y--;
       break;
     case 'DOWN':
+      this.playerLocations[playerId].status = 2;
       this.playerLocations[playerId].y++;
       break;
     case 'LEFT':
+      this.playerLocations[playerId].status = 3;
       this.playerLocations[playerId].x--;
       break;
     case 'RIGHT':
+      this.playerLocations[playerId].status = 4;
       this.playerLocations[playerId].x++;
       break;
     default:
@@ -54,9 +59,9 @@ Players.prototype.move = function(playerId, direction) {
 module.exports = Players;
 
 // Uncomment for example.
-// randomPlayer = new Players;
-// randomPlayer.addPlayer('newPlayer');
-// randomPlayer.addPlayer('newPlayer');
-// randomPlayer.addPlayer('newPlayer2');
-// randomPlayer.move('newPlayer', 'UP');
-// randomPlayer.move('newPlayer2', 'LEFT');
+randomPlayer = new Players;
+randomPlayer.addPlayer('newPlayer');
+randomPlayer.addPlayer('newPlayer');
+randomPlayer.addPlayer('newPlayer2');
+randomPlayer.move('newPlayer', 'UP');
+randomPlayer.move('newPlayer2', 'LEFT');

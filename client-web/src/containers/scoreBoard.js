@@ -5,12 +5,9 @@ import { connect } from 'react-redux';
 // change: use table, instead of ul
 class ScoreBoard extends Component {
   renderScore() {
-    console.log('inside renderScore');
-
     return this.props.scores.sort((a, b) => a.score < b.score)
     .map(score => {
       if ( score.id === this.props.username ) {
-        console.log('this is the user\'s score');
         return (
           <div key={score.id} id='playerScore' className='scoreItem'>
             <div className='scoreboard-score'>{score.score} </div>
@@ -48,9 +45,3 @@ var mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(ScoreBoard);
-          // <table>
-          //   <tr>
-          //     <td>Player</td><td>Score</td>
-          //   </tr>
-          //   { this.renderScore() }
-          // </table>
