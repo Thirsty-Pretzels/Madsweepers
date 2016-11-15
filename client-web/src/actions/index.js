@@ -81,3 +81,10 @@ export function updateScore(scoreChange) {
     scoreChange: scoreChange
   }
 };
+
+export function countMines(mines) {
+  return {
+    type: 'COUNT-MINES',
+    minesLeft: mines
+  }
+};
