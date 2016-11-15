@@ -1,5 +1,7 @@
 // socket helper function: drop flag
-module.exports = function(io, board, data) {
+var updateCurrentScores = require('./updateCurrentScores.js');
+
+module.exports = function(io, board, currentScores, data) {
   var playerId = data[0];
   var location = data[1];
 
@@ -12,15 +14,17 @@ module.exports = function(io, board, data) {
       console.log('mines left: ', board.minesLeft);
       io.emit('countMines', board.minesLeft);
       io.emit('updateBoard', board.board);
-      //update score
-      io.emit('updateScore', {id: 'player'+playerId, scoreChange: scoreRightFlag});
+      // update currentScores then emit the change
+      updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreRightFlag});
+      io.emit('updateScore', {id: playerId, scoreChange: scoreRightFlag});
     } else {
     // if the flag is dropped at a wrong place
       board.board[location.y][location.x].status = 3;
       //update board
       io.emit('updateBoard', board.board);
-      //update score
-      io.emit('updateScore', {id: 'player'+playerId, scoreChange: scoreWrongFlag});
+      // update currentScores then emit the change
+      updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreWrongFlag});
+      io.emit('updateScore', {id: playerId, scoreChange: scoreWrongFlag});
       //after 0.3, reset the corresponing grid to initial
       setTimeout(() => {
         board.board[location.y][location.x].status = 0;
