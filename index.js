@@ -69,7 +69,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('disconnect', function(){
-    disconnectHandler(players, clients);
+    disconnectHandler(players, clients, socket);
   });
 });
 
