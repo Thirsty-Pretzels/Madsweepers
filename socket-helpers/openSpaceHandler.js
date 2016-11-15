@@ -27,7 +27,8 @@ module.exports = function(io, board, currentScores, data) {
         io.emit('updateBoard', {type: 0, board: board.board});
       }, 300);
     }
+
+    // only send the change of the board, make sure it's type 1
+    io.emit('updateBoard', {type: 1, locationX: location.x, locationY: location.y, status: 2});
   }
-  // only send the change of the board, make sure it's type 1
-  io.emit('updateBoard', {type: 1, locationX: location.x, locationY: location.y, status: 2});
 }
