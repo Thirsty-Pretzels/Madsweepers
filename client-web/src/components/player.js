@@ -12,14 +12,10 @@ export default class Player extends Component {
   render() {
     var status = 'player'
     if ( this.props.playerLocation.status === 1 ) {
-      status = 'player-up';
-    } else if ( this.props.playerLocation.status === 2 ) {
-      status = 'player-down';
-    } else if ( this.props.playerLocation.status === 3 ) {
       status = 'player-left';
-    } else if ( this.props.playerLocation.status === 4 ) {
+    } else if ( this.props.playerLocation.status === 2 ) {
       status = 'player-right';
-    }
+    } 
 
     return (
       <div

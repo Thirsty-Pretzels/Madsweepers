@@ -34,19 +34,17 @@ Players.prototype.move = function(playerId, direction) {
   // body...
   switch(direction) {
     case 'UP':
-      this.playerLocations[playerId].status = 1;
       this.playerLocations[playerId].y--;
       break;
     case 'DOWN':
-      this.playerLocations[playerId].status = 2;
       this.playerLocations[playerId].y++;
       break;
     case 'LEFT':
-      this.playerLocations[playerId].status = 3;
+      this.playerLocations[playerId].status = 1;
       this.playerLocations[playerId].x--;
       break;
     case 'RIGHT':
-      this.playerLocations[playerId].status = 4;
+      this.playerLocations[playerId].status = 2;
       this.playerLocations[playerId].x++;
       break;
     default:
