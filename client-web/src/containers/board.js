@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 
 class Board extends Component {
   componentWillMount() {
-    console.log('need a new board');
     this.props.getNewBoard();
   }
 

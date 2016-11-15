@@ -32,7 +32,6 @@ export function movePlayer(playerId, key, location, board) {
 // while actions of type (ARROWUP, ARROWDOWN, ARROWLEFT, ARROWRIGHT) will bypass middleware
 // commented added by Bruce
 export function updateLocation(newLocations) {
-  console.log('inside updateLocation action');
   return {
     type: 'updatePlayerLocations',
     payload: newLocations,
@@ -69,7 +68,6 @@ export function dropFlag(playerId, location) {
 }
 
 export function createNewPlayer(playerId) {
-  console.log('inside createNewPlayer action');
   return {
     type: 'CREATE-PLAYER',
     payload: playerId
