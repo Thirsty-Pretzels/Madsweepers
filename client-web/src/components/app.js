@@ -6,24 +6,9 @@ import ScoreBoard from '../containers/scoreBoard';
 import GameStatus from '../containers/gameStatus';
 
 export default class App extends Component {
-  //used for for the home button icon
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      username: ''
-    }
-  }
-
+  // this is the router on the App component
   redirect(pageTo) {
     browserHistory.push('/' + pageTo);
-  }
-
-  updateUsername(username, callback) {
-    console.log('update username to be ', username);
-    this.setState({ username }, () => {
-      callback();
-    });
   }
 
   render() {
