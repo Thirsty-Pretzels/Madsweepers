@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
+import Board from '../containers/board';
+import PlayGround from '../containers/playGround';
+import ScoreBoard from '../containers/scoreBoard';
+import GameStatus from '../containers/gameStatus';
 
 export default class App extends Component {
   //used for for the home button icon
@@ -34,6 +38,14 @@ export default class App extends Component {
             username: this.state.username,
             updateUsername: this.updateUsername.bind(this)
           })}
+        </div>
+        <div id='section1'>
+          <PlayGround />
+          <Board />
+        </div>
+        <div id='section2'>
+          <ScoreBoard />
+          <GameStatus />
         </div>
       </div>
 

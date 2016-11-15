@@ -32,6 +32,7 @@ export function boardMiddleware(store) {
 }
 
 // define the initializing middleware function
+// middleware that calls actions in actions/index.js and passes it data using socket connections
 export default function(store) {
   socket.on('updatePlayerLocations', newLocations => {
   	//when data is received from socket server, fire another action by store.dispatch
@@ -45,5 +46,9 @@ export default function(store) {
   socket.on('updateScore', scoreChange => {
     //update score panel when new score is received
     store.dispatch(actions.updateScore(scoreChange));
+  });
+
+  socket.on('countMines', minesLeft => {
+    store.dispatch(actions.countMines(minesLeft));
   });
 }

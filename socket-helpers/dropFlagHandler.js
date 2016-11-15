@@ -10,6 +10,7 @@ module.exports = function(io, board, data) {
       //update board
       board.minesLeft--;
       console.log('mines left: ', board.minesLeft);
+      io.emit('countMines', board.minesLeft);
       io.emit('updateBoard', board.board);
       //update score
       io.emit('updateScore', {id: 'player'+playerId, scoreChange: scoreRightFlag});
