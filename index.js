@@ -75,15 +75,18 @@ io.on('connection', function(socket){
       if(board.board[location.y][location.x].val === 9) {
         io.emit('updateScore', {id: playerId, scoreChange: scoreRevealMine});
         board.minesLeft--;
+        console.log('mines left: ', board.minesLeft);
       } else {
         io.emit('updateScore', {id: 'player'+playerId, scoreChange: scoreRevealspace});
         board.todos--;
       }
       if (board.minesLeft === 0){
         board.generate();
+        setTimeout(function(){
+          io.emit('updateBoard', board.board);
+        }, 300);
       }
     }
-
     io.emit('updateBoard', board.board);
   });
 
@@ -96,6 +99,8 @@ io.on('connection', function(socket){
       if ( board.board[location.y][location.x].val === 9 ) {
         board.board[location.y][location.x].status = 1;
         //update board
+        board.minesLeft--;
+        console.log('mines left: ', board.minesLeft);
         io.emit('updateBoard', board.board);
         //update score
         io.emit('updateScore', {id: 'player'+playerId, scoreChange: scoreRightFlag});
@@ -112,12 +117,15 @@ io.on('connection', function(socket){
           io.emit('updateBoard', board.board);
         }, 300);
       }
+      if (board.minesLeft === 0){
+        board.generate();
+      }
     }
     console.log(board.todos, board.minesLeft);
   });
 
   socket.on('disconnect', function(...test){
-    console.log('user disconnected', test);
+    console.log('user disconnected');
     clients.forEach(function(x, i){
       if (x['socket'] === socket){
         players.removePlayer(x['playerId']);
