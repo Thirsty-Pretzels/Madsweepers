@@ -31,8 +31,6 @@ export default class App extends Component {
           {this.props.children && React.cloneElement(this.props.children, {
             // this is where to pass props to all children components
             redirect: this.redirect,
-            username: this.state.username,
-            updateUsername: this.updateUsername.bind(this)
           })}
         </div>
       </div>

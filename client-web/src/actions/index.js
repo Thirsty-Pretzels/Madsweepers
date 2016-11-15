@@ -23,6 +23,13 @@ export function movePlayer(playerId, key, location, board) {
   }
 }
 
+export function updateUsername(newUsername) {
+  return {
+    type: 'UPDATE_USERNAME',
+    payload: newUsername
+  }
+}
+
 // updateLocation action:
 // when data is received from server throught socket, this action will be fired through store.dispatch
 // type: ARROWUP, ARROWDOWN, ARROWLEFT, ARROWRIGHT
