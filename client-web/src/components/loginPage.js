@@ -18,7 +18,7 @@ class LoginPage extends Component {
 
     // MJ: send room name  selected in dropdown to socket
     roomName = roomName || 'roomA' //default to roomA if user does not make a choice
-    socket.emit('selectRoom', roomName);
+    socket.emit('selectRoom', roomName, name);
     this.props.redirect('gamePlay');
 
   }

@@ -20,18 +20,23 @@ global.scoreWrongFlag = -5;
 
 // Create gameManager when server starts
 var gameManager = new GameManager();
+// This keeps track of all active players and their socket
 var clients = [];
+// This tracks players and their respective rooms
+var clientRoom = {};
+module.exports = clientRoom;
 
 // Now the room name is hard coded
 // we need to send the room name along with every communciation
-const roomName = 'roomA';
+var roomName = 'RoomA';
 
 io.on('connection', function(socket){
   console.log('a user connected');
 
-  socket.on('selectRoom', function (roomName) {
-    roomName  = roomName;
-    console.log('updated room name to: ', roomName);
+  socket.on('selectRoom', function (roomName, userName) {
+    var roomName = roomName;
+    clientRoom[userName] = roomName;
+    console.log(clientRoom, 'client-room pair in selectRoom')
     // create a new room if the room does not exist.
     if ( !gameManager.rooms[roomName] ) {
       gameManager.createRoom(roomName);
@@ -43,13 +48,24 @@ io.on('connection', function(socket){
     io.emit('countMines', [gameManager.rooms[roomName].board.minesLeft, gameManager.rooms[roomName].board.minesCount]); //add total mine count
 
  
+    } 
+
+  });
+
+  socket.on('getNewBoard', function() {
+    console.log('getting board for room name:', roomName)
+    io.emit('updateBoard', {type: 0, board: gameManager.rooms[roomName].board.board});  // to send stuff back to client side
+    io.emit('countMines', gameManager.rooms[roomName].board.minesLeft);
   });
 
   socket.on('createPlayer', function(playerId) {
-    createPlayerHandler(io, gameManager.rooms[roomName].players, clients, socket, playerId, gameManager.rooms[roomName]['currentScores']);
+    createPlayerHandler(io, clientRoom, roomName, gameManager.rooms[roomName].players, clients, socket, playerId, gameManager.rooms[roomName]['currentScores']);
   })
 
   socket.on('movePlayer', function(data) {
+    var playerId = data[0];
+    var roomName = clientRoom[playerId];
+    console.log(clientRoom,'client-room pair in movePlayer');
     movePlayerHandler(io, gameManager.rooms[roomName].players, data);
   });
 
