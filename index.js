@@ -33,12 +33,17 @@ io.on('connection', function(socket){
     gameManager.createRoom(roomName);
   }
 
-  socket.on('GET-NEW-BOARD', function() {
+  socket.on('SELECT-ROOM', function (roomName) {
+    roomName  = roomName;
+    console.log('updated room name to: ', roomName);
+  });
+
+  socket.on('getNewBoard', function() {
     io.emit('updateBoard', gameManager.rooms[roomName].board.board);  // to send stuff back to client side
     io.emit('countMines', gameManager.rooms[roomName].board.minesLeft);
   });
 
-  socket.on('CREATE-PLAYER', function(playerId) {
+  socket.on('createPlayer', function(playerId) {
     createPlayerHandler(io, gameManager.rooms[roomName].players, clients, socket, playerId, gameManager.rooms[roomName]['currentScores']);
   })
 
@@ -46,11 +51,11 @@ io.on('connection', function(socket){
     movePlayerHandler(io, gameManager.rooms[roomName].players, data);
   });
 
-  socket.on('OPEN-SPACE', function(data){
+  socket.on('openSpace', function(data){
     openSpaceHandler(io, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data);
   });
 
-  socket.on('DROP-FLAG', function(data){
+  socket.on('dropFlag', function(data){
     dropFlagHandler(io, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data);
   });
 
