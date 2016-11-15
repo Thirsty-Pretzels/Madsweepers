@@ -17,8 +17,9 @@ export default class LoginPage extends Component {
 
   onFormSubmit(e) {
     e.preventDefault();
-    this.props.updateUsername(this.state.value);
-    this.props.redirect('gamePlay');
+    this.props.updateUsername(this.state.value, () => {
+      this.props.redirect('gamePlay');
+    });
   }
 
   render() {

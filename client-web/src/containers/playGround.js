@@ -8,8 +8,13 @@ import Player from '../components/player';
 const playerId = Date.now().toString(36);
 
 class PlayGround extends Component {
-  componentWillMount() {
-    this.props.createNewPlayer(playerId);
+  constructor(props) {
+    super(props)
+  }
+
+  componentDidMount() {
+    console.log('playerGround username =>', this.props)
+    this.props.createNewPlayer(this.props.username);
   }
 
   keyDown(e) {

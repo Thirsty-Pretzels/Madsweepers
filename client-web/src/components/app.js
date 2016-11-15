@@ -15,9 +15,11 @@ export default class App extends Component {
     browserHistory.push('/' + pageTo);
   }
 
-  updateUsername(username) {
+  updateUsername(username, callback) {
     console.log('update username to be ', username);
-    this.setState({ username });
+    this.setState({ username }, () => {
+      callback();
+    });
   }
 
   render() {
@@ -30,7 +32,7 @@ export default class App extends Component {
             // this is where to pass props to all children components
             redirect: this.redirect,
             username: this.state.username,
-            updateUsername: this.updateUsername
+            updateUsername: this.updateUsername.bind(this)
           })}
         </div>
       </div>
