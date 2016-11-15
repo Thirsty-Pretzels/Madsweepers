@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { updateUsername } from '../actions/index';
 import axios from 'axios';
 
-export default class LoginPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: ''
-    }
-  }
+var name;
 
+class LoginPage extends Component {
   changeValue(event) {
-    this.setState({
-      value: event.target.value
-    })
+    name = event.target.value
   }
 
   onFormSubmit(e) {
     e.preventDefault();
-    this.props.updateUsername(this.state.value, () => {
-      this.props.redirect('gamePlay');
-    });
+    this.props.updateUsername(name);
+    this.props.redirect('gamePlay');
   }
 
   render() {
@@ -31,7 +26,7 @@ export default class LoginPage extends Component {
 
         <form>
           <input
-            value={ this.state.value }
+            value={ name }
             placeholder='enter username'
             onChange={ this.changeValue.bind(this) } />
           <button onClick={ this.onFormSubmit.bind(this) }>Enter</button>
@@ -40,3 +35,17 @@ export default class LoginPage extends Component {
     );
   }
 };
+
+var mapStateToProps = (state) => {
+  return {
+    username: state.username
+  }
+};
+
+var mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    updateUsername: updateUsername
+  }, dispatch)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
