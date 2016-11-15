@@ -35,6 +35,7 @@ io.on('connection', function(socket){
 
   socket.on('GET-NEW-BOARD', function() {
     io.emit('updateBoard', gameManager.rooms[roomName].board.board);  // to send stuff back to client side
+    io.emit('countMines', gameManager.rooms[roomName].board.minesLeft);
   });
 
   socket.on('CREATE-PLAYER', function(playerId) {
