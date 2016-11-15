@@ -5,7 +5,7 @@ import { updateUsername } from '../actions/index';
 import axios from 'axios';
 
 var name;
-var roomName = 'roomA'; //set to roomA as default if user does not make a choice
+var roomName;
 
 class LoginPage extends Component {
   changeValue(event) {
@@ -17,14 +17,15 @@ class LoginPage extends Component {
     this.props.updateUsername(name);
 
     // MJ: send room name  selected in dropdown to socket
-    socket.emit('SELECT-ROOM', roomName);
-
+    roomName = roomName || 'roomA' //default to roomA if user does not make a choice
+    socket.emit('selectRoom', roomName);
     this.props.redirect('gamePlay');
 
   }
 
   handleRoom(e) {
     roomName = e.target.value;
+    console.log(roomName);
     e.preventDefault();
   }
 
@@ -34,18 +35,34 @@ class LoginPage extends Component {
         <h2>
           this is the loginPage
         </h2>
-        <p> Select Room: </p>
-        <select onChange={this.handleRoom}>
-          <option value= 'RoomA'> Room A </option>
-          <option value= 'RoomB'> Room B </option>
-        </select>
-        <form>
-          <input
-            value={ name }
-            placeholder='enter username'
-            onChange={ this.changeValue.bind(this) } />
-          <button onClick={ this.onFormSubmit.bind(this) }>Enter</button>
-        </form>
+
+        <div className = "rooms">
+          <div>
+            <p> Join Room: </p>
+            <select onChange={this.handleRoom}>
+              <option value= 'RoomA'> Room A </option>
+              <option value= 'RoomB'> Room B </option>
+            </select>
+          </div>
+          <div>
+           <p> OR Create New Room </p>
+            <input onChange={this.handleRoom}
+              value={ roomName }
+              placeholder='enter room name'
+            />
+          </div>
+        </div>
+        
+        <div className = "username">
+          <form>
+            <input
+              value={ name }
+              placeholder='enter username'
+              onChange={ this.changeValue.bind(this) } />
+            <button onClick={ this.onFormSubmit.bind(this) }>Enter</button>
+          </form>
+        </div>
+
       </div>
     );
   }
