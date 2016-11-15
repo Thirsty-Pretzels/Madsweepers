@@ -12,7 +12,7 @@ module.exports = function(io, board, currentScores, data) {
       //update board
       board.minesLeft--;
       console.log('mines left: ', board.minesLeft);
-      io.emit('countMines', board.minesLeft);
+      io.emit('countMines', [board.minesLeft, board.minesCount]);
       // only send the change of the board, make sure it's type 1
       io.emit('updateBoard', {type: 1, locationX: location.x, locationY: location.y, status: 1});
       // update currentScores then emit the change

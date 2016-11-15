@@ -89,9 +89,9 @@ export function updateScore(scoreChange) {
   }
 };
 
-export function countMines(mines) {
+export function countMines(minesInfo) {
   return {
     type: 'COUNT-MINES',
-    minesLeft: mines
+    minesInfo: minesInfo
   }
 };

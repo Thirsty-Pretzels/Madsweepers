@@ -1,6 +1,7 @@
-export default function(state = '', action) {
+export default function(state = ['', ''], action) {
   if (action.type === 'COUNT-MINES') {
-    var newState = action.minesLeft;
+  	console.log('inside reducer: ', action.mineInfo);
+    var newState = [action.minesInfo[0], action.minesInfo[1]];
     return newState;
   } else {
     return state;
