@@ -22,14 +22,7 @@ export default class App extends Component {
             redirect: this.redirect,
           })}
         </div>
-        <div id='section1'>
-          <PlayGround />
-          <Board />
-        </div>
-        <div id='section2'>
-          <ScoreBoard />
-          <GameStatus />
-        </div>
+        
       </div>
 
     );
