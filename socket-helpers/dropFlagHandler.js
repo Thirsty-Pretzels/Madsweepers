@@ -13,22 +13,24 @@ module.exports = function(io, board, currentScores, data) {
       board.minesLeft--;
       console.log('mines left: ', board.minesLeft);
       io.emit('countMines', board.minesLeft);
-      io.emit('updateBoard', board.board);
+      // only send the change of the board, make sure it's type 1
+      io.emit('updateBoard', {type: 1, locationX: location.x, locationY: location.y, status: 1});
       // update currentScores then emit the change
       updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreRightFlag});
       io.emit('updateScore', {id: playerId, scoreChange: scoreRightFlag});
     } else {
     // if the flag is dropped at a wrong place
       board.board[location.y][location.x].status = 3;
-      //update board
-      io.emit('updateBoard', board.board);
+      // only send the change of the board, make sure it's type 1
+      io.emit('updateBoard', {type: 1, locationX: location.x, locationY: location.y, status: 3});
       // update currentScores then emit the change
       updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreWrongFlag});
       io.emit('updateScore', {id: playerId, scoreChange: scoreWrongFlag});
       //after 0.3, reset the corresponing grid to initial
       setTimeout(() => {
         board.board[location.y][location.x].status = 0;
-        io.emit('updateBoard', board.board);
+        // only send the change of the board, make sure it's type 1
+        io.emit('updateBoard', {type: 1, locationX: location.x, locationY: location.y, status: 0});
       }, 300);
     }
     if (board.minesLeft === 0){

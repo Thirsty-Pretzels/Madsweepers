@@ -39,7 +39,9 @@ io.on('connection', function(socket){
   });
 
   socket.on('getNewBoard', function() {
-    io.emit('updateBoard', gameManager.rooms[roomName].board.board);  // to send stuff back to client side
+    //type 0 means that sending the whole board
+    //type 1 means that sending the changes
+    io.emit('updateBoard', {type: 0, board: gameManager.rooms[roomName].board.board});  // to send stuff back to client side
     io.emit('countMines', gameManager.rooms[roomName].board.minesLeft);
   });
 
