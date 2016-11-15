@@ -13,7 +13,6 @@ export default function(state = defaultState, action) {
       for (var i = 0; i < state.length; i++) {
         newState[i] = state[i].slice();
       }
-      console.log(newState);
 
       // update newState
       newState[action.payload.locationY][action.payload.locationX].status = action.payload.status;
