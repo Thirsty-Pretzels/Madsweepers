@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Board from '../containers/board';
 import PlayGround from '../containers/playGround';
 import ScoreBoard from '../containers/scoreBoard';
+import GameStatus from '../containers/gameStatus'
 
 export default class GamePlay extends Component {
 // added a second section for scoreboard. can someone please help me with CSS?
@@ -18,6 +19,7 @@ export default class GamePlay extends Component {
         </div>
         <div id='section2'>
           <ScoreBoard />
+          <GameStatus />
         </div>
       </div>
     );
