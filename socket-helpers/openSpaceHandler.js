@@ -24,9 +24,10 @@ module.exports = function(io, board, currentScores, data) {
     if (board.minesLeft === 0){
       board.generate();
       setTimeout(function(){
-        io.emit('updateBoard', board.board);
+        io.emit('updateBoard', {type: 0, board: board.board});
       }, 300);
     }
   }
-  io.emit('updateBoard', board.board);
+  // only send the change of the board, make sure it's type 1
+  io.emit('updateBoard', {type: 1, locationX: location.x, locationY: location.y, status: 2});
 }
