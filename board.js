@@ -13,6 +13,7 @@ Board.prototype.generate = function (n, m, d) {
   var mines = Math.ceil(n * m * d);
   this.todos = n * m - mines;  //total number of non-mine tiles to uncover
   this.board = [];
+  this.minesCount = mines;   //add total mine count info
   this.minesLeft = mines;
 
   //generate empty board
