@@ -12,19 +12,19 @@ export function boardMiddleware(store) {
     }
 
     if ( action.type === 'OPEN-SPACE' ) {
-      socket.emit('OPEN-SPACE', [action.playerId, action.location]);
+      socket.emit('openSpace', [action.playerId, action.location]);
     }
 
     if ( action.type === 'GET-NEW-BOARD' ) {
-      socket.emit('GET-NEW-BOARD');
+      socket.emit('getNewBoard');
     }
 
     if ( action.type === 'CREATE-PLAYER' ) {
-      socket.emit('CREATE-PLAYER', action.payload);
+      socket.emit('createPlayer', action.payload);
     }
 
     if ( action.type === 'DROP-FLAG' ) {
-      socket.emit('DROP-FLAG', [action.playerId, action.location]);
+      socket.emit('dropFlag', [action.playerId, action.location]);
     }
 
     return next(action);
