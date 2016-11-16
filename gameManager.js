@@ -7,7 +7,7 @@ function createBoard(rows, columns, dangerFactor) {
   dangerFactor = dangerFactor ? dangerFactor : 0.2;
 
   var board = new Board();
-  board.generate(rows, columns, dangerFactor);
+  board.generate(rows, columns, dangerFactor, Date.now());
   console.log('created newboard');
 
   return board;
