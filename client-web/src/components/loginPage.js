@@ -7,7 +7,7 @@ import axios from 'axios';
 var name;
 var roomName;
 
-class LoginPage extends Component {
+export class LoginPage extends Component {
   changeValue(event) {
     name = event.target.value
   }
