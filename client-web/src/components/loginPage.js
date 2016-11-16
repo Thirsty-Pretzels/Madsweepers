@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateUsername } from '../actions/index';
+import { updateRoomName } from '../actions/index';
 import axios from 'axios';
 
 var name;
@@ -16,11 +17,11 @@ class LoginPage extends Component {
     e.preventDefault();
     this.props.updateUsername(name);
 
-    // MJ: send room name  selected in dropdown to socket
+    // MJ: send room name selected in dropdown to socket together with username
     roomName = roomName || 'roomA' //default to roomA if user does not make a choice
-    socket.emit('selectRoom', roomName);
+    this.props.updateRoomName(roomName);
+    
     this.props.redirect('gamePlay');
-
   }
 
   handleRoom(e) {
@@ -40,8 +41,8 @@ class LoginPage extends Component {
           <div>
             <p> Join Room: </p>
             <select onChange={this.handleRoom}>
-              <option value= 'RoomA'> Room A </option>
-              <option value= 'RoomB'> Room B </option>
+              <option value= 'roomA'> Room A </option>
+              <option value= 'roomB'> Room B </option>
             </select>
           </div>
           <div>
@@ -70,13 +71,15 @@ class LoginPage extends Component {
 
 var mapStateToProps = (state) => {
   return {
-    username: state.username
+    username: state.username,
+    roomName: state.roomName
   }
 };
 
 var mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    updateUsername: updateUsername
+    updateUsername: updateUsername,
+    updateRoomName: updateRoomName
   }, dispatch)
 };
 

@@ -30,6 +30,13 @@ export function updateUsername(newUsername) {
   }
 }
 
+export function updateRoomName(roomName) {
+  return {
+    type: 'UPDATE_ROOMNAME',
+    payload: roomName
+  }
+}
+
 // updateLocation action:
 // when data is received from server throught socket, this action will be fired through store.dispatch
 // type: ARROWUP, ARROWDOWN, ARROWLEFT, ARROWRIGHT
@@ -74,10 +81,11 @@ export function dropFlag(playerId, location) {
   }
 }
 
-export function createNewPlayer(playerId) {
+export function createNewPlayer(playerId, roomName) {
   return {
     type: 'CREATE-PLAYER',
-    payload: playerId
+    payload: playerId,
+    roomName: roomName
   }
 }
 

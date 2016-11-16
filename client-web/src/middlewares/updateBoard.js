@@ -20,7 +20,7 @@ export function boardMiddleware(store) {
     }
 
     if ( action.type === 'CREATE-PLAYER' ) {
-      socket.emit('createPlayer', action.payload);
+      socket.emit('createPlayer', action.payload, action.roomName);
     }
 
     if ( action.type === 'DROP-FLAG' ) {

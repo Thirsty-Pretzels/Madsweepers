@@ -9,7 +9,8 @@ const playerId = Date.now().toString(36);
 
 class PlayGround extends Component {
   componentWillMount() {
-    this.props.createNewPlayer(this.props.username);
+    console.log(this.props.username, this.props.roomName, 'username and roomname in playground component')
+    this.props.createNewPlayer(this.props.username, this.props.roomName);
   }
 
   keyDown(e) {
@@ -56,7 +57,8 @@ var mapStateToProps = (state) => {
   return {
     username: state.username,
     board: state.board,
-    playerLocation: state.playerLocation
+    playerLocation: state.playerLocation,
+    roomName: state.roomName
   }
 };
 
