@@ -75,8 +75,10 @@ io.on('connection', function(socket){
   });
 });
 
-http.listen(3000, function(){
-  console.log('IAM listening on *:3000, AMA');
+var port = process.env.port || 3000;
+
+http.listen(port, function(){
+  console.log(`IAM listening on *:${port}, AMA`);
 });
 
 // module.exports = board;
