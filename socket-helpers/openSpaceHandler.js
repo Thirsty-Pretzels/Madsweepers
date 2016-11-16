@@ -10,7 +10,9 @@ module.exports = function(io, roomName, board, currentScores, data) {
     //update the score according to the result;
     if(board.board[location.y][location.x].val === 9) {
       // update currentScores then emit the change
+      console.log('inside updateScore, before: ', currentScores);
       updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreRevealMine});
+      console.log('inside updateScore, after: ', currentScores);
       io.to(roomName).emit('updateScore', {id: playerId, scoreChange: scoreRevealMine});
       board.minesLeft--;
       console.log('mines left: ', board.minesLeft);
