@@ -40,38 +40,47 @@ export class LoginPage extends Component {
 
   render() {
     return (
-      <div className='loginPage App-Components'>
-        <h2>
-          this is the loginPage
-        </h2>
+        <div>
           {
             !this.props.userInfo.status ? 
-            <div className = "username">
-              <form>
-                <input
-                  value={ name }
-                  placeholder='enter username'
-                  onChange={ this.changeValue.bind(this) } />
-                <button onClick={ this.onFormSubmit.bind(this) }>PLAY AS A GUEST</button>
-              </form>
-            </div> : 
+            <div className="row">
+            <h2> Welcome</h2>
+                <form>
+                  <input
+                    value={ name }
+                    placeholder='enter username'
+                    onChange={ this.changeValue.bind(this) } 
+                    />
+                  <button 
+                    className="btn waves-effect waves-light" 
+                    type="submit" 
+                    name="action"
+                    onClick={this.onFormSubmit.bind(this)}
+                  > Play as a Guest
+                    <i className="material-icons right">send</i>
+                   </button>
+                </form>
+            </div> :
+
             <div>
-              <div className = 'userInfo' display='none'>
-                <h4>userIno</h4>
+              <div className="row">
+                <h4>User Info</h4>
                 <p>Username: {this.props.userInfo.username}</p>
                 <p>TempId:   {this.props.userInfo.tempUniqUserId}</p>
               </div>
+
               <div>
                 <h4>RoomList</h4>
-                  <table>
-                    <tr><th>RoomName</th><th>PlayerCount</th></tr>
-                  {
-                    this.props.roomList.map((room) => 
-                      <tr onClick={this.enterRoom.bind(this, room.roomName, this.props.userInfo.username)}><td>{room.roomName}</td><td>{room.numberOfPlayer}</td></tr>
-                    )
-                  }
-                  </table>
+                <table>
+                  <tr><th>RoomName</th><th>PlayerCount</th></tr>
+                {
+                  this.props.roomList.map((room) => 
+                    <tr onClick={this.enterRoom.bind(this, room.roomName, this.props.userInfo.username)}><td>{room.roomName}</td><td>{room.numberOfPlayer}</td></tr>
+                  )
+                }
+                </table>
               </div>
+
               {
                 !this.props.userInfo.inRoom ? null : 
                 <div>

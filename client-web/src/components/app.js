@@ -13,16 +13,15 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>This is the app component</h1>
 
-        <div className="App-Content">
+      <div className="container">
+        <h1>Super Sweeper</h1>
+        <div>
           {this.props.children && React.cloneElement(this.props.children, {
             // this is where to pass props to all children components
             redirect: this.redirect,
           })}
         </div>
-
       </div>
 
     );
