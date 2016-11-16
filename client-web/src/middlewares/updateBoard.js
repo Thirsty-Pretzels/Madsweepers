@@ -35,9 +35,9 @@ export function boardMiddleware(store) {
       socket.emit('getNewBoard');
     }
 
-    if ( action.type === 'CREATE-PLAYER' ) {
-      socket.emit('createPlayer', action.payload, action.roomName);
-    }
+    // if ( action.type === 'CREATE-PLAYER' ) {
+    //   socket.emit('createPlayer', action.payload, action.roomName);
+    // }
 
     if ( action.type === 'DROP-FLAG' ) {
       socket.emit('dropFlag', [action.playerId, action.location]);
@@ -85,7 +85,6 @@ export default function(store) {
 
   socket.on('updateScore', scoreChange => {
     //update score panel when new score is received
-    console.log('scoreChange: ', scoreChange);
     store.dispatch(actions.updateScore(scoreChange));
   });
 

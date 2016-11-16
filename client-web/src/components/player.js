@@ -6,7 +6,6 @@ export default class Player extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props.playerLocation);
   }
 
   render() {

@@ -24,7 +24,6 @@ export class LoginPage extends Component {
 
   leaveRoom() {
     if(this.props.userInfo.inRoom) {
-      console.log('I am here');
       this.props.leaveRoom(this.props.userInfo.room, this.props.userInfo.username);
     }
   }
@@ -34,14 +33,12 @@ export class LoginPage extends Component {
   }
 
   componentDidUpdate() {
-    console.log('allReady: ', this.props.allReady);
     if(this.props.allReady) {
       this.props.redirect('gamePlay');
     }
   }
 
   render() {
-    console.log('userInfo: ', this.props.userInfo);
     return (
       <div className='loginPage App-Components'>
         <h2>

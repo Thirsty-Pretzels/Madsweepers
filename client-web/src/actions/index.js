@@ -156,13 +156,13 @@ export function dropFlag(playerId, location) {
   }
 }
 
-export function createNewPlayer(playerId, roomName) {
-  return {
-    type: 'CREATE-PLAYER',
-    payload: playerId,
-    roomName: roomName
-  }
-}
+// export function createNewPlayer(playerId, roomName) {
+//   return {
+//     type: 'CREATE-PLAYER',
+//     payload: playerId,
+//     roomName: roomName
+//   }
+// }
 
 // define updateScore actions
 export function updateScore(scoreChange) {
