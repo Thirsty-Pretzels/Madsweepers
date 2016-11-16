@@ -8,7 +8,7 @@ import axios from 'axios';
 var name;
 var roomName;
 
-class LoginPage extends Component {
+export class LoginPage extends Component {
   changeValue(event) {
     name = event.target.value
   }
@@ -20,7 +20,7 @@ class LoginPage extends Component {
     // MJ: send room name selected in dropdown to socket together with username
     roomName = roomName || 'roomA' //default to roomA if user does not make a choice
     this.props.updateRoomName(roomName);
-    
+
     this.props.redirect('gamePlay');
   }
 
@@ -41,8 +41,8 @@ class LoginPage extends Component {
           <div>
             <p> Join Room: </p>
             <select onChange={this.handleRoom}>
-              <option value= 'roomA'> Room A </option>
-              <option value= 'roomB'> Room B </option>
+              <option value='RoomA'> Room A </option>
+              <option value='RoomB'> Room B </option>
             </select>
           </div>
           <div>
@@ -53,7 +53,7 @@ class LoginPage extends Component {
             />
           </div>
         </div>
-        
+
         <div className = "username">
           <form>
             <input
