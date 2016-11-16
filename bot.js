@@ -1,3 +1,5 @@
+//MJ: KIV
+
 // var Bot = function () {
 //   this.username = 'Bot';
 //   this.room = '';
@@ -9,7 +11,8 @@
 
 // }
 
-// Bot.prototype.makeMove() {
+// Bot.prototype.playRounds() {
 //   socket.
 // }
 
+// module.exports = Bot;

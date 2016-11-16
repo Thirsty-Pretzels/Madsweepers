@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Board from '../containers/board';
 import PlayGround from '../containers/playGround';
 import ScoreBoard from '../containers/scoreBoard';
-import GameStatus from '../containers/gameStatus'
+import GameStatus from '../containers/gameStatus';
+//MJ: KIV. Not in use for now
+//import AddComputerPlayer from '../containers/addComputerPlayer';
 
 export default class GamePlay extends Component {
 // added a second section for scoreboard. can someone please help me with CSS?
