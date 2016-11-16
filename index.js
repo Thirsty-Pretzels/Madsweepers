@@ -32,9 +32,13 @@ io.on('connection', function(socket){
 
   socket.on('createPlayer', function(playerId, roomName) {
     console.log(playerId, roomName, 'socket: createPlayer')
+
+    socket.join(roomName);
+
     if ( !gameManager.rooms[roomName] ) {
       gameManager.createRoom(roomName);
     }
+
     console.log(socket.id, 'socketid');
     clientRoom[socket.id] = roomName;
     createPlayerHandler(io, roomName, gameManager.rooms[roomName].players, clients, socket, playerId, gameManager.rooms[roomName]['currentScores']);
@@ -43,30 +47,31 @@ io.on('connection', function(socket){
   socket.on('getNewBoard', function() {
     var roomName = clientRoom[socket.id];
     console.log(roomName, 'getting board for room name');
-    io.emit('updateBoard', {type: 0, board: gameManager.rooms[roomName].board.board});  // to send stuff back to client side
-    io.emit('countMines', gameManager.rooms[roomName].board.minesLeft);
+    io.to(roomName).emit('updateBoard', {type: 0, board: gameManager.rooms[roomName].board.board});  // to send stuff back to client side
+    io.to(roomName).emit('countMines', gameManager.rooms[roomName].board.minesLeft);
   });
 
   socket.on('movePlayer', function(data) {
     var roomName = clientRoom[socket.id];
     console.log(roomName, 'room on move player');
-    movePlayerHandler(io, gameManager.rooms[roomName].players, data);
+    movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data);
   });
 
   socket.on('openSpace', function(data){
     var roomName = clientRoom[socket.id];
     console.log(roomName, 'room on open space');
-    openSpaceHandler(io, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data);
+    openSpaceHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data);
   });
 
   socket.on('dropFlag', function(data){
     var roomName = clientRoom[socket.id];
-    dropFlagHandler(io, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data);
+    dropFlagHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data);
   });
 
   socket.on('disconnect', function(){
     var roomName = clientRoom[socket.id];
-    disconnectHandler(io, gameManager.rooms[roomName].players, gameManager.rooms[roomName]['currentScores'], clients, socket);
+    console.log(roomName, 'roomName when disconnecting');
+    disconnectHandler(io, roomName, gameManager.rooms[roomName].players, gameManager.rooms[roomName]['currentScores'], clients, socket);
   });
 });
 
