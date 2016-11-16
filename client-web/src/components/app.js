@@ -4,6 +4,14 @@ import Board from '../containers/board';
 import PlayGround from '../containers/playGround';
 import ScoreBoard from '../containers/scoreBoard';
 import GameStatus from '../containers/gameStatus';
+import injectTapEventPlugin from 'react-tap-event-plugin'; // For Material-UI 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+ 
+// Needed for onTouchTap 
+// http://stackoverflow.com/a/34015469/988941 
+injectTapEventPlugin();
+
+
 
 export default class App extends Component {
   // this is the router on the App component
@@ -13,7 +21,6 @@ export default class App extends Component {
 
   render() {
     return (
-
       <div className="container">
         <h1>Super Sweeper</h1>
         <div>
@@ -23,7 +30,6 @@ export default class App extends Component {
           })}
         </div>
       </div>
-
     );
   }
 }
