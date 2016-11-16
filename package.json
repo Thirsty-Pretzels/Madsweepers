@@ -27,6 +27,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.1.2",
+    "nodemon": "^1.11.0",
     "should": "^11.1.1",
     "socket.io-client": "^1.5.1"
   }
