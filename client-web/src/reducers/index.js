@@ -5,6 +5,7 @@ import updateScoresReducer from './reducer_score_update';
 import usernameReducer from './reducer_username';
 import roomNameReducer from './reducer_room_name';
 import gameStatusReducer from './reducer_game_status';
+import currentBoardViewReducer from './reducer_current_board_view';
 
 //combineReducers takes in an object
 // the name of the key allows you to access the state in the redux state store
@@ -14,8 +15,8 @@ const rootReducer = combineReducers({
   board: boardReducer,
   playerLocation: playerLocationReducer,
   scores: updateScoresReducer,
-  gameStatus: gameStatusReducer
-
+  gameStatus: gameStatusReducer,
+  currentBoardView: currentBoardViewReducer
 });
 
 export default rootReducer;
