@@ -86,8 +86,7 @@ io.on('connection', function(socket){
     movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data);
     if (Math.floor((Date.now() - gameManager.rooms[roomName].board.time)) / 1000 / 60 >= 1){
       console.log('time\'s up');
-      //TODO: end game
-
+      io.to(roomName).emit('endification');
     }
   });
 
