@@ -58,15 +58,15 @@ body {
   position: absolute;
   width: 50px;
   height: 50px;
-  background-image: url('../images/mario.png');
-  background-size: contain;
+  background-image: url('../images/walk_left.gif');
+  background-size: cover;
   background-repeat: no-repeat;
   transition-duration: .2s;
   border-width: 0;
   z-index: 1;
 }
 
-.player-up {
+/*.player-up {
   position: absolute;
   width: 50px;
   height: 50px;
@@ -88,7 +88,7 @@ body {
   transition-duration: .2s;
   border-width: 0;
   z-index: 1;
-}
+}*/
 
 .player-left {
   position: absolute;
@@ -106,12 +106,17 @@ body {
   position: absolute;
   width: 50px;
   height: 50px;
-  background-image: url('../images/walk_right.gif');
-  background-size: contain;
+  background-image: url('../images/walk_left.gif');
+  background-size: cover;
   background-repeat: no-repeat;
   transition-duration: .2s;
   border-width: 0;
   z-index: 1;
+  /* this part of css will mirror the gif image */
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .grid-initial {
