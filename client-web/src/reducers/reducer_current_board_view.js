@@ -1,6 +1,6 @@
 export default function(state, action) {
   state = state || createCurrentView();
-  const board
+  // const board
 
   if ( action.type === 'updatePlayerLocations') {
     let key = Object.keys(action.payload)[0];
