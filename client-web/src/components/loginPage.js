@@ -22,6 +22,9 @@ export class LoginPage extends Component {
     this.props.updateRoomName(roomName);
 
     this.props.redirect('gamePlay');
+    
+    // uncomment this part when finsihed the roomList page;
+    // this.props.redirect('roomList');
   }
 
   handleRoom(e) {

@@ -10,11 +10,10 @@ const routes = (
   <Router history={browserHistory}>
     <Route path='/' component={App}>
       <IndexRoute component={LoginPage} />
+      <Route path='roomList' component={RoomListPage} />
       <Route path='gamePlay' component={GamePlay} />
     </Route>
   </Router>
 );
 
 export default routes;
-
-      // <Route path='roomList' component={RoomListPage} />
