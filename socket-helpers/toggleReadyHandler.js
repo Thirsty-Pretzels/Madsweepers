@@ -7,7 +7,6 @@ module.exports = function(io, socket, room, user, gameManager) {
   	return a && gameManager.rooms[room].players.playerLocations[b].ready;
   }, true);
 
-  console.log('isAllPlayersReady: ', isAllPlayersReady);
   if(isAllPlayersReady) {
   	io.to(room).emit('updateBoard', gameManager.rooms[room].board);
     io.to(room).emit('updateScore', gameManager.rooms[room].currentScores);

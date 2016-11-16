@@ -77,24 +77,18 @@ io.on('connection', function(socket){
 
   socket.on('getNewBoard', function() {
     var roomName = clientRoom[socket.id];
-    console.log(roomName, 'getting board for room name');
     io.to(roomName).emit('updateBoard', {type: 0, board: gameManager.rooms[roomName].board.board});  // to send stuff back to client side
-    console.log('mineLeft', gameManager.rooms[roomName].board.minesLeft);
     io.to(roomName).emit('countMines', [gameManager.rooms[roomName].board.minesLeft, gameManager.rooms[roomName].board.minesLeft]);
   });
 
   socket.on('movePlayer', function(data) {
     var roomName = clientRoom[socket.id];
-    console.log(roomName, 'room on move player');
     movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data);
   });
 
   socket.on('openSpace', function(data){
     var roomName = clientRoom[socket.id];
-    console.log(roomName, 'room on open space');
-    console.log('data getting', data);
     openSpaceHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data);
-    console.log('currentScores: ', gameManager.rooms[roomName]['currentScores']);
   });
 
   socket.on('dropFlag', function(data){
