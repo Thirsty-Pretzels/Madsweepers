@@ -103,7 +103,9 @@ io.on('connection', function(socket){
   socket.on('disconnect', function(){
     var roomName = clientRoom[socket.id];
     console.log(roomName, 'roomName when disconnecting');
-    disconnectHandler(io, roomName, gameManager.rooms[roomName].players, gameManager.rooms[roomName]['currentScores'], clients, socket);
+    if(roomName){
+      disconnectHandler(io, roomName, gameManager.rooms[roomName].players, gameManager.rooms[roomName]['currentScores'], clients, socket);
+    }
   });
 });
 
