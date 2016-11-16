@@ -83,10 +83,6 @@ io.on('connection', function(socket){
 
   socket.on('movePlayer', function(data) {
     var roomName = clientRoom[socket.id];
-<<<<<<< HEAD
-=======
-    console.log(roomName, 'room on move player', gameManager.rooms[roomName].board.time);
->>>>>>> 06a5700265b429f767c9109ac69684ae3a5249bb
     movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data);
     if (Math.floor((Date.now() - gameManager.rooms[roomName].board.time)) / 1000 / 60 >= 1){
       console.log('time\'s up');
