@@ -33,7 +33,7 @@ var clients = [];
 var clientRoom = {};
 
 // This keeps track of active users and its socket
-var users = {}; 
+var users = {};
 
 // Now the room name is hard coded
 // we need to send the room name along with every communciation
