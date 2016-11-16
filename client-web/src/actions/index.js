@@ -1,3 +1,78 @@
+// define action when a temperory user is trying to login
+export function loginTempUser(username) {
+  return {
+    type: 'LOGIN-TEMP-USER',
+    payload: username
+  }
+}
+
+export function newUser(userInfo) {
+  return {
+    type: 'NEW-USER',
+    payload: userInfo
+  }
+}
+
+export function updateRoomList(rooms) {
+  return {
+    type: 'ROOM-LIST-UPDATE',
+    payload: rooms
+  }
+}
+
+export function enterRoom(roomname, username, inRoom, inRoomname) {
+  return {
+    type: 'ENTER-ROOM',
+    room: roomname,
+    user: username,
+    inRoom: inRoom,
+    inRoomname: inRoomname
+  }
+}
+
+export function hasEnteredRoom(roomname) {
+  return {
+    type: 'ENTERED-ROOM',
+    room: roomname
+  }
+}
+
+export function leaveRoom(roomname, username) {
+  return {
+    type: 'LEAVE-ROOM',
+    room: roomname,
+    user: username
+  }
+}
+
+export function hasLeftRoom(roomname) {
+  return {
+    type: 'LEFT-ROOM',
+    room: roomname
+  }
+}
+
+export function toggleReady(room, user) {
+  return {
+    type: 'TOGGLE-READY',
+    room: room,
+    user: user
+  }
+}
+
+export function hasToggledReady() {
+  return {
+    type: 'TOGGLED-READY'
+  }
+}
+
+export function allReady(isAllPlayersReady) {
+  return {
+    type: 'ALL-READY',
+    ready: isAllPlayersReady
+  }
+}
+
 // movePlayer action:
 // movePlayer is fired when player is using keyboard to move
 // type: UP, DOWN, LEFT, RIGHT

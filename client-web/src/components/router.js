@@ -17,4 +17,4 @@ const routes = (
 
 export default routes;
 
-      // <Route path='roomList' component={RoomListPage} />
+//      <Route path='roomList' component={RoomListPage} />

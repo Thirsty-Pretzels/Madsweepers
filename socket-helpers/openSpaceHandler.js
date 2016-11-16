@@ -13,7 +13,6 @@ module.exports = function(io, roomName, board, currentScores, data) {
       updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreRevealMine});
       io.to(roomName).emit('updateScore', {id: playerId, scoreChange: scoreRevealMine});
       board.minesLeft--;
-      console.log('mines left: ', board.minesLeft);
       io.to(roomName).emit('countMines', [board.minesLeft, board.minesCount]);
     } else {
       // update currentScores then emit the change
