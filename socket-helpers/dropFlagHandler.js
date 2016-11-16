@@ -15,7 +15,7 @@ module.exports = function(io, roomName, board, currentScores, data) {
       // only send the change of the board, make sure it's type 1
       io.to(roomName).emit('updateBoard', {type: 1, locationX: location.x, locationY: location.y, status: 1});
       // update currentScores then emit the change
-      updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreRightFlag});
+      updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreRightFlag}, io, roomName);
       io.to(roomName).emit('updateScore', {id: playerId, scoreChange: scoreRightFlag});
     } else {
     // if the flag is dropped at a wrong place
@@ -23,7 +23,7 @@ module.exports = function(io, roomName, board, currentScores, data) {
       // only send the change of the board, make sure it's type 1
       io.to(roomName).emit('updateBoard', {type: 1, locationX: location.x, locationY: location.y, status: 3});
       // update currentScores then emit the change
-      updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreWrongFlag});
+      updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreWrongFlag}, io, roomName);
       io.to(roomName).emit('updateScore', {id: playerId, scoreChange: scoreWrongFlag});
       //after 0.3, reset the corresponing grid to initial
       setTimeout(() => {
