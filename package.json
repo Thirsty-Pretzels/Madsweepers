@@ -4,7 +4,7 @@
   "description": "Multi-player minesweeper",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test",
+    "test": "npm run start | mocha test",
     "start": "nodemon index.js"
   },
   "repository": {
