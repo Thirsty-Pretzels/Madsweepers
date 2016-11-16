@@ -1,6 +1,6 @@
 # Project Name
 
-Multiplayer Minesweeper
+MadSweeper
 
 ## Team
 
@@ -20,7 +20,7 @@ Multiplayer Minesweeper
 
 ## Usage
 
-Connect to the server and play!  Use the arrow keys to move, space to reveal tiles and 'm' to mark mines.
+Connect to the server and play!  Use the arrow keys to move, space to reveal tiles and 'f' to mark mines.
 
 ## Requirements
 
@@ -35,9 +35,13 @@ Connect to the server and play!  Use the arrow keys to move, space to reveal til
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
 npm install
-bower install
+```
+
+From within the client-web directory:
+
+```sh
+npm install
 ```
 
 ### Roadmap

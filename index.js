@@ -53,8 +53,13 @@ io.on('connection', function(socket){
 
   socket.on('movePlayer', function(data) {
     var roomName = clientRoom[socket.id];
-    console.log(roomName, 'room on move player');
+    console.log(roomName, 'room on move player', gameManager.rooms[roomName].board.time);
     movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data);
+    if (Math.floor((Date.now() - gameManager.rooms[roomName].board.time)) / 1000 / 60 >= 1){
+      console.log('time\'s up');
+      //TODO: end game
+
+    }
   });
 
   socket.on('openSpace', function(data){
