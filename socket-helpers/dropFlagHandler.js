@@ -11,7 +11,6 @@ module.exports = function(io, roomName, board, currentScores, data) {
       board.board[location.y][location.x].status = 1;
       //update board
       board.minesLeft--;
-      console.log('mines left: ', board.minesLeft);
       io.to(roomName).emit('countMines', [board.minesLeft, board.minesCount]);
       // only send the change of the board, make sure it's type 1
       io.to(roomName).emit('updateBoard', {type: 1, locationX: location.x, locationY: location.y, status: 1});

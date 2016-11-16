@@ -9,21 +9,21 @@ const playerId = Date.now().toString(36);
 
 class PlayGround extends Component {
   componentWillMount() {
-    console.log(this.props.username, this.props.roomName, 'username and roomname in playground component')
-    this.props.createNewPlayer(this.props.username, this.props.roomName);
+    // console.log(this.props.username, this.props.roomName, 'username and roomname in playground component')
+    // this.props.createNewPlayer(this.props.username, this.props.roomName);
   }
 
   keyDown(e) {
     if ( e.key.slice(0, 5) === 'Arrow'  ) {
-      this.props.movePlayer(this.props.username, e.key, this.props.playerLocation, this.props.board);
+      this.props.movePlayer(this.props.userInfo.username, e.key, this.props.playerLocation, this.props.board);
     }
 
     if ( e.key === ' ' ) {
-      this.props.openSpace(this.props.username, this.props.playerLocation[this.props.username]);
+      this.props.openSpace(this.props.userInfo.username, this.props.playerLocation[this.props.userInfo.username]);
     }
 
     if ( e.key === 'f' || e.key === 'F') {
-      this.props.dropFlag(this.props.username, this.props.playerLocation[this.props.username]);
+      this.props.dropFlag(this.props.userInfo.username, this.props.playerLocation[this.props.userInfo.username]);
     }
 
   }
@@ -55,6 +55,7 @@ class PlayGround extends Component {
 
 var mapStateToProps = (state) => {
   return {
+    userInfo: state.userInfo,
     username: state.username,
     board: state.board,
     playerLocation: state.playerLocation,

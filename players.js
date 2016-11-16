@@ -24,6 +24,7 @@ Players.prototype.removePlayer = function(playerId) {
 Players.prototype.createPlayer = function(playerId) {
   // body...
   return {
+    ready: false,
     status: 0,
     x: Math.floor( Math.random() * 10 ),
     y: Math.floor( Math.random() * 10 )

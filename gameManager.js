@@ -7,7 +7,7 @@ function createBoard(rows, columns, dangerFactor) {
   dangerFactor = dangerFactor ? dangerFactor : 0.2;
 
   var board = new Board();
-  board.generate(rows, columns, dangerFactor);
+  board.generate(rows, columns, dangerFactor, Date.now());
   console.log('created newboard');
 
   return board;
@@ -26,12 +26,28 @@ var GameManager = function() {
 GameManager.prototype.createRoom = function(roomName) {
 
   var board = createBoard();
-  var players = createPlayers();
+  var players = createPlayers(); 
+
   this.rooms[roomName] = {board, players};
   //need to store the current score for the current game inside this game;
-  this.rooms[roomName]['currentScores'] = [];
+  this.rooms[roomName].currentScores = [];
+  this.rooms[roomName].gameStatus = 'staging';
 
   console.log('created new room ', this.rooms[roomName]);
+};
+
+GameManager.prototype.listRoom = function() {
+ // body...
+ var roomList = [];
+ for (var roomName in this.rooms) {
+   roomList.push({
+     roomName: roomName,
+     numberOfPlayer: this.rooms[roomName].players.playerCount
+   })
+ }
+
+ return roomList;
+
 };
 
 

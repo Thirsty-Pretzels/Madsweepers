@@ -1,6 +1,8 @@
 export default function(state = [], action) {
   if (action.type === 'UPDATE-SCORE') {
-  	// state is only readable. Thus, can't revise state directly. Must generate a new State and revise this state;
+    // state is only readable. Thus, can't revise state directly. Must generate a new State and revise this state;
+    console.log('inside score reducer: ', state);
+    console.log('inside score reducer: ', action);
     var newState = [];
 
     if (Array.isArray(action.scoreChange)) {
