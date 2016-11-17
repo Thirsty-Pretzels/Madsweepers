@@ -45,20 +45,20 @@ export class LoginPage extends Component {
           <input
             value={ name }
             placeholder='Enter awesome username here'
-            onChange={ this.changeValue.bind(this) } 
+            onChange={ this.changeValue.bind(this) }
             />
-          <button 
-            className="myButton" 
-            type="submit" 
+          <button
+            className="myButton"
+            type="submit"
             name="action"
             onClick={this.onFormSubmit.bind(this)}
           > Let me play!
             <i className="material-icons right">send</i>
            </button>
         </form>
-      </div> 
+      </div>
     )
-  } 
+  }
 
   renderLobby() {
     return(
@@ -66,12 +66,12 @@ export class LoginPage extends Component {
         <div className="row">
           <h3>Your details</h3>
           <ul>
-            <li> Username: {this.props.userInfo.username}</li> 
+            <li> Username: {this.props.userInfo.username}</li>
             <li> TempId:   {this.props.userInfo.tempUniqUserId}</li>
           </ul>
         </div>
 
-        <div className="row">
+        <div className="row roomList">
           <h3>Rooms Available</h3>
           <table>
             <tr>
@@ -79,7 +79,7 @@ export class LoginPage extends Component {
               <th>PlayerCount</th>
             </tr>
           {
-            this.props.roomList.map((room) => 
+            this.props.roomList.map((room) =>
               <tr onClick={this.enterRoom.bind(this, room.roomName, this.props.userInfo.username)}><td>{room.roomName}</td><td>{room.numberOfPlayer}</td></tr>
             )
           }
@@ -87,15 +87,15 @@ export class LoginPage extends Component {
         </div>
 
         {
-          !this.props.userInfo.inRoom ? null : 
+          !this.props.userInfo.inRoom ? null :
 
           <div className = "row">
             <text>{this.props.userInfo.username} am in {this.props.userInfo.room}</text>
-            <button 
-              onClick={this.toggleReady.bind(this)}> 
+            <button
+              onClick={this.toggleReady.bind(this)}>
                {this.props.userInfo.isReady ? 'I need more time!' : 'I am Ready!'}
             </button>
-            <button 
+            <button
               onClick={this.leaveRoom.bind(this)}>Exit This Room</button>
           </div>
         }
