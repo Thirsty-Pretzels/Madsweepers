@@ -67,17 +67,6 @@ export class LoginPage extends Component {
     )
   }
 
-  // sub component: render lobby
-  renderLobby() {
-    return(
-      <div>
-        {this.renderUserInfo()}
-        {this.renderRoomList()}
-        { !this.props.userInfo.inRoom ? null : this.renderRoom() }
-      </div>
-    )
-  }
-
   // render UserInfo
   renderUserInfo() {
     return (
@@ -96,6 +85,7 @@ export class LoginPage extends Component {
     );
   }
 
+  // render roomList
   renderRoomList() {
     return (
       <div className="row roomList">
@@ -130,6 +120,17 @@ export class LoginPage extends Component {
         </button>
       </div>
     );
+  }
+
+  // sub component: render lobby
+  renderLobby() {
+    return(
+      <div>
+        {this.renderUserInfo()}
+        {this.renderRoomList()}
+        { !this.props.userInfo.inRoom ? null : this.renderRoom() }
+      </div>
+    )
   }
 
   render() {
