@@ -30,8 +30,16 @@ class PlayGround extends Component {
 
   renderPlayers() {
     var playersArr = Object.keys(this.props.playerLocation);
-    console.log('playersId!!!: ', playersArr);
-    return playersArr.map( (player) =>
+
+    let minX = this.props.currentBoardView[0][0][0];
+    let maxX = minX + 12;
+    let minY = this.props.currentBoardView[0][0][1];
+    let maxY = minY + 12;
+
+    return playersArr.filter(player =>
+        minX <= this.props.playerLocation[player].x <= maxX &&
+        minY <= this.props.playerLocation[player].y <= maxY
+      ).map( player =>
       <Player
         key={player}
         username={player}
@@ -58,7 +66,8 @@ var mapStateToProps = (state) => {
     // username: state.username,
     board: state.board,
     playerLocation: state.playerLocation,
-    roomName: state.roomName
+    roomName: state.roomName,
+    currentBoardView: state.currentBoardView
   }
 };
 

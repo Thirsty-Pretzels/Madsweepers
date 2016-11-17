@@ -2,7 +2,7 @@ export default function(state, action) {
   state = state || createCurrentView();
 
   if ( action.type === 'updatePlayerLocations') {
-    let startPoint = determineStartPoint(action.payload, action.boardSize);
+    let startPoint = determineStartPoint(action.payload, action.boardSize, action.playerId);
 
     return createCurrentView(startPoint);
   }
@@ -10,11 +10,11 @@ export default function(state, action) {
   return state
 }
 
-var determineStartPoint = (playerLocation, boardSize) => {
+var determineStartPoint = (playerLocation, boardSize, playerId) => {
     let key = Object.keys(playerLocation)[0];
 
-    var x = playerLocation[key].x - 6;
-    var y = playerLocation[key].y - 6;
+    var x = playerLocation[playerId].x - 6;
+    var y = playerLocation[playerId].y - 6;
 
     if ( x < 0 ) {
       x = 0;
