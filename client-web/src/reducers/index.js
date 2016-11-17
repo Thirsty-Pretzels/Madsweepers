@@ -9,6 +9,7 @@ import usernameReducer from './reducer_username';
 // import roomNameReducer from './reducer_room_name';
 import gameStatusReducer from './reducer_game_status';
 import currentBoardViewReducer from './reducer_current_board_view';
+import endificationReducer from './reducer_endification.js';
 
 //combineReducers takes in an object
 // the name of the key allows you to access the state in the redux state store
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   playerLocation: playerLocationReducer,
   scores: updateScoresReducer,
   gameStatus: gameStatusReducer,
-  currentBoardView: currentBoardViewReducer
+  currentBoardView: currentBoardViewReducer,
+  endification: endificationReducer
 });
 
 export default rootReducer;

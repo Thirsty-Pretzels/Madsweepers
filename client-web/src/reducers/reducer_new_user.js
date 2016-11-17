@@ -1,9 +1,10 @@
-export default function(state = {username: '', tempUniqUserId: '', status: false, room: '', inRoom: false, isReady: false}, action) {
+export default function(state = {username: '', tempUniqUserId: '', status: false, userCode: 1, room: '', inRoom: false, isReady: false}, action) {
   var newState = Object.assign({}, state);
   if (action.type === 'NEW-USER') {
   	newState.status = action.payload.status;
     newState.username = action.payload.username;
     newState.tempUniqUserId = action.payload.tempUniqUserId;
+    newState.userCode = action.payload.userCode;
 
     return newState;
   } else if (action.type === 'ENTERED-ROOM') {

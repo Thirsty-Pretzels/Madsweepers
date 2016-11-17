@@ -65,7 +65,7 @@ export class LoginPage extends Component {
       <div>
         <div className="row">
           <div className='userProfile' id='userImage'>
-            <img src={'../../images/user'+Math.ceil(Math.random()*12)+'.png'} />
+            <img src={'../../images/user'+this.props.userInfo.userCode+'.png'} />
           </div>
           <div>
             <h4>{this.props.userInfo.username}'s profile</h4>
