@@ -4,6 +4,7 @@ import PlayGround from '../containers/playGround';
 import ScoreBoard from '../containers/scoreBoard';
 import GameStatus from '../containers/gameStatus';
 import BoardOverview from '../containers/boardOverview';
+import TopScores from '../containers/top_scores';
 //MJ: KIV. Not in use for now
 //import AddComputerPlayer from '../containers/addComputerPlayer';
 
@@ -28,6 +29,7 @@ export default class GamePlay extends Component {
           <BoardOverview />
           <ScoreBoard />
           <GameStatus />
+          <TopScores />
         </div>
       </div>
     );
