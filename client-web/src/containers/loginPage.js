@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { loginTempUser, enterRoom, leaveRoom, toggleReady } from '../actions/index';
+import { toggleCreateRoomPanel, loginTempUser, enterRoom, leaveRoom, toggleReady } from '../actions/index';
 import axios from 'axios';
 
-var name;
-
 export class LoginPage extends Component {
-  changeValue(event) {
-    name = event.target.value
+  onFormSubmit(e) {
+    var formData = document.getElementById('loginForm').elements;
+    
+    e.preventDefault();
+    this.props.loginTempUser(formData.name.value);
   }
 
-  onFormSubmit(e) {
+  createRoom(e) {
+    var formData = document.getElementById('createRoomForm').elements;
+    console.log('colNumber: ', formData.colNumber.value);
+    console.log('rowNumber: ', formData.rowNumber.value);
+    console.log('mineDensity: ', formData.mineDensity.value);
     e.preventDefault();
-    this.props.loginTempUser(name);
+    this.props.toggleCreateRoomPanel();
   }
 
   enterRoom(room, user) {
@@ -38,6 +43,10 @@ export class LoginPage extends Component {
     }
   }
 
+  showCreateRoomPanel() {
+    this.props.toggleCreateRoomPanel();
+  }
+
   // sub component: render welcome
   renderWelcome() {
     return (
@@ -45,35 +54,26 @@ export class LoginPage extends Component {
         <div className='headerCentered' id='header-image'>
           <img src='../../images/header-image.png' id='header-image-container'/>
         </div>
-        <form className='formCentered'>
+        <form 
+          className='formCentered' 
+          id='loginForm'
+          onSubmit={this.onFormSubmit.bind(this)}
+          >
           <input
-            value={ name }
+            name='name'
             placeholder='Enter awesome username here'
-            onChange={ this.changeValue.bind(this) }
             id='input-text'
+            style={{width: '450px'}}
             />
           <br/>
           <button
             className="myButton"
             type="submit"
-            name="action"
-            onClick={this.onFormSubmit.bind(this)}
             id='submit-button'
           > Let me play!
             <i className="material-icons right">send</i>
            </button>
         </form>
-      </div>
-    )
-  }
-
-  // sub component: render lobby
-  renderLobby() {
-    return(
-      <div>
-        {this.renderUserInfo()}
-        {this.renderRoomList()}
-        { !this.props.userInfo.inRoom ? null : this.renderRoom() }
       </div>
     )
   }
@@ -96,9 +96,15 @@ export class LoginPage extends Component {
     );
   }
 
+  // render roomList
   renderRoomList() {
     return (
       <div className="row roomList">
+        <button
+          onClick={this.showCreateRoomPanel.bind(this)}>
+          New Room  
+        </button>
+        { this.props.userInfo.showCreatePanel ? this.renderCreateRoomPanel() : null}
         <h3>Rooms Available</h3>
         <table>
           <tr>
@@ -111,6 +117,56 @@ export class LoginPage extends Component {
           )
         }
         </table>
+      </div>
+    );
+  }
+
+  renderCreateRoomPanel() {
+    return (
+      <div>
+        <form 
+          className='formCentered'
+          onSubmit={this.createRoom.bind(this)}
+          id='createRoomForm'
+          >
+          <input 
+            type='number'
+            name="rowNumber"
+            min="12" 
+            max="50"
+            style={{width: '175px'}}
+            placeholder='MAP ROW: 20'
+          />
+          <text> X </text>
+          <input
+            type='number'
+            name="colNumber"
+            min="12"
+            max="50"
+            style={{width: '175px'}}
+            placeholder='MAP COL: 20'
+          />
+          <br />
+          <select name='mineDensity'>
+            <option value={0.2}> -- select mine density -- </option>
+            <option value={0.2}>Killing Spree</option>
+            <option value={0.25}>Dominating</option>
+            <option value={0.3}>Mega Kill</option>
+            <option value={0.35}>Unstoppable</option>
+            <option value={0.4}>Wicked Sick</option>
+            <option value={0.45}>Monster kill</option>
+            <option value={0.5}>Godlike</option>
+            <option value={0.6}>Holy Shit</option>
+          </select>
+          <br/>
+          <button
+            className="myButton"
+            type="submit"
+            id='create-room-button'>
+            Make A New Room
+          </button>
+        </form>
+
       </div>
     );
   }
@@ -132,6 +188,17 @@ export class LoginPage extends Component {
     );
   }
 
+  // sub component: render lobby
+  renderLobby() {
+    return(
+      <div>
+        {this.renderUserInfo()}
+        {this.renderRoomList()}
+        { !this.props.userInfo.inRoom ? null : this.renderRoom() }
+      </div>
+    )
+  }
+
   render() {
     return (
         <div>
@@ -151,6 +218,7 @@ var mapStateToProps = (state) => {
 
 var mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
+    toggleCreateRoomPanel: toggleCreateRoomPanel, 
     loginTempUser: loginTempUser,
     enterRoom: enterRoom,
     leaveRoom: leaveRoom,

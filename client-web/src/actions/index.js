@@ -76,6 +76,12 @@ export function allReady(isAllPlayersReady) {
   }
 }
 
+export function toggleCreateRoomPanel() {
+  return {
+    type: 'TOGGLE-CREATE-ROOM-PANEL'
+  }
+}
+
 // movePlayer action:
 // movePlayer is fired when player is using keyboard to move
 // type: UP, DOWN, LEFT, RIGHT
