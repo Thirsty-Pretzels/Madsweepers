@@ -1,6 +1,7 @@
 :root {
     --text: #333434;
-    --swamp: #EFEFEF;
+    /*--swamp: #EFEFEF;*/
+    --swamp: #D6EAF8;
     --endeavour: #0F5C9B;
     --golden-poppy: #FFC412;
     --lemon: #FFEB0E;
@@ -93,12 +94,21 @@ input {
 .roomList {
   font-size: 22px;
   font-family: "Mario";
-  background-color: var(--golden-poppy);
+  background-color: #FAE5D3;
   border-width: 0px;
-  border-radius: 15px;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
   box-shadow: 0 5px #FF9900;
-  margin-top: 6.5px;
+  margin-top: 6px;
   margin-left: 6px;
+  padding-left: 16px;
+  padding-top: 2px;
+}
+
+.roomName:hover {
+  font-style: italic;
+  font-size: 30px;
+  cursor: pointer;
 }
 
 #section1 {

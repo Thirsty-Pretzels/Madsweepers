@@ -85,7 +85,7 @@ export class LoginPage extends Component {
             </tr>
           {
             this.props.roomList.map((room) =>
-              <tr onClick={this.enterRoom.bind(this, room.roomName, this.props.userInfo.username)}><td>{room.roomName}</td><td>{room.numberOfPlayer}</td></tr>
+              <tr className='roomName' onClick={this.enterRoom.bind(this, room.roomName, this.props.userInfo.username)}><td>{room.roomName}</td><td>{room.numberOfPlayer}</td></tr>
             )
           }
           </table>
