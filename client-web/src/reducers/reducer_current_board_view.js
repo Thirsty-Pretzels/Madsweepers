@@ -1,6 +1,5 @@
 export default function(state, action) {
   state = state || createCurrentView();
-
   if ( action.type === 'updatePlayerLocations') {
     let startPoint = determineStartPoint(action.payload, action.boardSize, action.playerId);
 
