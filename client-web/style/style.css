@@ -7,6 +7,43 @@
     --malachite-green: #A0975A;
 }
 
+/*.gameButton {
+
+}*/
+
+@font-face {
+  font-family: "Mario";
+  src: url('../fonts/SuperMarioBros.ttf') format("truetype");
+}
+
+a{
+  text-decoration: none;
+}
+button, a{
+  font-size: 22px;
+  font-family: "Mario";
+  color: #663300;
+  background-color: #FFD800;
+  border-width: 0px;
+  border-radius: 15px;
+  box-shadow: 0 5px #FF9900;
+  margin-top: 6.5px;
+  margin-left: 6px;
+}
+
+button:hover,
+button.hover{
+  background-color: #FFCC00;
+}
+
+a:active,
+button:active,
+button.active{
+  box-shadow: 0 2px #FF9900;
+  transform: translateY(3px);
+}
+
+
 .App-Components {
   animation-duration: 1s;
   animation-name: slidein;
