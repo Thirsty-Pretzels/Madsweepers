@@ -2,8 +2,8 @@ var Board = require('./board.js');
 var Players = require('./players.js');
 
 function createBoard(rows, columns, dangerFactor) {
-  rows = rows ? rows : 12;
-  columns = columns ? columns : 12;
+  rows = rows ? rows : 20;
+  columns = columns ? columns : 30;
   dangerFactor = dangerFactor ? dangerFactor : 0.2;
 
   var board = new Board();
@@ -26,7 +26,7 @@ var GameManager = function() {
 GameManager.prototype.createRoom = function(roomName) {
 
   var board = createBoard();
-  var players = createPlayers(); 
+  var players = createPlayers();
 
   this.rooms[roomName] = {board, players};
   //need to store the current score for the current game inside this game;
