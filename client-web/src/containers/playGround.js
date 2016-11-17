@@ -32,13 +32,15 @@ class PlayGround extends Component {
     var playersArr = Object.keys(this.props.playerLocation);
 
     let minX = this.props.currentBoardView[0][0][0];
-    let maxX = minX + 12;
+    let maxX = minX + 11;
     let minY = this.props.currentBoardView[0][0][1];
-    let maxY = minY + 12;
+    let maxY = minY + 11;
 
     return playersArr.filter(player =>
-        minX <= this.props.playerLocation[player].x <= maxX &&
-        minY <= this.props.playerLocation[player].y <= maxY
+        this.props.playerLocation[player].x <= maxX &&
+        this.props.playerLocation[player].x >= minX &&
+        this.props.playerLocation[player].y <= maxY &&
+        this.props.playerLocation[player].y >= minY
       ).map( player =>
       <Player
         key={player}
