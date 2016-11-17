@@ -14,6 +14,9 @@ class PlayGround extends Component {
   }
 
   keyDown(e) {
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+    }
     if ( e.key.slice(0, 5) === 'Arrow'  ) {
       this.props.movePlayer(this.props.userInfo.username, e.key, this.props.playerLocation, this.props.board);
     }

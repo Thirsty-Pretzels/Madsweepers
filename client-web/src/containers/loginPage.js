@@ -64,11 +64,16 @@ export class LoginPage extends Component {
     return(
       <div>
         <div className="row">
-          <h3>Your details</h3>
-          <ul>
-            <li> Username: {this.props.userInfo.username}</li>
-            <li> TempId:   {this.props.userInfo.tempUniqUserId}</li>
-          </ul>
+          <div className='userProfile' id='userImage'>
+            <img src={'../../images/user'+Math.ceil(Math.random()*12)+'.png'} />
+          </div>
+          <div>
+            <h4>{this.props.userInfo.username}'s profile</h4>
+            <ul className='userProfile' id='userInfo'>
+              <li> Username: {this.props.userInfo.username}</li>
+              <li> TempId:   {this.props.userInfo.tempUniqUserId}</li>
+            </ul>
+          </div>
         </div>
 
         <div className="row roomList">
