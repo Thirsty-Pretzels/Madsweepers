@@ -22,5 +22,5 @@ ReactDOM.render(
   <Provider store={store}>
     {routes}
   </Provider>
-  , document.querySelector('.container'));
+  , document.querySelector('.app'));
 

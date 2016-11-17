@@ -32,13 +32,15 @@ button, a{
 }
 
 button:hover,
+
 button.hover{
   background-color: #FFCC00;
 }
 
 a:active,
 button:active,
-button.active{
+
+button.active {
   box-shadow: 0 2px #FF9900;
   transform: translateY(3px);
 }
@@ -60,10 +62,6 @@ body {
 
 button {
   background-color: var(--golden-poppy)
-}
-
-input {
-
 }
 
 @keyframes slidein {
@@ -271,4 +269,10 @@ input {
   margin-left: 50px;
   display: inline-block;
   vertical-align: center;
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
