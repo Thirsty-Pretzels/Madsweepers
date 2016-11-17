@@ -77,6 +77,19 @@ input {
   }
 }
 
+/* from this line: classes and ids from loginPage */
+.userProfile {
+  display: inline-block;
+}
+
+#userImage {
+  float: left;
+}
+
+#userInfo {
+  float: left;
+}
+
 .roomList {
   font-size: 22px;
   font-family: "Mario";
