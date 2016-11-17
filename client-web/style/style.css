@@ -1,5 +1,6 @@
 :root {
-    --swamp: #333434;
+    --text: #333434;
+    --swamp: #EFEFEF;
     --endeavour: #0F5C9B;
     --golden-poppy: #FFC412;
     --lemon: #FFEB0E;
@@ -21,8 +22,7 @@ a{
 button, a{
   font-size: 22px;
   font-family: "Mario";
-  color: #663300;
-  background-color: #FFD800;
+  background-color: var(--golden-poppy);
   border-width: 0px;
   border-radius: 15px;
   box-shadow: 0 5px #FF9900;
@@ -50,9 +50,10 @@ button.active{
 
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-body {  
-  font-family:'Roboto', sans-serif;
-  color: white;
+body {
+  /*font-family:'Roboto', sans-serif;*/
+  font-family: "Mario";
+  color: var(--text);
   background-color: var(--swamp);
 }
 
@@ -74,6 +75,17 @@ input {
     margin-left: 0%;
     width: 100%;
   }
+}
+
+.roomList {
+  font-size: 22px;
+  font-family: "Mario";
+  background-color: var(--golden-poppy);
+  border-width: 0px;
+  border-radius: 15px;
+  box-shadow: 0 5px #FF9900;
+  margin-top: 6.5px;
+  margin-left: 6px;
 }
 
 #section1 {

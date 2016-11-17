@@ -71,7 +71,7 @@ export class LoginPage extends Component {
           </ul>
         </div>
 
-        <div className="row">
+        <div className="row roomList">
           <h3>Rooms Available</h3>
           <table>
             <tr>
