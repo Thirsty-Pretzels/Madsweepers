@@ -37,7 +37,6 @@ button.hover{
   background-color: #FFCC00;
 }
 
-a:active,
 button:active,
 
 button.active {
@@ -159,6 +158,21 @@ button {
   text-align: center;
 }
 
+.grid-overview {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: white;
+  margin: none;
+  padding: none;
+}
+
+.rowOverview {
+  height: 12px;
+}
+
 .gameBoard {
   font-family: BirdyGame;
   outline: none;
@@ -271,6 +285,34 @@ button {
  width: 50px;
  height: 50px;
  color: red;
+}
+
+.grid-overview-0 {
+  width: 10px;
+  height: 10px;
+  vertical-align: top;
+  background-color: var(--golden-poppy);
+}
+
+.grid-overview-1 {
+  width: 10px;
+  height: 10px;
+  vertical-align: top;
+  background-color: grey;
+}
+
+.grid-overview-10 {
+  width: 10px;
+  height: 10px;
+  vertical-align: top;
+  background-color: blue;
+}
+
+.grid-overview-11 {
+  width: 10px;
+  height: 10px;
+  vertical-align: top;
+  background-color: red;
 }
 
 #playerScore {
