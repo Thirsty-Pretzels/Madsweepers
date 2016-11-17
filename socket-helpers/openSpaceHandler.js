@@ -1,7 +1,7 @@
 // socket helper function: open space
 var updateCurrentScores = require('./updateCurrentScores.js');
 
-module.exports = function(io, roomName, board, currentScores, data) {
+module.exports = function(io, roomName, board, currentScores, data, boardValues) {
 	var playerId = data[0];
   var location = data[1];
 
@@ -21,7 +21,7 @@ module.exports = function(io, roomName, board, currentScores, data) {
       board.todos--;
     }
     if (board.minesLeft === 0){
-      board.generate();
+      board.generate(20, 30);
       setTimeout(function(){
         io.to(roomName).emit('updateBoard', {type: 0, board: board.board});
       }, 300);

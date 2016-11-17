@@ -33,7 +33,7 @@ module.exports = function(io, roomName, board, currentScores, data) {
       }, 300);
     }
     if (board.minesLeft === 0){
-      board.generate();
+      board.generate(20, 30);
       setTimeout(function(){
         io.to(roomName).emit('updateBoard', {type: 0, board: board.board});
       }, 300);
