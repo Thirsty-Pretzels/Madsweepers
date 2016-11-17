@@ -16,7 +16,7 @@ export class LoginPage extends Component {
     var formData = document.getElementById('createRoomForm').elements;
 
     e.preventDefault();
-    this.props.createNewRoom(formData.rowNumber.value, formData.colNumber.value, formData.mineDensity.value);
+    this.props.createNewRoom(formData.roomName.value, formData.rowNumber.value, formData.colNumber.value, formData.mineDensity.value);
     this.props.toggleCreateRoomPanel();
   }
 
@@ -135,11 +135,20 @@ export class LoginPage extends Component {
           id='createRoomForm'
           >
           <input 
+            type='text'
+            name="roomName"
+            min="12" 
+            max="50"
+            style={{width: '440px', 'margin-bottom': '3px'}}
+            placeholder='Enter An Awesome RoomName'
+          />
+          <br />
+          <input 
             type='number'
             name="rowNumber"
             min="12" 
             max="50"
-            style={{width: '175px'}}
+            style={{width: '199px'}}
             placeholder='MAP ROW: 20'
           />
           <text> X </text>
@@ -148,7 +157,7 @@ export class LoginPage extends Component {
             name="colNumber"
             min="12"
             max="50"
-            style={{width: '175px'}}
+            style={{width: '199px'}}
             placeholder='MAP COL: 20'
           />
           <br />

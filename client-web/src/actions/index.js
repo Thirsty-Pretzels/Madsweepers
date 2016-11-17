@@ -82,9 +82,10 @@ export function toggleCreateRoomPanel() {
   }
 }
 
-export function createNewRoom(row, col, mineDensity) {
+export function createNewRoom(roomName, row, col, mineDensity) {
   return {
     type: 'CREATE-NEW-ROOM',
+    roomName: roomName,
     row: row,
     col: col,
     mineDensity: mineDensity

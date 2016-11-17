@@ -26,8 +26,8 @@ global.scoreWrongFlag = -5;
 // Create gameManager when server starts
 var gameManager = new GameManager();
 // Generate two default rooms
-gameManager.createRoom('roomA');
-gameManager.createRoom('roomB');
+gameManager.createRoom('HR48');
+gameManager.createRoom('Trump Not President');
 // This keeps track of active player and its socket
 var clients = {};
 var clientRoom = {};
@@ -62,9 +62,8 @@ io.on('connection', function(socket){
   });
 
   socket.on('createNewRoom', (info) => {
-    console.log(info.row);
-    console.log(info.col);
-    console.log(info.mineDensity);
+    gameManager.createRoom(info.roomName, info.row, info.col, info.mineDensity);
+    io.emit('roomListUpdate', gameManager.listRoom());
   });
  //  socket.on('createPlayer', function(playerId, roomName) {
  //    console.log(playerId, roomName, 'socket: createPlayer')
