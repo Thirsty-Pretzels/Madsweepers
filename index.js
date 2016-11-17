@@ -30,7 +30,6 @@ gameManager.createRoom('roomA');
 gameManager.createRoom('roomB');
 // This keeps track of active player and its socket
 var clients = {};
-var clientRoom = {};
 
 // This keeps track of active users and its socket
 var users = {};
