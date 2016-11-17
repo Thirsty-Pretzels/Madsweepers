@@ -36,7 +36,6 @@ button.hover{
   background-color: #FFCC00;
 }
 
-a:active,
 button:active,
 button.active{
   box-shadow: 0 2px #FF9900;
