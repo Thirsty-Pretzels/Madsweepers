@@ -19,16 +19,16 @@ class Player extends Component {
         <text
           className='player-text'
           style={{
-            marginLeft: (this.props.playerLocation.x - this.props.currentBoardView[0][0][0]) * 52 + 1,
-            marginTop: (this.props.playerLocation.y - this.props.currentBoardView[0][0][1]) * 52 + 1
+            marginLeft: (this.props.playerLocation.x - this.props.currentBoardView[0][0][0]) * 50 + 1,
+            marginTop: (this.props.playerLocation.y - this.props.currentBoardView[0][0][1]) * 50 + 1
           }}
         >{this.props.username}</text>
         <div
           className={ status }
           id={ this.props.username }
           style={{
-            marginLeft: (this.props.playerLocation.x - this.props.currentBoardView[0][0][0]) * 52 + 1,
-            marginTop: (this.props.playerLocation.y - this.props.currentBoardView[0][0][1]) * 52 + 1
+            marginLeft: (this.props.playerLocation.x - this.props.currentBoardView[0][0][0]) * 50 + 1,
+            marginTop: (this.props.playerLocation.y - this.props.currentBoardView[0][0][1]) * 50 + 1
           }}>
         </div>
       </div>
