@@ -183,3 +183,9 @@ export function countMines(minesInfo) {
     minesInfo: minesInfo
   }
 };
+
+export function endification() {
+  return {
+    type: 'END-GAME'
+  }
+};
