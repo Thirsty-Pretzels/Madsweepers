@@ -82,6 +82,21 @@ export function toggleCreateRoomPanel() {
   }
 }
 
+export function createNewRoom(row, col, mineDensity) {
+  return {
+    type: 'CREATE-NEW-ROOM',
+    row: row,
+    col: col,
+    mineDensity: mineDensity
+  }
+}
+
+export function hasCreatedNewRoom() {
+  return {
+    type: 'CREATED-NEW-ROOM'
+  }
+}
+
 // movePlayer action:
 // movePlayer is fired when player is using keyboard to move
 // type: UP, DOWN, LEFT, RIGHT
@@ -120,6 +135,7 @@ export function updateRoomName(roomName) {
     payload: roomName
   }
 }
+
 
 // updateLocation action:
 // when data is received from server throught socket, this action will be fired through store.dispatch

@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { toggleCreateRoomPanel, loginTempUser, enterRoom, leaveRoom, toggleReady } from '../actions/index';
+import { createNewRoom, toggleCreateRoomPanel, loginTempUser, enterRoom, leaveRoom, toggleReady } from '../actions/index';
 import axios from 'axios';
 
 export class LoginPage extends Component {
   onFormSubmit(e) {
     var formData = document.getElementById('loginForm').elements;
-    
+
     e.preventDefault();
     this.props.loginTempUser(formData.name.value);
   }
 
   createRoom(e) {
     var formData = document.getElementById('createRoomForm').elements;
-    console.log('colNumber: ', formData.colNumber.value);
-    console.log('rowNumber: ', formData.rowNumber.value);
-    console.log('mineDensity: ', formData.mineDensity.value);
+
     e.preventDefault();
+    this.props.createNewRoom(formData.rowNumber.value, formData.colNumber.value, formData.mineDensity.value);
     this.props.toggleCreateRoomPanel();
   }
 
@@ -37,16 +36,22 @@ export class LoginPage extends Component {
     this.props.toggleReady(this.props.userInfo.room, this.props.userInfo.username);
   }
 
+  showCreateRoomPanel() {
+    if(!this.props.userInfo.showCreatePanel) {
+      this.props.toggleCreateRoomPanel();
+    }
+  }
+
+  closeCreteRoomPanel(e) {
+    e.preventDefault();
+    this.props.toggleCreateRoomPanel();
+  }
+
   componentDidUpdate() {
     if(this.props.allReady) {
       this.props.redirect('gamePlay');
     }
   }
-
-  showCreateRoomPanel() {
-    this.props.toggleCreateRoomPanel();
-  }
-
   // sub component: render welcome
   renderWelcome() {
     return (
@@ -165,6 +170,13 @@ export class LoginPage extends Component {
             id='create-room-button'>
             Make A New Room
           </button>
+          <button
+            className="myButton"
+            id='close-create-room-button'
+            onClick={this.closeCreteRoomPanel.bind(this)}
+            >
+            Close This Tab
+          </button>
         </form>
 
       </div>
@@ -222,7 +234,8 @@ var mapDispatchToProps = (dispatch) => {
     loginTempUser: loginTempUser,
     enterRoom: enterRoom,
     leaveRoom: leaveRoom,
-    toggleReady: toggleReady
+    toggleReady: toggleReady,
+    createNewRoom: createNewRoom
   }, dispatch)
 };
 

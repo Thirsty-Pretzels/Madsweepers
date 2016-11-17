@@ -61,6 +61,11 @@ io.on('connection', function(socket){
     toggleReadyHandler(io, socket, info.room, info.user, gameManager);
   });
 
+  socket.on('createNewRoom', (info) => {
+    console.log(info.row);
+    console.log(info.col);
+    console.log(info.mineDensity);
+  });
  //  socket.on('createPlayer', function(playerId, roomName) {
  //    console.log(playerId, roomName, 'socket: createPlayer')
 

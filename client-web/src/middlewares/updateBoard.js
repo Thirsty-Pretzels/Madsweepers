@@ -22,6 +22,10 @@ export function boardMiddleware(store) {
       socket.emit('toggleReady', {room: action.room ,user: action.user});
     }
 
+    if (action.type === 'CREATE-NEW-ROOM') {
+      socket.emit('createNewRoom', {row: action.row, col: action.col, mineDensity: action.mineDensity})
+    }
+    
     //when action.type is UP, DOWN, LEFT, RIGHT, socket.emit will be fired
     if ( action.type === 'UP' || action.type === 'DOWN' || action.type === 'LEFT' || action.type === 'RIGHT' ) {
       socket.emit('movePlayer', [action.payload, action.type]);
