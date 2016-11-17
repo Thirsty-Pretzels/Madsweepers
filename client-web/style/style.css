@@ -76,6 +76,20 @@ button {
   }
 }
 
+/* app.js */
+.headerCentered {
+  text-align: center;
+}
+
+#header-text {
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 20;
+  font-size: 64px;
+}
+
 /* from this line: classes and ids from loginPage */
 .userProfile {
   display: inline-block;
@@ -87,6 +101,21 @@ button {
 
 #userInfo {
   float: left;
+}
+
+#header-image-container {
+  margin-top: -35px;
+}
+
+/*not working :-(*/
+/*#header-image {
+  border-radius: 10%;
+}*/
+
+.formCentered {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 24px;
 }
 
 .roomList {
