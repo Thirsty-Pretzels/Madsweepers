@@ -40,14 +40,25 @@ export class LoginPage extends Component {
 
   renderWelcome() {
     return (
-      <div className="row" >
+      <div>
+       <h1> Yo </h1>
         <form>
+          <div>
           <input
             value={ name }
+<<<<<<< HEAD
             placeholder='Enter awesome username here'
             onChange={ this.changeValue.bind(this) }
             />
           <button
+=======
+            placeholder='Enter username here'
+            onChange={ this.changeValue.bind(this) } 
+            />
+          </div>
+          <div>
+          <button 
+>>>>>>> f9c4fc2ae95d62f940482e624257e2101108b770
             className="btn btn-success"
             type="submit"
             name="action"
@@ -55,14 +66,16 @@ export class LoginPage extends Component {
           > Let me play!
             <i className="material-icons right">send</i>
            </button>
+          </div>
         </form>
       </div>
     )
   }
 
   renderLobby() {
-    return(
+    return (
       <div>
+<<<<<<< HEAD
         <div className="row">
           <h3>Your details</h3>
           <ul>
@@ -85,8 +98,24 @@ export class LoginPage extends Component {
           }
           </table>
         </div>
+=======
+        <h3>Your details</h3>
+        <ul>
+          <li> Username: {this.props.userInfo.username}</li> 
+          <li> TempId:   {this.props.userInfo.tempUniqUserId}</li>
+        </ul>
+      </div>
+>>>>>>> f9c4fc2ae95d62f940482e624257e2101108b770
 
+      <div>
+        <h3>Rooms Available</h3>
+        <table>
+          <tr>
+            <th>RoomName</th>
+            <th>PlayerCount</th>
+          </tr>
         {
+<<<<<<< HEAD
           !this.props.userInfo.inRoom ? null :
 
           <div className = "row">
@@ -98,14 +127,38 @@ export class LoginPage extends Component {
             <button
               onClick={this.leaveRoom.bind(this)}>Exit This Room</button>
           </div>
+=======
+          this.props.roomList.map((room) => 
+            <tr onClick={this.enterRoom.bind(this, room.roomName, this.props.userInfo.username)}><td>{room.roomName}</td><td>{room.numberOfPlayer}</td></tr>
+          )
+>>>>>>> f9c4fc2ae95d62f940482e624257e2101108b770
         }
+        </table>
       </div>
+
+      {
+        !this.props.userInfo.inRoom ? null : 
+
+        <div>
+          <text>{this.props.userInfo.username} am in {this.props.userInfo.room}</text>
+          <button 
+            onClick={this.toggleReady.bind(this)}> 
+             {this.props.userInfo.isReady ? 'I need more time!' : 'I am Ready!'}
+          </button>
+          <button 
+            onClick={this.leaveRoom.bind(this)}>Exit This Room</button>
+        </div>
+      }
     )
   }
 
   render() {
     return (
+<<<<<<< HEAD
       <div style={{ marginLeft: 100 }}>
+=======
+      <div>
+>>>>>>> f9c4fc2ae95d62f940482e624257e2101108b770
         { !this.props.userInfo.status ? this.renderWelcome() : this.renderLobby() }
       </div>
     );

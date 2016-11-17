@@ -32,12 +32,14 @@ button, a{
 }
 
 button:hover,
+
 button.hover{
   background-color: #FFCC00;
 }
 
 button:active,
-button.active{
+
+button.active {
   box-shadow: 0 2px #FF9900;
   transform: translateY(3px);
 }
@@ -61,10 +63,6 @@ button {
   background-color: var(--golden-poppy)
 }
 
-input {
-
-}
-
 @keyframes slidein {
   from {
     margin-left: 100%;
@@ -75,6 +73,20 @@ input {
     margin-left: 0%;
     width: 100%;
   }
+}
+
+/* app.js */
+.headerCentered {
+  text-align: center;
+}
+
+#header-text {
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 20;
+  font-size: 64px;
 }
 
 /* from this line: classes and ids from loginPage */
@@ -88,6 +100,21 @@ input {
 
 #userInfo {
   float: left;
+}
+
+#header-image-container {
+  margin-top: -35px;
+}
+
+/*not working :-(*/
+/*#header-image {
+  border-radius: 10%;
+}*/
+
+.formCentered {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 24px;
 }
 
 .roomList {
@@ -270,4 +297,10 @@ input {
   margin-left: 50px;
   display: inline-block;
   vertical-align: center;
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
