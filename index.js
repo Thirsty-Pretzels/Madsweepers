@@ -26,8 +26,10 @@ global.scoreWrongFlag = -5;
 // Create gameManager when server starts
 var gameManager = new GameManager();
 // Generate two default rooms
-gameManager.createRoom('roomA');
-gameManager.createRoom('roomB');
+gameManager.createRoom('thirsty pretzels');
+gameManager.createRoom('hr48');
+gameManager.createRoom('Hack Reactor');
+gameManager.createRoom('944MarketStreet');
 // This keeps track of active player and its socket
 var clients = {};
 var clientRoom = {};
