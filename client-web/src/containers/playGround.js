@@ -72,7 +72,8 @@ var mapStateToProps = (state) => {
     board: state.board,
     playerLocation: state.playerLocation,
     roomName: state.roomName,
-    currentBoardView: state.currentBoardView
+    currentBoardView: state.currentBoardView,
+    endification: state.endification
   }
 };
 
