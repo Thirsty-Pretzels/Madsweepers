@@ -38,6 +38,7 @@ export class LoginPage extends Component {
     }
   }
 
+  // sub component: render welcome
   renderWelcome() {
     return (
       <div className="row" >
@@ -66,52 +67,69 @@ export class LoginPage extends Component {
     )
   }
 
+  // sub component: render lobby
   renderLobby() {
     return(
       <div>
-        <div className="row">
-          <div className='userProfile' id='userImage'>
-            <img src={'../../images/user'+this.props.userInfo.userCode+'.png'} />
-          </div>
-          <div>
-            <h4>{this.props.userInfo.username}'s profile</h4>
-            <ul className='userProfile' id='userInfo'>
-              <li> Username: {this.props.userInfo.username}</li>
-              <li> TempId:   {this.props.userInfo.tempUniqUserId}</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="row roomList">
-          <h3>Rooms Available</h3>
-          <table>
-            <tr>
-              <th>RoomName</th>
-              <th>PlayerCount</th>
-            </tr>
-          {
-            this.props.roomList.map((room) =>
-              <tr className='roomName' onClick={this.enterRoom.bind(this, room.roomName, this.props.userInfo.username)}><td>{room.roomName}</td><td>{room.numberOfPlayer}</td></tr>
-            )
-          }
-          </table>
-        </div>
-
-        {
-          !this.props.userInfo.inRoom ? null :
-
-          <div className = "row">
-            <text>{this.props.userInfo.username} am in {this.props.userInfo.room}</text>
-            <button
-              onClick={this.toggleReady.bind(this)}>
-               {this.props.userInfo.isReady ? 'I need more time!' : 'I am Ready!'}
-            </button>
-            <button
-              onClick={this.leaveRoom.bind(this)}>Exit This Room</button>
-          </div>
-        }
+        {this.renderUserInfo()}
+        {this.renderRoomList()}
+        { !this.props.userInfo.inRoom ? null : this.renderRoom() }
       </div>
     )
+  }
+
+  // render UserInfo
+  renderUserInfo() {
+    return (
+      <div className="row">
+        <div className='userProfile' id='userImage'>
+          <img src={'../../images/user'+this.props.userInfo.userCode+'.png'} />
+        </div>
+        <div>
+          <h4>{this.props.userInfo.username}'s profile</h4>
+          <ul className='userProfile' id='userInfo'>
+            <li> Username: {this.props.userInfo.username}</li>
+            <li> TempId:   {this.props.userInfo.tempUniqUserId}</li>
+          </ul>
+        </div>
+      </div>
+    );
+  }
+
+  renderRoomList() {
+    return (
+      <div className="row roomList">
+        <h3>Rooms Available</h3>
+        <table>
+          <tr>
+            <th>RoomName</th>
+            <th>PlayerCount</th>
+          </tr>
+        {
+          this.props.roomList.map((room) =>
+            <tr className='roomName' onClick={this.enterRoom.bind(this, room.roomName, this.props.userInfo.username)}><td>{room.roomName}</td><td>{room.numberOfPlayer}</td></tr>
+          )
+        }
+        </table>
+      </div>
+    );
+  }
+
+  // render Room
+  renderRoom() {
+    return (
+      <div className = "row">
+        <text>{this.props.userInfo.username} am in {this.props.userInfo.room}</text>
+        <button
+          onClick={this.toggleReady.bind(this)}>
+           {this.props.userInfo.isReady ? 'I need more time!' : 'I am Ready!'}
+        </button>
+        <button
+          onClick={this.leaveRoom.bind(this)}>
+            Exit This Room
+        </button>
+      </div>
+    );
   }
 
   render() {

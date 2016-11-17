@@ -1,7 +1,7 @@
 // socket helper function: open space
 var updateCurrentScores = require('./updateCurrentScores.js');
 
-module.exports = function(io, roomName, board, currentScores, data) {
+module.exports = function(io, roomName, board, currentScores, data, boardValues) {
 	var playerId = data[0];
   var location = data[1];
 
