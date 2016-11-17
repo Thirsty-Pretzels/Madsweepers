@@ -91,4 +91,8 @@ export default function(store) {
   socket.on('countMines', minesInfo => {
     store.dispatch(actions.countMines(minesInfo));
   });
+
+  socket.on('endification', () => {
+    store.dispatch(actions.endification());
+  })
 }

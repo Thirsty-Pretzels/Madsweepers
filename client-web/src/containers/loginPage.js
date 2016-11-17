@@ -41,17 +41,23 @@ export class LoginPage extends Component {
   renderWelcome() {
     return (
       <div className="row" >
-        <form>
+        <div className='headerCentered' id='header-image'>
+          <img src='../../images/header-image.png' id='header-image-container'/>
+        </div>
+        <form className='formCentered'>
           <input
             value={ name }
             placeholder='Enter awesome username here'
             onChange={ this.changeValue.bind(this) }
+            id='input-text'
             />
+          <br/>
           <button
             className="myButton"
             type="submit"
             name="action"
             onClick={this.onFormSubmit.bind(this)}
+            id='submit-button'
           > Let me play!
             <i className="material-icons right">send</i>
            </button>
@@ -65,7 +71,7 @@ export class LoginPage extends Component {
       <div>
         <div className="row">
           <div className='userProfile' id='userImage'>
-            <img src={'../../images/user'+Math.ceil(Math.random()*12)+'.png'} />
+            <img src={'../../images/user'+this.props.userInfo.userCode+'.png'} />
           </div>
           <div>
             <h4>{this.props.userInfo.username}'s profile</h4>
