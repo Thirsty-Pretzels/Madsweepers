@@ -7,10 +7,13 @@ module.exports = function(io, socket, room, user, gameManager) {
   	return a && gameManager.rooms[room].players.playerLocations[b].ready;
   }, true);
 
+  // calculate board size
+  var boardSize = [gameManager.rooms[room].board.board[0].length, gameManager.rooms[room].board.board.length]
+
   if(isAllPlayersReady) {
   	io.to(room).emit('updateBoard', gameManager.rooms[room].board);
     io.to(room).emit('updateScore', gameManager.rooms[room].currentScores);
-  	io.to(room).emit('updatePlayerLocations', gameManager.rooms[room].players.playerLocations);
+  	io.to(room).emit('updatePlayerLocations', {newLocations: gameManager.rooms[room].players.playerLocations, boardSize: boardSize});
   }
   io.to(room).emit('allPlayersReady', isAllPlayersReady);
 };

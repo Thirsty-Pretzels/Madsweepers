@@ -83,7 +83,9 @@ io.on('connection', function(socket){
 
   socket.on('movePlayer', function(data) {
     var roomName = clientRoom[socket.id];
-    movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data);
+    //calculate board size
+    var boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length]
+    movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize);
     if (Math.floor((Date.now() - gameManager.rooms[roomName].board.time)) / 1000 / 60 >= 1){
       console.log('time\'s up');
       io.to(roomName).emit('endification');

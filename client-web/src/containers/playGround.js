@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { movePlayer, openSpace, dropFlag, createNewPlayer } from '../actions/index';
 import { bindActionCreators } from 'redux';
-import Player from '../components/player';
+import Player from './player';
 
 // const playerId = Date.now().toString(36);
 
@@ -30,11 +30,11 @@ class PlayGround extends Component {
 
   renderPlayers() {
     var playersArr = Object.keys(this.props.playerLocation);
-
+    console.log('playersId!!!: ', playersArr);
     return playersArr.map( (player) =>
       <Player
         key={player}
-        username={this.props.userInfo.username}
+        username={player}
         playerLocation={this.props.playerLocation[player]} />
     );
   }

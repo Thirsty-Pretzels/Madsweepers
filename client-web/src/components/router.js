@@ -1,7 +1,7 @@
 import React from 'react';
 import {IndexRoute, Router, Route, browserHistory} from 'react-router';
 import App from './app';
-import LoginPage from './loginPage';
+import LoginPage from '../containers/loginPage';
 // import RoomListPage from './roomListPage'
 import GamePlay from './gamePlay';
 
