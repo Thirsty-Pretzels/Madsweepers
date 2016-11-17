@@ -1,4 +1,10 @@
-body {
+:root {
+    --swamp: #333434;
+    --endeavour: #0F5C9B;
+    --golden-poppy: #FFC412;
+    --lemon: #FFEB0E;
+    --dark-tangerine: #F3A913;
+    --malachite-green: #A0975A;
 }
 
 .App-Components {
@@ -18,10 +24,10 @@ body {
   }
 }
 
-@font-face {
+/*@font-face {
   font-family: BirdyGame;
   src: url('../fonts/Birdy_Game.ttf');
-}
+}*/
 
 #section1 {
   display: inline-block;

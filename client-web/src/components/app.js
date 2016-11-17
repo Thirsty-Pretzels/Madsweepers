@@ -5,6 +5,7 @@ import PlayGround from '../containers/playGround';
 import ScoreBoard from '../containers/scoreBoard';
 import GameStatus from '../containers/gameStatus';
 
+
 export default class App extends Component {
   // this is the router on the App component
   redirect(pageTo) {
@@ -13,7 +14,6 @@ export default class App extends Component {
 
   render() {
     return (
-
       <div className="container">
         <h1>Super Sweeper</h1>
         <div>
@@ -23,7 +23,6 @@ export default class App extends Component {
           })}
         </div>
       </div>
-
     );
   }
 }
