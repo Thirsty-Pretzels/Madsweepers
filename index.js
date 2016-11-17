@@ -29,7 +29,7 @@ var gameManager = new GameManager();
 gameManager.createRoom('roomA');
 gameManager.createRoom('roomB');
 // This keeps track of active player and its socket
-var clients = [];
+var clients = {};
 var clientRoom = {};
 
 // This keeps track of active users and its socket
@@ -50,7 +50,7 @@ io.on('connection', function(socket){
       leaveRoomHandler(io, socket, info.inRoomname, info.user, gameManager);
     }
     clientRoom[socket.id] = info.room;
-    enterRoomHandler(io, socket, info.room, info.user, gameManager, gameManager.rooms[info.room]['currentScores']);
+    enterRoomHandler(io, socket, info.room, info.user, gameManager, gameManager.rooms[info.room]['currentScores'], clients);
   });
 
   socket.on('leaveRoom', (info) => {
@@ -77,8 +77,10 @@ io.on('connection', function(socket){
 
   socket.on('getNewBoard', function() {
     var roomName = clientRoom[socket.id];
-    io.to(roomName).emit('updateBoard', {type: 0, board: gameManager.rooms[roomName].board.board});  // to send stuff back to client side
-    io.to(roomName).emit('countMines', [gameManager.rooms[roomName].board.minesLeft, gameManager.rooms[roomName].board.minesLeft]);
+    if (roomName){
+      io.to(roomName).emit('updateBoard', {type: 0, board: gameManager.rooms[roomName].board.board});  // to send stuff back to client side
+      io.to(roomName).emit('countMines', [gameManager.rooms[roomName].board.minesLeft, gameManager.rooms[roomName].board.minesLeft]);
+    }
   });
 
   socket.on('movePlayer', function(data) {
@@ -104,10 +106,12 @@ io.on('connection', function(socket){
     var roomName = clientRoom[socket.id];
     console.log(roomName, 'roomName when disconnecting');
     if(roomName){
-      disconnectHandler(io, roomName, gameManager.rooms[roomName].players, gameManager.rooms[roomName]['currentScores'], clients, socket);
+      console.log('inside disconnect handler')
+      disconnectHandler(io, gameManager, gameManager.rooms[roomName].players, gameManager.rooms[roomName]['currentScores'], clients, socket);
     }
   });
 });
+
 
 var port = process.env.PORT || 3000;
 
