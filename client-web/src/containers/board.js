@@ -9,20 +9,25 @@ class Board extends Component {
     this.props.getNewBoard();
   }
 
+  renderCurrentView() {
+    const currentBoard = this.props.currentBoardView.map(row =>
+      row.map(index =>
+        this.props.board[index[1]][index[0]]
+      )
+    );
+
+    return currentBoard.map((row, index) =>
+      <Row key={index} rowIndex={index} row={row} />
+    );
+  }
+
   render() {
     return (
       <div
         id='gameBoard'
         className='gameBoard'
       >{
-        this.props.board.map((row, index) => {
-          return (
-            <Row
-              key={index}
-              rowIndex={index}
-              row={row} />
-          )
-        })
+        this.renderCurrentView()
       }</div>
     )
   }
@@ -30,7 +35,8 @@ class Board extends Component {
 
 var mapStateToProps = (state) => {
   return {
-    board: state.board
+    board: state.board,
+    currentBoardView: state.currentBoardView
   }
 };
 

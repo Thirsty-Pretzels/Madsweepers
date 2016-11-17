@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { movePlayer, openSpace, dropFlag, createNewPlayer } from '../actions/index';
 import { bindActionCreators } from 'redux';
-import Player from '../components/player';
+import Player from './player';
 
 const playerId = Date.now().toString(36);
 

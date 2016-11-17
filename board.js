@@ -145,9 +145,9 @@ Board.prototype.tally = function(){
 }
 
 // uncomment to generate a sample board on startup
-// var hjk = new Board();
-// hjk.generate(30, 30, .2);
-// hjk.flag(12, 12, 'heyooo');
-// console.log(hjk);
+var hjk = new Board();
+hjk.generate(30, 30, .2);
+hjk.flag(12, 12, 'heyooo');
+console.log(JSON.stringify(hjk.board));
 
 module.exports = Board;

@@ -74,9 +74,9 @@ export default function(store) {
     store.dispatch(actions.allReady(isAllPlayersReady));
   });
 
-  socket.on('updatePlayerLocations', newLocations => {
+  socket.on('updatePlayerLocations', ({newLocations, boardSize}) => {
   	//when data is received from socket server, fire another action by store.dispatch
-    store.dispatch(actions.updateLocation(newLocations));
+    store.dispatch(actions.updateLocation(newLocations, boardSize));
   });
 
   socket.on('updateBoard', newBoard => {

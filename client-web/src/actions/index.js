@@ -120,10 +120,11 @@ export function updateRoomName(roomName) {
 // in middleware, actions of type (UP, DOWN, LEFT AND RIGHT) will lead to socket.emit
 // while actions of type (ARROWUP, ARROWDOWN, ARROWLEFT, ARROWRIGHT) will bypass middleware
 // commented added by Bruce
-export function updateLocation(newLocations) {
+export function updateLocation(newLocations, boardSize) {
   return {
     type: 'updatePlayerLocations',
     payload: newLocations,
+    boardSize: boardSize
   }
 }
 
