@@ -85,6 +85,9 @@ io.on('connection', function(socket){
 
   socket.on('movePlayer', function(data) {
     var roomName = clientRoom[socket.id];
+    if (!gameManager.rooms.hasOwnProperty(roomName)){
+      return;
+    }
     const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
 
     movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize, clients, socket);
@@ -124,9 +127,7 @@ io.on('connection', function(socket){
 
   socket.on('disconnect', function(){
     var roomName = clientRoom[socket.id];
-    console.log(roomName, 'roomName when disconnecting');
     if(roomName){
-      console.log('inside disconnect handler')
       disconnectHandler(io, gameManager, gameManager.rooms[roomName].players, gameManager.rooms[roomName]['currentScores'], clients, socket);
     }
   });
