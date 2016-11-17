@@ -5,13 +5,7 @@ import { movePlayer, openSpace, dropFlag, createNewPlayer } from '../actions/ind
 import { bindActionCreators } from 'redux';
 import Player from './player';
 
-// const playerId = Date.now().toString(36);
-
 class PlayGround extends Component {
-  componentWillMount() {
-    // console.log(this.props.username, this.props.roomName, 'username and roomname in playground component')
-    // this.props.createNewPlayer(this.props.username, this.props.roomName);
-  }
 
   keyDown(e) {
     if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
@@ -28,6 +22,10 @@ class PlayGround extends Component {
     if ( e.key === 'f' || e.key === 'F') {
       this.props.dropFlag(this.props.userInfo.username, this.props.playerLocation[this.props.userInfo.username]);
     }
+
+  }
+
+  endGame() {
 
   }
 
@@ -54,12 +52,19 @@ class PlayGround extends Component {
 
   render() {
     return (
-      <div
-        className='playGround'
-        id='playGround'
-        tabIndex='0'
-        onKeyDown={ this.keyDown.bind(this) }>
-          { this.renderPlayers() }
+      <div>
+        <div
+          className='playGround'
+          id='playGround'
+          tabIndex='0'
+          onKeyDown={ this.keyDown.bind(this) }>
+            { this.renderPlayers() }
+        </div>
+        {
+          this.props.endification ?
+          this.endGame()
+          : null
+        }
       </div>
     )
   }
@@ -68,7 +73,6 @@ class PlayGround extends Component {
 var mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
-    // username: state.username,
     board: state.board,
     playerLocation: state.playerLocation,
     roomName: state.roomName,
