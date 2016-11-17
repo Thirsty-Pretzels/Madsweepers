@@ -26,12 +26,11 @@ global.scoreWrongFlag = -5;
 // Create gameManager when server starts
 var gameManager = new GameManager();
 // Generate two default rooms
-gameManager.createRoom('thirsty pretzels');
-gameManager.createRoom('hr48');
-gameManager.createRoom('Hack Reactor');
-gameManager.createRoom('944MarketStreet');
+gameManager.createRoom('roomA');
+gameManager.createRoom('roomB');
 // This keeps track of active player and its socket
 var clients = {};
+var clientRoom = {};
 
 // This keeps track of active users and its socket
 var users = {};
@@ -50,7 +49,7 @@ io.on('connection', function(socket){
     if (info.inRoom) {
       leaveRoomHandler(io, socket, info.inRoomname, info.user, gameManager);
     }
-    clients[socket.id]['roomName'] = info.room;
+    clientRoom[socket.id] = info.room;
     enterRoomHandler(io, socket, info.room, info.user, gameManager, gameManager.rooms[info.room]['currentScores'], clients);
   });
 
@@ -77,7 +76,7 @@ io.on('connection', function(socket){
  // });
 
   socket.on('getNewBoard', function() {
-    var roomName = clients[socket.id][roomName];
+    var roomName = clientRoom[socket.id];
     if (roomName){
       io.to(roomName).emit('updateBoard', {type: 0, board: gameManager.rooms[roomName].board.board});  // to send stuff back to client side
       io.to(roomName).emit('countMines', [gameManager.rooms[roomName].board.minesLeft, gameManager.rooms[roomName].board.minesLeft]);
@@ -85,10 +84,8 @@ io.on('connection', function(socket){
   });
 
   socket.on('movePlayer', function(data) {
-    var roomName = clients[socket.id][roomName];
-    //calculate board size
-    var boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length]
-    movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize);
+    var roomName = clientRoom[socket.id];
+    movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data);
     if (Math.floor((Date.now() - gameManager.rooms[roomName].board.time)) / 1000 / 60 >= 1){
       console.log('time\'s up');
       io.to(roomName).emit('endification');
@@ -96,17 +93,17 @@ io.on('connection', function(socket){
   });
 
   socket.on('openSpace', function(data){
-    var roomName = clients[socket.id][roomName];
+    var roomName = clientRoom[socket.id];
     openSpaceHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data);
   });
 
   socket.on('dropFlag', function(data){
-    var roomName = clients[socket.id][roomName];
+    var roomName = clientRoom[socket.id];
     dropFlagHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data);
   });
 
   socket.on('disconnect', function(){
-    var roomName = clients[socket.id][roomName];
+    var roomName = clientRoom[socket.id];
     console.log(roomName, 'roomName when disconnecting');
     if(roomName){
       console.log('inside disconnect handler')
