@@ -5,7 +5,7 @@ import { movePlayer, openSpace, dropFlag, createNewPlayer } from '../actions/ind
 import { bindActionCreators } from 'redux';
 import Player from './player';
 
-const playerId = Date.now().toString(36);
+// const playerId = Date.now().toString(36);
 
 class PlayGround extends Component {
   componentWillMount() {
@@ -30,11 +30,11 @@ class PlayGround extends Component {
 
   renderPlayers() {
     var playersArr = Object.keys(this.props.playerLocation);
-
+    console.log('playersId!!!: ', playersArr);
     return playersArr.map( (player) =>
       <Player
         key={player}
-        username={this.props.username}
+        username={player}
         playerLocation={this.props.playerLocation[player]} />
     );
   }
@@ -55,7 +55,7 @@ class PlayGround extends Component {
 var mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
-    username: state.username,
+    // username: state.username,
     board: state.board,
     playerLocation: state.playerLocation,
     roomName: state.roomName
