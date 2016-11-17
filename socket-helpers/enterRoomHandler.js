@@ -5,5 +5,5 @@ module.exports = function(io, socket, room, user, gameManager, currentScores, cl
   socket.emit('hasEnteredRoom', room);
   currentScores.push({id: user, scoreChange: 0});
   io.emit('roomListUpdate', gameManager.listRoom());
-  clients[socket.id] = {'roomName': room, 'user': user}
+  clients[socket.id] = {'roomName': room, 'user': user, 'loot': {'banana': 0, 'ammo': 0, 'shield': 0}, 'stun': 0};
 }

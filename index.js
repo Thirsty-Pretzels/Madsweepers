@@ -87,10 +87,28 @@ io.on('connection', function(socket){
     var roomName = clientRoom[socket.id];
     const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
 
-    movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize);
+    movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize, clients, socket);
     if (Math.floor((Date.now() - gameManager.rooms[roomName].board.time)) / 1000 / 60 >= 1){
       console.log('time\'s up');
       io.to(roomName).emit('endification');
+    }
+  });
+
+  socket.on('getStun', function(data){
+    if(clients[socket.id]['loot']['shield'] > 0){
+      clients[socket.id]['loot']['shield']--;
+      return;
+    }
+    clients[socket.id]['stun'] = true;
+    setTimeout(function(){
+      clients[socket.id]['stun'] = false;
+    });
+  });
+
+  socket.on('shoot', function(data){
+    if(clients[socket.id]['loot']['ammo'] > 0){
+      clients[socket.id]['loot']['ammo']--;
+      io.to(clients[socket.id]['roomName']).emit('bulletOut', players.playerLocations[clients[socket.id]['user']]);
     }
   });
 
@@ -101,7 +119,7 @@ io.on('connection', function(socket){
 
   socket.on('dropFlag', function(data){
     var roomName = clientRoom[socket.id];
-    dropFlagHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data);
+    dropFlagHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, socket, clients);
   });
 
   socket.on('disconnect', function(){
