@@ -3,13 +3,28 @@
     --endeavour: #0F5C9B;
     --golden-poppy: #FFC412;
     --lemon: #FFEB0E;
-    --dark-tangerine: #F3A913;
     --malachite-green: #A0975A;
 }
 
 .App-Components {
   animation-duration: 1s;
   animation-name: slidein;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {  
+  font-family:'Roboto', sans-serif;
+  color: white;
+  background-color: var(--swamp);
+}
+
+button {
+  background-color: var(--golden-poppy)
+}
+
+input {
+
 }
 
 @keyframes slidein {
@@ -23,11 +38,6 @@
     width: 100%;
   }
 }
-
-/*@font-face {
-  font-family: BirdyGame;
-  src: url('../fonts/Birdy_Game.ttf');
-}*/
 
 #section1 {
   display: inline-block;
@@ -133,7 +143,7 @@
 .grid-initial {
   width: 50px;
   height: 50px;
-  background-color: #F5D25C;
+  background-color: var(--golden-poppy);
   vertical-align: top;
 }
 
