@@ -17,7 +17,7 @@ class Board extends Component {
     );
 
     return currentBoard.map((row, index) =>
-      <Row key={index} rowIndex={index} row={row} />
+      <Row key={index} row={row} />
     );
   }
 
