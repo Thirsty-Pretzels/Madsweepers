@@ -1,5 +1,8 @@
+var localUserName;
+
 // define action when a temperory user is trying to login
 export function loginTempUser(username) {
+  localUserName = username;
   return {
     type: 'LOGIN-TEMP-USER',
     payload: username
@@ -124,7 +127,8 @@ export function updateLocation(newLocations, boardSize) {
   return {
     type: 'updatePlayerLocations',
     payload: newLocations,
-    boardSize: boardSize
+    boardSize: boardSize,
+    playerId: localUserName
   }
 }
 

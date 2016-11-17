@@ -32,8 +32,6 @@ GameManager.prototype.createRoom = function(roomName) {
   //need to store the current score for the current game inside this game;
   this.rooms[roomName].currentScores = [];
   this.rooms[roomName].gameStatus = 'staging';
-
-  console.log('created new room ', this.rooms[roomName]);
 };
 
 GameManager.prototype.listRoom = function() {
