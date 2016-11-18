@@ -104,6 +104,7 @@ io.on('connection', function(socket){
     
     if ((Date.now() - gameManager.rooms[roomName].board.time) / 1000 / 60 >= 1){
       console.log('time\'s up');
+      gameManager.endGame(roomName);
       io.to(roomName).emit('endification');
     }
   });
@@ -128,12 +129,12 @@ io.on('connection', function(socket){
 
   socket.on('openSpace', function(data){
     var roomName = clientRoom[socket.id];
-    openSpaceHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data);
+    openSpaceHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, gameManager);
   });
 
   socket.on('dropFlag', function(data){
     var roomName = clientRoom[socket.id];
-    dropFlagHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, socket, clients);
+    dropFlagHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, socket, clients, gameManager);
   }); 
 
   socket.on('getHighScores', function(){

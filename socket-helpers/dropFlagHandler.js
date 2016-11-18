@@ -1,7 +1,7 @@
 // socket helper function: drop flag
 var updateCurrentScores = require('./updateCurrentScores.js');
 
-module.exports = function(io, roomName, board, currentScores, data, socket, clients) {
+module.exports = function(io, roomName, board, currentScores, data, socket, clients, gameManager) {
   var playerId = data[0];
   var location = data[1];
   var loot = ['ammo', 'shield', 'banana'];
@@ -23,7 +23,7 @@ module.exports = function(io, roomName, board, currentScores, data, socket, clie
       // only send the change of the board, make sure it's type 1
       io.to(roomName).emit('updateBoard', {type: 1, locationX: location.x, locationY: location.y, status: 1});
       // update currentScores then emit the change
-      updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreRightFlag}, io, roomName);
+      updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreRightFlag}, io, roomName, gameManager);
       io.to(roomName).emit('updateScore', {id: playerId, scoreChange: scoreRightFlag});
     } else {
     // if the flag is dropped at a wrong place
@@ -31,7 +31,7 @@ module.exports = function(io, roomName, board, currentScores, data, socket, clie
       // only send the change of the board, make sure it's type 1
       io.to(roomName).emit('updateBoard', {type: 1, locationX: location.x, locationY: location.y, status: 3});
       // update currentScores then emit the change
-      updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreWrongFlag}, io, roomName);
+      updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreWrongFlag}, io, roomName, gameManager);
       io.to(roomName).emit('updateScore', {id: playerId, scoreChange: scoreWrongFlag});
       //after 0.3, reset the corresponing grid to initial
       setTimeout(() => {

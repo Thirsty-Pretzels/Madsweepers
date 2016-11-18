@@ -59,6 +59,10 @@ GameManager.prototype.startGame = function(roomName) {
   this.rooms[roomName].currentScores.forEach(score => score.scoreChange = 0);
 };
 
+GameManager.prototype.endGame = function(roomName) {
+  this.rooms[roomName].gameStatus = 'staging';
+}
+
 GameManager.prototype.removeRoom = function(roomName) {
   delete this.rooms[roomName];
 };
