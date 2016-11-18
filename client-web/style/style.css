@@ -7,6 +7,13 @@
     --lemon: #FFEB0E;
     --malachite-green: #A0975A;
     --gridSize: 50px;
+
+    --dark-blue: #154890 ; /*grid*/
+    --malibu-blue: #6699FF; /*sidebar*/
+    --brown-gray: #CDBFAC;
+    --bone-gray: #E1D4C0;
+    --merino-gray: #F5EDE3; /*background*/
+    --blaze-orange: #FF6600; /*buttons*/
 }
 
 /*.gameButton {
