@@ -1,4 +1,15 @@
-export default function(state = {username: '', tempUniqUserId: '', status: false, userCode: 1, room: '', inRoom: false, isReady: false}, action) {
+var defaultState = {
+  username: '', 
+  tempUniqUserId: '', 
+  status: false, 
+  userCode: 1, 
+  room: '', 
+  inRoom: false, 
+  isReady: false,
+  showCreatePanel: false
+};
+
+export default function(state = defaultState, action) {
   var newState = Object.assign({}, state);
   if (action.type === 'NEW-USER') {
   	newState.status = action.payload.status;
@@ -23,6 +34,11 @@ export default function(state = {username: '', tempUniqUserId: '', status: false
     newState.isReady = !state.isReady;
 
     return newState;
+  } else if (action.type === 'TOGGLE-CREATE-ROOM-PANEL') {
+    newState.showCreatePanel = !state.showCreatePanel;
+
+    return newState
   }
+
   return state;
 }
