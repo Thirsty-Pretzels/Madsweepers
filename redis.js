@@ -49,3 +49,4 @@ module.exports = {
   getHighScoresFromDb: getHighScoresFromDb,
   saveHighScoresInDb: saveHighScoresInDb
 }
+
