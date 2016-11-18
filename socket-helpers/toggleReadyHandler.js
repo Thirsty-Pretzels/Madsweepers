@@ -16,9 +16,10 @@ module.exports = function(io, socket, room, user, gameManager) {
 
     var boardSize = [gameManager.rooms[room].board.board[0].length, gameManager.rooms[room].board.board.length]
 
-  	io.to(room).emit('updateBoard', {type: 0, board: gameManager.rooms[room].board.board});
+    io.to(room).emit('updateBoard', {type: 0, board: gameManager.rooms[room].board.board});
+    io.emit('roomListUpdate', gameManager.listRoom());
     io.to(room).emit('updateScore', gameManager.rooms[room].currentScores);
-  	io.to(room).emit('updatePlayerLocations', {newLocations: gameManager.rooms[room].players.playerLocations, boardSize: boardSize});
+    io.to(room).emit('updatePlayerLocations', {newLocations: gameManager.rooms[room].players.playerLocations, boardSize: boardSize});
   }
   io.to(room).emit('allPlayersReady', isAllPlayersReady);
 };

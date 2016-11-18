@@ -55,7 +55,7 @@ Players.prototype.move = function(playerId, direction) {
   console.log(this.playerLocations);
 };
 
-Players.prototype.listPlayer = function() {
+Players.prototype.listPlayers = function() {
   return Object.keys(this.playerLocations);
 };
 
