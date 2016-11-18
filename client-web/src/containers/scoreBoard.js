@@ -40,7 +40,7 @@ class ScoreBoard extends Component {
 var mapStateToProps = (state) => {
   return {
     scores: state.scores,
-    username: state.username
+    username: state.userInfo.username
   };
 };
 
