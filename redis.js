@@ -6,7 +6,6 @@ bluebird.promisifyAll(redis.Multi.prototype);
 var db = redis.createClient();
 
 var runDataBase = () => {
-
   // if you'd like to select database 3, instead of 0 (default), call
   // client.select(3, function() { /* ... */ });
   db.on("error", function (err) {
@@ -22,9 +21,14 @@ var runDataBase = () => {
   return;
 }
 
+// this function gets top 10 results from db. The response is already sorted by redis 
 var getHighScoresFromDb = (io) => {
   db.zrevrangeAsync('leaderboard', 0, 9, "withscores").then(function(res) {
     console.log(res, 'getting high scores from db');
+    if (res.length === 0) {
+      // hardcode mock data if database is not returning any results
+      res = ["minehannnn", "99", "Yo_wassup", "90", "thisisMJ", "45", "timzeng", "40", "angrybird", "36"];
+    }
     io.emit('getHighScores', res);
   });
 }
@@ -32,13 +36,16 @@ var getHighScoresFromDb = (io) => {
 var saveHighScoresInDb = (scores) => {
   // finalScores: [ { id: 'mj', score: -15 } ]
   console.log(scores, 'received scores to save into DB');
-  scores.forEach(({id, score}) => {db.zadd("leaderboard", score, id)});
+  // prevent function from executing if no scores are sent
+  if (scores) {
+    scores.forEach(({id, score}) => {db.zadd("leaderboard", score, id)});
+  }
 }
 
 
 module.exports = {
-  runDataBase: runDataBase,
   db: db,
+  runDataBase: runDataBase,
   getHighScoresFromDb: getHighScoresFromDb,
   saveHighScoresInDb: saveHighScoresInDb
 }
