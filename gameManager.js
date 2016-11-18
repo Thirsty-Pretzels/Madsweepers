@@ -50,15 +50,17 @@ GameManager.prototype.listRoom = function() {
 
 };
 
-GameManger.prototype.roomDetail(roomName, users) {
+GameManager.prototype.roomDetail = function(roomName, users) {
   var userList = {};
 
   this.rooms[roomName].players.listPlayers().forEach((user) => {
+    userList[user] = {};
     userList[user].userCode = users[user].userCode;
     userList[user].readyStatus = this.rooms[roomName].players.playerLocations[user].ready;
+
   });
 
-  return userList;
+  return {host: this.rooms[roomName].players.listPlayers()[0], userList: userList};
 }
 
 GameManager.prototype.startGame = function(roomName) {
