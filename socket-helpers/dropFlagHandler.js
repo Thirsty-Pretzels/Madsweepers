@@ -4,7 +4,7 @@ var updateCurrentScores = require('./updateCurrentScores.js');
 module.exports = function(io, roomName, board, currentScores, data, socket, clients) {
   var playerId = data[0];
   var location = data[1];
-
+  var loot = ['ammo', 'shield', 'banana'];
   if ( board.board[location.y][location.x].status === 0 ) {
     // if the flag is dropped at a correct place
     if ( board.board[location.y][location.x].val === 9 ) {
@@ -15,9 +15,9 @@ module.exports = function(io, roomName, board, currentScores, data, socket, clie
       if (Math.random() * 100 > 75){
         loot = loot[Math.floor(Math.random() * loot.length)];
         io.to(roomName).emit('playerLoot', [playerId, loot]);
-        console.log(loot);
         clients[socket.id]['loot'][loot]++;
       }
+
 
       io.to(roomName).emit('countMines', [board.minesLeft, board.minesCount]);
       // only send the change of the board, make sure it's type 1
