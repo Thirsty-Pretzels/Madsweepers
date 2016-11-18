@@ -4,7 +4,7 @@ var io = require('socket.io')(http);
 var Board = require('./board.js');
 var Players = require('./players.js');
 var GameManager = require('./gameManager.js');
-var {runDataBase, db, getHighScoresFromDb, saveHighScoresInDb} = require('./redis.js');
+//var {runDataBase, db, getHighScoresFromDb, saveHighScoresInDb} = require('./redis.js');
 
 // import helper function
 var loginTempUserHandler = require('./socket-helpers/loginTempUserHandler');
@@ -37,7 +37,7 @@ var clientRoom = {};
 var users = {};
 
 // MJ: initialize redisDatabase
-runDataBase();
+//runDataBase();
 
 io.on('connection', function(socket){
   console.log('a user connected');

@@ -29,7 +29,7 @@ export default class GamePlay extends Component {
           <BoardOverview />
           <ScoreBoard />
           <GameStatus />
-          <TopScores />
+         {/*<TopScores />*/}
         </div>
       </div>
     );
