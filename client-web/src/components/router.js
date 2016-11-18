@@ -3,7 +3,7 @@ import {IndexRoute, Router, Route, browserHistory} from 'react-router';
 import App from './app';
 import LoginPage from '../containers/loginPage';
 // import RoomListPage from './roomListPage'
-import GamePlay from './gamePlay';
+import GamePlay from '../containers/gamePlay';
 
 // basic setup of router.
 const routes = (
