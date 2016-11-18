@@ -1,5 +1,8 @@
 module.exports = function(io, socket, room, user, gameManager, clients, currentScores) {
   console.log('user leaves room');
+  if (!room){
+    return;
+  }
   socket.leave(room);
   gameManager.rooms[room].players.removePlayer(user);
 
