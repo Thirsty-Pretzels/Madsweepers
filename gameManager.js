@@ -38,7 +38,11 @@ GameManager.prototype.listRoom = function() {
  for (var roomName in this.rooms) {
    roomList.push({
      roomName: roomName,
-     numberOfPlayer: this.rooms[roomName].players.playerCount
+     numberOfPlayer: this.rooms[roomName].players.playerCount,
+     roomStatus: this.rooms[roomName].gameStatus,
+     minesLeft: this.rooms[roomName].board.minesLeft,
+     minesCount: this.rooms[roomName].board.minesCount,
+     players: this.rooms[roomName].players.listPlayers()
    })
  }
 

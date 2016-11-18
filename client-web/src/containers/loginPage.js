@@ -16,7 +16,7 @@ export class LoginPage extends Component {
     var formData = document.getElementById('createRoomForm').elements;
 
     e.preventDefault();
-    this.props.createNewRoom(formData.roomName.value, formData.rowNumber.value, formData.colNumber.value, formData.mineDensity.value);
+    this.props.createNewRoom(formData.roomName.value, formData.rowNumber.value || 20, formData.colNumber.value || 20, formData.mineDensity.value);
     this.props.toggleCreateRoomPanel();
   }
 
@@ -111,10 +111,12 @@ export class LoginPage extends Component {
         </button>
         { this.props.userInfo.showCreatePanel ? this.renderCreateRoomPanel() : null}
         <h3>Awesome Rooms Available</h3>
-        <table>
+        <table id='roomListTable'>
           <tr>
             <th>RoomName</th>
             <th>PlayerCount</th>
+            <th>GameStatus</th>
+            <th>Host</th>
           </tr>
         { this.props.roomList.map((room) => this.renderRoomListEntry(room)) }
         </table>
@@ -122,14 +124,44 @@ export class LoginPage extends Component {
     );
   }
 
+  renderProgressBar(minesLeft, minesCount) {
+    var classNameDecider = function(progress, total) {
+      if (progress / total < 0.3) {
+        return 'progress progress-striped progress-success';
+      } else if (progress / total < 0.50) {
+        return 'progress progress-striped progress-info';
+      } else if (progress / total < 0.8) {
+        return 'progress progress-striped';
+      } else if (progress / total < 0.92) {
+        return 'progress progress-striped progress-warning';
+      } else {
+        return 'progress progress-striped progress-danger';
+      }
+    }
+
+    return (
+      <progress 
+        className='progressBarInRoomList'
+        style={{'margin-bottom': '0'}}
+        className={classNameDecider(minesCount - minesLeft, minesCount)}
+        value={minesCount - minesLeft} 
+        max={minesCount}
+      >
+      </progress>
+    );
+  }
+
   renderRoomListEntry(room) {
     return (
-      <tr 
+      <tr
+        key={room.roomName}
         className='roomName' 
         onClick={this.enterRoom.bind(this, room.roomName, this.props.userInfo.username)}
         >
         <td>{room.roomName}</td>
         <td>{room.numberOfPlayer}</td>
+        <td>{room.roomStatus === 'staging' ? 'staging' : this.renderProgressBar(room.minesLeft , room.minesCount) }</td>
+        {room.players ? (<td>{room.players[0]}</td>) : null}
       </tr>
     );
   }
@@ -145,8 +177,6 @@ export class LoginPage extends Component {
           <input 
             type='text'
             name="roomName"
-            min="12" 
-            max="50"
             style={{width: '440px', 'margin-bottom': '3px'}}
             placeholder='Enter An Awesome RoomName'
           />
