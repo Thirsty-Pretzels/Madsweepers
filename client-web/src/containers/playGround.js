@@ -1,33 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { movePlayer, openSpace, dropFlag, createNewPlayer } from '../actions/index';
+import { movePlayer, openSpace, dropFlag } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import Player from './player';
+import GameResult from './gameResult';
 
 class PlayGround extends Component {
 
   keyDown(e) {
-    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-        e.preventDefault();
-    }
-    if ( e.key.slice(0, 5) === 'Arrow'  ) {
-      this.props.movePlayer(this.props.userInfo.username, e.key, this.props.playerLocation, this.props.board);
-    }
+    // check if the game has end, if so then disable the keyDown function.
+    if ( !this.props.endification ) {
 
-    if ( e.key === ' ' ) {
-      this.props.openSpace(this.props.userInfo.username, this.props.playerLocation[this.props.userInfo.username]);
-    }
+      if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+          e.preventDefault();
+      }
+      if ( e.key.slice(0, 5) === 'Arrow'  ) {
+        this.props.movePlayer(this.props.userInfo.username, e.key, this.props.playerLocation, this.props.board);
+      }
 
-    if ( e.key === 'f' || e.key === 'F') {
-      this.props.dropFlag(this.props.userInfo.username, this.props.playerLocation[this.props.userInfo.username]);
+      if ( e.key === ' ' ) {
+        this.props.openSpace(this.props.userInfo.username, this.props.playerLocation[this.props.userInfo.username]);
+      }
+
+      if ( e.key === 'f' || e.key === 'F') {
+        this.props.dropFlag(this.props.userInfo.username, this.props.playerLocation[this.props.userInfo.username]);
+      }
     }
 
   }
 
-  endGame() {
-
-  }
+  // endGame() {
+  //   this.props.redirect('');
+  // }
 
   renderPlayers() {
     var playersArr = Object.keys(this.props.playerLocation);
@@ -62,7 +66,7 @@ class PlayGround extends Component {
         </div>
         {
           this.props.endification ?
-          this.endGame()
+          <GameResult redirect={this.props.redirect} />
           : null
         }
       </div>
@@ -75,7 +79,6 @@ var mapStateToProps = (state) => {
     userInfo: state.userInfo,
     board: state.board,
     playerLocation: state.playerLocation,
-    roomName: state.roomName,
     currentBoardView: state.currentBoardView,
     endification: state.endification
   }
@@ -85,8 +88,7 @@ var mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     movePlayer: movePlayer,
     openSpace: openSpace,
-    dropFlag: dropFlag,
-    createNewPlayer: createNewPlayer
+    dropFlag: dropFlag
   }, dispatch)
 };
 
