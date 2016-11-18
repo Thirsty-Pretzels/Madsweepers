@@ -18,7 +18,6 @@ class GameStatus extends Component {
 }
 
 var classNameDecider = function(progress, total) {
-  console.log(progress / total);
   if (progress / total < 0.3) {
     return 'progress progress-striped progress-success';
   } else if (progress / total < 0.50) {

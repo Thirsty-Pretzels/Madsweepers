@@ -46,7 +46,6 @@ GameManager.prototype.listRoom = function() {
    })
  }
 
- console.log('roomList:', roomList);
  return roomList;
 
 };
