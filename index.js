@@ -80,6 +80,8 @@ io.on('connection', function(socket){
  //    createPlayerHandler(io, roomName, gameManager, gameManager.rooms[roomName].players, clients, socket, playerId, gameManager.rooms[roomName]['currentScores']);
  // });
 
+
+
   socket.on('getNewBoard', function() {
     var roomName = clientRoom[socket.id];
     if (roomName){
