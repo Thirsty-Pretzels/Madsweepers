@@ -42,7 +42,7 @@ GameManager.prototype.listRoom = function() {
      roomStatus: this.rooms[roomName].gameStatus,
      minesLeft: (this.rooms[roomName].board) ? this.rooms[roomName].board.minesLeft : 0,
      minesCount: (this.rooms[roomName].board) ? this.rooms[roomName].board.minesCount : 0,
-     players: this.rooms[roomName].players.listPlayers()
+     host: this.rooms[roomName].players.listPlayers()[0]
    })
  }
 

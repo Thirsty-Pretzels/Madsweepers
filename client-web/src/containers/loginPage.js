@@ -162,7 +162,7 @@ export class LoginPage extends Component {
         <td>{room.roomName}</td>
         <td>{room.numberOfPlayer}</td>
         <td>{room.roomStatus === 'staging' ? 'staging' : this.renderProgressBar(room.minesLeft , room.minesCount) }</td>
-        {room.players ? (<td>{room.players[0]}</td>) : null}
+        {room.host ? (<td>{room.host}</td>) : null}
       </tr>
     );
   }
