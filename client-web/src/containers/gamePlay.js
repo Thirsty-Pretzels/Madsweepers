@@ -5,11 +5,13 @@ import ScoreBoard from '../containers/scoreBoard';
 import GameStatus from '../containers/gameStatus';
 import BoardOverview from '../containers/boardOverview';
 import TopScores from '../containers/top_scores';
+import { connect } from 'react-redux';
 //MJ: KIV. Not in use for now
 //import AddComputerPlayer from '../containers/addComputerPlayer';
 
-export default class GamePlay extends Component {
+class GamePlay extends Component {
 // added a second section for scoreboard. can someone please help me with CSS?
+
   componentDidMount() {
     document.getElementById('playGround').focus();
   }
@@ -20,6 +22,7 @@ export default class GamePlay extends Component {
 
   render() {
     return (
+      this.props.userStatus ?
       <div className='App-Components' onClick={ this.reFocus }>
         <div id='section1'>
           <PlayGround redirect={this.props.redirect}/>
@@ -32,7 +35,21 @@ export default class GamePlay extends Component {
          {/*<TopScores />*/}
         </div>
       </div>
+      :
+      <div>{ this.props.redirect('') }</div>
     );
   }
 }
+
+
+var mapStateToProps = (state) => {
+  return {
+    userStatus: state.userInfo.status
+  }
+}
+
+export default connect(mapStateToProps)(GamePlay);
+
+
+
 
