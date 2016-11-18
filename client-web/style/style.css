@@ -47,6 +47,7 @@ button.active {
 
 
 .App-Components {
+  padding: 2%;
   animation-duration: 1s;
   animation-name: slidein;
 }
@@ -80,8 +81,22 @@ button {
 .headerCentered {
   text-align: center;
 }
-
+#MadIcon {
+  /*float: left;*/
+  width: 64px;
+  height: 64px;
+  size: cover;
+  z-index: 13;
+  color: var(--golden-poppy);
+  content: url(../images/mad_icon.png);
+}
 #header-text {
+  border-width: 10px;
+  border-style: solid;
+  border-color: var(--golden-poppy);
+  border-radius: 10px;
+  background-color: var(--text);
+  color: var(--golden-poppy);
   display: block;
   position: relative;
   margin-left: auto;
@@ -143,12 +158,17 @@ button {
 }
 
 #section1 {
-  display: inline-block;
   float: left;
 }
 
 #section2 {
-  display: inline-block;
+  border-width: 10px;
+  border-style: solid;
+  border-color: var(--text);
+  border-radius: 10px;
+  padding: 1%;
+  background-color: var(--malachite-green);
+  text-align: center;
   float:right;
 }
 
