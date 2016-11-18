@@ -23,9 +23,9 @@ var GameManager = function() {
   this.roomCount = 0;
 };
 
-GameManager.prototype.createRoom = function(roomName) {
+GameManager.prototype.createRoom = function(roomName, row, col, dangerFactor) {
 
-  var board = createBoard();
+  var board = createBoard(row, col, dangerFactor);
   var players = createPlayers();
 
   this.rooms[roomName] = {board, players};

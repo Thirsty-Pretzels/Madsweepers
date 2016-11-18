@@ -6,6 +6,7 @@
     --golden-poppy: #FFC412;
     --lemon: #FFEB0E;
     --malachite-green: #A0975A;
+    --gridSize: 50px;
 }
 
 /*.gameButton {
@@ -85,7 +86,7 @@ button {
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  z-index: 20;
+  z-index: 3;
   font-size: 64px;
 }
 
@@ -105,11 +106,6 @@ button {
 #header-image-container {
   margin-top: -35px;
 }
-
-/*not working :-(*/
-/*#header-image {
-  border-radius: 10%;
-}*/
 
 .formCentered {
   margin-top: 15px;
@@ -149,8 +145,8 @@ button {
 
 .grid {
   display: inline-block;
-  width: 50px;
-  height: 50px;
+  width: var(--gridSize);
+  height: var(--gridSize);
   border-width: 1px;
   border-style: solid;
   border-color: white;
@@ -185,8 +181,8 @@ button {
 
 .player {
   position: absolute;
-  width: 50px;
-  height: 50px;
+  width: var(--gridSize);
+  height: var(--gridSize);
   background-image: url('../images/walk_left.gif');
   background-size: cover;
   background-repeat: no-repeat;
@@ -195,34 +191,10 @@ button {
   z-index: 1;
 }
 
-/*.player-up {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background-image: url('../images/walk_up.gif');
-  background-size: contain;
-  background-repeat: no-repeat;
-  transition-duration: .2s;
-  border-width: 0;
-  z-index: 1;
-}
-
-.player-down {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background-image: url('../images/walk_down.gif');
-  background-size: contain;
-  background-repeat: no-repeat;
-  transition-duration: .2s;
-  border-width: 0;
-  z-index: 1;
-}*/
-
 .player-left {
   position: absolute;
-  width: 50px;
-  height: 50px;
+  width: var(--gridSize);
+  height: var(--gridSize);
   background-image: url('../images/walk_left.gif');
   background-size: cover;
   background-repeat: no-repeat;
@@ -233,8 +205,8 @@ button {
 
 .player-right {
   position: absolute;
-  width: 50px;
-  height: 50px;
+  width: var(--gridSize);
+  height: var(--gridSize);
   background-image: url('../images/walk_left.gif');
   background-size: cover;
   background-repeat: no-repeat;
@@ -249,41 +221,41 @@ button {
 }
 
 .player-text {
-  z-index: 99;
+  z-index: 2;
   position: absolute;
 }
 
 .grid-initial {
-  width: 50px;
-  height: 50px;
+  width: var(--gridSize);
+  height: var(--gridSize);
   background-color: var(--golden-poppy);
   vertical-align: top;
 }
 
 .grid-flag {
-  width: 50px;
-  height: 50px;
+  width: var(--gridSize);
+  height: var(--gridSize);
   content: url('../images/flag.png');
   vertical-align: top;
 }
 
 .grid-wrongFlag {
-  width: 50px;
-  height: 50px;
+  width: var(--gridSize);
+  height: var(--gridSize);
   content: url('../images/redCross.png');
   vertical-align: top;
 }
 
 .grid-explosion {
-  width: 50px;
-  height: 50px;
+  width: var(--gridSize);
+  height: var(--gridSize);
   content: url('../images/explosion.png');
   vertical-align: top;
 }
 
 .grid-revealed {
- width: 50px;
- height: 50px;
+ width: var(--gridSize);
+ height: var(--gridSize);
  color: red;
 }
 
@@ -320,6 +292,19 @@ button {
   font-weight: bold;
 }
 
+.gameResult {
+  margin-left: 10%;
+  margin-top: 10%;
+  position: absolute;
+  background-color: grey;
+  z-index: 3;
+  width: 40%;
+  height: 40%;
+  text-align: center;
+  font-size: 25px;
+  padding-top: 25px;
+}
+
 .scoreItem {
   font-size: 35px;
   font-family: BirdyGame;
@@ -328,16 +313,16 @@ button {
 .scoreboard-score {
   display: inline-block;
   text-align: center;
-  line-height: 50px;
-  width: 50px;
-  height: 50px;
+  line-height: var(--gridSize);
+  width: var(--gridSize);
+  height: var(--gridSize);
   border-radius: 25px;
   border-width: 2px;
   border-color: black;
 }
 
 .scoreboard-id {
-  margin-left: 50px;
+  margin-left: var(--gridSize);
   display: inline-block;
   vertical-align: center;
 }

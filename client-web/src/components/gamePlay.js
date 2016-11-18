@@ -22,7 +22,7 @@ export default class GamePlay extends Component {
     return (
       <div className='App-Components' onClick={ this.reFocus }>
         <div id='section1'>
-          <PlayGround />
+          <PlayGround redirect={this.props.redirect}/>
           <Board />
         </div>
         <div id='section2'>
