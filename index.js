@@ -4,6 +4,7 @@ var io = require('socket.io')(http);
 var Board = require('./board.js');
 var Players = require('./players.js');
 var GameManager = require('./gameManager.js');
+//var {runDataBase, db, getHighScoresFromDb, saveHighScoresInDb} = require('./redis.js');
 
 // import helper function
 var loginTempUserHandler = require('./socket-helpers/loginTempUserHandler');
@@ -35,8 +36,8 @@ var clientRoom = {};
 // This keeps track of active users and its socket
 var users = {};
 
-// Now the room name is hard coded
-// we need to send the room name along with every communciation
+// MJ: initialize redisDatabase
+//runDataBase();
 
 io.on('connection', function(socket){
   console.log('a user connected');
@@ -100,6 +101,7 @@ io.on('connection', function(socket){
     const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
 
     movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize, clients, socket);
+    
     if ((Date.now() - gameManager.rooms[roomName].board.time) / 1000 / 60 >= 1){
       console.log('time\'s up');
       io.to(roomName).emit('endification');
@@ -132,6 +134,14 @@ io.on('connection', function(socket){
   socket.on('dropFlag', function(data){
     var roomName = clientRoom[socket.id];
     dropFlagHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, socket, clients);
+  }); 
+
+  socket.on('getHighScores', function(){
+    getHighScoresFromDb(io);
+  });
+
+  socket.on('saveHighScores', function(scores){
+    saveHighScoresInDb(scores);
   });
 
   socket.on('disconnect', function(){

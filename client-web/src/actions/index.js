@@ -207,10 +207,18 @@ export function countMines(minesInfo) {
   }
 };
 
+
 export function endification(val) {
   val = val === undefined ? true : val;
   return {
     type: 'END-GAME',
     payload: val
+  }
+};
+
+export function updateHighScore(scores) {
+  return {
+    type: 'UPDATE-HIGH-SCORE',
+    highScores: scores
   }
 };
