@@ -1,6 +1,6 @@
 export default function(state = false, action) {
   if ( action.type === 'ALL-READY' ) {
-    console.log('inside reducer: ', action.ready);
+    console.log('inside allReady reducer: ', action.ready);
     return action.ready;
   }
 

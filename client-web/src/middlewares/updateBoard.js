@@ -76,6 +76,9 @@ export default function(store) {
 
   socket.on('allPlayersReady', (isAllPlayersReady) => {
     store.dispatch(actions.allReady(isAllPlayersReady));
+    if ( isAllPlayersReady ) {
+      store.dispatch(actions.endification(false));
+    }
   });
 
   socket.on('updatePlayerLocations', ({newLocations, boardSize}) => {

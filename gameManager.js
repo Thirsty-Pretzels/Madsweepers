@@ -25,17 +25,15 @@ var GameManager = function() {
 
 GameManager.prototype.createRoom = function(roomName, row, col, dangerFactor) {
 
-  var board = createBoard(row, col, dangerFactor);
+  // var board = createBoard(row, col, dangerFactor);
   var players = createPlayers();
+  var currentScores = [];
+  var gameStatus = 'staging';
 
-  this.rooms[roomName] = {board, players};
-  //need to store the current score for the current game inside this game;
-  this.rooms[roomName].currentScores = [];
-  this.rooms[roomName].gameStatus = 'staging';
+  this.rooms[roomName] = {row, col, dangerFactor, players, currentScores, gameStatus};
 };
 
 GameManager.prototype.listRoom = function() {
- // body...
  var roomList = [];
  for (var roomName in this.rooms) {
    roomList.push({
@@ -48,8 +46,17 @@ GameManager.prototype.listRoom = function() {
 
 };
 
+GameManager.prototype.startGame = function(roomName) {
+  const row = this.rooms[roomName].row;
+  const col = this.rooms[roomName].col;
+  const dangerFactor = this.rooms[roomName].dangerFactor;
+  this.rooms[roomName].board = createBoard(row, col, dangerFactor);
+  this.rooms[roomName].currentScores.forEach(score => score.scoreChange = 0);
+};
 
-// Generate Players object to manage player locations and potentially status.
+GameManager.prototype.removeRoom = function(roomName) {
+  delete this.rooms[roomName];
+};
 
 module.exports = GameManager;
 
