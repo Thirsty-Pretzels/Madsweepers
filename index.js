@@ -54,6 +54,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('leaveRoom', (info) => {
+    var roomName = clientRoom[socket.id];
     leaveRoomHandler(io, socket, info.room, info.user, gameManager, clients, gameManager.rooms[roomName]['currentScores']);
   });
 
