@@ -164,12 +164,13 @@ button {
 #section2 {
   border-width: 10px;
   border-style: solid;
-  border-color: var(--text);
+  border-color: var(--golden-poppy);
   border-radius: 10px;
   padding: 1%;
-  background-color: var(--malachite-green);
+  background-color: var(--text);
   text-align: center;
   float:right;
+  color: var(--golden-poppy);
 }
 
 .grid {
