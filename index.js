@@ -4,7 +4,7 @@ var io = require('socket.io')(http);
 var Board = require('./board.js');
 var Players = require('./players.js');
 var GameManager = require('./gameManager.js');
-//var {runDataBase, db, getHighScoresFromDb, saveHighScoresInDb} = require('./redis.js');
+var {runDataBase, db, getHighScoresFromDb, saveHighScoresInDb} = require('./redis.js');
 
 // import helper function
 var loginTempUserHandler = require('./socket-helpers/loginTempUserHandler');
@@ -17,6 +17,9 @@ var openSpaceHandler = require('./socket-helpers/openSpaceHandler');
 var movePlayerHandler = require('./socket-helpers/movePlayerHandler');
 var disconnectHandler = require('./socket-helpers/disconnectHandler');
 var createPlayerHandler = require('./socket-helpers/createPlayerHandler');
+
+// MJ: initialize redisDatabase. 
+runDataBase();
 
 // define score amounts by each operation
 global.scoreRevealMine = -10;
@@ -35,9 +38,6 @@ var clientRoom = {};
 
 // This keeps track of active users and its socket
 var users = {};
-
-// MJ: initialize redisDatabase
-//runDataBase();
 
 io.on('connection', function(socket){
   console.log('a user connected');
@@ -142,7 +142,9 @@ io.on('connection', function(socket){
   });
 
   socket.on('saveHighScores', function(scores){
+    //MJ: save scores, then broadcast new scores to everyone across rooms
     saveHighScoresInDb(scores);
+    getHighScoresFromDb(io);
   });
 
   socket.on('disconnect', function(){
