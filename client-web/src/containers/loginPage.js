@@ -110,19 +110,27 @@ export class LoginPage extends Component {
           New Room  
         </button>
         { this.props.userInfo.showCreatePanel ? this.renderCreateRoomPanel() : null}
-        <h3>Rooms Available</h3>
+        <h3>Awesome Rooms Available</h3>
         <table>
           <tr>
             <th>RoomName</th>
             <th>PlayerCount</th>
           </tr>
-        {
-          this.props.roomList.map((room) =>
-            <tr className='roomName' onClick={this.enterRoom.bind(this, room.roomName, this.props.userInfo.username)}><td>{room.roomName}</td><td>{room.numberOfPlayer}</td></tr>
-          )
-        }
+        { this.props.roomList.map((room) => this.renderRoomListEntry(room)) }
         </table>
       </div>
+    );
+  }
+
+  renderRoomListEntry(room) {
+    return (
+      <tr 
+        className='roomName' 
+        onClick={this.enterRoom.bind(this, room.roomName, this.props.userInfo.username)}
+        >
+        <td>{room.roomName}</td>
+        <td>{room.numberOfPlayer}</td>
+      </tr>
     );
   }
 
