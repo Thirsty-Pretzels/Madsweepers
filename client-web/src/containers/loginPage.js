@@ -273,6 +273,7 @@ var mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
     roomList: state.roomList,
+    roomInfo: state.roomInfo,
     allReady: state.allReady
   };
 };
