@@ -54,7 +54,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('leaveRoom', (info) => {
-    leaveRoomHandler(io, socket, info.room, info.user, gameManager);
+    leaveRoomHandler(io, socket, info.room, info.user, gameManager, clients, gameManager.rooms[roomName]['currentScores']);
   });
 
   socket.on('toggleReady', (info) => {
@@ -90,12 +90,14 @@ io.on('connection', function(socket){
   socket.on('movePlayer', function(data) {
     var roomName = clientRoom[socket.id];
     if (!gameManager.rooms.hasOwnProperty(roomName)){
+      io.to(socket.id).emit('badRoom');
+      console.log('bad room');
       return;
     }
     const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
 
     movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize, clients, socket);
-    if (Math.floor((Date.now() - gameManager.rooms[roomName].board.time)) / 1000 / 60 >= 1){
+    if ((Date.now() - gameManager.rooms[roomName].board.time) / 1000 / 60 >= 1){
       console.log('time\'s up');
       io.to(roomName).emit('endification');
     }
