@@ -4,7 +4,8 @@ var io = require('socket.io')(http);
 var Board = require('./board.js');
 var Players = require('./players.js');
 var GameManager = require('./gameManager.js');
-var {runDataBase, db, getHighScoresFromDb, saveHighScoresInDb} = require('./redis.js');
+// // To uncomment when running db
+// var {runDataBase, db, getHighScoresFromDb, saveHighScoresInDb} = require('./redis.js');
 
 // import helper function
 var loginTempUserHandler = require('./socket-helpers/loginTempUserHandler');
@@ -18,8 +19,9 @@ var movePlayerHandler = require('./socket-helpers/movePlayerHandler');
 var disconnectHandler = require('./socket-helpers/disconnectHandler');
 var createPlayerHandler = require('./socket-helpers/createPlayerHandler');
 
-// MJ: initialize redisDatabase. 
-runDataBase();
+// // To uncomment when running db
+// // MJ: initialize redisDatabase. 
+// runDataBase();
 
 // define score amounts by each operation
 global.scoreRevealMine = -10;
