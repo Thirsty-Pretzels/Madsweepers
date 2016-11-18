@@ -6,11 +6,8 @@ import GameStatus from '../containers/gameStatus';
 import BoardOverview from '../containers/boardOverview';
 import TopScores from '../containers/top_scores';
 import { connect } from 'react-redux';
-//MJ: KIV. Not in use for now
-//import AddComputerPlayer from '../containers/addComputerPlayer';
 
 class GamePlay extends Component {
-// added a second section for scoreboard. can someone please help me with CSS?
 
   componentDidMount() {
     document.getElementById('playGround').focus();
@@ -32,7 +29,7 @@ class GamePlay extends Component {
           <BoardOverview />
           <ScoreBoard />
           <GameStatus />
-         {/*<TopScores />*/}
+          <TopScores />
         </div>
       </div>
       :
