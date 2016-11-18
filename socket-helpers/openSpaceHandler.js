@@ -1,7 +1,7 @@
 // socket helper function: open space
 var updateCurrentScores = require('./updateCurrentScores.js');
 
-module.exports = function(io, roomName, board, currentScores, data, boardValues) {
+module.exports = function(io, roomName, board, currentScores, data, gameManager) {
 	var playerId = data[0];
   var location = data[1];
 
@@ -10,13 +10,13 @@ module.exports = function(io, roomName, board, currentScores, data, boardValues)
     //update the score according to the result;
     if(board.board[location.y][location.x].val === 9) {
       // update currentScores then emit the change
-      updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreRevealMine}, io, roomName);
+      updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreRevealMine}, io, roomName, gameManager);
       io.to(roomName).emit('updateScore', {id: playerId, scoreChange: scoreRevealMine});
       board.minesLeft--;
       io.to(roomName).emit('countMines', [board.minesLeft, board.minesCount]);
     } else {
       // update currentScores then emit the change
-      updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreRevealspace}, io, roomName);
+      updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreRevealspace}, io, roomName, gameManager);
       io.to(roomName).emit('updateScore', {id: playerId, scoreChange: scoreRevealspace});
       board.todos--;
     }
