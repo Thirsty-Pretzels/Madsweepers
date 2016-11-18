@@ -55,6 +55,10 @@ Players.prototype.move = function(playerId, direction) {
   console.log(this.playerLocations);
 };
 
+Players.prototype.listPlayer = function() {
+  return Object.keys(this.playerLocations);
+};
+
 module.exports = Players;
 
 // Uncomment for example.
