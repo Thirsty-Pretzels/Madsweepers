@@ -65,6 +65,7 @@ export class LoginPage extends Component {
           onSubmit={this.onFormSubmit.bind(this)}
           >
           <input
+            maxLength={12}
             name='name'
             placeholder='Enter awesome username here'
             id='input-text'
@@ -174,9 +175,10 @@ export class LoginPage extends Component {
           onSubmit={this.createRoom.bind(this)}
           id='createRoomForm'
           >
-          <input 
+          <input
             type='text'
             name="roomName"
+            maxLength={12}
             style={{width: '440px', 'margin-bottom': '3px'}}
             placeholder='Enter An Awesome RoomName'
           />
