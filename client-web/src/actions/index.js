@@ -207,8 +207,10 @@ export function countMines(minesInfo) {
   }
 };
 
-export function endification() {
+export function endification(val) {
+  val = val === undefined ? true : val;
   return {
-    type: 'END-GAME'
+    type: 'END-GAME',
+    payload: val
   }
 };

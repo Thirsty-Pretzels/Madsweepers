@@ -29,10 +29,6 @@ class PlayGround extends Component {
 
   }
 
-  // endGame() {
-  //   this.props.redirect('');
-  // }
-
   renderPlayers() {
     var playersArr = Object.keys(this.props.playerLocation);
 
