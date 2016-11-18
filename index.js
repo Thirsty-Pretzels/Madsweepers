@@ -4,6 +4,7 @@ var io = require('socket.io')(http);
 var Board = require('./board.js');
 var Players = require('./players.js');
 var GameManager = require('./gameManager.js');
+var redisDb = require('./redis.js');
 
 // import helper function
 var loginTempUserHandler = require('./socket-helpers/loginTempUserHandler');
@@ -22,6 +23,9 @@ global.scoreRevealMine = -10;
 global.scoreRevealspace = 1;
 global.scoreRightFlag = 10;
 global.scoreWrongFlag = -5;
+
+// initialize redisDatabase
+redisDb();
 
 // Create gameManager when server starts
 var gameManager = new GameManager();
@@ -100,6 +104,7 @@ io.on('connection', function(socket){
     const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
 
     movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize, clients, socket);
+    
     if ((Date.now() - gameManager.rooms[roomName].board.time) / 1000 / 60 >= 1){
       console.log('time\'s up');
       io.to(roomName).emit('endification');

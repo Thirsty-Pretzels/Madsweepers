@@ -207,8 +207,18 @@ export function countMines(minesInfo) {
   }
 };
 
+<<<<<<< e69a711b9934e8e40a0fb7328073fccf16f4b343
 export function endification(val) {
   val = val === undefined ? true : val;
+=======
+export function saveHighScoreToDb() {
+  return {
+    type: 'SAVE-HIGH-SCORE'
+  }
+};
+
+export function endification() {
+>>>>>>> Linking up leaderboard with database
   return {
     type: 'END-GAME',
     payload: val
