@@ -48,8 +48,9 @@ io.on('connection', function(socket){
   });
 
   socket.on('enterRoom', (info) => {
+    console.log('info=======>>>>>>>>>', info);
     if (info.inRoom) {
-      leaveRoomHandler(io, socket, info.inRoomname, info.user, gameManager, clients, gameManager.rooms[info.inRoomname]['currentScores']);
+      leaveRoomHandler(io, socket, info.inRoomname, info.user, gameManager, users, clients, gameManager.rooms[info.inRoomname]['currentScores']);
     }
     clientRoom[socket.id] = info.room;
     enterRoomHandler(io, socket, info.room, info.user, gameManager, users, gameManager.rooms[info.room]['currentScores'], clients);
@@ -57,7 +58,7 @@ io.on('connection', function(socket){
 
   socket.on('leaveRoom', (info) => {
     var roomName = clientRoom[socket.id];
-    leaveRoomHandler(io, socket, info.room, info.user, gameManager, users);
+    leaveRoomHandler(io, socket, info.room, info.user, gameManager, users, clients, gameManager.rooms[info.room]['currentScores']);
   });
 
   socket.on('toggleReady', (info) => {

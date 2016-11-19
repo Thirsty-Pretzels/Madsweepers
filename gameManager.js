@@ -25,7 +25,6 @@ var GameManager = function() {
 
 GameManager.prototype.createRoom = function(roomName, row, col, dangerFactor) {
 
-  // var board = createBoard(row, col, dangerFactor);
   var players = createPlayers();
   var currentScores = [];
   var gameStatus = 'staging';
