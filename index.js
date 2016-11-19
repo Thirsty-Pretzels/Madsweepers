@@ -34,14 +34,15 @@ var gameManager = new GameManager();
 gameManager.createRoom('HR48');
 gameManager.createRoom('Trump Not President');
 // This keeps track of active player and its socket
-var clients = {};
-var clientRoom = {};
+var clients = {roomName: null};
 
 // This keeps track of active users and its socket
 var users = {};
 
 io.on('connection', function(socket){
   console.log('a user connected');
+
+  clients[socket.id] = {}
 
   socket.on('loginTempUser', username => {
     loginTempUserHandler(io, socket, users, username, gameManager.listRoom());
@@ -51,12 +52,12 @@ io.on('connection', function(socket){
     if (info.inRoom) {
       leaveRoomHandler(io, socket, info.inRoomname, info.user, gameManager, users, clients, gameManager.rooms[info.inRoomname]['currentScores']);
     }
-    clientRoom[socket.id] = info.room;
+    clients[socket.id]['roomName'] = info.room;
     enterRoomHandler(io, socket, info.room, info.user, gameManager, users, gameManager.rooms[info.room]['currentScores'], clients);
   });
 
   socket.on('leaveRoom', (info) => {
-    var roomName = clientRoom[socket.id];
+    var roomName = clients[socket.id]['roomName'];
     leaveRoomHandler(io, socket, info.room, info.user, gameManager, users, clients, gameManager.rooms[info.room]['currentScores']);
   });
 
@@ -70,7 +71,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('getNewBoard', function() {
-    var roomName = clientRoom[socket.id];
+    var roomName = clients[socket.id]['roomName'];
     if (roomName){
       io.to(roomName).emit('updateBoard', {type: 0, board: gameManager.rooms[roomName].board.board});  // to send stuff back to client side
       io.to(roomName).emit('countMines', [gameManager.rooms[roomName].board.minesLeft, gameManager.rooms[roomName].board.minesLeft]);
@@ -78,7 +79,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('movePlayer', function(data) {
-    var roomName = clientRoom[socket.id];
+    var roomName = clients[socket.id]['roomName'];
     if (!gameManager.rooms.hasOwnProperty(roomName)){
       io.to(socket.id).emit('badRoom');
       console.log('bad room');
@@ -114,12 +115,12 @@ io.on('connection', function(socket){
   });
 
   socket.on('openSpace', function(data){
-    var roomName = clientRoom[socket.id];
+    var roomName = clients[socket.id]['roomName'];
     openSpaceHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, gameManager);
   });
 
   socket.on('dropFlag', function(data){
-    var roomName = clientRoom[socket.id];
+    var roomName = clients[socket.id]['roomName'];
     dropFlagHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, socket, clients, gameManager);
   });
 
@@ -134,7 +135,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('disconnect', function(){
-    var roomName = clientRoom[socket.id];
+    var roomName = clients[socket.id]['roomName'];
     if(roomName){
       disconnectHandler(io, gameManager, gameManager.rooms[roomName].players, gameManager.rooms[roomName]['currentScores'], clients, socket);
     }
