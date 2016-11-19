@@ -34,10 +34,30 @@ a{
   text-decoration: none;
 }
 
-.col-centered {
-  float: none;
-  margin: 0 auto;
+/* 
+===================================================
+START Reusable components 
+===================================================
+*/
+
+.App-Components {
+  animation-duration: 1s;
+  animation-name: slidein;
+  padding: 2%;
 }
+
+.center-block {
+  display: block;
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 
+===================================================
+END Reusable components 
+===================================================
+*/
 
 button, a{
   font-size: 22px;
@@ -64,16 +84,7 @@ button.active {
 }
 
 
-.App-Components {
-  padding: 2%;
-  animation-duration: 1s;
-  animation-name: slidein;
-}
-
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-
 body {
-  /*font-family:'Roboto', sans-serif;*/
   font-family: "Luigi";
   color: var(--text);
   background-color: var(--background);
@@ -92,9 +103,7 @@ body {
 }
 
 /* app.js */
-.headerCentered {
-  text-align: center;
-}
+
 #MadIcon {
   /*float: left;*/
   width: 64px;
@@ -102,21 +111,6 @@ body {
   size: cover;
   z-index: 13;
   content: url(../images/mad_icon.png);
-}
-#header-text {
-  border-width: 10px;
-  border-style: solid;
-  border-color: var(--button);
-  border-radius: 10px;
-  background-color: var(--text);
-  color: var(--button);
-  display: block;
-  font-family: "Mario";
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
-  z-index: 3;
-  font-size: 64px;
 }
 
 /* from this line: classes and ids from loginPage */
@@ -132,7 +126,7 @@ body {
   float: left;
 }
 
-#header-image-container {
+.login-banner {
   margin-top: -35px;
 }
 
@@ -392,8 +386,3 @@ body {
   vertical-align: center;
 }
 
-.center-block {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
