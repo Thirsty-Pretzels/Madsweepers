@@ -62,6 +62,10 @@ export default function(store) {
     store.dispatch(actions.updateRoomList(rooms));
   });
 
+  socket.on('roomInfoUpdate', info => {
+    store.dispatch(actions.updateRoomInfo(info));
+  });
+
   socket.on('hasEnteredRoom', room => {
     store.dispatch(actions.hasEnteredRoom(room));
   });

@@ -23,6 +23,13 @@ export function updateRoomList(rooms) {
   }
 }
 
+export function updateRoomInfo(info) {
+  return {
+    type: 'ROOM-INFO-UPDATE',
+    payload: info
+  }
+}
+
 export function enterRoom(roomname, username, inRoom, inRoomname) {
   return {
     type: 'ENTER-ROOM',
