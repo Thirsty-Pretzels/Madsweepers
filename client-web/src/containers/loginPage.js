@@ -73,7 +73,7 @@ export class LoginPage extends Component {
             />
           <br/>
           <button
-            className="myButton"
+            className="myButton col-md-6 col-centered"
             type="submit"
             id='submit-button'
           > Let me play!
