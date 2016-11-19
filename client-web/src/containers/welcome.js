@@ -14,8 +14,8 @@ export class Welcome extends Component {
   render() {
     return (
       <div className="row" >
-        <div className='headerCentered' id='header-image'>
-          <img src='../../images/header-image.png' id='header-image-container'/>
+        <div className='center-block'>
+          <img src='../../images/header-image.png' className='center-block'/>
         </div>
         <form
           className='formCentered'
@@ -31,7 +31,7 @@ export class Welcome extends Component {
             />
           <br/>
           <button
-            className="myButton col-md-6 col-centered"
+            className="myButton col-md-6 center-block"
             type="submit"
             id='submit-button'
           > Let me play!
