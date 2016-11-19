@@ -20,7 +20,7 @@ var disconnectHandler = require('./socket-helpers/disconnectHandler');
 var createPlayerHandler = require('./socket-helpers/createPlayerHandler');
 
 // // To uncomment when running db
-// // MJ: initialize redisDatabase. 
+// // MJ: initialize redisDatabase.
 // runDataBase();
 
 // define score amounts by each operation
@@ -58,7 +58,9 @@ io.on('connection', function(socket){
 
   socket.on('leaveRoom', (info) => {
     var roomName = clientRoom[socket.id];
-    leaveRoomHandler(io, socket, info.room, info.user, gameManager, users);
+    if (info.room){
+      leaveRoomHandler(io, socket, info.room, info.user, gameManager, users);
+    }
   });
 
   socket.on('toggleReady', (info) => {
@@ -103,7 +105,7 @@ io.on('connection', function(socket){
     const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
 
     movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize, clients, socket);
-    
+
     if ((Date.now() - gameManager.rooms[roomName].board.time) / 1000 / 60 >= 1){
       console.log('time\'s up');
       gameManager.endGame(roomName);
@@ -137,7 +139,7 @@ io.on('connection', function(socket){
   socket.on('dropFlag', function(data){
     var roomName = clientRoom[socket.id];
     dropFlagHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, socket, clients, gameManager);
-  }); 
+  });
 
   socket.on('getHighScores', function(){
     getHighScoresFromDb(io);
