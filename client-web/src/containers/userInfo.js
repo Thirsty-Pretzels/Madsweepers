@@ -19,7 +19,7 @@ export class UserInfo extends Component {
         </div>
       </div>
     );
-  } 
+  }
 }
 
 var mapStateToProps = (state) => {
