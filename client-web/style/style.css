@@ -12,8 +12,8 @@
     --malibu-blue: #6699FF; /*sidebar*/
     --brown-gray: #CDBFAC;
     --bone-gray: #E1D4C0;
-    --merino-gray: #F5EDE3; /*background*/
-    --blaze-orange: #FF6600; /*buttons*/
+    --background: #F5EDE3; /*merino-gray*/
+    --button: #FF6600; /*blaze-orange*/
 }
 
 /*.gameButton {
@@ -42,7 +42,7 @@ a{
 button, a{
   font-size: 22px;
   font-family: "Mario";
-  background-color: var(--golden-poppy);
+  background-color: var(--button);
   border-width: 0px;
   border-radius: 15px;
   box-shadow: 0 5px #FF9900;
@@ -65,6 +65,7 @@ button.active {
 
 
 .App-Components {
+  padding: 2%;
   animation-duration: 1s;
   animation-name: slidein;
 }
@@ -75,11 +76,7 @@ body {
   /*font-family:'Roboto', sans-serif;*/
   font-family: "Luigi";
   color: var(--text);
-  background-color: var(--swamp);
-}
-
-button {
-  background-color: var(--golden-poppy)
+  background-color: var(--background);
 }
 
 @keyframes slidein {
@@ -98,8 +95,21 @@ button {
 .headerCentered {
   text-align: center;
 }
-
+#MadIcon {
+  /*float: left;*/
+  width: 64px;
+  height: 64px;
+  size: cover;
+  z-index: 13;
+  content: url(../images/mad_icon.png);
+}
 #header-text {
+  border-width: 10px;
+  border-style: solid;
+  border-color: var(--button);
+  border-radius: 10px;
+  background-color: var(--text);
+  color: var(--button);
   display: block;
   font-family: "Mario";
   position: relative;
@@ -162,13 +172,19 @@ button {
 }
 
 #section1 {
-  display: inline-block;
   float: left;
 }
 
 #section2 {
-  display: inline-block;
+  border-width: 10px;
+  border-style: solid;
+  border-color: var(--golden-poppy);
+  border-radius: 10px;
+  padding: 1%;
+  background-color: var(--text);
+  text-align: center;
   float:right;
+  color: var(--golden-poppy);
 }
 
 #userInfoRender {

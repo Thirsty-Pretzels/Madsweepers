@@ -17,7 +17,6 @@ var dropFlagHandler = require('./socket-helpers/dropFlagHandler');
 var openSpaceHandler = require('./socket-helpers/openSpaceHandler');
 var movePlayerHandler = require('./socket-helpers/movePlayerHandler');
 var disconnectHandler = require('./socket-helpers/disconnectHandler');
-var createPlayerHandler = require('./socket-helpers/createPlayerHandler');
 
 // // To uncomment when running db
 // // MJ: initialize redisDatabase.
@@ -49,8 +48,9 @@ io.on('connection', function(socket){
   });
 
   socket.on('enterRoom', (info) => {
+    console.log('info=======>>>>>>>>>', info);
     if (info.inRoom) {
-      leaveRoomHandler(io, socket, info.inRoomname, info.user, gameManager, users);
+      leaveRoomHandler(io, socket, info.inRoomname, info.user, gameManager, users, clients, gameManager.rooms[info.inRoomname]['currentScores']);
     }
     clientRoom[socket.id] = info.room;
     enterRoomHandler(io, socket, info.room, info.user, gameManager, users, gameManager.rooms[info.room]['currentScores'], clients);
@@ -58,9 +58,7 @@ io.on('connection', function(socket){
 
   socket.on('leaveRoom', (info) => {
     var roomName = clientRoom[socket.id];
-    if (info.room){
-      leaveRoomHandler(io, socket, info.room, info.user, gameManager, users);
-    }
+    leaveRoomHandler(io, socket, info.room, info.user, gameManager, users, clients, gameManager.rooms[info.room]['currentScores']);
   });
 
   socket.on('toggleReady', (info) => {
@@ -71,21 +69,6 @@ io.on('connection', function(socket){
     gameManager.createRoom(info.roomName, info.row, info.col, info.mineDensity);
     io.emit('roomListUpdate', gameManager.listRoom());
   });
- //  socket.on('createPlayer', function(playerId, roomName) {
- //    console.log(playerId, roomName, 'socket: createPlayer')
-
- //    socket.join(roomName);
-
- //    if ( !gameManager.rooms[roomName] ) {
- //      gameManager.createRoom(roomName);
- //    }
-
- //    console.log(socket.id, 'socketid');
- //    clientRoom[socket.id] = roomName;
- //    createPlayerHandler(io, roomName, gameManager, gameManager.rooms[roomName].players, clients, socket, playerId, gameManager.rooms[roomName]['currentScores']);
- // });
-
-
 
   socket.on('getNewBoard', function() {
     var roomName = clientRoom[socket.id];

@@ -7,10 +7,10 @@ import GamePlay from '../containers/gamePlay';
 
 // basic setup of router.
 const routes = (
-  <Router history={browserHistory}>
-    <Route path='/' component={App}>
-      <IndexRoute component={LoginPage} />
-      <Route path='gamePlay' component={GamePlay} />
+  <Router history={ browserHistory }>
+    <Route path='/' component={ App }>
+      <IndexRoute component={ LoginPage } />
+      <Route path='gamePlay' component={ GamePlay } />
     </Route>
   </Router>
 );
