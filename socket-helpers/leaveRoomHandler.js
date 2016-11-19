@@ -1,4 +1,4 @@
-module.exports = function(io, socket, room, user, gameManager, clients, currentScores) {
+module.exports = function(io, socket, room, user, gameManager, users, clients, currentScores) {
   console.log('user leaves room');
   if (!room){
     return;
@@ -12,5 +12,6 @@ module.exports = function(io, socket, room, user, gameManager, clients, currentS
   socket.emit('allPlayersReady', false);
   socket.emit('hasLeftRoom', room);
 
+  io.to(room).emit('roomInfoUpdate', gameManager.roomDetail(room, users));
   io.emit('roomListUpdate', gameManager.listRoom());
 }

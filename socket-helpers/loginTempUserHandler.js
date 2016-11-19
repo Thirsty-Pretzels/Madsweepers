@@ -4,7 +4,7 @@ module.exports = function(io, socket, users, username, rooms) {
   var tempUniqUserId = Date.now().toString(36) + ('' + Math.floor(Math.random() * 10000));
   var userCode = Math.ceil(Math.random()*12);
   // store the username in the users list
-  users[socket.id] = {
+  users[username] = {
   	username: username,
   	socket: socket.id,
   	tempUniqUserId: tempUniqUserId,

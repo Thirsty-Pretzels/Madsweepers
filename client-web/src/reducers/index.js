@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import newUserReducer from './reducer_new_user';
 import updateRoomListReducer from './reducer_update_roomlist';
+import updateRoomInfoReducer from './reducer_update_roominfo';
 import readyStatusReducer from './reducer_ready_Status';
 import boardReducer from './reducer_board';
 import playerLocationReducer from './reducer_player_location';
@@ -17,6 +18,7 @@ import highScoresReducer from './reducer_top_scores.js';
 const rootReducer = combineReducers({
   userInfo: newUserReducer,
   roomList: updateRoomListReducer,
+  roomInfo: updateRoomInfoReducer,
   allReady: readyStatusReducer,
   username: usernameReducer,
   highScores: highScoresReducer,
