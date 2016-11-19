@@ -18,16 +18,17 @@ export class Welcome extends Component {
           <img src='../../images/header-image.png' className='center-block'/>
         </div>
         <form
-          className='formCentered'
+          className='form-centered center-block'
           id='loginForm'
           onSubmit={this.onFormSubmit.bind(this)}
           >
           <input
+            className="col-md-6 center-block"
             maxLength={12}
             name='name'
             placeholder='Enter awesome username here'
             id='input-text'
-            style={{width: '450px', marginBottom: '5px'}}
+            style={{'font-size': '30px', marginTop: '10px'}}
             />
           <br/>
           <button
