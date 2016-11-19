@@ -266,9 +266,9 @@ export class LoginPage extends Component {
         <td><img src={'../../images/user'+this.props.roomInfo.userList[user].userCode+'.png'} /></td>
         <td>{user}</td>
         <td>        
-          <button disabled>
+          <h4>
             {user}{this.props.roomInfo.userList[user].readyStatus ? ' is Ready!' : ' is messing around!'}
-          </button>
+          </h4>
         </td>
       </tr>
     );
