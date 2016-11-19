@@ -31,6 +31,7 @@ export function updateRoomInfo(info) {
 }
 
 export function enterRoom(roomname, username, inRoom, inRoomname) {
+  console.log('got clicked', roomname, username);
   return {
     type: 'ENTER-ROOM',
     room: roomname,
@@ -229,3 +230,10 @@ export function updateHighScore(scores) {
     highScores: scores
   }
 };
+
+export function updateGameTime(gameTime) {
+  return {
+    type: 'UPDATE-GAME-TIME',
+    payload: gameTime
+  }
+}

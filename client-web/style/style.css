@@ -3,7 +3,7 @@
     /*--swamp: #EFEFEF;*/
     --swamp: #D6EAF8;
     --endeavour: #0F5C9B;
-    --golden-poppy: #FFC412;
+    --button: #FFC412; /*goldenpoppy*/
     --lemon: #FFEB0E;
     --malachite-green: #A0975A;
     --gridSize: 50px;
@@ -13,7 +13,7 @@
     --brown-gray: #CDBFAC;
     --bone-gray: #E1D4C0;
     --background: #F5EDE3; /*merino-gray*/
-    --button: #FF6600; /*blaze-orange*/
+    --blaze-orange: #FF6600; /*blaze-orange*/
 }
 
 /*.gameButton {
@@ -34,9 +34,9 @@ a{
   text-decoration: none;
 }
 
-/* 
+/*
 ===================================================
-START Reusable components 
+REUSABLE COMPONENTS
 ===================================================
 */
 
@@ -53,6 +53,7 @@ START Reusable components
   margin-right: auto;
 }
 
+
 #header-text {
   font-family: "Mario";
   border-width: 10px;
@@ -61,15 +62,15 @@ START Reusable components
   border-radius: 10px;
   background-color: var(--text);
   color: var(--button);
-  display: block;       display: block;
+  display: block;
   font-family: "Mario";
   position: relative;
   font-size: 64px;
 }
 
-/* 
+/*
 ===================================================
-END Reusable components 
+BUTTONS
 ===================================================
 */
 
@@ -103,6 +104,12 @@ body {
   color: var(--text);
   background-color: var(--background);
 }
+
+/* 
+===================================================
+LOGIN
+===================================================
+*/
 
 @keyframes slidein {
   from {
@@ -149,6 +156,12 @@ body {
   text-align: center;
   font-size: 24px;
 }
+
+/* 
+===================================================
+ROOMLIST
+===================================================
+*/
 
 #roomListTable {
   border-collapse: separate;
@@ -256,7 +269,7 @@ body {
   position: absolute;
   width: var(--gridSize);
   height: var(--gridSize);
-  background-image: url('../images/walk_left.gif');
+  background-image: url('../images/tank.png');
   background-size: cover;
   background-repeat: no-repeat;
   transition-duration: .2s;
@@ -268,19 +281,7 @@ body {
   position: absolute;
   width: var(--gridSize);
   height: var(--gridSize);
-  background-image: url('../images/walk_left.gif');
-  background-size: cover;
-  background-repeat: no-repeat;
-  transition-duration: .2s;
-  border-width: 0;
-  z-index: 1;
-}
-
-.player-right {
-  position: absolute;
-  width: var(--gridSize);
-  height: var(--gridSize);
-  background-image: url('../images/walk_left.gif');
+  background-image: url('../images/robot.png');
   background-size: cover;
   background-repeat: no-repeat;
   transition-duration: .2s;
@@ -291,6 +292,18 @@ body {
   -o-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
+}
+
+.player-right {
+  position: absolute;
+  width: var(--gridSize);
+  height: var(--gridSize);
+  background-image: url('../images/robot.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: .2s;
+  border-width: 0;
+  z-index: 1;
 }
 
 .player-text {

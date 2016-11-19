@@ -5,10 +5,10 @@ class GameStatus extends Component {
   render() {
     return (
       <div id='gameStatus'>
-        <h4>Game Status</h4>
-        <progress 
+        <h4>Mines Left</h4>
+        <progress
           className={classNameDecider(this.props.minesInfo[1] - this.props.minesInfo[0], this.props.minesInfo[1])}
-          value={this.props.minesInfo[1] - this.props.minesInfo[0]} 
+          value={this.props.minesInfo[1] - this.props.minesInfo[0]}
           max={this.props.minesInfo[1]}
         >
         </progress>
