@@ -14,7 +14,7 @@ module.exports = function(io, socket, room, user, gameManager, users) {
 
     console.log('trying to restart the game for room ', room);
 
-    var boardSize = [gameManager.rooms[room].board.board[0].length, gameManager.rooms[room].board.board.length]
+    var boardSize = [gameManager.rooms[room].board.board[0].length, gameManager.rooms[room].board.board.length];
 
     io.to(room).emit('updateBoard', {type: 0, board: gameManager.rooms[room].board.board});
     io.emit('roomListUpdate', gameManager.listRoom());

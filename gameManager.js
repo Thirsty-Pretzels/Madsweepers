@@ -63,12 +63,14 @@ GameManager.prototype.roomDetail = function(roomName, users) {
 }
 
 GameManager.prototype.startGame = function(roomName) {
-  const row = this.rooms[roomName].row;
-  const col = this.rooms[roomName].col;
-  const dangerFactor = this.rooms[roomName].dangerFactor;
-  this.rooms[roomName].gameStatus = 'gaming';
-  this.rooms[roomName].board = createBoard(row, col, dangerFactor);
-  this.rooms[roomName].currentScores.forEach(score => score.scoreChange = 0);
+  if ( this.rooms[roomName].gameStatus === 'staging' ) {
+    const row = this.rooms[roomName].row;
+    const col = this.rooms[roomName].col;
+    const dangerFactor = this.rooms[roomName].dangerFactor;
+    this.rooms[roomName].gameStatus = 'gaming';
+    this.rooms[roomName].board = createBoard(row, col, dangerFactor);
+    this.rooms[roomName].currentScores.forEach(score => score.scoreChange = 0);
+  }
 };
 
 GameManager.prototype.endGame = function(roomName) {
