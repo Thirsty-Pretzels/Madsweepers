@@ -16,7 +16,7 @@ export default class App extends Component {
     return (
       <div className="container">
         <div className='headerCentered'>
-          <text className="text-center" id='header-text'>Super Sweeper</text>
+          <div className="text-center" id='header-text'><image id='MadIcon' /> Mad Sweepers</div>
         </div>
           {this.props.children && React.cloneElement(this.props.children, {
             // this is where to pass props to all children components

@@ -9,7 +9,7 @@ Players.prototype.addPlayer = function(playerId) {
       const newPlayer = this.createPlayer(playerId);
       this.playerLocations[playerId] = newPlayer;
       this.playerCount++;
-      console.log(this.playerCount, this.playerLocations);
+      console.log('add', this.playerCount, this.playerLocations);
   } else {
     console.log('player already exist');
   }
@@ -19,6 +19,7 @@ Players.prototype.removePlayer = function(playerId) {
   console.log('deadifying player ' + playerId);
   delete this.playerLocations[playerId];
   this.playerCount--;
+  console.log('remove', this.playerCount, this.playerLocations);
 };
 
 Players.prototype.createPlayer = function(playerId) {
