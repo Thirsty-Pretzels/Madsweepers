@@ -9,7 +9,6 @@ Players.prototype.addPlayer = function(playerId) {
       const newPlayer = this.createPlayer(playerId);
       this.playerLocations[playerId] = newPlayer;
       this.playerCount++;
-      console.log('add', this.playerCount, this.playerLocations);
   } else {
     console.log('player already exist');
   }
@@ -19,7 +18,6 @@ Players.prototype.removePlayer = function(playerId) {
   console.log('deadifying player ' + playerId);
   delete this.playerLocations[playerId];
   this.playerCount--;
-  console.log('remove', this.playerCount, this.playerLocations);
 };
 
 Players.prototype.createPlayer = function(playerId) {
@@ -33,7 +31,6 @@ Players.prototype.createPlayer = function(playerId) {
 };
 
 Players.prototype.move = function(playerId, direction) {
-  // body...
   switch(direction) {
     case 'UP':
       this.playerLocations[playerId].y--;
@@ -54,6 +51,10 @@ Players.prototype.move = function(playerId, direction) {
   }
 
   console.log(this.playerLocations);
+};
+
+Players.prototype.resetDirectionStatus = function(playerId) {
+  this.playerLocations[playerId].status = 0;
 };
 
 Players.prototype.listPlayers = function() {

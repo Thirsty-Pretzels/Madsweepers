@@ -34,9 +34,9 @@ a{
   text-decoration: none;
 }
 
-/* 
+/*
 ===================================================
-START Reusable components 
+START Reusable components
 ===================================================
 */
 
@@ -53,6 +53,7 @@ START Reusable components
   margin-right: auto;
 }
 
+
 #header-text {
   font-family: "Mario";
   border-width: 10px;
@@ -67,9 +68,9 @@ START Reusable components
   font-size: 64px;
 }
 
-/* 
+/*
 ===================================================
-END Reusable components 
+END Reusable components
 ===================================================
 */
 
@@ -256,7 +257,7 @@ body {
   position: absolute;
   width: var(--gridSize);
   height: var(--gridSize);
-  background-image: url('../images/walk_left.gif');
+  background-image: url('../images/tank.png');
   background-size: cover;
   background-repeat: no-repeat;
   transition-duration: .2s;
@@ -268,19 +269,7 @@ body {
   position: absolute;
   width: var(--gridSize);
   height: var(--gridSize);
-  background-image: url('../images/walk_left.gif');
-  background-size: cover;
-  background-repeat: no-repeat;
-  transition-duration: .2s;
-  border-width: 0;
-  z-index: 1;
-}
-
-.player-right {
-  position: absolute;
-  width: var(--gridSize);
-  height: var(--gridSize);
-  background-image: url('../images/walk_left.gif');
+  background-image: url('../images/robot.png');
   background-size: cover;
   background-repeat: no-repeat;
   transition-duration: .2s;
@@ -291,6 +280,18 @@ body {
   -o-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
+}
+
+.player-right {
+  position: absolute;
+  width: var(--gridSize);
+  height: var(--gridSize);
+  background-image: url('../images/robot.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: .2s;
+  border-width: 0;
+  z-index: 1;
 }
 
 .player-text {
