@@ -4,14 +4,11 @@ import { bindActionCreators } from 'redux';
 import { createNewRoom, toggleCreateRoomPanel, loginTempUser, enterRoom, leaveRoom, toggleReady } from '../actions/index';
 import axios from 'axios';
 
+import Welcome from './welcome';
+import UserInfo from './userInfo';
+import CreateRoomPanel from './createRoomPanel'
+
 export class LoginPage extends Component {
-  onFormSubmit(e) {
-    var formData = document.getElementById('loginForm').elements;
-
-    e.preventDefault();
-    this.props.loginTempUser(formData.name.value);
-  }
-
   createRoom(e) {
     var formData = document.getElementById('createRoomForm').elements;
 
@@ -52,37 +49,6 @@ export class LoginPage extends Component {
       this.props.redirect('gamePlay');
     }
   }
-  // sub component: render welcome
-  renderWelcome() {
-    return (
-      <div className="row" >
-        <div className= "center-block">
-          <img src='../../images/header-image.png' className="center-block"/>
-        </div>
-        <form
-          className='formCentered'
-          id='loginForm'
-          onSubmit={this.onFormSubmit.bind(this)}
-          >
-          <input
-            maxLength={12}
-            name='name'
-            placeholder='Enter awesome username here'
-            id='input-text'
-            style={{width: '450px', marginBottom: '5px'}}
-            />
-          <br/>
-          <button
-            className="myButton col-md-6 col-centered"
-            type="submit"
-            id='submit-button'
-          > Let me play!
-            <i className="material-icons right">send</i>
-           </button>
-        </form>
-      </div>
-    )
-  }
 
   // render UserInfo
   renderUserInfo() {
@@ -110,7 +76,7 @@ export class LoginPage extends Component {
           onClick={this.showCreateRoomPanel.bind(this)}>
           New Room
         </button>
-        { this.props.userInfo.showCreatePanel ? this.renderCreateRoomPanel() : null}
+        { this.props.userInfo.showCreatePanel ? <CreateRoomPanel /> : null}
         <h3>Awesome Rooms Available</h3>
         <table id='roomListTable'>
           <tr>
@@ -167,71 +133,6 @@ export class LoginPage extends Component {
     );
   }
 
-  renderCreateRoomPanel() {
-    return (
-      <div>
-        <form
-          className='formCentered'
-          onSubmit={this.createRoom.bind(this)}
-          id='createRoomForm'
-          >
-          <input
-            type='text'
-            name="roomName"
-            maxLength={12}
-            style={{width: '440px', 'margin-bottom': '3px'}}
-            placeholder='Enter An Awesome RoomName'
-          />
-          <br />
-          <input
-            type='number'
-            name="rowNumber"
-            min="12"
-            max="50"
-            style={{width: '199px'}}
-            placeholder='MAP ROW: 20'
-          />
-          <text> X </text>
-          <input
-            type='number'
-            name="colNumber"
-            min="12"
-            max="50"
-            style={{width: '199px'}}
-            placeholder='MAP COL: 20'
-          />
-          <br />
-          <select name='mineDensity'>
-            <option value={0.2}> -- select mine density -- </option>
-            <option value={0.2}>Killing Spree</option>
-            <option value={0.25}>Dominating</option>
-            <option value={0.3}>Mega Kill</option>
-            <option value={0.35}>Unstoppable</option>
-            <option value={0.4}>Wicked Sick</option>
-            <option value={0.45}>Monster kill</option>
-            <option value={0.5}>Godlike</option>
-            <option value={0.6}>Holy Shit</option>
-          </select>
-          <br/>
-          <button
-            className="myButton"
-            type="submit"
-            id='create-room-button'>
-            Make A New Room
-          </button>
-          <button
-            className="myButton"
-            id='close-create-room-button'
-            onClick={this.closeCreteRoomPanel.bind(this)}
-            >
-            Close This Tab
-          </button>
-        </form>
-
-      </div>
-    );
-  }
-
   // render Room
   renderRoom() {
     return (
@@ -272,7 +173,7 @@ export class LoginPage extends Component {
   renderLobby() {
     return(
       <div>
-        {this.renderUserInfo()}
+        <UserInfo />
         {this.renderRoomList()}
         { !this.props.userInfo.inRoom ? null : this.renderRoom() }
       </div>
@@ -282,7 +183,7 @@ export class LoginPage extends Component {
   render() {
     return (
         <div>
-          { !this.props.userInfo.status ? this.renderWelcome() : this.renderLobby() }
+          { !this.props.userInfo.status ? <Welcome /> : this.renderLobby() }
       </div>
     );
   }
