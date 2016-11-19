@@ -15,11 +15,6 @@ describe('App' , () => {
     expect(component).to.exist;
   });
 
-  it('Check the title text', () => {
-    let DOMNode = findDOMNode(component);
-    expect(DOMNode.querySelector('h1').textContent).to.equal('This is the app component');
-  });
-
   it('Should have a redirect function', () => {
     expect(component.redirect).to.exist;
   });

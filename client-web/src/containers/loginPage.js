@@ -41,3 +41,5 @@ var mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(LoginPage);
+
+// export { LoginPage, ConnectedApp };
