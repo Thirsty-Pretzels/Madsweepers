@@ -28,7 +28,6 @@ class ScoreBoard extends Component {
   render() {
     return (
       <div id='scoreBoard'>
-        <h2>LeaderBoard</h2>
         <div>
           { this.renderScore() }
         </div>
