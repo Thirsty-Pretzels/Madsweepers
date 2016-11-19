@@ -45,7 +45,7 @@ export class TopScores extends Component {
 
     return (
       <div id='topScores'>
-        <h2>Leader Borad</h2>
+        <h2>Leader Board</h2>
           <table>
             <tr>
               <th>Name</th>
