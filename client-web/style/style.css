@@ -53,6 +53,20 @@ START Reusable components
   margin-right: auto;
 }
 
+#header-text {
+  font-family: "Mario";
+  border-width: 10px;
+  border-style: solid;
+  border-color: var(--button);
+  border-radius: 10px;
+  background-color: var(--text);
+  color: var(--button);
+  display: block;       display: block;
+  font-family: "Mario";
+  position: relative;
+  font-size: 64px;
+}
+
 /* 
 ===================================================
 END Reusable components 
