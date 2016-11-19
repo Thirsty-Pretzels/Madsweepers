@@ -59,8 +59,8 @@ export class LoginPage extends Component {
         <div className='headerCentered' id='header-image'>
           <img src='../../images/header-image.png' id='header-image-container'/>
         </div>
-        <form 
-          className='formCentered' 
+        <form
+          className='formCentered'
           id='loginForm'
           onSubmit={this.onFormSubmit.bind(this)}
           >
@@ -108,7 +108,7 @@ export class LoginPage extends Component {
       <div className="row roomList">
         <button
           onClick={this.showCreateRoomPanel.bind(this)}>
-          New Room  
+          New Room
         </button>
         { this.props.userInfo.showCreatePanel ? this.renderCreateRoomPanel() : null}
         <h3>Awesome Rooms Available</h3>
@@ -141,11 +141,11 @@ export class LoginPage extends Component {
     }
 
     return (
-      <progress 
+      <progress
         className='progressBarInRoomList'
         style={{'margin-bottom': '0'}}
         className={classNameDecider(minesCount - minesLeft, minesCount)}
-        value={minesCount - minesLeft} 
+        value={minesCount - minesLeft}
         max={minesCount}
       >
       </progress>
@@ -156,7 +156,7 @@ export class LoginPage extends Component {
     return (
       <tr
         key={room.roomName}
-        className='roomName' 
+        className='roomName'
         onClick={this.enterRoom.bind(this, room.roomName, this.props.userInfo.username)}
         >
         <td>{room.roomName}</td>
@@ -170,7 +170,7 @@ export class LoginPage extends Component {
   renderCreateRoomPanel() {
     return (
       <div>
-        <form 
+        <form
           className='formCentered'
           onSubmit={this.createRoom.bind(this)}
           id='createRoomForm'
@@ -183,10 +183,10 @@ export class LoginPage extends Component {
             placeholder='Enter An Awesome RoomName'
           />
           <br />
-          <input 
+          <input
             type='number'
             name="rowNumber"
-            min="12" 
+            min="12"
             max="50"
             style={{width: '199px'}}
             placeholder='MAP ROW: 20'
@@ -235,7 +235,7 @@ export class LoginPage extends Component {
   // render Room
   renderRoom() {
     return (
-      <div className = "row">
+      <div className = "gameResult">
         <text>{this.props.userInfo.username} am in {this.props.userInfo.room}</text>
         <button
           onClick={this.toggleReady.bind(this)}>
@@ -279,7 +279,7 @@ var mapStateToProps = (state) => {
 
 var mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    toggleCreateRoomPanel: toggleCreateRoomPanel, 
+    toggleCreateRoomPanel: toggleCreateRoomPanel,
     loginTempUser: loginTempUser,
     enterRoom: enterRoom,
     leaveRoom: leaveRoom,

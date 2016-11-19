@@ -12,8 +12,8 @@
     --malibu-blue: #6699FF; /*sidebar*/
     --brown-gray: #CDBFAC;
     --bone-gray: #E1D4C0;
-    --merino-gray: #F5EDE3; /*background*/
-    --blaze-orange: #FF6600; /*buttons*/
+    --background: #F5EDE3; /*merino-gray*/
+    --button: #FF6600; /*blaze-orange*/
 }
 
 /*.gameButton {
@@ -31,7 +31,7 @@ a{
 button, a{
   font-size: 22px;
   font-family: "Mario";
-  background-color: var(--golden-poppy);
+  background-color: var(--button);
   border-width: 0px;
   border-radius: 15px;
   box-shadow: 0 5px #FF9900;
@@ -65,11 +65,7 @@ body {
   /*font-family:'Roboto', sans-serif;*/
   font-family: "Mario";
   color: var(--text);
-  background-color: var(--swamp);
-}
-
-button {
-  background-color: var(--golden-poppy)
+  background-color: var(--background);
 }
 
 @keyframes slidein {
@@ -94,16 +90,15 @@ button {
   height: 64px;
   size: cover;
   z-index: 13;
-  color: var(--golden-poppy);
   content: url(../images/mad_icon.png);
 }
 #header-text {
   border-width: 10px;
   border-style: solid;
-  border-color: var(--golden-poppy);
+  border-color: var(--button);
   border-radius: 10px;
   background-color: var(--text);
-  color: var(--golden-poppy);
+  color: var(--button);
   display: block;
   position: relative;
   margin-left: auto;
