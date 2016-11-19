@@ -229,3 +229,10 @@ export function updateHighScore(scores) {
     highScores: scores
   }
 };
+
+export function updateGameTime(gameTime) {
+  return {
+    type: 'UPDATE-GAME-TIME',
+    payload: gameTime
+  }
+}

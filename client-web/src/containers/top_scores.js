@@ -45,7 +45,7 @@ export class TopScores extends Component {
 
     return (
       <div id='topScores'>
-        <h2>Top Scores</h2>
+        <h2>Leader Borad</h2>
           <table>
             <tr>
               <th>Name</th>
@@ -56,7 +56,7 @@ export class TopScores extends Component {
       </div>
     )
   }
-} 
+}
 
 var mapStateToProps = (state) => {
   return {

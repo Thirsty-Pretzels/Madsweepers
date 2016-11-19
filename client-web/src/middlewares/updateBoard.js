@@ -105,5 +105,9 @@ export default function(store) {
 
   socket.on('endification', () => {
     store.dispatch(actions.endification());
-  })
+  });
+
+  socket.on('updateGameTime', (gameTime) => {
+    store.dispatch(actions.updateGameTime(gameTime));
+  });
 }
