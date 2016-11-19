@@ -56,8 +56,8 @@ export class LoginPage extends Component {
   renderWelcome() {
     return (
       <div className="row" >
-        <div className='headerCentered' id='header-image'>
-          <img src='../../images/header-image.png' id='header-image-container'/>
+        <div className= "center-block">
+          <img src='../../images/header-image.png' className="center-block"/>
         </div>
         <form
           className='formCentered'
