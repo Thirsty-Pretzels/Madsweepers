@@ -21,13 +21,24 @@
 }*/
 
 @font-face {
-  font-family: "Mario";
-  src: url('../fonts/SuperMarioBros.ttf') format("truetype");
+  font-family: "Luigi";
+  src: url('../fonts/MarioandLuigi.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: "Mario";
+    src: url('../fonts/SuperMarioBros.ttf');
 }
 
 a{
   text-decoration: none;
 }
+
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
 button, a{
   font-size: 22px;
   font-family: "Mario";
@@ -62,7 +73,7 @@ button.active {
 
 body {
   /*font-family:'Roboto', sans-serif;*/
-  font-family: "Mario";
+  font-family: "Luigi";
   color: var(--text);
   background-color: var(--swamp);
 }
@@ -90,6 +101,7 @@ button {
 
 #header-text {
   display: block;
+  font-family: "Mario";
   position: relative;
   margin-left: auto;
   margin-right: auto;
@@ -131,7 +143,7 @@ button {
 
 .roomList {
   font-size: 22px;
-  font-family: "Mario";
+  font-family: "Luigi";
   background-color: #FAE5D3;
   border-width: 0px;
   border-top-right-radius: 25px;
@@ -186,7 +198,7 @@ button {
 }
 
 .gameBoard {
-  font-family: BirdyGame;
+  font-family: Luigi;
   outline: none;
   position: relative;
 }
@@ -323,7 +335,7 @@ button {
 
 .scoreItem {
   font-size: 35px;
-  font-family: BirdyGame;
+  font-family: Luigi;
 }
 
 .scoreboard-score {
