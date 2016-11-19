@@ -69,7 +69,7 @@ export class LoginPage extends Component {
             name='name'
             placeholder='Enter awesome username here'
             id='input-text'
-            style={{width: '450px'}}
+            style={{width: '450px', marginBottom: '5px'}}
             />
           <br/>
           <button
@@ -87,7 +87,7 @@ export class LoginPage extends Component {
   // render UserInfo
   renderUserInfo() {
     return (
-      <div className="row">
+      <div className="row" id='userInfoRender'>
         <div className='userProfile' id='userImage'>
           <img src={'../../images/user'+this.props.userInfo.userCode+'.png'} />
         </div>
@@ -105,7 +105,7 @@ export class LoginPage extends Component {
   // render roomList
   renderRoomList() {
     return (
-      <div className="row roomList">
+      <div className="row roomList" id='roomListRender'>
         <button
           onClick={this.showCreateRoomPanel.bind(this)}>
           New Room
@@ -235,7 +235,7 @@ export class LoginPage extends Component {
   // render Room
   renderRoom() {
     return (
-      <div className = "row">
+      <div className='row' id='roomInfoRender'>
         <h3>{this.props.userInfo.room}</h3>
         <br />
         <button
@@ -247,30 +247,24 @@ export class LoginPage extends Component {
             Exit This Room
         </button>
         <br />
-          <table>
-            { Object.keys(this.props.roomInfo.userList).length !== 0 ? this.renderUserEntry(this.props.userInfo.username) : null}
-            { this.props.roomInfo.host && this.props.roomInfo.host !== this.props.userInfo.username ? this.renderUserEntry(this.props.roomInfo.host) : null}
-            {
-              Object.keys(this.props.roomInfo.userList).map((user) => {
-                return (user !== this.props.roomInfo.host && user !== this.props.userInfo.username) ? this.renderUserEntry(user) : null
-              })
-            }
-          </table>
+        { Object.keys(this.props.roomInfo.userList).length !== 0 ? this.renderUserEntry(this.props.userInfo.username) : null}
+        { this.props.roomInfo.host && this.props.roomInfo.host !== this.props.userInfo.username ? this.renderUserEntry(this.props.roomInfo.host) : null}
+        {
+          Object.keys(this.props.roomInfo.userList).map((user) => {
+            return (user !== this.props.roomInfo.host && user !== this.props.userInfo.username) ? this.renderUserEntry(user) : null
+          })
+        }
       </div>
     );
   }
 
   renderUserEntry(user) {
     return (
-      <tr>
-        <td><img src={'../../images/user'+this.props.roomInfo.userList[user].userCode+'.png'} /></td>
-        <td>{user}</td>
-        <td>
-          <button disabled>
-            {user}{this.props.roomInfo.userList[user].readyStatus ? ' is Ready!' : ' is messing around!'}
-          </button>
-        </td>
-      </tr>
+      <div style={{margin: '10px 0 5px 0'}}>
+        <img src={'../../images/user'+this.props.roomInfo.userList[user].userCode+'.png'} style={{display: 'inline-block', marginRight: '20px'}}/>
+        <h2 style={{display: 'inline-block', marginRight: '10px'}}>{user}</h2>
+        <h4 style={{display: 'inline-block'}}>{this.props.roomInfo.userList[user].readyStatus ? ' is Ready!' : ' is messing around!'}</h4>
+      </div>
     );
   }
 
