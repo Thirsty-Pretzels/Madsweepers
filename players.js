@@ -25,13 +25,14 @@ Players.prototype.createPlayer = function(playerId) {
   return {
     ready: false,
     status: 0,
+    movingTimeStamp: 0,
     x: Math.floor( Math.random() * 10 ),
     y: Math.floor( Math.random() * 10 )
   };
 };
 
 Players.prototype.move = function(playerId, direction) {
-  // body...
+  this.playerLocations[playerId].movingTimeStamp = Date.now();
   switch(direction) {
     case 'UP':
       this.playerLocations[playerId].y--;
