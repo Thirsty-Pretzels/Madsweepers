@@ -17,7 +17,6 @@ var dropFlagHandler = require('./socket-helpers/dropFlagHandler');
 var openSpaceHandler = require('./socket-helpers/openSpaceHandler');
 var movePlayerHandler = require('./socket-helpers/movePlayerHandler');
 var disconnectHandler = require('./socket-helpers/disconnectHandler');
-var createPlayerHandler = require('./socket-helpers/createPlayerHandler');
 
 // // To uncomment when running db
 // // MJ: initialize redisDatabase.
@@ -50,7 +49,7 @@ io.on('connection', function(socket){
 
   socket.on('enterRoom', (info) => {
     if (info.inRoom) {
-      leaveRoomHandler(io, socket, info.inRoomname, info.user, gameManager);
+      leaveRoomHandler(io, socket, info.inRoomname, info.user, gameManager, clients, gameManager.rooms[info.inRoomname]['currentScores']);
     }
     clientRoom[socket.id] = info.room;
     enterRoomHandler(io, socket, info.room, info.user, gameManager, gameManager.rooms[info.room]['currentScores'], clients);
