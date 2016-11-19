@@ -1,7 +1,7 @@
 // socket helper function: drop flag
 var updateCurrentScores = require('./updateCurrentScores.js');
 
-module.exports = function(io, roomName, board, currentScores, data, socket, clients, gameManager) {
+module.exports = function(io, roomName, board, currentScores, data, socket, clients, gameManager, users) {
   var playerId = data[0];
   var location = data[1];
   var loot = ['ammo', 'shield', 'banana'];

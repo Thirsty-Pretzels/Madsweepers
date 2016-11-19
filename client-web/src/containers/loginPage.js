@@ -73,7 +73,7 @@ export class LoginPage extends Component {
             />
           <br/>
           <button
-            className="myButton"
+            className="myButton col-md-6 col-centered"
             type="submit"
             id='submit-button'
           > Let me play!
@@ -162,7 +162,7 @@ export class LoginPage extends Component {
         <td>{room.roomName}</td>
         <td>{room.numberOfPlayer}</td>
         <td>{room.roomStatus === 'staging' ? 'staging' : this.renderProgressBar(room.minesLeft , room.minesCount) }</td>
-        {room.players ? (<td>{room.players[0]}</td>) : null}
+        {room.host ? (<td>{room.host}</td>) : null}
       </tr>
     );
   }
@@ -235,8 +235,9 @@ export class LoginPage extends Component {
   // render Room
   renderRoom() {
     return (
-      <div className = "gameResult">
-        <text>{this.props.userInfo.username} am in {this.props.userInfo.room}</text>
+      <div className = "row">
+        <h3>{this.props.userInfo.room}</h3>
+        <br />
         <button
           onClick={this.toggleReady.bind(this)}>
            {this.props.userInfo.isReady ? 'I need more time!' : 'I am Ready!'}
@@ -245,7 +246,31 @@ export class LoginPage extends Component {
           onClick={this.leaveRoom.bind(this)}>
             Exit This Room
         </button>
+        <br />
+          <table>
+            { Object.keys(this.props.roomInfo.userList).length !== 0 ? this.renderUserEntry(this.props.userInfo.username) : null}
+            { this.props.roomInfo.host && this.props.roomInfo.host !== this.props.userInfo.username ? this.renderUserEntry(this.props.roomInfo.host) : null}
+            {
+              Object.keys(this.props.roomInfo.userList).map((user) => {
+                return (user !== this.props.roomInfo.host && user !== this.props.userInfo.username) ? this.renderUserEntry(user) : null
+              })
+            }
+          </table>
       </div>
+    );
+  }
+
+  renderUserEntry(user) {
+    return (
+      <tr>
+        <td><img src={'../../images/user'+this.props.roomInfo.userList[user].userCode+'.png'} /></td>
+        <td>{user}</td>
+        <td>
+          <button disabled>
+            {user}{this.props.roomInfo.userList[user].readyStatus ? ' is Ready!' : ' is messing around!'}
+          </button>
+        </td>
+      </tr>
     );
   }
 
@@ -273,6 +298,7 @@ var mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
     roomList: state.roomList,
+    roomInfo: state.roomInfo,
     allReady: state.allReady
   };
 };

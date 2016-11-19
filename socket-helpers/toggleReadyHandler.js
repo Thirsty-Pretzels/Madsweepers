@@ -1,4 +1,4 @@
-module.exports = function(io, socket, room, user, gameManager) {
+module.exports = function(io, socket, room, user, gameManager, users) {
   gameManager.rooms[room].players.playerLocations[user].ready = !gameManager.rooms[room].players.playerLocations[user].ready;
   socket.emit('hasToggledReady', 'ok');
 
@@ -21,5 +21,6 @@ module.exports = function(io, socket, room, user, gameManager) {
     io.to(room).emit('updateScore', gameManager.rooms[room].currentScores);
     io.to(room).emit('updatePlayerLocations', {newLocations: gameManager.rooms[room].players.playerLocations, boardSize: boardSize});
   }
+  io.to(room).emit('roomInfoUpdate', gameManager.roomDetail(room, users));
   io.to(room).emit('allPlayersReady', isAllPlayersReady);
 };

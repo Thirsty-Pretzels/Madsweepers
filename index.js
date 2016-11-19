@@ -52,16 +52,16 @@ io.on('connection', function(socket){
       leaveRoomHandler(io, socket, info.inRoomname, info.user, gameManager, clients, gameManager.rooms[info.inRoomname]['currentScores']);
     }
     clientRoom[socket.id] = info.room;
-    enterRoomHandler(io, socket, info.room, info.user, gameManager, gameManager.rooms[info.room]['currentScores'], clients);
+    enterRoomHandler(io, socket, info.room, info.user, gameManager, users, gameManager.rooms[info.room]['currentScores'], clients);
   });
 
   socket.on('leaveRoom', (info) => {
     var roomName = clientRoom[socket.id];
-    leaveRoomHandler(io, socket, info.room, info.user, gameManager, clients, gameManager.rooms[roomName]['currentScores']);
+    leaveRoomHandler(io, socket, info.room, info.user, gameManager, users);
   });
 
   socket.on('toggleReady', (info) => {
-    toggleReadyHandler(io, socket, info.room, info.user, gameManager);
+    toggleReadyHandler(io, socket, info.room, info.user, gameManager, users);
   });
 
   socket.on('createNewRoom', (info) => {

@@ -1,9 +1,10 @@
-module.exports = function(io, socket, room, user, gameManager, currentScores, clients) {
+module.exports = function(io, socket, room, user, gameManager, users, currentScores, clients) {
   console.log('new user enter room');
   gameManager.rooms[room].players.addPlayer(user);
   socket.join(room);
   socket.emit('hasEnteredRoom', room);
   currentScores.push({id: user, scoreChange: 0});
+  io.to(room).emit('roomInfoUpdate', gameManager.roomDetail(room, users));
   io.emit('roomListUpdate', gameManager.listRoom());
   clients[socket.id] = {'roomName': room, 'user': user, 'loot': {'banana': 0, 'ammo': 0, 'shield': 0}, 'stun': 0};
 }

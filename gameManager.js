@@ -42,13 +42,26 @@ GameManager.prototype.listRoom = function() {
      roomStatus: this.rooms[roomName].gameStatus,
      minesLeft: (this.rooms[roomName].board) ? this.rooms[roomName].board.minesLeft : 0,
      minesCount: (this.rooms[roomName].board) ? this.rooms[roomName].board.minesCount : 0,
-     players: this.rooms[roomName].players.listPlayers()
+     host: this.rooms[roomName].players.listPlayers()[0]
    })
  }
 
  return roomList;
 
 };
+
+GameManager.prototype.roomDetail = function(roomName, users) {
+  var userList = {};
+
+  this.rooms[roomName].players.listPlayers().forEach((user) => {
+    userList[user] = {};
+    userList[user].userCode = users[user].userCode;
+    userList[user].readyStatus = this.rooms[roomName].players.playerLocations[user].ready;
+
+  });
+
+  return {host: this.rooms[roomName].players.listPlayers()[0], userList: userList};
+}
 
 GameManager.prototype.startGame = function(roomName) {
   const row = this.rooms[roomName].row;
