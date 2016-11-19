@@ -87,7 +87,7 @@ export class LoginPage extends Component {
   // render UserInfo
   renderUserInfo() {
     return (
-      <div className="row">
+      <div className="row" id='userInfoRender'>
         <div className='userProfile' id='userImage'>
           <img src={'../../images/user'+this.props.userInfo.userCode+'.png'} />
         </div>
@@ -105,7 +105,7 @@ export class LoginPage extends Component {
   // render roomList
   renderRoomList() {
     return (
-      <div className="row roomList">
+      <div className="row roomList" id='roomListRender'>
         <button
           onClick={this.showCreateRoomPanel.bind(this)}>
           New Room  
@@ -235,7 +235,7 @@ export class LoginPage extends Component {
   // render Room
   renderRoom() {
     return (
-      <div className = "row">
+      <div className='row' id='roomInfoRender'>
         <h3>{this.props.userInfo.room}</h3>
         <br />
         <button
