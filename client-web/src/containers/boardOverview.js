@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 class BoardOverview extends Component {
 
   render() {
-    console.log(Math.floor((Date.now() - this.props.gameTime) / 1000));
     const playersArr = Object.keys(this.props.playerLocation);
     var boardOverview = this.props.board.map(row=> row.map(grid=>{return {status: grid.status, val: grid.val}}));
     playersArr.forEach(player =>
