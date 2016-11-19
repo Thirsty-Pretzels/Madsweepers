@@ -48,7 +48,6 @@ io.on('connection', function(socket){
   });
 
   socket.on('enterRoom', (info) => {
-    console.log('info=======>>>>>>>>>', info);
     if (info.inRoom) {
       leaveRoomHandler(io, socket, info.inRoomname, info.user, gameManager, users, clients, gameManager.rooms[info.inRoomname]['currentScores']);
     }

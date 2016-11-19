@@ -5,5 +5,10 @@ module.exports = function(io, roomName, players, data, boardSize, clients, socke
   if (!clients[socket.id]['stun']){
     players.move(playerId, direction);
     io.to(roomName).emit('updatePlayerLocations', {newLocations: players.playerLocations, boardSize: boardSize});
+    setTimeout(() => {
+      players.resetDirectionStatus(playerId);
+      // only send the change of the board, make sure it's type 1
+      io.to(roomName).emit('updatePlayerLocations', {newLocations: players.playerLocations, boardSize: boardSize});
+    }, 200);
   }
 }
