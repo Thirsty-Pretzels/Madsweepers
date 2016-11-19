@@ -62,7 +62,7 @@ START Reusable components
   border-radius: 10px;
   background-color: var(--text);
   color: var(--button);
-  display: block;       display: block;
+  display: block;
   font-family: "Mario";
   position: relative;
   font-size: 64px;
