@@ -31,6 +31,7 @@ export function updateRoomInfo(info) {
 }
 
 export function enterRoom(roomname, username, inRoom, inRoomname) {
+  console.log('got clicked', roomname, username);
   return {
     type: 'ENTER-ROOM',
     room: roomname,

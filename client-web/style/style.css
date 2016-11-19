@@ -3,7 +3,7 @@
     /*--swamp: #EFEFEF;*/
     --swamp: #D6EAF8;
     --endeavour: #0F5C9B;
-    --golden-poppy: #FFC412;
+    --button: #FFC412; /*goldenpoppy*/
     --lemon: #FFEB0E;
     --malachite-green: #A0975A;
     --gridSize: 50px;
@@ -13,7 +13,7 @@
     --brown-gray: #CDBFAC;
     --bone-gray: #E1D4C0;
     --background: #F5EDE3; /*merino-gray*/
-    --button: #FF6600; /*blaze-orange*/
+    --blaze-orange: #FF6600; /*blaze-orange*/
 }
 
 /*.gameButton {
@@ -36,7 +36,7 @@ a{
 
 /*
 ===================================================
-START Reusable components
+REUSABLE COMPONENTS
 ===================================================
 */
 
@@ -62,7 +62,7 @@ START Reusable components
   border-radius: 10px;
   background-color: var(--text);
   color: var(--button);
-  display: block;       display: block;
+  display: block;
   font-family: "Mario";
   position: relative;
   font-size: 64px;
@@ -70,7 +70,7 @@ START Reusable components
 
 /*
 ===================================================
-END Reusable components
+BUTTONS
 ===================================================
 */
 
@@ -104,6 +104,12 @@ body {
   color: var(--text);
   background-color: var(--background);
 }
+
+/* 
+===================================================
+LOGIN
+===================================================
+*/
 
 @keyframes slidein {
   from {
@@ -150,6 +156,12 @@ body {
   text-align: center;
   font-size: 24px;
 }
+
+/* 
+===================================================
+ROOMLIST
+===================================================
+*/
 
 #roomListTable {
   border-collapse: separate;
