@@ -137,7 +137,7 @@ io.on('connection', function(socket){
   socket.on('disconnect', function(){
     var roomName = clients[socket.id]['roomName'];
     if(roomName){
-      disconnectHandler(io, gameManager, gameManager.rooms[roomName].players, gameManager.rooms[roomName]['currentScores'], clients, socket);
+      disconnectHandler(io, gameManager, gameManager.rooms[roomName].players, gameManager.rooms[roomName]['currentScores'], clients, socket, users);
     }
   });
 });
