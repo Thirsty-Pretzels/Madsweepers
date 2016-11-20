@@ -24,7 +24,7 @@ export class Welcome extends Component {
           >
           <input
             className="col-md-6 center-block"
-            maxLength={12}
+            maxLength={20}
             name='name'
             placeholder='Enter awesome username here'
             id='input-text'

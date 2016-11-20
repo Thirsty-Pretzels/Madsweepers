@@ -6,7 +6,6 @@ import { leaveRoom, endification, toggleReady } from '../actions/index';
 class GameResult extends Component {
 
   componentWillMount() {
-    console.log('GameResult component will mount');
     this.props.toggleReady(this.props.userInfo.room, this.props.userInfo.username);
   }
 
