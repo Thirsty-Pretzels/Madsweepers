@@ -1,5 +1,19 @@
 var localUserName;
 
+// action template. this function is tested in mocha
+export function action(type, payload) {
+  if (typeof payload === 'undefined') {
+    return { type };
+  }
+  return { type, payload };
+}
+
+// create action template. this function is tested in mocha
+export function createAction(type, payload) {
+  return action (type, payload);
+}
+
+
 // define action when a temperory user is trying to login
 export function loginTempUser(username) {
   localUserName = username;

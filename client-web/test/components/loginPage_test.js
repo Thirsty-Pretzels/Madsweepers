@@ -18,8 +18,6 @@ describe('LoginPage' , () => {
   let app;
   let renderer;
 
-  console.log(ConnectedApp, LoginPage);
-
   beforeEach(() => {
     //component = renderIntoDocument(<LoginPage />);
     // // shallow rendering
