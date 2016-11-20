@@ -31,10 +31,10 @@ Bot.prototype.decide = function(board) {
   if (board[this.x][this.y]['val'] === 9) {
     if (Math.random() > decision) {
       board[this.x][this.y]['status'] = 2;
-      this.score += 10;
+      this.score -= 10;
     } else {
       board[this.x][this.y]['status'] = 1;
-      this.score -= 10;
+      this.score += 10;
     }
   } else {
     if (Math.random() > decision) {
