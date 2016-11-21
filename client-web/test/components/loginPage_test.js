@@ -1,7 +1,7 @@
 import React from 'react';
-import ConnectedApp, { LoginPage } from '../../src/components/loginPage';
+import ConnectedApp, {LoginPage} from '../../src/containers/loginPage';
 import { findDOMNode } from 'react-dom';
-import { Simulate, renderIntoDocument } from 'react-addons-test-utils';
+import { Simulate, renderIntoDocument, createRenderer } from 'react-addons-test-utils';
 import chai, { expect } from 'chai';
 
 function createMockStore(state) {
@@ -15,19 +15,19 @@ function createMockStore(state) {
 }
 
 describe('LoginPage' , () => {
-  let component;
+  let app;
+  let renderer;
 
   beforeEach(() => {
-    component = renderIntoDocument(<LoginPage />);
+    //component = renderIntoDocument(<LoginPage />);
+    // // shallow rendering
+    // renderer = createRenderer();
+    // renderer.render(<LoginPage />)
   });
 
   it('render the LoginPage component', () => {
+   // component = this.renderer.getRenderOutput();
     expect(component).to.exist;
-  });
-
-  it('Check the title text', () => {
-    let DOMNode = findDOMNode(component);
-    expect(DOMNode.querySelector('h2').textContent).to.equal('this is the loginPage');
   });
 
   it('Should have access to application state username', () => {
