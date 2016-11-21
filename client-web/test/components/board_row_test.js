@@ -42,8 +42,8 @@ describe('Test suite for Row component', () => {
   }); 
 
   it('If props(overView) is false or undefined, All of the Children of Row should be Grid', () => {
-    console.log(wrapper1.childAt(0));
-    console.log(wrapper1.childAt(0).node.type);
+    // console.log(wrapper1.childAt(0));
+    // console.log(wrapper1.childAt(0).node.type);
     for(var i = 0; i < wrapper1.children().length; i++) {
       // expect(wrapper1.childAt(i).contains(<Grid />)).to.equal(true);
       // expect(wrapper1.childAt(i) instanceof Grid).to.equal(true);
