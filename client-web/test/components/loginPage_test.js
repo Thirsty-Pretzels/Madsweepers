@@ -1,5 +1,6 @@
+
 import React from 'react';
-import ConnectedApp, { LoginPage } from '../../src/containers/loginPage';
+import ConnectedApp, {LoginPage} from '../../src/containers/loginPage';
 import { findDOMNode } from 'react-dom';
 import { Simulate, renderIntoDocument, createRenderer } from 'react-addons-test-utils';
 import chai, { expect } from 'chai';

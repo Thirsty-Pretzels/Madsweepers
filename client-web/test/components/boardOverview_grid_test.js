@@ -11,7 +11,7 @@ let wrapper2;
 let wrapper3;
 let wrapper4;
 
-describe('Test suite for UserComponent', () => {
+describe('Test suite for GridOverview Component', () => {
   beforeEach(() => {
     // Prevent duplication
     wrapper1 = shallow(<GridOverview grid={{status: 0}} />);
