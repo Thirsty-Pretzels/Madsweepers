@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 export default class GridOverview extends Component {
+  constructor(props) {
+    super(props);
+  }
 
   renderGrid() {
     if (this.props.grid.status === 10) {
