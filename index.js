@@ -86,7 +86,7 @@ io.on('connection', function(socket){
       return;
     }
     const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
-
+    console.log('datatat: ', data);
     movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize, clients, socket);
 
     if ((Date.now() - gameManager.rooms[roomName].board.time) / 1000 / 60 >= 1){
