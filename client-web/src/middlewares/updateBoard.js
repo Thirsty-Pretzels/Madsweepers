@@ -47,6 +47,10 @@ export function boardMiddleware(store) {
       socket.emit('dropFlag', [action.playerId, action.location]);
     }
 
+    if ( action.type === 'STUN' ) {
+      socket.emit('getStun');
+    }
+
     return next(action);
   };
 }
@@ -112,6 +116,7 @@ export default function(store) {
   });
 
   socket.on('bulletOut', (newBullet, id) => {
+    console.log('inside middleware newBullet ==>>', newBullet);
     store.dispatch(actions.addBullet(newBullet, id));
   });
 }

@@ -109,10 +109,10 @@ io.on('connection', function(socket){
   });
 
   socket.on('shoot', function(data){
-    if(clients[socket.id]['loot']['ammo'] > 0){
+    // if(clients[socket.id]['loot']['ammo'] > 0){
       // clients[socket.id]['loot']['ammo']--;
-      io.to(clients[socket.id]['roomName']).emit('bulletOut', players.playerLocations[clients[socket.id]['user']], data, Math.floor(Math.random() * 100000000000).toString(36));
-    }
+      io.to(clients[socket.id]['roomName']).emit('bulletOut', data, Math.floor(Math.random() * 100000000000).toString(36));
+    // }
   });
 
   socket.on('openSpace', function(data){
