@@ -4,7 +4,6 @@ import PlayGround from '../containers/playGround';
 import ScoreBoard from '../containers/scoreBoard';
 import GameStatus from '../containers/gameStatus';
 import BoardOverview from '../containers/boardOverview';
-import TopScores from '../containers/top_scores';
 import { connect } from 'react-redux';
 
 class GamePlay extends Component {
@@ -29,7 +28,6 @@ class GamePlay extends Component {
           <BoardOverview />
           <ScoreBoard />
           <GameStatus />
-          <TopScores />
         </div>
       </div>
       :

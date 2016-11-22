@@ -7,11 +7,11 @@ export class UserInfo extends Component {
   render() {
     return (
       <div className="row" id='userInfoRender'>
+        <h1>Profile: {this.props.userInfo.username} </h1>
         <div className='userProfile' id='userImage'>
           <img src={'../../images/user'+this.props.userInfo.userCode+'.png'} />
         </div>
         <div>
-          <h4>{this.props.userInfo.username}'s profile</h4>
           <ul className='userProfile' id='userInfo'>
             <li> Username: {this.props.userInfo.username}</li>
             <li> TempId:   {this.props.userInfo.tempUniqUserId}</li>

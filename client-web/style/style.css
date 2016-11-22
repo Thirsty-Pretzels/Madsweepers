@@ -35,6 +35,10 @@ a{
   text-decoration: none;
 }
 
+ul {
+  list-style: none;
+}
+
 /*
 ===================================================
 REUSABLE COMPONENTS
@@ -76,7 +80,7 @@ BUTTONS
 */
 
 button, a{
-  font-size: 22px;
+  font-size: 30px;
   font-family: "Mario";
   background-color: var(--button);
   border-width: 0px;
@@ -104,6 +108,13 @@ body {
   font-family: "Luigi";
   color: var(--text);
   background-color: var(--background);
+  font-size: 18px;
+}
+
+li {
+  font-family: "Luigi";
+  color: var(--text);
+  font-size: 18px;
 }
 
 /*
@@ -145,7 +156,7 @@ LOGIN
 }
 
 #userInfo {
-  float: left;
+  float: right;
 }
 
 .login-banner {
@@ -174,23 +185,25 @@ ROOMLIST
 }
 
 .roomList {
-  font-size: 22px;
   font-family: "Luigi";
   background-color: #FAE5D3;
   border-width: 0px;
-  border-top-right-radius: 25px;
-  border-bottom-left-radius: 25px;
-  box-shadow: 0 5px #FF9900;
-  margin-top: 6px;
-  margin-left: 6px;
-  padding-left: 16px;
-  padding-top: 2px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 .roomName:hover {
   font-style: italic;
   font-size: 30px;
   cursor: pointer;
+}
+
+.roomList {
+  font-family: "Luigi";
+  background-color: #FAE5D3;
+  border-width: 0px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 #section1 {
@@ -426,5 +439,10 @@ ROOMLIST
   margin-left: var(--gridSize);
   display: inline-block;
   vertical-align: center;
+}
+
+.enhance-key {
+  font-size: 20px;
+  font-weight: bold
 }
 
