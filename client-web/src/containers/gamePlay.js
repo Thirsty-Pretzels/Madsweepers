@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import Board from '../containers/board';
-import PlayGround from '../containers/playGround';
-import ScoreBoard from '../containers/scoreBoard';
-import GameStatus from '../containers/gameStatus';
-import BoardOverview from '../containers/boardOverview';
+import Board from './board';
+import PlayGround from './playGround';
+import ScoreBoard from './scoreBoard';
+import GameStatus from './gameStatus';
+import Loot from '../components/loot';
+import BoardOverview from './boardOverview';
 import { connect } from 'react-redux';
 
 class GamePlay extends Component {
@@ -25,6 +26,7 @@ class GamePlay extends Component {
           <Board />
         </div>
         <div id='section2'>
+          <Loot />
           <BoardOverview />
           <ScoreBoard />
           <GameStatus />
