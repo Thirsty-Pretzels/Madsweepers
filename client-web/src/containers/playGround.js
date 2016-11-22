@@ -1,11 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { movePlayer, openSpace, dropFlag } from '../actions/index';
+import {
+  movePlayer,
+  openSpace,
+  dropFlag,
+  updateBulletLocation,
+  fireBullet,
+  removeBullet
+} from '../actions/index';
 import { bindActionCreators } from 'redux';
 import Player from './player';
 import GameResult from './gameResult';
 
+var func;
+var moving = false;
+
 class PlayGround extends Component {
+
+  animateBullet() {
+    if ( !moving ) {
+      moving = true;
+      const boardSize = {x: this.props.board[0].length, y: this.props.board.length - 1};
+
+
+      func = setInterval( () => {
+        console.log('moving bullets');
+        this.props.updateBulletLocation(this.props.bulletLocation, boardSize);
+
+        for (var i = 0; i < this.props.bulletLocation.length; i++) {
+          if ( this.props.bulletLocation[i].x === this.props.playerLocation[this.props.userInfo.username].x && this.props.bulletLocation[i].y === this.props.playerLocation[this.props.userInfo.username].y ) {
+            console.log('i am being shot');
+          }
+        }
+
+      } , 1000);
+    }
+  }
 
   keyDown(e) {
     // check if the game has end, if so then disable the keyDown function.
@@ -24,6 +54,13 @@ class PlayGround extends Component {
 
       if ( e.key === 'f' || e.key === 'F') {
         this.props.dropFlag(this.props.userInfo.username, this.props.playerLocation[this.props.userInfo.username]);
+      }
+
+      if ( e.key === 'd' ) {
+        const direction = this.props.playerLocation[this.props.userInfo.username].status;
+        const x = this.props.playerLocation[this.props.userInfo.username].x;
+        const y = this.props.playerLocation[this.props.userInfo.username].y;
+        this.props.fireBullet( {direction, x, y} );
       }
     }
 
@@ -50,6 +87,36 @@ class PlayGround extends Component {
     );
   }
 
+  renderBullets() {
+    if ( this.props.bulletLocation.length ) {
+      this.animateBullet();
+
+      let minX = this.props.currentBoardView[0][0][0];
+      let maxX = minX + 11;
+      let minY = this.props.currentBoardView[0][0][1];
+      let maxY = minY + 11;
+
+      return this.props.bulletLocation.filter(bullet =>
+          bullet.x <= maxX &&
+          bullet.x >= minX &&
+          bullet.y <= maxY &&
+          bullet.y >= minY
+        ).map(bullet =>
+        <div
+          key={ bullet.id }
+          className='bullet'
+          style={{
+            marginLeft: (bullet.x - this.props.currentBoardView[0][0][0]) * 50 + 1,
+            marginTop: (bullet.y - this.props.currentBoardView[0][0][1]) * 50 + 1
+          }}>
+        </div>
+      )
+    } else {
+      clearInterval(func);
+      moving = false;
+    }
+  }
+
   render() {
     return (
       <div>
@@ -59,6 +126,7 @@ class PlayGround extends Component {
           tabIndex='0'
           onKeyDown={ this.keyDown.bind(this) }>
             { this.renderPlayers() }
+            { this.renderBullets() }
         </div>
         {
           this.props.endification ?
@@ -76,7 +144,8 @@ var mapStateToProps = (state) => {
     board: state.board,
     playerLocation: state.playerLocation,
     currentBoardView: state.currentBoardView,
-    endification: state.endification
+    endification: state.endification,
+    bulletLocation: state.bulletLocation
   }
 };
 
@@ -84,7 +153,10 @@ var mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     movePlayer: movePlayer,
     openSpace: openSpace,
-    dropFlag: dropFlag
+    dropFlag: dropFlag,
+    updateBulletLocation: updateBulletLocation,
+    fireBullet: fireBullet,
+    removeBullet: removeBullet
   }, dispatch)
 };
 

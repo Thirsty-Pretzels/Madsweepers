@@ -34,9 +34,11 @@ Players.prototype.createPlayer = function(playerId) {
 
 Players.prototype.move = function(playerId, direction, boardSize) {
   if (direction === 'UP' && this.playerLocations[playerId].y > 0) {
+    this.playerLocations[playerId].status = 3;
     this.playerLocations[playerId].y--;
   }
   if (direction === 'DOWN' && this.playerLocations[playerId].y < boardSize[1] - 1){
+    this.playerLocations[playerId].status = 4;
     this.playerLocations[playerId].y++;
   }
   if (direction === 'LEFT' && this.playerLocations[playerId].x > 0) {

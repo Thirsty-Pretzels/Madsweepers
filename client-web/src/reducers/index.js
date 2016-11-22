@@ -13,6 +13,7 @@ import currentBoardViewReducer from './reducer_current_board_view';
 import endificationReducer from './reducer_endification';
 import highScoresReducer from './reducer_top_scores';
 import gameTimeReducer from './reducer_game_time';
+import bulletLocationReducer from './reducer_bullet_location.js';
 
 //combineReducers takes in an object
 // the name of the key allows you to access the state in the redux state store
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
   gameStatus: gameStatusReducer,
   currentBoardView: currentBoardViewReducer,
   endification: endificationReducer,
-  gameTime: gameTimeReducer
+  gameTime: gameTimeReducer,
+  bulletLocation: bulletLocationReducer
 });
 
 export default rootReducer;
