@@ -322,11 +322,27 @@ ROOMLIST
   background-size: cover;
 }
 
+.bulletL {
+  background-image: url('../images/bulletL.png');
+}
+
+.bulletR {
+  background-image: url('../images/bulletR.png');
+}
+
+.bulletU {
+  background-image: url('../images/bulletU.png');
+}
+
+.bulletD {
+  background-image: url('../images/bulletD.png');
+}
+
 .bullet {
   position: absolute;
   width: var(--gridSize);
   height: var(--gridSize);
-  background-image: url('../images/bullet.png');
+  /*background-image: url('../images/bullet.png');*/
   background-size: cover;
   background-repeat: no-repeat;
   transition-duration: .1s;
