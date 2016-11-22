@@ -6,7 +6,7 @@ import {
   dropFlag,
   updateBulletLocation,
   fireBullet,
-  removeBullet
+  beingStun
 } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import Player from './player';
@@ -29,7 +29,7 @@ class PlayGround extends Component {
 
         for (var i = 0; i < this.props.bulletLocation.length; i++) {
           if ( this.props.bulletLocation[i].x === this.props.playerLocation[this.props.userInfo.username].x && this.props.bulletLocation[i].y === this.props.playerLocation[this.props.userInfo.username].y ) {
-            console.log('i am being shot');
+            this.props.beingStun();
           }
         }
 
@@ -156,7 +156,7 @@ var mapDispatchToProps = (dispatch) => {
     dropFlag: dropFlag,
     updateBulletLocation: updateBulletLocation,
     fireBullet: fireBullet,
-    removeBullet: removeBullet
+    beingStun: beingStun
   }, dispatch)
 };
 

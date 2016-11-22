@@ -98,9 +98,9 @@ io.on('connection', function(socket){
   });
 
   socket.on('getStun', function(data){
-    console.log('get stunned');
-    if(clients[socket.id]['loot']['shield'] > 0){
+    console.log('get stunned');if(clients[socket.id]['loot']['shield'] > 0){
       clients[socket.id]['loot']['shield']--;
+      io.to(socket.id).emit('useLoot', 'shield');
       return;
     }
     clients[socket.id]['stun'] = true;
@@ -110,10 +110,11 @@ io.on('connection', function(socket){
   });
 
   socket.on('shoot', function(data){
-    if(clients[socket.id]['loot']['ammo'] > 0){
+    // if(clients[socket.id]['loot']['ammo'] > 0){
       // clients[socket.id]['loot']['ammo']--;
       io.to(clients[socket.id]['roomName']).emit('bulletOut', data, Math.floor(Math.random() * 100000000000).toString(36));
-    }
+      io.to(socket.id).emit('useLoot', 'ammo')
+    // }
   });
 
   socket.on('openSpace', function(data){
