@@ -17,7 +17,6 @@ export class LoginPage extends Component {
   }
 
   renderLobby() {
-    console.log(Instructions, 'instructions');
     return(
       <div>
         <div className="row">
