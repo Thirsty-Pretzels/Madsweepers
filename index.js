@@ -79,6 +79,13 @@ io.on('connection', function(socket){
     }
   });
 
+  socket.on('danceParty', function(data){
+    var roomName = clients[socket.id]['roomName'];
+    gameManager.rooms[roomName].players.forEach(function(x){
+      console.log(x);
+    });
+  });
+
   socket.on('movePlayer', function(data) {
     var roomName = clients[socket.id]['roomName'];
     if (!gameManager.rooms.hasOwnProperty(roomName)){
