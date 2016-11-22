@@ -7,7 +7,7 @@ module.exports = function(io, roomName, players, data, boardSize, clients, socke
 
   if (!clients[socket.id]['stun']){
     // clearTimeout(func);
-    players.move(playerId, direction);
+    players.move(playerId, direction, boardSize);
     io.to(roomName).emit('updatePlayerLocations', {newLocations: players.playerLocations, boardSize: boardSize});
     // func = setTimeout(() => {
     //   players.resetDirectionStatus(playerId);

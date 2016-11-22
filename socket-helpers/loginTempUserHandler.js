@@ -1,5 +1,5 @@
 module.exports = function(io, socket, users, username, rooms) {
-  // generate a uniq userId 
+  // generate a uniq userId
   console.log('building a new user', username);
   var tempUniqUserId = Date.now().toString(36) + ('' + Math.floor(Math.random() * 10000));
   var userCode = Math.ceil(Math.random()*12);

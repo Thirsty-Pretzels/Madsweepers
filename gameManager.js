@@ -23,13 +23,19 @@ var GameManager = function() {
   this.roomCount = 0;
 };
 
-GameManager.prototype.createRoom = function(roomName, row, col, dangerFactor) {
+GameManager.prototype.createRoom = function(roomName, row, col, dangerFactor, io, id) {
 
   var players = createPlayers();
   var currentScores = [];
   var gameStatus = 'staging';
-
-  this.rooms[roomName] = {row, col, dangerFactor, players, currentScores, gameStatus};
+  if (roomName.match(/[A-Z]/gi)){
+    roomName = roomName.split('').filter(function(a){
+      return a.match(/[A-Z]/gi) || a === ' ';
+    }).join('');
+    this.rooms[roomName] = {row, col, dangerFactor, players, currentScores, gameStatus};
+  } else {
+    io.to(id).emit('badRoomName');
+  }
 };
 
 GameManager.prototype.listRoom = function() {
@@ -49,9 +55,9 @@ GameManager.prototype.listRoom = function() {
 
 };
 
-GameManager.prototype.roomDetail = function(roomName, users) {
+GameManager.prototype.roomDetail = function(roomName, users, clients) {
   var userList = {};
-
+  console.log(users);
   this.rooms[roomName].players.listPlayers().forEach((user) => {
     userList[user] = {};
     userList[user].userCode = users[user].userCode;
