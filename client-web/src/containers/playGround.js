@@ -106,7 +106,7 @@ class PlayGround extends Component {
           let className;
           let style;
           switch(bullet.direction) {
-            case 1: 
+            case 1:
               className = 'bullet bulletL';
               break;
             case 2:
@@ -120,7 +120,7 @@ class PlayGround extends Component {
               break;
             default:
               className = 'bullet bulletL';
-              break; 
+              break;
           }
           return (
             <div

@@ -116,7 +116,10 @@ export default function(store) {
   });
 
   socket.on('bulletOut', (newBullet, id) => {
-    console.log('inside middleware newBullet ==>>', newBullet);
     store.dispatch(actions.addBullet(newBullet, id));
+  });
+
+  socket.on('updateLoot', loot => {
+    store.dispatch(actions.updateLoot(loot));
   });
 }

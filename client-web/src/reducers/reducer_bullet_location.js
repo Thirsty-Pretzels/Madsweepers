@@ -4,7 +4,7 @@ export default function(state = [], action) {
         bullet.x > 0 &&
         bullet.y > 0 &&
         bullet.x < action.boardSize.x - 1 &&
-        bullet.y < action.boardSize.y - 1
+        bullet.y < action.boardSize.y
       ).map(bullet => {
       if ( bullet.direction === 3 ) {
         bullet.y--;

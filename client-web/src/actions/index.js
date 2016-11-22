@@ -253,3 +253,10 @@ export function beingStun() {
     type: 'STUN'
   }
 }
+
+export function updateLoot(loot) {
+  return {
+    type: 'UPDATE-LOOT',
+    payload: loot
+  }
+}
