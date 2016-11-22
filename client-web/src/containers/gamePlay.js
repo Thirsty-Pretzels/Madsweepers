@@ -26,7 +26,7 @@ class GamePlay extends Component {
           <Board />
         </div>
         <div id='section2'>
-          <Loot />
+          <Loot loot={ this.props.loot }/>
           <BoardOverview />
           <ScoreBoard />
           <GameStatus />
@@ -41,7 +41,8 @@ class GamePlay extends Component {
 
 var mapStateToProps = (state) => {
   return {
-    userStatus: state.userInfo.status
+    userStatus: state.userInfo.status,
+    loot: state.loot
   }
 }
 

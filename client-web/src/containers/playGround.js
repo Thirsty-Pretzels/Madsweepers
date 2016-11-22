@@ -24,7 +24,6 @@ class PlayGround extends Component {
 
 
       func = setInterval( () => {
-        console.log('moving bullets');
         this.props.updateBulletLocation(this.props.bulletLocation, boardSize);
 
         for (var i = 0; i < this.props.bulletLocation.length; i++) {
@@ -102,11 +101,10 @@ class PlayGround extends Component {
           bullet.y <= maxY &&
           bullet.y >= minY
         ).map((bullet) => {
-          console.log('bullet info: ', bullet);
           let className;
           let style;
           switch(bullet.direction) {
-            case 1: 
+            case 1:
               className = 'bullet bulletL';
               break;
             case 2:
@@ -120,7 +118,7 @@ class PlayGround extends Component {
               break;
             default:
               className = 'bullet bulletL';
-              break; 
+              break;
           }
           return (
             <div

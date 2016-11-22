@@ -4,7 +4,7 @@ export default function(state = [], action) {
         bullet.x > 0 &&
         bullet.y > 0 &&
         bullet.x < action.boardSize.x - 1 &&
-        bullet.y < action.boardSize.y - 1
+        bullet.y < action.boardSize.y
       ).map(bullet => {
       if ( bullet.direction === 3 ) {
         bullet.y--;
@@ -21,15 +21,12 @@ export default function(state = [], action) {
       }
     });
   } else if ( action.type === 'ADD-BULLET' ) {
-    console.log('trying to add bullet', action.payload);
     const newBullet = {
       id: action.id,
       direction: action.payload.direction,
       x: action.payload.x,
       y: action.payload.y
     }
-
-    console.log('add new bullet', newBullet);
 
     var newState = state.slice();
     newState.push(newBullet);
