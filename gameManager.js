@@ -27,12 +27,13 @@ GameManager.prototype.createRoom = function(roomName, row, col, dangerFactor, io
 
   var players = createPlayers();
   var currentScores = [];
+  var gameRecord = [];
   var gameStatus = 'staging';
   if (roomName.match(/[A-Z]/gi)){
     roomName = roomName.split('').filter(function(a){
       return a.match(/[A-Z]/gi) || a === ' ';
     }).join('');
-    this.rooms[roomName] = {row, col, dangerFactor, players, currentScores, gameStatus};
+    this.rooms[roomName] = {row, col, dangerFactor, players, currentScores, gameRecord, gameStatus};
   } else {
     io.to(id).emit('badRoomName');
   }
@@ -68,6 +69,20 @@ GameManager.prototype.roomDetail = function(roomName, users, clients) {
   return {host: this.rooms[roomName].players.listPlayers()[0], userList: userList};
 }
 
+GameManager.prototype.addRecord = function(roomName, event, scorer, scoree) {
+  // Event List:
+  // open a space:           0
+  // step on a mine:         1
+  // flag correctly:         2
+  // flag on a wrong place:  3
+  // get shot:               4
+  // place a banana:         5
+  // step on a banana:       6
+  // using shield:           7
+  // fire dance party:       8
+  this.rooms[roomName].gameRecord.push([event, scorer, scoree]);
+}
+
 GameManager.prototype.startGame = function(roomName) {
   if ( this.rooms[roomName].gameStatus === 'staging' ) {
     const row = this.rooms[roomName].row;
@@ -76,6 +91,7 @@ GameManager.prototype.startGame = function(roomName) {
     this.rooms[roomName].gameStatus = 'gaming';
     this.rooms[roomName].board = createBoard(row, col, dangerFactor);
     this.rooms[roomName].currentScores.forEach(score => score.scoreChange = 0);
+    this.gameRecord = [];
   }
 };
 
