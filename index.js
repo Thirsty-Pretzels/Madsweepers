@@ -98,6 +98,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('getStun', function(data){
+    console.log('getStun');
     if(clients[socket.id]['loot']['shield'] > 0){
       clients[socket.id]['loot']['shield']--;
       return;
