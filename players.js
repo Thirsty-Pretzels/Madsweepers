@@ -35,9 +35,11 @@ Players.prototype.createPlayer = function(playerId) {
 Players.prototype.move = function(playerId, direction) {
   switch(direction) {
     case 'UP':
+      this.playerLocations[playerId].status = 3;
       this.playerLocations[playerId].y--;
       break;
     case 'DOWN':
+      this.playerLocations[playerId].status = 4;
       this.playerLocations[playerId].y++;
       break;
     case 'LEFT':
