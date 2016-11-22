@@ -98,7 +98,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('getStun', function(data){
-    console.log('get stunned');if(clients[socket.id]['loot']['shield'] > 0){
+    if(clients[socket.id]['loot']['shield'] > 0){
       clients[socket.id]['loot']['shield']--;
       io.to(socket.id).emit('useLoot', 'shield');
       return;

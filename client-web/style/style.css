@@ -291,6 +291,37 @@ ROOMLIST
   z-index: 1;
 }
 
+.lootList {
+}
+
+.lootItem {
+  display: inline-block;
+}
+
+.lootBanana {
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  content: url('../images/banana.png');
+  background-size: cover;
+}
+
+.lootBullet {
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  content: url('../images/bullet.png');
+  background-size: cover;
+}
+
+.lootShield {
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  content: url('../images/shield.png');
+  background-size: cover;
+}
+
 .bullet {
   position: absolute;
   width: var(--gridSize);
