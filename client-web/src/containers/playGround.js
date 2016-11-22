@@ -34,7 +34,7 @@ class PlayGround extends Component {
           }
         }
 
-      } , 1000);
+      } , 100);
     }
   }
 
