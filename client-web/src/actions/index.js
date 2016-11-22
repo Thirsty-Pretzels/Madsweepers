@@ -107,10 +107,6 @@ export function hasCreatedNewRoom() {
   }
 }
 
-// movePlayer action:
-// movePlayer is fired when player is using keyboard to move
-// type: UP, DOWN, LEFT, RIGHT
-// commented added by Bruce
 export function movePlayer(playerId, key, location, board) {
   var keyPress = 'STAY';
 
@@ -154,7 +150,6 @@ export function updateRoomName(roomName) {
 // prefixes are added to the type, so middleware can distinguish them from UP, DOWN, LEFT AND RIGHT
 // in middleware, actions of type (UP, DOWN, LEFT AND RIGHT) will lead to socket.emit
 // while actions of type (ARROWUP, ARROWDOWN, ARROWLEFT, ARROWRIGHT) will bypass middleware
-// commented added by Bruce
 export function updateLocation(newLocations, boardSize) {
   return {
     type: 'updatePlayerLocations',
@@ -193,15 +188,6 @@ export function dropFlag(playerId, location) {
   }
 }
 
-// export function createNewPlayer(playerId, roomName) {
-//   return {
-//     type: 'CREATE-PLAYER',
-//     payload: playerId,
-//     roomName: roomName
-//   }
-// }
-
-// define updateScore actions
 export function updateScore(scoreChange) {
   return {
     type: 'UPDATE-SCORE',
