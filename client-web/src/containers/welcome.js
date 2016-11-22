@@ -28,7 +28,7 @@ export class Welcome extends Component {
             name='name'
             placeholder='Enter awesome username here'
             id='input-text'
-            style={{'font-size': '30px', marginTop: '10px'}}
+            style={{'fontSize': '30px', marginTop: '10px'}}
             />
           <br/>
           <button

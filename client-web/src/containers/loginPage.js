@@ -6,6 +6,8 @@ import Welcome from './welcome';
 import UserInfo from './userInfo';
 import RoomList from './roomList';
 import Room from './room';
+import Instructions from './instructions';
+import TopScores from './top_scores';
 
 export class LoginPage extends Component {
   componentDidUpdate() {
@@ -15,10 +17,17 @@ export class LoginPage extends Component {
   }
 
   renderLobby() {
+    console.log(Instructions, 'instructions');
     return(
       <div>
-        <UserInfo />
-        <RoomList />
+        <div className="row">
+          <div className="col-md-8 roomList"> <RoomList/> </div>
+          <div className="col-md-4"> <UserInfo /> </div>
+        </div>
+        <div className="row instructions">
+          <div className="col-md-8"><Instructions /> </div>
+          <div className="col-md-4"><TopScores /> </div>
+        </div>
         { !this.props.userInfo.inRoom ? null : <Room /> }
       </div>
     )

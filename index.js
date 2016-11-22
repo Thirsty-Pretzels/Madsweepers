@@ -105,7 +105,7 @@ io.on('connection', function(socket){
     clients[socket.id]['stun'] = true;
     setTimeout(function(){
       clients[socket.id]['stun'] = false;
-    });
+    }, 5000);
   });
 
   socket.on('shoot', function(data){
