@@ -273,3 +273,9 @@ export function addBullet(newBullet, id) {
     id: id
   }
 }
+
+export function beingStun() {
+  return {
+    type: 'STUN'
+  }
+}

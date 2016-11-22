@@ -1,4 +1,4 @@
-export default function(state = [{id: 'e', direction: 2, x: 5, y: 5}, {id: 'f', direction: 3, x: 5, y: 15}], action) {
+export default function(state = [], action) {
   if (action.type === 'UPDATE-BULLET-LOCATION') {
     return action.payload.filter(bullet =>
         bullet.x > 0 &&
@@ -21,12 +21,15 @@ export default function(state = [{id: 'e', direction: 2, x: 5, y: 5}, {id: 'f', 
       }
     });
   } else if ( action.type === 'ADD-BULLET' ) {
+    console.log('trying to add bullet', action.payload);
     const newBullet = {
       id: action.id,
-      direction: action.payload.status,
+      direction: action.payload.direction,
       x: action.payload.x,
       y: action.payload.y
     }
+
+    console.log('add new bullet', newBullet);
 
     var newState = state.slice();
     newState.push(newBullet);
