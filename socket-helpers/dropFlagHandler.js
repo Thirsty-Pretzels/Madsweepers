@@ -14,8 +14,8 @@ module.exports = function(io, roomName, board, currentScores, data, socket, clie
 
       if (Math.random() * 100 > 75){
         loot = loot[Math.floor(Math.random() * loot.length)];
-        io.to(roomName).emit('playerLoot', [playerId, loot]);
         clients[socket.id]['loot'][loot]++;
+        io.to(socket.id).emit('updateLoot', clients[socket.id]['loot']);
       }
 
 
