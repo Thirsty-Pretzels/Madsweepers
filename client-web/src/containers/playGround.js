@@ -101,15 +101,38 @@ class PlayGround extends Component {
           bullet.x >= minX &&
           bullet.y <= maxY &&
           bullet.y >= minY
-        ).map(bullet =>
-        <div
-          key={ bullet.id }
-          className='bullet'
-          style={{
-            marginLeft: (bullet.x - this.props.currentBoardView[0][0][0]) * 50 + 1,
-            marginTop: (bullet.y - this.props.currentBoardView[0][0][1]) * 50 + 1
-          }}>
-        </div>
+        ).map((bullet) => {
+          console.log('bullet info: ', bullet);
+          let className;
+          let style;
+          switch(bullet.direction) {
+            case 1: 
+              className = 'bullet bulletL';
+              break;
+            case 2:
+              className = 'bullet bulletR';
+              break;
+            case 3:
+              className = 'bullet bulletU';
+              break;
+            case 4:
+              className = 'bullet bulletD';
+              break;
+            default:
+              className = 'bullet bulletL';
+              break; 
+          }
+          return (
+            <div
+              key={ bullet.id }
+              className={className}
+              style={{
+                marginLeft: (bullet.x - this.props.currentBoardView[0][0][0]) * 50 + 1,
+                marginTop: (bullet.y - this.props.currentBoardView[0][0][1]) * 50 + 1
+              }}>
+            </div>
+          );
+        }
       )
     } else {
       clearInterval(func);
