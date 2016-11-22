@@ -12,7 +12,6 @@ module.exports = function(io, roomName, players, data, boardSize, clients, socke
     func = setTimeout(() => {
       players.resetDirectionStatus(playerId);
       io.to(roomName).emit('updatePlayerLocations', {newLocations: players.playerLocations, boardSize: boardSize});
-      // }
     }, 200);
   }
 }
