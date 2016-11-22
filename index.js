@@ -62,7 +62,6 @@ io.on('connection', function(socket){
   });
 
   socket.on('toggleReady', (info) => {
-    console.log('clients: ', clients, 'users: ', users)
     toggleReadyHandler(io, socket, info.room, info.user, gameManager, users, clients);
   });
 
@@ -94,7 +93,6 @@ io.on('connection', function(socket){
       return;
     }
     const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
-    console.log('datatat: ', data);
     movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize, clients, socket);
 
     if ((Date.now() - gameManager.rooms[roomName].board.time) / 1000 / 60 >= 1){
@@ -117,11 +115,11 @@ io.on('connection', function(socket){
   });
 
   socket.on('shoot', function(data){
-    // if(clients[socket.id]['loot']['ammo'] > 0){
-      // clients[socket.id]['loot']['ammo']--;
+    if(clients[socket.id]['loot']['ammo'] > 0){
+      clients[socket.id]['loot']['ammo']--;
       io.to(clients[socket.id]['roomName']).emit('bulletOut', data, Math.floor(Math.random() * 100000000000).toString(36));
       io.to(socket.id).emit('updateLoot', clients[socket.id]['loot']);
-    // }
+    }
   });
 
   socket.on('openSpace', function(data){

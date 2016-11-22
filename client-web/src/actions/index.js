@@ -255,6 +255,7 @@ export function beingStun() {
 }
 
 export function updateLoot(loot) {
+  console.log('inside updateLoot action', loot);
   return {
     type: 'UPDATE-LOOT',
     payload: loot

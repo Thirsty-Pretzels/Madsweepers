@@ -21,15 +21,12 @@ export default function(state = [], action) {
       }
     });
   } else if ( action.type === 'ADD-BULLET' ) {
-    console.log('trying to add bullet', action.payload);
     const newBullet = {
       id: action.id,
       direction: action.payload.direction,
       x: action.payload.x,
       y: action.payload.y
     }
-
-    console.log('add new bullet', newBullet);
 
     var newState = state.slice();
     newState.push(newBullet);
