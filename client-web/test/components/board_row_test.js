@@ -41,19 +41,20 @@ describe('Test suite for Row component', () => {
     expect(wrapper2.hasClass('rowOverview')).to.equal(true);
   }); 
 
+  it('The amount of children that Row has should be the same as defined by props', () => {
+    expect(wrapper1.children().length).to.equal(rowData.length);
+    expect(wrapper2.children().length).to.equal(rowData.length);
+  });
+
   it('If props(overView) is false or undefined, All of the Children of Row should be Grid', () => {
-    // console.log(wrapper1.childAt(0));
-    // console.log(wrapper1.childAt(0).node.type);
     for(var i = 0; i < wrapper1.children().length; i++) {
-      // expect(wrapper1.childAt(i).contains(<Grid />)).to.equal(true);
-      // expect(wrapper1.childAt(i) instanceof Grid).to.equal(true);
-      expect(wrapper1.childAt(i).node.type).to.equal(Function: Grid);
+      expect(wrapper1.childAt(i).find('Grid')).to.have.length(1);
     }
   });
 
-  it('If props(overView) is false or undefined, All of the Children of Row should be GridOverview', () => {
-    for(var i = 0; i < wrapper1.children().length; i++) {
-      expect(wrapper1.childAt(i).contains(<GridOverview />)).to.equal(true);
+  it('If props(overView) is true, All of the Children of Row should be GridOverview', () => {
+    for(var i = 0; i < wrapper2.children().length; i++) {
+      expect(wrapper2.childAt(i).find('GridOverview')).to.have.length(1);
     }
   });
 
