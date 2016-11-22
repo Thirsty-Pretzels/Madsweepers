@@ -17,31 +17,19 @@ export function createAction(type, payload) {
 // define action when a temperory user is trying to login
 export function loginTempUser(username) {
   localUserName = username;
-  return {
-    type: 'LOGIN-TEMP-USER',
-    payload: username
-  }
+  return createAction('LOGIN-TEMP-USER', username);
 }
 
 export function newUser(userInfo) {
-  return {
-    type: 'NEW-USER',
-    payload: userInfo
-  }
+  return createAction('NEW-USER', userInfo);
 }
 
 export function updateRoomList(rooms) {
-  return {
-    type: 'ROOM-LIST-UPDATE',
-    payload: rooms
-  }
+  return createAction('ROOM-LIST-UPDATE', rooms);
 }
 
 export function updateRoomInfo(info) {
-  return {
-    type: 'ROOM-INFO-UPDATE',
-    payload: info
-  }
+  return createAction('ROOM-INFO-UPDATE', info);
 }
 
 export function enterRoom(roomname, username, inRoom, inRoomname) {
