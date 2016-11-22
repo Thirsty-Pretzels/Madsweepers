@@ -69,7 +69,7 @@ GameManager.prototype.roomDetail = function(roomName, users, clients) {
   return {host: this.rooms[roomName].players.listPlayers()[0], userList: userList};
 }
 
-GameManager.prototype.addRecord = function(roomName, event, scorer, scoree) {
+GameManager.prototype.addRecordEntry = function(roomName, event, scorer, scoree) {
   // Event List:
   // open a space:           0
   // step on a mine:         1
@@ -97,6 +97,9 @@ GameManager.prototype.startGame = function(roomName) {
 
 GameManager.prototype.endGame = function(roomName) {
   this.rooms[roomName].gameStatus = 'staging';
+  this.rooms[roomName].gameRecord.forEach((recordEntry) => {
+    console.log('game ended: ', recordEntry);
+  });
 }
 
 GameManager.prototype.removeRoom = function(roomName) {

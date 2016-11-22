@@ -124,7 +124,7 @@ io.on('connection', function(socket){
 
   socket.on('openSpace', function(data){
     var roomName = clients[socket.id]['roomName'];
-    openSpaceHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, gameManager);
+    openSpaceHandler(io, socket, clients, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, gameManager);
   });
 
   socket.on('dropFlag', function(data){
