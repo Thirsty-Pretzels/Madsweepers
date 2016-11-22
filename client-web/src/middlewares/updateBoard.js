@@ -39,9 +39,9 @@ export function boardMiddleware(store) {
       socket.emit('getNewBoard');
     }
 
-    // if ( action.type === 'CREATE-PLAYER' ) {
-    //   socket.emit('createPlayer', action.payload, action.roomName);
-    // }
+    if ( action.type === 'FIRE-BULLET' ) {
+      socket.emit('shoot', action.payload);
+    }
 
     if ( action.type === 'DROP-FLAG' ) {
       socket.emit('dropFlag', [action.playerId, action.location]);
@@ -109,5 +109,9 @@ export default function(store) {
 
   socket.on('updateGameTime', (gameTime) => {
     store.dispatch(actions.updateGameTime(gameTime));
+  });
+
+  socket.on('bulletOut', (newBullet, id) => {
+    store.dispatch(actions.addBullet(newBullet, id));
   });
 }

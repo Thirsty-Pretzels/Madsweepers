@@ -250,3 +250,26 @@ export function updateGameTime(gameTime) {
     payload: gameTime
   }
 }
+
+export function updateBulletLocation(bulletLocation, boardSize) {
+  return {
+    type: 'UPDATE-BULLET-LOCATION',
+    payload: bulletLocation,
+    boardSize: boardSize
+  }
+}
+
+export function fireBullet(bulletInfo) {
+  return {
+    type: 'FIRE-BULLET',
+    payload: bulletInfo
+  }
+}
+
+export function addBullet(newBullet, id) {
+  return {
+    type: 'ADD-BULLET',
+    payload: newBullet,
+    id: id
+  }
+}

@@ -106,7 +106,7 @@ body {
   background-color: var(--background);
 }
 
-/* 
+/*
 ===================================================
 LOGIN
 ===================================================
@@ -158,7 +158,7 @@ LOGIN
   font-size: 24px;
 }
 
-/* 
+/*
 ===================================================
 ROOMLIST
 ===================================================
@@ -274,6 +274,19 @@ ROOMLIST
   background-size: cover;
   background-repeat: no-repeat;
   transition-duration: .2s;
+  border-width: 0;
+  z-index: 1;
+}
+
+.bullet {
+  position: absolute;
+  width: var(--gridSize);
+  height: var(--gridSize);
+  background-image: url('../images/bullet.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: .1s;
+  transition-timing-function: linear;
   border-width: 0;
   z-index: 1;
 }
