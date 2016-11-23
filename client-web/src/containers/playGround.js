@@ -80,7 +80,7 @@ class PlayGround extends Component {
 
   renderPlayers() {
     var playersArr = Object.keys(this.props.playerLocation); //usernames
-    console.log(this.props.playerLocation, 'playersArr')
+    // console.log(this.props.playerLocation, 'playersArr')
 
     let minX = this.props.currentBoardView[0][0][0];
     let maxX = minX + 11;

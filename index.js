@@ -112,7 +112,8 @@ io.on('connection', function(socket){
     clients[socket.id]['stun'] = true;
     var roomName = clients[socket.id].roomName;
     var playerId = clients[socket.id].user;
-    io.to(roomName).emit('broadcast', playerId + 'just shot!!!');
+    console.log('broadcasting');
+    io.to(roomName).emit('broadcast', playerId + ' just got shot!!!');
     io.to(roomName).emit('updateScore', {id: playerId, scoreChange: scoreGetShot});
     gameManager.addRecordEntry(roomName, 'GetShot', playerId);
     updateCurrentScores(gameManager.rooms[roomName]['currentScores'], {id: playerId, scoreChange: scoreGetShot}, io, roomName, gameManager);

@@ -144,6 +144,8 @@ export default function(store) {
   });
 
   socket.on('broadcast', (message) => {
+    console.log('some just got shot!');
+    console.log('message: ', message);
     store.dispatch(actions.broadcast(message));
     setTimeout(() => {
       store.dispatch(actions.checkOutdatedMessage());
