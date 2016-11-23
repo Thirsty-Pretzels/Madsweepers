@@ -18,6 +18,7 @@ var openSpaceHandler = require('./socket-helpers/openSpaceHandler');
 var movePlayerHandler = require('./socket-helpers/movePlayerHandler');
 var disconnectHandler = require('./socket-helpers/disconnectHandler');
 var dancePartyHandler = require('./socket-helpers/dancePartyHandler');
+var updateCurrentScores = require('./socket-helpers/updateCurrentScores.js');
 
 // // To uncomment when running db
 // // MJ: initialize redisDatabase.
@@ -28,6 +29,7 @@ global.scoreRevealMine = -10;
 global.scoreRevealspace = 1;
 global.scoreRightFlag = 10;
 global.scoreWrongFlag = -5;
+global.scoreGetShot = -3;
 
 // Create gameManager when server starts
 var gameManager = new GameManager();
@@ -108,6 +110,11 @@ io.on('connection', function(socket){
       return;
     }
     clients[socket.id]['stun'] = true;
+    var roomName = clients[socket.id].roomName;
+    var playerId = clients[socket.id].user;
+    gameManager.addRecordEntry(roomName, 'GetShot', playerId);
+    updateCurrentScores(gameManager.rooms[roomName]['currentScores'], {id: playerId, scoreChange: scoreGetShot}, io, roomName, gameManager);
+    io.to(roomName).emit('updateScore', {id: playerId, scoreChange: scoreGetShot});
     setTimeout(function(){
       clients[socket.id]['stun'] = false;
     }, 5000);

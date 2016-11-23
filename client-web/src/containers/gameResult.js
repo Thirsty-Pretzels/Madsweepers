@@ -39,8 +39,7 @@ class GameResult extends Component {
               <td><img src='../../images/explosion.png' className='gameResultImage'/>x{ this.props.gameResult[user].StepOnMine ? this.props.gameResult[user].StepOnMine : 0 }</td>
               <td><img src='../../images/flag.png' className='gameResultImage'/>x{ this.props.gameResult[user].FlagRight ? this.props.gameResult[user].FlagRight : 0 }</td>
               <td><img src='../../images/redCross.png' className='gameResultImage'/>x{ this.props.gameResult[user].FlagWrong ? this.props.gameResult[user].FlagWrong : 0 }</td>
-              <td><img src='../../images/bullet.png' className='gameResultImage'/>x{ this.props.gameResult[user].Shot ? this.props.gameResult[user].Shot : 0 }</td>
-              <td><img src='../../images/death.png' className='gameResultImage'/>x{ this.props.gameResult[user].GetShot ? this.props.gameResult[user].GetShot : 0 }</td>
+              <td><img src='../../images/bullet.png' className='gameResultImage'/>x{ this.props.gameResult[user].GetShot ? this.props.gameResult[user].GetShot : 0 }</td>
             </tr>
           )}
         </table>
