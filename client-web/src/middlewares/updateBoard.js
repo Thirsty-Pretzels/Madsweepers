@@ -52,7 +52,7 @@ export function boardMiddleware(store) {
     }
 
     if ( action.type === 'BANANA-OUT' ) {
-      socket.emit('bananaOut');
+      socket.emit('bananaOut', action.payload);
     }
 
     return next(action);
