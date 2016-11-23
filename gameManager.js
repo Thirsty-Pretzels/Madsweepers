@@ -89,7 +89,9 @@ GameManager.prototype.addRecordEntry = function(roomName, event, scorer) {
 }
 
 GameManager.prototype.joinGame = function(roomName, scorer) {
-  this.rooms[roomName].gameRecord[scorer] = {};
+  if(!this.rooms[roomName].gameRecord[scorer]) {
+    this.rooms[roomName].gameRecord[scorer] = {};
+  }
 }
 
 GameManager.prototype.startGame = function(roomName) {
