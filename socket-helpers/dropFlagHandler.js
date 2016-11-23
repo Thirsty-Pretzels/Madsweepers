@@ -10,7 +10,7 @@ module.exports = function(io, roomName, board, currentScores, data, socket, clie
     if ( board.board[location.y][location.x].val === 9 ) {
       board.board[location.y][location.x].status = 1;
       //update board
-      gameManager.addRecordEntry(roomName, 2, clients[socket.id]['user'], null);
+      gameManager.addRecordEntry(roomName, 'FlagRight', clients[socket.id]['user']);
       board.minesLeft--;
 
       if (Math.random() * 100 > 75){
@@ -19,7 +19,6 @@ module.exports = function(io, roomName, board, currentScores, data, socket, clie
         io.to(socket.id).emit('updateLoot', clients[socket.id]['loot']);
       }
 
-      gameManager.addRecordEntry(roomName, 2, clients[socket.id]['user'], null);
       io.to(roomName).emit('countMines', [board.minesLeft, board.minesCount]);
       // only send the change of the board, make sure it's type 1
       io.to(roomName).emit('updateBoard', {type: 1, locationX: location.x, locationY: location.y, status: 1});
@@ -29,7 +28,7 @@ module.exports = function(io, roomName, board, currentScores, data, socket, clie
     } else {
     // if the flag is dropped at a wrong place
       board.board[location.y][location.x].status = 3;
-      gameManager.addRecordEntry(roomName, 3, clients[socket.id]['user'], null);
+      gameManager.addRecordEntry(roomName, 'FlagWrong', clients[socket.id]['user']);
       // only send the change of the board, make sure it's type 1
       io.to(roomName).emit('updateBoard', {type: 1, locationX: location.x, locationY: location.y, status: 3});
       // update currentScores then emit the change
