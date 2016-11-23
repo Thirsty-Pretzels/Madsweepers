@@ -33,5 +33,9 @@ export default function(state = [], action) {
     return newState;
   }
 
+  if ( action.type === 'REMOVE-ALL-BULLET' ) {
+    return [];
+  }
+
   return state;
 }

@@ -288,7 +288,7 @@ ROOMLIST
   background-repeat: no-repeat;
   transition-duration: .2s;
   border-width: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
 .lootList {
@@ -352,6 +352,17 @@ ROOMLIST
   z-index: 1;
 }
 
+.banana {
+  position: absolute;
+  width: var(--gridSize);
+  height: var(--gridSize);
+  background-image: url('../images/banana.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-width: 0;
+  z-index: 1;
+}
+
 .player-left {
   position: absolute;
   width: var(--gridSize);
@@ -361,7 +372,7 @@ ROOMLIST
   background-repeat: no-repeat;
   transition-duration: .2s;
   border-width: 0;
-  z-index: 1;
+  z-index: 2;
   /* this part of css will mirror the gif image */
   -moz-transform: scaleX(-1);
   -o-transform: scaleX(-1);
@@ -378,7 +389,7 @@ ROOMLIST
   background-repeat: no-repeat;
   transition-duration: .2s;
   border-width: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
 .player-text {
