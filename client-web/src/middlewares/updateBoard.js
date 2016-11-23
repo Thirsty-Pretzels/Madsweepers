@@ -142,4 +142,11 @@ export default function(store) {
   socket.on('danceParty', (status, boardSize) => {
     store.dispatch(actions.updateLocation(status, boardSize));
   });
+
+  socket.on('broadcast', (message) => {
+    store.dispatch(actions.broadcast(message));
+    setTimeout(() => {
+      store.dispatch(actions.checkOutdatedMessage());
+    }, 3000);
+  });
 }
