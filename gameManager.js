@@ -71,16 +71,15 @@ GameManager.prototype.roomDetail = function(roomName, users, clients) {
 
 GameManager.prototype.addRecordEntry = function(roomName, event, scorer) {
   // Event List:
-  // 'OpenSpace':            0
-  // 'StepOnMine':           1
-  // 'FlagRight':            2
-  // 'FlagWrong':            3
-  // 'Shot':                 4
-  // 'GetShot':              5
-  // 'PlaceBanana':          6
-  // 'StepOnBanana':         7
-  // 'Shield':               8
-  // 'FireDance':            9
+  // 'OpenSpace':            
+  // 'StepOnMine':           
+  // 'FlagRight':            
+  // 'FlagWrong':           
+  // 'GetShot':              
+  // 'PlaceBanana':          
+  // 'StepOnBanana':         
+  // 'Shield':               
+  // 'FireDance':            
   if (this.rooms[roomName].gameRecord[scorer][event]) {
     this.rooms[roomName].gameRecord[scorer][event]++;
   } else {
