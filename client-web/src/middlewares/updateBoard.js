@@ -114,6 +114,7 @@ export default function(store) {
   });
 
   socket.on('endification', (gameResult) => {
+    console.log('game ended: ', gameResult);
     store.dispatch(actions.endification(true, gameResult));
   });
 

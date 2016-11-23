@@ -8,7 +8,7 @@ module.exports = function(currentScores, scoreChange, io, roomName, gameManger) 
       if (currentScores[i].scoreChange >= 100){
         console.log('max score reached')
         gameManger.endGame(roomName);
-        io.to(roomName).emit('endification');
+        io.to(roomName).emit('endification', gameManger.endGame(roomName));
       }
   	  break;
   	}
