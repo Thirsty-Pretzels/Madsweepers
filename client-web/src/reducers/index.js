@@ -17,7 +17,6 @@ import gameTimeReducer from './reducer_game_time';
 import bulletLocationReducer from './reducer_bullet_location';
 import bananaLocationReducer from './reducer_banana_location';
 import lootReducer from './reducer_loot';
-import bulletLocationReducer from './reducer_bullet_location.js';
 
 //combineReducers takes in an object
 // the name of the key allows you to access the state in the redux state store

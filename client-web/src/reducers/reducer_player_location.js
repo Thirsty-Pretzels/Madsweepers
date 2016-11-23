@@ -7,7 +7,7 @@ export default function(state = [ {id:'player1', x: 0, y: 0},
   } 
   if (action.type === 'END-DANCE') {
     var userToUnfreeze = action.payload;
-    var newState = state.slice();
+    var newState = Object.assign({}, state)
     newState[userToUnfreeze].status = 0;
     return newState;
   }

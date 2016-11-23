@@ -137,6 +137,7 @@ export default function(store) {
   socket.on('bananaUsed', location => {
     const type = 'REMOVE-BANANA';
     store.dispatch(actions.updateBanana({type, location}));
+  });
 
   socket.on('danceParty', (status, boardSize) => {
     store.dispatch(actions.updateLocation(status, boardSize));
