@@ -93,7 +93,7 @@ io.on('connection', function(socket){
       return;
     }
     const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
-    movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize, clients, socket, gameManager.rooms[roomName].board.board);
+    movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize, clients, socket, gameManager.rooms[roomName].board);
 
     if ((Date.now() - gameManager.rooms[roomName].board.time) / 1000 / 60 >= 1){
       console.log('time\'s up');
@@ -115,9 +115,9 @@ io.on('connection', function(socket){
 
   socket.on('bananaOut', function(data){
     var roomName = clients[socket.id]['roomName'];
-    if(clients[socket.id]['loot']['banana'] > 0 && gameManager.rooms[roomName].board.placeBanana(data[0].x, data[0].y)){
+    if(clients[socket.id]['loot']['banana'] > 0 && gameManager.rooms[roomName].board.placeBanana(data.x, data.y)){
       clients[socket.id]['loot']['banana']--;
-      io.to(socket.id).emit('bananaPlaced', data[0]);
+      io.to(socket.id).emit('bananaPlaced', [data.x, data.y]);
     }
     io.to(socket.id).emit('updateLoot', clients[socket.id]['loot']);
   });

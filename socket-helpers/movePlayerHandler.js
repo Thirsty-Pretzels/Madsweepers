@@ -8,11 +8,13 @@ module.exports = function(io, roomName, players, data, boardSize, clients, socke
     // clearTimeout(func);
     players.move(playerId, direction, boardSize);
     const playerLoc = players.playerLocations[playerId];
-    if (board[playerLoc[0]][playerLoc[1]]['surface']['banana'] === true) {
-      if (playerLoc[0] > 0 && playerLoc[1] > 0 && playerLoc[0] < board.board.length && playerLoc[1] < board.board[0].length){
+    console.log('player loc',playerLoc)
+    if (board.board[playerLoc.y][playerLoc.x]['surface']['banana'] === true) {
+      board.removeBanana(playerLoc.x, playerLoc.y);
+      io.to(roomName).emit('bananaUsed', {x: playerLoc.x, y: playerLoc.y});
+      if (playerLoc.x > 0 && playerLoc.y > 0 && playerLoc.y < board.board.length && playerLoc.x < board.board[0].length){
         players.move(playerId, direction, boardSize);
       }
-      board.removeBanana(playerLoc[0], playerLoc[1]);
       clients[socket.id]['stun'] = true;
       setTimeout(function(){
         clients[socket.id]['stun'] = false;
