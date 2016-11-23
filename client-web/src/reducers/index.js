@@ -17,6 +17,7 @@ import gameTimeReducer from './reducer_game_time';
 import bulletLocationReducer from './reducer_bullet_location';
 import bananaLocationReducer from './reducer_banana_location';
 import lootReducer from './reducer_loot';
+import broadcastReducer from './reducer_broadcast';
 
 //combineReducers takes in an object
 // the name of the key allows you to access the state in the redux state store
@@ -38,7 +39,8 @@ const rootReducer = combineReducers({
   gameTime: gameTimeReducer,
   bulletLocation: bulletLocationReducer,
   bananaLocation: bananaLocationReducer,
-  loot: lootReducer
+  loot: lootReducer,
+  broadcast: broadcastReducer
 });
 
 export default rootReducer;

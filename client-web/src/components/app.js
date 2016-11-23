@@ -5,8 +5,7 @@ import PlayGround from '../containers/playGround';
 import ScoreBoard from '../containers/scoreBoard';
 import GameStatus from '../containers/gameStatus';
 
-export default class App extends Component {
-
+export class App extends Component {
   // this is the router on the App component
   redirect(pageTo) {
     browserHistory.push('/' + pageTo);
@@ -16,7 +15,11 @@ export default class App extends Component {
     return (
       <div className="container">
         <div className="row center-block">
-           <div className="text-center" id='header-text'><image id='MadIcon' /> Mad Sweepers</div>
+          {
+            this.props.userInfo.inRoom && this.props.broadcast.refresh ? 
+            <div className="text-center" id='header-text'>{this.props.broadcast.message}</div>                                                                 :
+            <div className="text-center" id='header-text'><image id='MadIcon' /> Mad Sweepers</div>
+          }
         </div>
           {this.props.children && React.cloneElement(this.props.children, {
             // this is where to pass props to all children components
@@ -26,3 +29,12 @@ export default class App extends Component {
     );
   }
 }
+
+var mapStateToProps = (state) => {
+  return {
+    userInfo: state.userInfo,
+    broadcast: state.broadcast
+  }
+};
+
+export default connect(mapStateToProps)(App);

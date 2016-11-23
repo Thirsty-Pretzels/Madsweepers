@@ -288,3 +288,18 @@ export function makeDance() {
 export function endDance(username) {
   return createAction('END-DANCE', username);
 }
+
+export function broadcast(messgage) {
+  return {
+    type: 'BROADCAST',
+    message: message,
+    date: Date.now()
+  }
+}
+
+export function checkOutdatedMessage() {
+  return {
+    type: 'CHECK-OUTDATED-MESSAGE',
+    date: Date.now()
+  }
+}
