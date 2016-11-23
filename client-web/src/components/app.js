@@ -16,11 +16,13 @@ export class App extends Component {
     return (
       <div className="container">
         <div className="row center-block">
-          {
-            this.props.userInfo.inRoom && this.props.broadcast.refresh ? 
-            <div className="text-center" id='header-text'>{this.props.broadcast.message}</div>                                                                 :
-            <div className="text-center" id='header-text'><image id='MadIcon' /> Mad Sweepers</div>
-          }
+          <div className="text-center" id='header-text'>
+            {
+              this.props.userInfo.inRoom && this.props.broadcast.refresh ? 
+              this.props.broadcast.message :
+              <div><image id='MadIcon'/> Mad Sweepers</div>
+            }
+          </div> 
         </div>
           {this.props.children && React.cloneElement(this.props.children, {
             // this is where to pass props to all children components
