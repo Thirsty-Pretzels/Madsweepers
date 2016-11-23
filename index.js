@@ -17,6 +17,7 @@ var dropFlagHandler = require('./socket-helpers/dropFlagHandler');
 var openSpaceHandler = require('./socket-helpers/openSpaceHandler');
 var movePlayerHandler = require('./socket-helpers/movePlayerHandler');
 var disconnectHandler = require('./socket-helpers/disconnectHandler');
+var dancePartyHandler = require('./socket-helpers/dancePartyHandler');
 
 // // To uncomment when running db
 // // MJ: initialize redisDatabase.
@@ -81,40 +82,7 @@ io.on('connection', function(socket){
   socket.on('danceParty', function(data){
     var roomName = clients[socket.id]['roomName'];
     var myUserName = clients[socket.id].user;
-    console.log(myUserName, 'myusername')
-
-    var status = gameManager.rooms[roomName].players.playerLocations;
-
-    // change status of other players to 5, which makes them dance on the client
-    for (var user in status) {
-      if (user !== myUserName) {
-        status[user].status = 5;
-      }
-    }
-
-    const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
-
-    console.log(status, 'status on server')
-
-    io.to(roomName).emit('danceParty', status, boardSize);
-
-    // get username of all players for the room we are in; 
-    var players =  Object.keys(status);
-
-    console.log(gameManager.rooms[roomName].players, 'players')
-    // add CSS to make other players rotate
-
-    // stun all other players except yourself
-    players.forEach((user) => {
-    // users object contains data by username
-      var socketId = users[user].socket;
-      if (socketId !== socket.id) {
-        clients[socketId]['stun'] = true;
-        setTimeout(function(){
-          clients[socketId]['stun'] = false;
-        }, 5000);
-      }
-    });
+    dancePartyHandler(io, socket, gameManager, roomName, myUserName, users, clients);
   });
 
   socket.on('movePlayer', function(data) {
