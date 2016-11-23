@@ -124,7 +124,7 @@ io.on('connection', function(socket){
     var roomName = clients[socket.id]['roomName'];
     if(clients[socket.id]['loot']['banana'] > 0 && gameManager.rooms[roomName].board.placeBanana(data.x, data.y)){
       clients[socket.id]['loot']['banana']--;
-      io.to(socket.id).emit('bananaPlaced', [data.x, data.y]);
+      io.to(socket.id).emit('bananaPlaced', {x: data.x, y: data.y});
     }
     io.to(socket.id).emit('updateLoot', clients[socket.id]['loot']);
   });
