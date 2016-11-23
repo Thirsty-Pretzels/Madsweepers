@@ -397,6 +397,112 @@ ROOMLIST
   position: absolute;
 }
 
+.player-dance{
+  animation: danceParty linear 4s;
+  animation-iteration-count: infinite;
+  transform-origin: 50% 50%;
+  -webkit-animation: danceParty linear 4s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-transform-origin: 50% 50%;
+}
+
+@keyframes danceParty{
+  0% {
+    opacity:0.99;
+    transform:  rotate(0deg) scaleX(1.00) scaleY(1.00) ;
+  }
+  10% {
+    opacity:0.9501864986401444;
+    transform:  rotate(-3deg) scaleX(0.80) scaleY(0.80) ;
+  }
+  20% {
+    opacity:0.9119229380076546;
+    transform:  rotate(-3deg) scaleX(0.80) scaleY(0.80) ;
+  }
+  30% {
+    opacity:0.8711511111111111;
+    transform:  rotate(36deg) scaleX(1.20) scaleY(1.20) ;
+  }
+  40% {
+    opacity:0.8337688888888889;
+    transform:  rotate(-3deg) scaleX(1.40) scaleY(1.40) ;
+  }
+  50% {
+    opacity:0.7949999999999999;
+    transform:  rotate(3deg) scaleX(1.60) scaleY(1.60) ;
+  }
+  60% {
+    opacity:0.7562311111111111;
+    transform:  rotate(-36deg) scaleX(1.60) scaleY(1.60) ;
+  }
+  70% {
+    opacity:0.7188488888888889;
+    transform:  rotate(3deg) scaleX(1.60) scaleY(1.60) ;
+  }
+  80% {
+    opacity:0.6780770619923454;
+    transform:  rotate(-3deg) scaleX(1.60) scaleY(1.60) ;
+  }
+  90% {
+    opacity:0.6398135013598556;
+    transform:  rotate(3deg) scaleX(1.60) scaleY(1.60) ;
+  }
+  100% {
+    opacity:0.6;
+    transform:  rotate(0deg) scaleX(1.60) scaleY(1.60) ;
+  }
+}
+
+@-webkit-keyframes danceParty {
+  0% {
+    opacity:0.99;
+    -webkit-transform:  rotate(0deg) scaleX(1.00) scaleY(1.00) ;
+  }
+  10% {
+    opacity:0.9501864986401444;
+    -webkit-transform:  rotate(-3deg) scaleX(0.80) scaleY(0.80) ;
+  }
+  20% {
+    opacity:0.9119229380076546;
+    -webkit-transform:  rotate(-3deg) scaleX(0.80) scaleY(0.80) ;
+  }
+  30% {
+    opacity:0.8711511111111111;
+    -webkit-transform:  rotate(36deg) scaleX(1.20) scaleY(1.20) ;
+  }
+  40% {
+    opacity:0.8337688888888889;
+    -webkit-transform:  rotate(-3deg) scaleX(1.40) scaleY(1.40) ;
+  }
+  50% {
+    opacity:0.7949999999999999;
+    -webkit-transform:  rotate(3deg) scaleX(1.60) scaleY(1.60) ;
+  }
+  60% {
+    opacity:0.7562311111111111;
+    -webkit-transform:  rotate(-36deg) scaleX(1.60) scaleY(1.60) ;
+  }
+  70% {
+    opacity:0.7188488888888889;
+    -webkit-transform:  rotate(3deg) scaleX(1.60) scaleY(1.60) ;
+  }
+  80% {
+    opacity:0.6780770619923454;
+    -webkit-transform:  rotate(-3deg) scaleX(1.60) scaleY(1.60) ;
+  }
+  90% {
+    opacity:0.6398135013598556;
+    -webkit-transform:  rotate(3deg) scaleX(1.60) scaleY(1.60) ;
+  }
+  100% {
+    opacity:0.6;
+    -webkit-transform:  rotate(0deg) scaleX(1.60) scaleY(1.60) ;
+  }
+}
+
+
+
+
 .grid-initial {
   width: var(--gridSize);
   height: var(--gridSize);
@@ -504,4 +610,3 @@ ROOMLIST
   font-size: 20px;
   font-weight: bold
 }
-

@@ -34,7 +34,7 @@ class PlayGround extends Component {
           }
         }
 
-      } , 1000);
+      } , 100);
     }
   }
 
@@ -70,12 +70,17 @@ class PlayGround extends Component {
         this.props.bananaOut( {x, y} );
         this.props.updateBanana( {type: 'ADD-BANANA', location: {x, y}} )
       }
+      
+      if (e.key === 'a' || e.key ==='A') {
+        socket.emit('danceParty', )
+      }
     }
 
   }
 
   renderPlayers() {
-    var playersArr = Object.keys(this.props.playerLocation);
+    var playersArr = Object.keys(this.props.playerLocation); //usernames
+    console.log(this.props.playerLocation, 'playersArr')
 
     let minX = this.props.currentBoardView[0][0][0];
     let maxX = minX + 11;
@@ -91,6 +96,7 @@ class PlayGround extends Component {
       <Player
         key={player}
         username={player}
+        allLocation = {this.props.playerLocation}
         playerLocation={this.props.playerLocation[player]} />
     );
   }

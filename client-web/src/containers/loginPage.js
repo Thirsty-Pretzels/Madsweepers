@@ -6,7 +6,7 @@ import Welcome from './welcome';
 import UserInfo from './userInfo';
 import RoomList from './roomList';
 import Room from './room';
-import Instructions from './instructions';
+import Instructions from '../components/instructions';
 import TopScores from './top_scores';
 
 export class LoginPage extends Component {

@@ -142,7 +142,6 @@ export function updateRoomName(roomName) {
   }
 }
 
-
 // updateLocation action:
 // when data is received from server throught socket, this action will be fired through store.dispatch
 // type: ARROWUP, ARROWDOWN, ARROWLEFT, ARROWRIGHT
@@ -279,4 +278,13 @@ export function updateBanana(update) {
     type: update.type,
     payload: update.location
   }
+}
+export function makeDance() {
+  return {
+    type: 'MAKE-DANCE'
+  }
+}
+
+export function endDance(username) {
+  return createAction('END-DANCE', username);
 }
