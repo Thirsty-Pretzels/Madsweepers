@@ -97,8 +97,7 @@ io.on('connection', function(socket){
 
     if ((Date.now() - gameManager.rooms[roomName].board.time) / 1000 / 60 >= 1){
       console.log('time\'s up');
-      gameManager.endGame(roomName);
-      io.to(roomName).emit('endification');
+      io.to(roomName).emit('endification', gameManager.endGame(roomName));
     }
   });
 

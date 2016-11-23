@@ -113,8 +113,8 @@ export default function(store) {
     store.dispatch(actions.countMines(minesInfo));
   });
 
-  socket.on('endification', () => {
-    store.dispatch(actions.endification());
+  socket.on('endification', (gameResult) => {
+    store.dispatch(actions.endification(true, gameResult));
   });
 
   socket.on('updateGameTime', (gameTime) => {

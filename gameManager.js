@@ -112,7 +112,8 @@ GameManager.prototype.startGame = function(roomName) {
 
 GameManager.prototype.endGame = function(roomName) {
   this.rooms[roomName].gameStatus = 'staging';
-  console.log(this.rooms[roomName].gameRecord);
+  
+  return this.rooms[roomName].gameRecord;
 }
 
 GameManager.prototype.removeRoom = function(roomName) {

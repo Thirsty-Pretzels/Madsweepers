@@ -9,6 +9,7 @@ import updateScoresReducer from './reducer_score_update';
 import usernameReducer from './reducer_username';
 // import roomNameReducer from './reducer_room_name';
 import gameStatusReducer from './reducer_game_status';
+import gameResultReducer from './reducer_game_result';
 import currentBoardViewReducer from './reducer_current_board_view';
 import endificationReducer from './reducer_endification';
 import highScoresReducer from './reducer_top_scores';
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   playerLocation: playerLocationReducer,
   scores: updateScoresReducer,
   gameStatus: gameStatusReducer,
+  gameResult: gameResultReducer,
   currentBoardView: currentBoardViewReducer,
   endification: endificationReducer,
   gameTime: gameTimeReducer,
