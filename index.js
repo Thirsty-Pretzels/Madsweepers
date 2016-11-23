@@ -93,7 +93,7 @@ io.on('connection', function(socket){
       return;
     }
     const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
-    movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize, clients, socket);
+    movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize, clients, socket, board);
 
     if ((Date.now() - gameManager.rooms[roomName].board.time) / 1000 / 60 >= 1){
       console.log('time\'s up');
@@ -112,6 +112,14 @@ io.on('connection', function(socket){
     setTimeout(function(){
       clients[socket.id]['stun'] = false;
     }, 5000);
+  });
+
+  socket.on('bananaOut', function(data){
+    if(clients[socket.id]['loot']['banana'] > 0 && board.placeBanana(data[0].x, data[0].y)){
+      clients[socket.id]['loot']['banana']--;
+      io.to(socket.id).emit('bananaPlaced', data[0]);
+    }
+    io.to(socket.id).emit('updateLoot', clients[socket.id]['loot']);
   });
 
   socket.on('shoot', function(data){

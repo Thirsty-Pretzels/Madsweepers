@@ -22,7 +22,7 @@ Board.prototype.generate = function (n, m, d, timeStamp) {
   for (var i = 0; i < n; i++){
     this.board.push([]);
     for (var j = 0; j < m; j++){
-      this.board[i].push({'val': 0, 'status': 0, 'flaggedBy': null, 'surface': null});
+      this.board[i].push({'val': 0, 'status': 0, 'flaggedBy': null, 'surface': {banana: false}});
     }
   }
 
@@ -121,6 +121,17 @@ Board.prototype.tileVal = function(x, y){
   return this.board[x][y]['val'];
 }
 
+Board.prototype.placeBanana = function(x, y) {
+  if (this.board[x][y]['surface']['banana'] === false){
+    this.board[x][y]['surface']['banana'] = true}
+    return true;
+  }
+  return false;
+}
+
+Board.prototype.removeBanana = function(x, y) {
+  this.board[x][y]['surface']['banana'] = false;
+}
 //get tallies for flagged mines
 Board.prototype.tally = function(){
   var tallies = {};
