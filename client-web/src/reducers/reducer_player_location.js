@@ -4,7 +4,14 @@ export default function(state = [ {id:'player1', x: 0, y: 0},
   //action.type === updatePlayerLocations means new data is received from server, render new positions by updating states.
   if( action.type === 'updatePlayerLocations') {
     return action.payload;
-  } else {
+  } 
+  if (action.type === 'END-DANCE') {
+    var userToUnfreeze = action.payload;
+    var newState = state.slice();
+    newState[userToUnfreeze].status = 0;
+    return newState;
+  }
+  else {
     return state;
   }
 }

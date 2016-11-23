@@ -96,6 +96,7 @@ class PlayGround extends Component {
       <Player
         key={player}
         username={player}
+        allLocation = {this.props.playerLocation}
         playerLocation={this.props.playerLocation[player]} />
     );
   }

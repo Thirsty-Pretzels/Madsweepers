@@ -80,8 +80,27 @@ io.on('connection', function(socket){
 
   socket.on('danceParty', function(data){
     var roomName = clients[socket.id]['roomName'];
-    // get socket Id of players for the room we are in; 
-    var players =  Object.keys(gameManager.rooms[roomName].players.playerLocations);
+    var myUserName = clients[socket.id].user;
+    console.log(myUserName, 'myusername')
+
+    var status = gameManager.rooms[roomName].players.playerLocations;
+
+    // change status of other players to 5, which makes them dance on the client
+    for (var user in status) {
+      if (user !== myUserName) {
+        status[user].status = 5;
+      }
+    }
+
+    const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
+
+    console.log(status, 'status on server')
+
+    io.to(roomName).emit('danceParty', status, boardSize);
+
+    // get username of all players for the room we are in; 
+    var players =  Object.keys(status);
+
     console.log(gameManager.rooms[roomName].players, 'players')
     // add CSS to make other players rotate
 
@@ -89,11 +108,8 @@ io.on('connection', function(socket){
     players.forEach((user) => {
     // users object contains data by username
       var socketId = users[user].socket;
-      console.log(socketId, 'socketId');
       if (socketId !== socket.id) {
         clients[socketId]['stun'] = true;
-        console.log('about to send out socket message')
-        io.to(roomName).emit('danceParty');
         setTimeout(function(){
           clients[socketId]['stun'] = false;
         }, 5000);
