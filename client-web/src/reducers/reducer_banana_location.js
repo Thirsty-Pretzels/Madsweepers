@@ -1,4 +1,4 @@
-export default function(state=[{x: 5, y: 5}, {x: 6, y: 6}], action) {
+export default function(state=[], action) {
   if ( action.type === 'ADD-BANANA' ) {
     var newSate = state.slice();
     newSate.push(action.payload);
