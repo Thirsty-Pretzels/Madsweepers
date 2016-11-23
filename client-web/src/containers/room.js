@@ -23,11 +23,11 @@ export class RoomList extends Component {
         <br />
         <button
           onClick={this.toggleReady.bind(this)}>
-           {this.props.userInfo.isReady ? 'I need more time!' : 'I am Ready!'}
+           {this.props.userInfo.isReady ? 'Not Really' : 'Ready'}
         </button>
         <button
           onClick={this.leaveRoom.bind(this)}>
-            Exit This Room
+            Exit
         </button>
         <br />
         { Object.keys(this.props.roomInfo.userList).length !== 0 ? <UserEntry user={this.props.userInfo.username} /> : null}

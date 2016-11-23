@@ -67,14 +67,14 @@ export class CreateRoomPanel extends Component {
             className="myButton"
             type="submit"
             id='create-room-button'>
-            Make A New Room
+            Create
           </button>
           <button
             className="myButton"
             id='close-create-room-button'
             onClick={this.closeCreteRoomPanel.bind(this)}
             >
-            Close This Tab
+            Close
           </button>
         </form>
       </div>

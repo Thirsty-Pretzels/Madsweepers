@@ -34,8 +34,8 @@ export class LoginPage extends Component {
 
   render() {
     return (
-        <div>
-          { !this.props.userInfo.status ? <Welcome /> : this.renderLobby() }
+      <div>
+        { !this.props.userInfo.status ? <Welcome /> : this.renderLobby() }
       </div>
     );
   }

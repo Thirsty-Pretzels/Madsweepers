@@ -10,9 +10,9 @@ export class RoomList extends Component {
   render() {
     return (
       <div style={{margin: '10px 0 5px 0'}}>
-        <img src={'../../images/user'+this.props.roomInfo.userList[this.props.user].userCode+'.png'} style={{display: 'inline-block', marginRight: '20px'}}/>
+        <img src={'../../images/user'+this.props.roomInfo.userList[this.props.user].userCode+'.png'} style={{width: '80px', height: '80px', 'border-radius': '40px', display: 'inline-block', marginRight: '20px'}}/>
         <h2 style={{display: 'inline-block', marginRight: '10px'}}>{this.props.user}</h2>
-        <h4 style={{display: 'inline-block'}}>{this.props.roomInfo.userList[this.props.user].readyStatus ? ' is Ready!' : ' is messing around!'}</h4>
+        <h4 style={{display: 'inline-block'}}>{this.props.roomInfo.userList[this.props.user].readyStatus ? ' Ready!' : ' waiting...'}</h4>
       </div>
     );
   }

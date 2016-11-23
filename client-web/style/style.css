@@ -194,8 +194,8 @@ ROOMLIST
 
 .roomName:hover {
   font-style: italic;
-  font-size: 30px;
   cursor: pointer;
+  color: var(--dark-blue);
 }
 
 .roomList {
