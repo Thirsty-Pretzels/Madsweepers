@@ -8,7 +8,7 @@ module.exports = function(io, roomName, players, data, boardSize, clients, socke
     // clearTimeout(func);
     players.move(playerId, direction, boardSize);
     const playerLoc = players.playerLocations[playerId];
-    if (board.board[playerLoc[0]][playerLoc[1]]['surface']['banana'] === true) {
+    if (board[playerLoc[0]][playerLoc[1]]['surface']['banana'] === true) {
       if (playerLoc[0] > 0 && playerLoc[1] > 0 && playerLoc[0] < board.board.length && playerLoc[1] < board.board[0].length){
         players.move(playerId, direction, boardSize);
       }

@@ -122,8 +122,8 @@ Board.prototype.tileVal = function(x, y){
 }
 
 Board.prototype.placeBanana = function(x, y) {
-  if (this.board[x][y]['surface']['banana'] === false){
-    this.board[x][y]['surface']['banana'] = true}
+  if (this.board[x][y]['surface']['banana'] === false) {
+    this.board[x][y]['surface']['banana'] = true;
     return true;
   }
   return false;
@@ -132,6 +132,7 @@ Board.prototype.placeBanana = function(x, y) {
 Board.prototype.removeBanana = function(x, y) {
   this.board[x][y]['surface']['banana'] = false;
 }
+
 //get tallies for flagged mines
 Board.prototype.tally = function(){
   var tallies = {};

@@ -98,7 +98,7 @@ io.on('connection', function(socket){
 
     io.to(roomName).emit('danceParty', status, boardSize);
 
-    // get username of all players for the room we are in; 
+    // get username of all players for the room we are in;
     var players =  Object.keys(status);
 
     console.log(gameManager.rooms[roomName].players, 'players')
@@ -125,7 +125,7 @@ io.on('connection', function(socket){
       return;
     }
     const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
-    movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize, clients, socket, board);
+    movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize, clients, socket, gameManager.rooms[roomName].board.board);
 
     if ((Date.now() - gameManager.rooms[roomName].board.time) / 1000 / 60 >= 1){
       console.log('time\'s up');
@@ -146,7 +146,8 @@ io.on('connection', function(socket){
   });
 
   socket.on('bananaOut', function(data){
-    if(clients[socket.id]['loot']['banana'] > 0 && board.placeBanana(data[0].x, data[0].y)){
+    var roomName = clients[socket.id]['roomName'];
+    if(clients[socket.id]['loot']['banana'] > 0 && gameManager.rooms[roomName].board.placeBanana(data[0].x, data[0].y)){
       clients[socket.id]['loot']['banana']--;
       io.to(socket.id).emit('bananaPlaced', data[0]);
     }
