@@ -203,11 +203,11 @@ export function countMines(minesInfo) {
 };
 
 
-export function endification(val) {
-  val = val === undefined ? true : val;
+export function endification(val, gameResult) {
   return {
     type: 'END-GAME',
-    payload: val
+    payload: val,
+    gameResult: gameResult
   }
 };
 

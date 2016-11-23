@@ -21,7 +21,7 @@ class GameResult extends Component {
 
   render() {
     const winnerScore = this.props.scores.sort((a, b) => a.score < b.score)[0];
-
+    console.log(this.props.gameResult);
     return (
       <div className='gameResult'>
         <h2>We have a winner!!</h2>
@@ -38,7 +38,8 @@ var mapStateToProps = (state) => {
   return {
     scores: state.scores,
     userInfo: state.userInfo,
-    allReady: state.allReady
+    allReady: state.allReady,
+    gameResult: state.gameResult
   }
 }
 
