@@ -14,6 +14,7 @@ import endificationReducer from './reducer_endification';
 import highScoresReducer from './reducer_top_scores';
 import gameTimeReducer from './reducer_game_time';
 import bulletLocationReducer from './reducer_bullet_location';
+import bananaLocationReducer from './reducer_banana_location';
 import lootReducer from './reducer_loot';
 
 //combineReducers takes in an object
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   endification: endificationReducer,
   gameTime: gameTimeReducer,
   bulletLocation: bulletLocationReducer,
+  bananaLocation: bananaLocationReducer,
   loot: lootReducer
 });
 
