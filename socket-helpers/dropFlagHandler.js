@@ -13,7 +13,7 @@ module.exports = function(io, roomName, board, currentScores, data, socket, clie
       gameManager.addRecordEntry(roomName, 'FlagRight', clients[socket.id]['user']);
       board.minesLeft--;
 
-      if (Math.random() * 100 > 65 && Date.now() - clients[socket.id]['wrongFlag'] > 2500){
+      if (Math.random() * 100 > 65 && Date.now() - clients[socket.id]['wrongFlag'] > 1000){
         loot = loot[Math.floor(Math.random() * loot.length)];
         clients[socket.id]['loot'][loot]++;
         io.to(socket.id).emit('updateLoot', clients[socket.id]['loot']);
