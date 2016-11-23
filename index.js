@@ -80,8 +80,24 @@ io.on('connection', function(socket){
 
   socket.on('danceParty', function(data){
     var roomName = clients[socket.id]['roomName'];
-    gameManager.rooms[roomName].players.forEach(function(x){
-      console.log(x);
+    // get socket Id of players for the room we are in; 
+    var players =  Object.keys(gameManager.rooms[roomName].players.playerLocations);
+    console.log(gameManager.rooms[roomName].players, 'players')
+    // add CSS to make other players rotate
+
+    // stun all other players except yourself
+    players.forEach((user) => {
+    // users object contains data by username
+      var socketId = users[user].socket;
+      console.log(socketId, 'socketId');
+      if (socketId !== socket.id) {
+        clients[socketId]['stun'] = true;
+        console.log('about to send out socket message')
+        io.to(roomName).emit('danceParty');
+        setTimeout(function(){
+          clients[socketId]['stun'] = false;
+        }, 5000);
+      }
     });
   });
 

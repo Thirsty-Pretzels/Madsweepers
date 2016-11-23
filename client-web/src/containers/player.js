@@ -7,7 +7,8 @@ class Player extends Component {
   }
 
   render() {
-    var status = 'player'
+    console.log(this.props.dance, 'dance');
+    var status = 'player';
     if ( this.props.playerLocation.status === 1 ) {
       status = 'player-left';
     } else if ( this.props.playerLocation.status === 2 ) {
@@ -24,7 +25,7 @@ class Player extends Component {
           }}
         >{this.props.username}</text>
         <div
-          className={ status }
+          className={ status + ' ' + this.props.dance}
           id={ this.props.username }
           style={{
             marginLeft: (this.props.playerLocation.x - this.props.currentBoardView[0][0][0]) * 50 + 1,
@@ -38,8 +39,10 @@ class Player extends Component {
 
 var mapStateToProps = (state) => {
   return {
-    currentBoardView: state.currentBoardView
+    currentBoardView: state.currentBoardView,
+    dance: state.dance
   }
 };
+
 
 export default connect(mapStateToProps)(Player);

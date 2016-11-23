@@ -280,3 +280,14 @@ export function updateBanana(update) {
     payload: update.location
   }
 }
+export function makeDance() {
+  return {
+    type: 'MAKE-DANCE'
+  }
+}
+
+export function endDance() {
+  return {
+    type: 'END-DANCE'
+  }
+}
