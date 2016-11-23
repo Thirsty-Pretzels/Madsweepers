@@ -576,12 +576,25 @@ ROOMLIST
   position: absolute;
   background-color: grey;
   z-index: 3;
-  width: 40%;
-  height: 40%;
+  width: 50%;
   text-align: center;
   font-size: 25px;
   padding-top: 25px;
   border-radius: 20px;
+}
+
+.gameResultTable {
+  margin: 0 auto;
+  border-spacing: 15px;
+  border-collapse: separate;
+}
+
+.gameResultImage {
+  display: inline;
+  width: var(--gridSize);
+  height: var(--gridSize);
+  border-width: 0;
+  z-index: 4;
 }
 
 .scoreItem {
