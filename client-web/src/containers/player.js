@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { endDance } from '../actions/index.js';
 
 class Player extends Component {
   constructor(props) {
@@ -7,11 +9,16 @@ class Player extends Component {
   }
 
   render() {
-    var status = 'player'
-    if ( this.props.playerLocation.status === 1 ) {
+    var status = 'player';
+    if (this.props.playerLocation.status === 0) {
+      status = 'player';
+    } else if ( this.props.playerLocation.status === 1 ) {
       status = 'player-left';
     } else if ( this.props.playerLocation.status === 2 ) {
       status = 'player-right';
+    } else if ( this.props.playerLocation.status === 5 ) {
+      status = 'player player-dance';
+      setTimeout( (() => this.props.endDance(this.props.username)), 5000)
     }
 
     return (
@@ -24,7 +31,7 @@ class Player extends Component {
           }}
         >{this.props.username}</text>
         <div
-          className={ status }
+          className={status}
           id={ this.props.username }
           style={{
             marginLeft: (this.props.playerLocation.x - this.props.currentBoardView[0][0][0]) * 50 + 1,
@@ -38,8 +45,15 @@ class Player extends Component {
 
 var mapStateToProps = (state) => {
   return {
-    currentBoardView: state.currentBoardView
+    currentBoardView: state.currentBoardView,
   }
 };
 
-export default connect(mapStateToProps)(Player);
+var mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    endDance: endDance,
+  }, dispatch)
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Player);
