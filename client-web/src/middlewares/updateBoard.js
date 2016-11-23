@@ -51,6 +51,10 @@ export function boardMiddleware(store) {
       socket.emit('getStun');
     }
 
+    if ( action.type === 'BANANA-OUT' ) {
+      socket.emit('bananaOut');
+    }
+
     return next(action);
   };
 }
@@ -86,6 +90,8 @@ export default function(store) {
     store.dispatch(actions.allReady(isAllPlayersReady));
     if ( isAllPlayersReady ) {
       store.dispatch(actions.endification(false));
+      store.dispatch(actions.updateBanana({type: 'REMOVE-ALL-BANANA'}));
+      store.dispatch(actions.removeAllBullet());
     }
   });
 
@@ -121,5 +127,15 @@ export default function(store) {
 
   socket.on('updateLoot', loot => {
     store.dispatch(actions.updateLoot(loot));
+  });
+
+  socket.on('bananaPlaced', location => {
+    const type = 'ADD-BANANA';
+    store.dispatch(actions.updateBanana({type, location}));
+  });
+
+  socket.on('bananaUsed', location => {
+    const type = 'REMOVE-BANANA';
+    store.dispatch(actions.updateBanana({type, location}));
   });
 }

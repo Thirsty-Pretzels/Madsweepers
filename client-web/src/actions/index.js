@@ -233,6 +233,12 @@ export function updateBulletLocation(bulletLocation, boardSize) {
   }
 }
 
+export function removeAllBullet() {
+  return {
+    type: 'REMOVE-ALL-BULLET'
+  }
+}
+
 export function fireBullet(bulletInfo) {
   return {
     type: 'FIRE-BULLET',
@@ -255,9 +261,22 @@ export function beingStun() {
 }
 
 export function updateLoot(loot) {
-  console.log('inside updateLoot action', loot);
   return {
     type: 'UPDATE-LOOT',
     payload: loot
+  }
+}
+
+export function bananaOut(location) {
+  return {
+    type: 'BANANA-OUT',
+    payload: location
+  }
+}
+
+export function updateBanana(update) {
+  return {
+    type: update.type,
+    payload: update.location
   }
 }

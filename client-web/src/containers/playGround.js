@@ -6,7 +6,9 @@ import {
   dropFlag,
   updateBulletLocation,
   fireBullet,
-  beingStun
+  beingStun,
+  bananaOut,
+  updateBanana
 } from '../actions/index';
 import { bindActionCreators } from 'redux';
 import Player from './player';
@@ -60,6 +62,13 @@ class PlayGround extends Component {
         const x = this.props.playerLocation[this.props.userInfo.username].x;
         const y = this.props.playerLocation[this.props.userInfo.username].y;
         this.props.fireBullet( {direction, x, y} );
+      }
+
+      if ( e.key ==='s' ) {
+        const x = this.props.playerLocation[this.props.userInfo.username].x;
+        const y = this.props.playerLocation[this.props.userInfo.username].y;
+        this.props.bananaOut( {x, y} );
+        this.props.updateBanana( {type: 'ADD-BANANA', location: {x, y}} )
       }
     }
 
@@ -138,6 +147,29 @@ class PlayGround extends Component {
     }
   }
 
+  renderBananas() {
+    let minX = this.props.currentBoardView[0][0][0];
+    let maxX = minX + 11;
+    let minY = this.props.currentBoardView[0][0][1];
+    let maxY = minY + 11;
+
+    return this.props.bananaLocation.filter(banana =>
+          banana.x <= maxX &&
+          banana.x >= minX &&
+          banana.y <= maxY &&
+          banana.y >= minY
+        ).map(banana =>
+      <div
+        key={ banana.x + Math.random() }
+        className='banana'
+        style={{
+          marginLeft: (banana.x - this.props.currentBoardView[0][0][0]) * 50 + 1,
+          marginTop: (banana.y - this.props.currentBoardView[0][0][1]) * 50 + 1
+        }}>
+      </div>
+    )
+  }
+
   render() {
     return (
       <div>
@@ -148,6 +180,7 @@ class PlayGround extends Component {
           onKeyDown={ this.keyDown.bind(this) }>
             { this.renderPlayers() }
             { this.renderBullets() }
+            { this.renderBananas() }
         </div>
         {
           this.props.endification ?
@@ -166,7 +199,8 @@ var mapStateToProps = (state) => {
     playerLocation: state.playerLocation,
     currentBoardView: state.currentBoardView,
     endification: state.endification,
-    bulletLocation: state.bulletLocation
+    bulletLocation: state.bulletLocation,
+    bananaLocation: state.bananaLocation
   }
 };
 
@@ -177,7 +211,9 @@ var mapDispatchToProps = (dispatch) => {
     dropFlag: dropFlag,
     updateBulletLocation: updateBulletLocation,
     fireBullet: fireBullet,
-    beingStun: beingStun
+    beingStun: beingStun,
+    bananaOut: bananaOut,
+    updateBanana: updateBanana
   }, dispatch)
 };
 
