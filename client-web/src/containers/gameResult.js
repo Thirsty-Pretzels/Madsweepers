@@ -29,6 +29,22 @@ class GameResult extends Component {
         <button onClick={ this.leaveRoom.bind(this) }>leave room</button>
         <button onClick={ this.restart.bind(this) }>restart</button>
         { this.props.userInfo.isReady ? <p>Waiting for other player to be ready...</p> : null}
+        <br />
+        <br />
+        <h3>Game Result</h3>
+        <table style={{borderSpacing: '20px'}}>
+          {Object.keys(this.props.gameResult).map((user) => 
+            <tr style={{height: '55px'}}>
+              <td>{user}</td>
+              <td><img src='../../images/userImage7.png' className='gameResultImage'/>x{ this.props.gameResult[user].OpenSpace ? this.props.gameResult[user].OpenSpace : 0 }</td>
+              <td><img src='../../images/explosion.png' className='gameResultImage'/>x{ this.props.gameResult[user].StepOnMine ? this.props.gameResult[user].StepOnMine : 0 }</td>
+              <td><img src='../../images/flag.png' className='gameResultImage'/>x{ this.props.gameResult[user].FlagRight ? this.props.gameResult[user].FlagRight : 0 }</td>
+              <td><img src='../../images/redCross.png' className='gameResultImage'/>x{ this.props.gameResult[user].FlagWrong ? this.props.gameResult[user].FlagWrong : 0 }</td>
+              <td><img src='../../images/bullet.png' className='gameResultImage'/>x{ this.props.gameResult[user].Shot ? this.props.gameResult[user].Shot : 0 }</td>
+              <td><img src='../../images/mad_icon.png' className='gameResultImage'/>x{ this.props.gameResult[user].GetShot ? this.props.gameResult[user].GetShot : 0 }</td>
+            </tr>
+          )}
+        </table>
       </div>
     )
   }

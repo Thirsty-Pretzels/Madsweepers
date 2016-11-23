@@ -584,6 +584,14 @@ ROOMLIST
   border-radius: 20px;
 }
 
+.gameResultImage {
+  position: absolute;
+  width: var(--gridSize);
+  height: var(--gridSize);
+  border-width: 0;
+  z-index: 2;
+}
+
 .scoreItem {
   font-size: 35px;
   font-family: Luigi;
