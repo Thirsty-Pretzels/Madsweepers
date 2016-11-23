@@ -289,7 +289,7 @@ export function endDance(username) {
   return createAction('END-DANCE', username);
 }
 
-export function broadcast(messgage) {
+export function broadcast(message) {
   return {
     type: 'BROADCAST',
     message: message,

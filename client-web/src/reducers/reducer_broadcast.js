@@ -1,12 +1,12 @@
 export default function(state = { message: '', date: Date.now(), refresh: false}, action) {
   var newState;
   if ( action.type === 'BROADCAST' ) {
-    newSate = {
+    newState = {
       message: action.message,
       date: action.date,
       refresh: true
     }
-    return newSate;
+    return newState;
   }
 
   if (action.type === 'CHECK-OUTDATED-MESSAGE') {
@@ -16,9 +16,9 @@ export default function(state = { message: '', date: Date.now(), refresh: false}
   			date: action.date,
   			refresh: false
   		}
+  		return newState;
   	}
-
-  	return newState;
+  	return state;
   }
 
   if (action.type === 'END-GAME') {

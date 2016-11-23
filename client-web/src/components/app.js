@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import Board from '../containers/board';
 import PlayGround from '../containers/playGround';
