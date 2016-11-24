@@ -9,7 +9,12 @@ export class UserInfo extends Component {
       <div className="row" id='userInfoRender'>
         <h1>Profile:</h1>
         <div className='col-md-8 userProfile' id='userImage'>
-          <img src={'../../images/user'+this.props.userInfo.userCode+'.png'} />
+          <img 
+          src={'../../images/user'+this.props.userInfo.userCode+'.png'} 
+          style={{
+            height: '200px',
+          }}
+          />
         </div>
         <div>
           <ul className='col-md-8 userProfile' id='userInfo'>
