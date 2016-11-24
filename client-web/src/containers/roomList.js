@@ -11,14 +11,14 @@ export class RoomList extends Component {
       this.props.toggleCreateRoomPanel();
     }
   }
-  
+
   render() {
     console.log(this.props.roomList);
     return (
       <div className="row roomList" id='roomListRender'>
-        
-        <h1>Rooms</h1>
-        
+
+        <h1>Rooms:</h1>
+
         <table id='roomListTable'>
           <tr>
             <th>RoomName</th>
@@ -29,12 +29,13 @@ export class RoomList extends Component {
         { this.props.roomList.map((room) => <RoomListEntry room={room}/>) }
         </table>
 
-         <button
-           onClick={this.showCreateRoomPanel.bind(this)}>
-           Create Room
-         </button>
-         { this.props.userInfo.showCreatePanel ? <CreateRoomPanel /> : null}
-
+        { this.props.userInfo.showCreatePanel ?
+          <CreateRoomPanel /> :
+          <button
+            onClick={this.showCreateRoomPanel.bind(this)}>
+            Create Room
+          </button>
+        }
       </div>
     );
   }

@@ -27,10 +27,7 @@ export class TopScores extends Component {
     var rows = [];
     for (var i = 0; i < this.props.highScores.length; i += 2) {
       rows.push(
-      <tr>
-        <td> {this.props.highScores[i]} </td>
-        <td> {this.props.highScores[i+1]} </td>
-      </tr>
+        <li className='col-md-9'>{this.props.highScores[i]}:  <span style={{float:'right'}}>{this.props.highScores[i+1]}</span></li>
       );
     }
     return rows;
@@ -45,14 +42,12 @@ export class TopScores extends Component {
 
     return (
       <div id='topScores'>
-        <h1>Leader Board</h1>
-          <table>
-            <tr>
-              <th>Name</th>
-              <th>Score</th>
-            </tr>
+        <div className="row">
+          <h1>Leader Board:</h1>
+          <ul>
             { this.renderScore() }
-          </table>
+          </ul>
+        </div>
       </div>
     )
   }

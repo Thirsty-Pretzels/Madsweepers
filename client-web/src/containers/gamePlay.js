@@ -20,7 +20,7 @@ class GamePlay extends Component {
   render() {
     return (
       this.props.userStatus ?
-      <div className='App-Components' onClick={ this.reFocus }>
+      <div onClick={ this.reFocus }>
         <div id='section1'>
           <PlayGround redirect={this.props.redirect}/>
           <Board />

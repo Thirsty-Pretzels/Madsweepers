@@ -20,12 +20,12 @@ export class LoginPage extends Component {
     return(
       <div>
         <div className="row">
-          <div className="col-md-8 roomList"> <RoomList/> </div>
-          <div className="col-md-4"> <UserInfo /> </div>
+          <div className="col-md-8 roomList App-Components"> <RoomList/> </div>
+          <div className="col-md-3 App-Components"> <UserInfo /> </div>
         </div>
         <div className="row instructions">
-          <div className="col-md-8"><Instructions /> </div>
-          <div className="col-md-4"><TopScores /> </div>
+          <div className="col-md-8 App-Components"> <Instructions /> </div>
+          <div className="col-md-3 App-Components"> <TopScores /> </div>
         </div>
         { !this.props.userInfo.inRoom ? null : <Room /> }
       </div>
@@ -34,8 +34,8 @@ export class LoginPage extends Component {
 
   render() {
     return (
-        <div>
-          { !this.props.userInfo.status ? <Welcome /> : this.renderLobby() }
+      <div>
+        { !this.props.userInfo.status ? <Welcome /> : this.renderLobby() }
       </div>
     );
   }
