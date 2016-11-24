@@ -24,10 +24,12 @@ export function newUser(userInfo) {
   return createAction('NEW-USER', userInfo);
 }
 
+// haven't written test yet
 export function updateRoomList(rooms) {
   return createAction('ROOM-LIST-UPDATE', rooms);
 }
 
+// haven't written test yet
 export function updateRoomInfo(info) {
   return createAction('ROOM-INFO-UPDATE', info);
 }
@@ -42,6 +44,7 @@ export function enterRoom(roomname, username, inRoom, inRoomname) {
   }
 }
 
+// haven't written test yet
 export function hasEnteredRoom(roomname) {
   return {
     type: 'ENTERED-ROOM',
@@ -57,6 +60,7 @@ export function leaveRoom(roomname, username) {
   }
 }
 
+// haven't written test yet
 export function hasLeftRoom(roomname) {
   return {
     type: 'LEFT-ROOM',
@@ -72,6 +76,7 @@ export function toggleReady(room, user) {
   }
 }
 
+// haven't written test yet
 export function hasToggledReady() {
   return {
     type: 'TOGGLED-READY'
@@ -85,6 +90,7 @@ export function allReady(isAllPlayersReady) {
   }
 }
 
+// haven't written test yet
 export function toggleCreateRoomPanel() {
   return {
     type: 'TOGGLE-CREATE-ROOM-PANEL'
@@ -101,12 +107,14 @@ export function createNewRoom(roomName, row, col, mineDensity) {
   }
 }
 
+// haven't written test yet
 export function hasCreatedNewRoom() {
   return {
     type: 'CREATED-NEW-ROOM'
   }
 }
 
+// haven't written test yet
 export function movePlayer(playerId, key, location, board) {
   var keyPress = 'STAY';
 
@@ -128,6 +136,7 @@ export function movePlayer(playerId, key, location, board) {
   }
 }
 
+// not using anymore
 export function updateUsername(newUsername) {
   return {
     type: 'UPDATE_USERNAME',
@@ -135,6 +144,7 @@ export function updateUsername(newUsername) {
   }
 }
 
+// not using any more;
 export function updateRoomName(roomName) {
   return {
     type: 'UPDATE_ROOMNAME',
