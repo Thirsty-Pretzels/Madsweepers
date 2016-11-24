@@ -36,10 +36,10 @@ class GameResult extends Component {
             <tr>
               <td>{user}</td>
               <td><img src='../../images/number.png' className='gameResultImage'/>x{ this.props.gameResult[user].OpenSpace ? this.props.gameResult[user].OpenSpace : 0 }</td>
-              <td><img src='../../images/explosion.png' className='gameResultImage'/>x{ this.props.gameResult[user].StepOnMine ? this.props.gameResult[user].StepOnMine : 0 }</td>
-              <td><img src='../../images/flag.png' className='gameResultImage'/>x{ this.props.gameResult[user].FlagRight ? this.props.gameResult[user].FlagRight : 0 }</td>
-              <td><img src='../../images/redCross.png' className='gameResultImage'/>x{ this.props.gameResult[user].FlagWrong ? this.props.gameResult[user].FlagWrong : 0 }</td>
-              <td><img src='../../images/bullet.png' className='gameResultImage'/>x{ this.props.gameResult[user].GetShot ? this.props.gameResult[user].GetShot : 0 }</td>
+              <td><img src='../../images/assets/explosion.png' className='gameResultImage'/>x{ this.props.gameResult[user].StepOnMine ? this.props.gameResult[user].StepOnMine : 0 }</td>
+              <td><img src='../../images/assets/flag3Copy.png' className='gameResultImage'/>x{ this.props.gameResult[user].FlagRight ? this.props.gameResult[user].FlagRight : 0 }</td>
+              <td><img src='../../images/assets/x.png' className='gameResultImage'/>x{ this.props.gameResult[user].FlagWrong ? this.props.gameResult[user].FlagWrong : 0 }</td>
+              <td><img src='../../images/assets/arrowR.png' className='gameResultImage gameResultImageArrow'/>x{ this.props.gameResult[user].GetShot ? this.props.gameResult[user].GetShot : 0 }</td>
             </tr>
           )}
         </table>

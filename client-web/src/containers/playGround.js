@@ -71,7 +71,7 @@ class PlayGround extends Component {
       }
 
       if (e.key === 'a' || e.key ==='A') {
-        socket.emit('danceParty', )
+        socket.emit('danceParty');
       }
     }
 

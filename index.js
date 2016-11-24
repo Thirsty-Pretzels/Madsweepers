@@ -81,9 +81,10 @@ io.on('connection', function(socket){
     }
   });
 
-  socket.on('danceParty', function(data){
+  socket.on('danceParty', function(){
     var roomName = clients[socket.id]['roomName'];
     var myUserName = clients[socket.id].user;
+    io.to(roomName).emit('broadcast', myUserName + ' said: Sometimes, You just gotta dance!!!');
     dancePartyHandler(io, socket, gameManager, roomName, myUserName, users, clients);
   });
 
@@ -112,9 +113,10 @@ io.on('connection', function(socket){
     clients[socket.id]['stun'] = true;
     var roomName = clients[socket.id].roomName;
     var playerId = clients[socket.id].user;
+    io.to(roomName).emit('broadcast', 'Hahahahaha, ' + playerId + ' just got shot!!!');
+    io.to(roomName).emit('updateScore', {id: playerId, scoreChange: scoreGetShot});
     gameManager.addRecordEntry(roomName, 'GetShot', playerId);
     updateCurrentScores(gameManager.rooms[roomName]['currentScores'], {id: playerId, scoreChange: scoreGetShot}, io, roomName, gameManager);
-    io.to(roomName).emit('updateScore', {id: playerId, scoreChange: scoreGetShot});
     setTimeout(function(){
       clients[socket.id]['stun'] = false;
     }, 5000);
@@ -126,6 +128,7 @@ io.on('connection', function(socket){
       clients[socket.id]['loot']['banana']--;
       io.to(socket.id).emit('bananaPlaced', {x: data.x, y: data.y});
     }
+    io.to(roomName).emit('broadcast', 'Be careful, ' + ['evil', 'sneaky', 'bad-ass'][Math.floor(Math.random()*3)] + ' '+ clients[socket.id].user + ' just put a banana peal on the floor!');
     io.to(socket.id).emit('updateLoot', clients[socket.id]['loot']);
   });
 

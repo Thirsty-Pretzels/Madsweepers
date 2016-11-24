@@ -15,6 +15,7 @@
     --bone-gray: #E1D4C0;
     --background: #F5EDE3; /*merino-gray*/
     --blaze-orange: #FF6600; /*blaze-orange*/
+    --sweeper-red: #FF0000;
 }
 
 /*.gameButton {
@@ -322,15 +323,15 @@ ROOMLIST
   border-radius: 20px;
   width: 40px;
   height: 40px;
-  content: url('../images/banana.png');
+  content: url('../images/assets/banana.png');
   background-size: cover;
 }
 
 .lootBullet {
   border-radius: 20px;
-  width: 40px;
-  height: 40px;
-  content: url('../images/bullet.png');
+  width: 80px;
+  height: 80px;
+  content: url('../images/assets/arrowR.png');
   background-size: cover;
 }
 
@@ -338,24 +339,24 @@ ROOMLIST
   border-radius: 20px;
   width: 40px;
   height: 40px;
-  content: url('../images/shield.png');
+  content: url('../images/assets/shieldCopy.png');
   background-size: cover;
 }
 
 .bulletL {
-  background-image: url('../images/bulletL.png');
+  background-image: url('../images/assets/arrowL.png');
 }
 
 .bulletR {
-  background-image: url('../images/bulletR.png');
+  background-image: url('../images/assets/arrowR.png');
 }
 
 .bulletU {
-  background-image: url('../images/bulletU.png');
+  background-image: url('../images/assets/arrowU.png');
 }
 
 .bulletD {
-  background-image: url('../images/bulletD.png');
+  background-image: url('../images/assets/arrowD.png');
 }
 
 .bullet {
@@ -375,7 +376,7 @@ ROOMLIST
   position: absolute;
   width: var(--gridSize);
   height: var(--gridSize);
-  background-image: url('../images/banana.png');
+  background-image: url('../images/assets/banana.png');
   background-size: cover;
   background-repeat: no-repeat;
   border-width: 0;
@@ -532,21 +533,22 @@ ROOMLIST
 .grid-flag {
   width: var(--gridSize);
   height: var(--gridSize);
-  content: url('../images/flag.png');
+  content: url('../images/assets/flag3Copy.png');
   vertical-align: top;
 }
 
 .grid-wrongFlag {
   width: var(--gridSize);
   height: var(--gridSize);
-  content: url('../images/redCross.png');
+  content: url('../images/assets/x.png');
   vertical-align: top;
 }
 
 .grid-explosion {
   width: var(--gridSize);
   height: var(--gridSize);
-  content: url('../images/explosion.png');
+  content: url('../images/assets/explosion.png');
+  /*content: url('../images/assets/cloud_fire1.png');*/
   vertical-align: top;
 }
 
@@ -614,6 +616,11 @@ ROOMLIST
   height: var(--gridSize);
   border-width: 0;
   z-index: 4;
+}
+
+.gameResultImageArrow {
+  width: 80px;
+  height: 80px;
 }
 
 .scoreItem {
