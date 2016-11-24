@@ -49,6 +49,25 @@ REUSABLE COMPONENTS
   animation-duration: 1s;
   animation-name: slidein;
   padding: 2%;
+  margin: 1%;
+  border-width: 0px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #FAE5D3;
+  border-width: 10px;
+  border-style: solid;
+  border-color: black;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: -100%;
+  }
+
+  to {
+    margin-left: 0%;
+  }
 }
 
 .center-block {
@@ -107,7 +126,8 @@ button.active {
 body {
   font-family: "Luigi";
   color: var(--text);
-  background-color: var(--background);
+  /*background-color: var(--background);*/
+  background-color: #F0F9FF;
   font-size: 18px;
 }
 
@@ -123,17 +143,6 @@ LOGIN
 ===================================================
 */
 
-@keyframes slidein {
-  from {
-    margin-left: 100%;
-    width: 300%;
-  }
-
-  to {
-    margin-left: 0%;
-    width: 100%;
-  }
-}
 
 /* app.js */
 
@@ -151,13 +160,17 @@ LOGIN
   display: inline-block;
 }
 
-#userImage {
+.sameWidthCol {
+  width: 100px;
+}
+
+/*#userImage {
   float: left;
 }
 
 #userInfo {
   float: right;
-}
+}*/
 
 .login-banner {
   margin-top: -35px;
@@ -185,11 +198,10 @@ ROOMLIST
 }
 
 .roomList {
+  animation-duration: 1s;
+
   font-family: "Luigi";
   background-color: #FAE5D3;
-  border-width: 0px;
-  border-top-right-radius: 20px;
-  border-bottom-left-radius: 20px;
 }
 
 .roomName:hover {
@@ -200,14 +212,16 @@ ROOMLIST
 
 .roomList {
   font-family: "Luigi";
-  background-color: #FAE5D3;
-  border-width: 0px;
   border-top-right-radius: 20px;
   border-bottom-left-radius: 20px;
 }
 
 #section1 {
   float: left;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin: 1%;
+  animation-duration: 1s;
+  animation-name: slidein;
 }
 
 #section2 {
@@ -220,6 +234,11 @@ ROOMLIST
   text-align: center;
   float:right;
   color: var(--golden-poppy);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+/*  animation-duration: 1s;
+  animation-name: slidein;
+*/  padding: 2%;
+  margin: 1%;
 }
 
 #userInfoRender {
@@ -232,7 +251,7 @@ ROOMLIST
 
 #roomInfoRender {
   margin-left: 20%;
-  margin-top: -30%;
+  margin-top: -50%;
   text-align: center;
   border-radius: 10px;
   position: absolute;
@@ -572,7 +591,7 @@ ROOMLIST
 
 .gameResult {
   margin-left: 10%;
-  margin-top: 10%;
+  margin-top: 2%;
   position: absolute;
   background-color: grey;
   z-index: 3;

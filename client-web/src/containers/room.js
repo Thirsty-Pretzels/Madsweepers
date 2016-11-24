@@ -12,7 +12,6 @@ export class RoomList extends Component {
   }
 
   toggleReady() {
-    console.log('toggleing ready');
     this.props.toggleReady(this.props.userInfo.room, this.props.userInfo.username);
   }
 
@@ -20,7 +19,6 @@ export class RoomList extends Component {
     return (
       <div className='row' id='roomInfoRender'>
         <h3>{this.props.userInfo.room}</h3>
-        <br />
         <button
           onClick={this.toggleReady.bind(this)}>
            {this.props.userInfo.isReady ? 'Not Really' : 'Ready'}
@@ -30,11 +28,16 @@ export class RoomList extends Component {
             Exit
         </button>
         <br />
-        { Object.keys(this.props.roomInfo.userList).length !== 0 ? <UserEntry user={this.props.userInfo.username} /> : null}
-        { this.props.roomInfo.host && this.props.roomInfo.host !== this.props.userInfo.username ? <UserEntry user={this.props.roomInfo.host} /> : null}
-        {
-          Object.keys(this.props.roomInfo.userList).map((user) => {
-            return (user !== this.props.roomInfo.host && user !== this.props.userInfo.username) ? <UserEntry user={user} /> : null
+        { Object.keys(this.props.roomInfo.userList).length !== 0 ?
+          <UserEntry user={this.props.userInfo.username} />
+          : null}
+        { this.props.roomInfo.host && this.props.roomInfo.host !== this.props.userInfo.username ?
+          <UserEntry user={this.props.roomInfo.host} />
+          : null}
+        { Object.keys(this.props.roomInfo.userList).map((user) => {
+            return (user !== this.props.roomInfo.host && user !== this.props.userInfo.username) ?
+            <UserEntry user={user} />
+            : null
           })
         }
       </div>

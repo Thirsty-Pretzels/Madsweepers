@@ -17,7 +17,7 @@ export class RoomList extends Component {
     return (
       <div className="row roomList" id='roomListRender'>
 
-        <h1>Rooms</h1>
+        <h1>Rooms:</h1>
 
         <table id='roomListTable'>
           <tr>

@@ -22,7 +22,7 @@ export class RoomListEntry extends Component {
         className='roomName'
         onClick={this.enterRoom.bind(this, this.props.room.roomName)}
         >
-        <td>{this.props.room.roomName}</td>
+        <td> - {this.props.room.roomName}</td>
         <td>{this.props.room.numberOfPlayer}</td>
         <td>{this.props.room.roomStatus === 'staging' ? 'staging' : <ProgressBar minesLeft={this.props.room.minesLeft} minesCount={this.props.room.minesCount} />}</td>
         {this.props.room.host ? (<td>{this.props.room.host}</td>) : null}
