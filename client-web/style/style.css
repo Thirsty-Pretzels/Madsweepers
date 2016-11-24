@@ -3,11 +3,14 @@
     /*--swamp: #EFEFEF;*/
     --swamp: #D6EAF8;
     --endeavour: #0F5C9B;
-    --button: #FFC412; /*goldenpoppy*/
+    --button: #00CAEC; /*goldenpoppy*/
     --golden-poppy: #FFC412;
     --lemon: #FFEB0E;
     --malachite-green: #A0975A;
     --gridSize: 50px;
+
+    --componentBackground: #E3E3E3;
+    --appBackground: #f7f7f7;
 
     --dark-blue: #154890 ; /*grid*/
     --malibu-blue: #6699FF; /*sidebar*/
@@ -55,10 +58,10 @@ REUSABLE COMPONENTS
   border-top-right-radius: 20px;
   border-bottom-left-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: #FAE5D3;
+  background-color: var(--componentBackground);
   border-width: 10px;
   border-style: solid;
-  border-color: black;
+  border-color: var(--text);
 }
 
 @keyframes slidein {
@@ -127,8 +130,9 @@ button.active {
 body {
   font-family: "Luigi";
   color: var(--text);
-  /*background-color: var(--background);*/
-  background-color: #F0F9FF;
+  background-color: var(--appBackground);
+
+  /*background-color: #F0F9FF;*/
   font-size: 18px;
 }
 
@@ -202,7 +206,7 @@ ROOMLIST
   animation-duration: 1s;
 
   font-family: "Luigi";
-  background-color: #FAE5D3;
+  background-color: #FFFFBA;
 }
 
 .roomName:hover {
@@ -256,11 +260,15 @@ ROOMLIST
   text-align: center;
   border-radius: 10px;
   position: absolute;
-  background-color: grey;
+  background-color: #FFDFBA;
   z-index: 3;
   width: 40%;
   font-size: 25px;
   padding-top: 25px;
+  border-radius: 20px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: black;
 }
 
 .grid {
@@ -595,13 +603,16 @@ ROOMLIST
   margin-left: 10%;
   margin-top: 2%;
   position: absolute;
-  background-color: grey;
+  background-color: var(--swamp);
   z-index: 3;
   width: 45%;
   text-align: center;
   font-size: 25px;
   padding-top: 25px;
   border-radius: 20px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: black;
 }
 
 .gameResultTable {

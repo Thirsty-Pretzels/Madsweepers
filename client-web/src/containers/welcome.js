@@ -36,7 +36,6 @@ export class Welcome extends Component {
             type="submit"
             id='submit-button'
           > Let me play!
-            <i className="material-icons right">send</i>
            </button>
         </form>
       </div>
