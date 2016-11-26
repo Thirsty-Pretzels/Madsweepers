@@ -65,21 +65,52 @@ describe('Test Unit for Action Creator' , () => {
   	});
   });
 
-  it('', () => {
+  it('wen user open a space, returns the action with userinfo, including username and location information', () => {
+  	let action = actionCreator.openSpace('ThirstyPretzelsRock', {ready: true, status: 0, x: 6, y: 7});
 
+  	expect(action).to.deep.equal({
+  		type: 'OPEN-SPACE',
+  		playerId: 'ThirstyPretzelsRock',
+  		location: {
+  			ready: true,
+  			status: 0,
+  			x: 6,
+  			y: 7
+  		}
+  	});
   });
+
+  it('wen user opens a space, returns the action with userinfo, including username and location information', () => {
+  	let action = actionCreator.openSpace('ThirstyPretzelsRock', {ready: true, status: 4, x: 6, y: 7});
+
+  	expect(action).to.deep.equal({
+  		type: 'OPEN-SPACE',
+  		playerId: 'ThirstyPretzelsRock',
+  		location: {
+  			ready: true,
+  			status: 4,
+  			x: 6,
+  			y: 7
+  		}
+  	});
+  });
+
+  it('when user drops a flag, returns the action with userinfo, including username and location information', () => {
+  	let action = actionCreator.dropFlag('ThirstyPretzelsRock', {ready: true, status: 2, x: 10, y: 23});
+
+  	expect(action).to.deep.equal({
+  		type: 'DROP-FLAG',
+  		playerId: 'ThirstyPretzelsRock',
+  		location: {
+  			ready: true,
+  			status: 2,
+  			x: 10,
+  			y: 23
+  		}
+  	});
+  });
+
 });
-
-
-// export function createNewRoom(roomName, row, col, mineDensity) {
-//   return {
-//     type: 'CREATE-NEW-ROOM',
-//     roomName: roomName,
-//     row: row,
-//     col: col,
-//     mineDensity: mineDensity
-//   }
-// }
 
 // export function movePlayer(playerId, key, location, board) {
 //   var keyPress = 'STAY';
