@@ -1,5 +1,9 @@
 module.exports = function(io, socket, gameManager, roomName, myUserName, users, clients) {
   // object containing username, location, status
+<<<<<<< 4dc8a12931c80aeefacca2c1bd8d57b7cdc48324
+=======
+  console.log('in dance party handler');
+>>>>>>> Add dance party icon in loot
 
   if (clients[socket.id]['loot']['party'] > 0){
     clients[socket.id]['loot']['party']--;
