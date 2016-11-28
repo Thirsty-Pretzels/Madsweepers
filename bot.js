@@ -55,25 +55,25 @@ Bot.prototype.decide = function(board) {
   if (this.x > 0) {
     moves.push([this.x - 1][this.y]);
     if (board[this.x - 1][this.y]['status'] === 0){
-      moves.concat([this.x - 1][this.y],[this.x - 1][this.y],[this.x - 1][this.y]);
+      moves = moves.concat([this.x - 1][this.y],[this.x - 1][this.y],[this.x - 1][this.y]);
     }
   }
   if (this.x < board.length - 1) {
     moves.push([this.x + 1][this.y]);
     if (board[this.x + 1][this.y]['status'] === 0){
-      moves.concat([this.x + 1][this.y],[this.x + 1][this.y],[this.x + 1][this.y]);
+      moves = moves.concat([this.x + 1][this.y],[this.x + 1][this.y],[this.x + 1][this.y]);
     }
   }
   if (this.y > 0) {
     moves.push([this.x][this.y - 1]);
     if (board[this.x][this.y - 1]['status'] === 0){
-      moves.concat([this.x][this.y - 1],[this.x][this.y - 1],[this.x][this.y - 1]);
+      moves = moves.concat([this.x][this.y - 1],[this.x][this.y - 1],[this.x][this.y - 1]);
     }
   }
   if (this.y < board[0].length - 1) {
     moves.push([this.x][this.y + 1]);
     if (board[this.x][this.y + 1]['status'] === 0){
-      moves.concat([this.x][this.y + 1],[this.x][this.y + 1],[this.x][this.y + 1]);
+      moves = moves.concat([this.x][this.y + 1],[this.x][this.y + 1],[this.x][this.y + 1]);
     }
   }
 
