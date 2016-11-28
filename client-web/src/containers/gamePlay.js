@@ -30,6 +30,13 @@ class GamePlay extends Component {
           <BoardOverview />
           <ScoreBoard />
           <GameStatus />
+          <audio
+            ref="audio_tag" 
+            src="../../music/Mars.wav" 
+            autoPlay="autoplay"
+            controls="controls"
+            loop="loop"
+          />
         </div>
       </div>
       :
