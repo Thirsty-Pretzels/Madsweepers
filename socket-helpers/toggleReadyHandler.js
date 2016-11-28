@@ -1,4 +1,5 @@
 module.exports = function(io, socket, room, user, gameManager, users, clients) {
+  console.log(gameManager.rooms[room].players.playerLocations);
   gameManager.rooms[room].players.playerLocations[user].ready = !gameManager.rooms[room].players.playerLocations[user].ready;
   socket.emit('hasToggledReady', 'ok');
 
