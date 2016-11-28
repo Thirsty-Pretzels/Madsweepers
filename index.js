@@ -1,8 +1,8 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var Board = require('./board.js');
-var Players = require('./players.js');
+// var Board = require('./board.js');
+// var Players = require('./players.js');
 var GameManager = require('./gameManager.js');
 // // To uncomment when running db
 // var {runDataBase, db, getHighScoresFromDb, saveHighScoresInDb} = require('./redis.js');
