@@ -48,7 +48,6 @@ io.on('connection', function(socket){
   clients[socket.id] = {}
 
   socket.on('loginTempUser', username => {
-    console.log('new user: ', username);
     loginTempUserHandler(io, socket, users, username, gameManager.listRoom());
   });
 
@@ -162,7 +161,6 @@ io.on('connection', function(socket){
   });
 
   socket.on('disconnect', function(){
-    console.log('user(in the lobby) disconnected');
     var roomName = clients[socket.id]['roomName'];
     if(roomName){
       disconnectHandler(io, gameManager, gameManager.rooms[roomName].players, gameManager.rooms[roomName]['currentScores'], clients, socket, users);
