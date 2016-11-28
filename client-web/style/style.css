@@ -97,6 +97,10 @@ REUSABLE COMPONENTS
   font-size: 64px;
 }
 
+audio {
+  background: #4c4e5a;
+}
+
 /*
 ===================================================
 BUTTONS
