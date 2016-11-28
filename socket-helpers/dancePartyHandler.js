@@ -1,5 +1,6 @@
 module.exports = function(io, socket, gameManager, roomName, myUserName, users, clients) {
   // object containing username, location, status
+
   if (clients[socket.id]['loot']['party'] > 0){
     clients[socket.id]['loot']['party']--;
     io.to(socket.id).emit('updateLoot', clients[socket.id]['loot']);
@@ -11,9 +12,7 @@ module.exports = function(io, socket, gameManager, roomName, myUserName, users, 
         status[user].status = 5;
       }
     }
-
     const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
-
     io.to(roomName).emit('danceParty', status, boardSize);
 
     // get username of all players for the room we are in;

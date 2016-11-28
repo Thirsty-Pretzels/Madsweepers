@@ -33,7 +33,7 @@ class GamePlay extends Component {
           <audio
             ref="audio_tag" 
             src="../../music/Mars.wav" 
-            autoPlay="autoplay"
+            //autoPlay="autoplay"
             controls="controls"
             loop="loop"
           />

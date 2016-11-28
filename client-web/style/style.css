@@ -349,6 +349,15 @@ ROOMLIST
   background-size: cover;
 }
 
+.lootParty {
+  border-radius: 20px;
+  padding: 10px;
+  width: 65px;
+  height: 65px;
+  content: url('../images/assets/boombox2.png');
+  background-size: cover;
+}
+
 .bulletL {
   background-image: url('../images/assets/arrowL.png');
 }
