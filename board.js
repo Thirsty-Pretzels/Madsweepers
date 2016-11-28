@@ -92,9 +92,8 @@ Board.prototype.loot = function(x, y) {
 }
 
 //flag a mine
-Board.prototype.flag = function(x, y, name){
+Board.prototype.flag = function(x, y){
   if (this.board[x][y]['flaggedBy'] === null){
-    this.board[x][y]['flaggedBy'] = name;
     this.board[x][y]['status'] = 1;
   }
   if (this.board[x][y]['val'] === 9) {
@@ -103,11 +102,8 @@ Board.prototype.flag = function(x, y, name){
 }
 
 //unflag a mine, can only be performed by person who originally flagged.
-Board.prototype.unflag = function(x, y, name){
-  if (this.board[x][y]['flaggedBy'] === name) {
-    this.board[x][y]['flaggedBy'] = null;
-    this.board[x][y]['status'] = 0;
-  }
+Board.prototype.unflag = function(x, y){
+  this.board[x][y]['status'] = 0;
 }
 
 //remove loot from board
