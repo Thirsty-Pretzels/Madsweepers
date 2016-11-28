@@ -37,7 +37,7 @@ var gameManager = new GameManager();
 gameManager.createRoom('HR48');
 gameManager.createRoom('Trump Not President');
 // This keeps track of active player and its socket
-var clients = {roomName: null};
+var clients = {'template': {'roomName': null, 'wrongFlag': 0, 'user': null, 'loot': {'banana': 1, 'ammo': 10, 'shield': 0, 'party': 0}, 'stun': false}};
 
 // This keeps track of active users and its socket
 var users = {};
@@ -45,7 +45,9 @@ var users = {};
 io.on('connection', function(socket){
   console.log('a user connected');
 
-  clients[socket.id] = {}
+  io.to(socket.id).emit('directToMainPage');
+
+  clients[socket.id] = {roomName: null}
 
   socket.on('loginTempUser', username => {
     loginTempUserHandler(io, socket, users, username, gameManager.listRoom());
@@ -128,7 +130,7 @@ io.on('connection', function(socket){
       clients[socket.id]['loot']['banana']--;
       io.to(socket.id).emit('bananaPlaced', {x: data.x, y: data.y});
     }
-    io.to(roomName).emit('broadcast', 'Be careful, ' + ['evil', 'sneaky', 'bad-ass'][Math.floor(Math.random()*3)] + ' '+ clients[socket.id].user + ' just put a banana peal on the floor!');
+    io.to(roomName).emit('broadcast', 'Be careful, ' + ['evil', 'sneaky', 'bad-ass'][Math.floor(Math.random()*3)] + ' '+ clients[socket.id].user + ' put a banana on the floor!');
     io.to(socket.id).emit('updateLoot', clients[socket.id]['loot']);
   });
 
