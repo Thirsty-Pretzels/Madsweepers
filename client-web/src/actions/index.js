@@ -313,3 +313,9 @@ export function checkOutdatedMessage() {
     date: Date.now()
   }
 }
+
+export function directToMainPage() {
+  return {
+    type: 'DIRECT-TO-MAIN-PAGE'
+  }
+}

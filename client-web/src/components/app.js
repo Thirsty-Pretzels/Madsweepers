@@ -15,14 +15,15 @@ export class App extends Component {
   render() {
     return (
       <div className="container">
+        { this.props.directToMainPage ? this.redirect('') : null }
         <div className="row center-block">
           <div className="text-center" id='header-text'>
             {
-              this.props.userInfo.inRoom && this.props.broadcast.refresh ? 
+              this.props.userInfo.inRoom && this.props.broadcast.refresh ?
               this.props.broadcast.message :
               <div><image id='MadIcon'/> Mad Sweepers</div>
             }
-          </div> 
+          </div>
         </div>
           {this.props.children && React.cloneElement(this.props.children, {
             // this is where to pass props to all children components
@@ -36,7 +37,8 @@ export class App extends Component {
 var mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
-    broadcast: state.broadcast
+    broadcast: state.broadcast,
+    directToMainPage: directToMainPage
   }
 };
 
