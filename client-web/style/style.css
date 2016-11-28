@@ -3,7 +3,7 @@
     /*--swamp: #EFEFEF;*/
     --swamp: #D6EAF8;
     --endeavour: #0F5C9B;
-    --button: #00CAEC; /*goldenpoppy*/
+    --button: #FFC412; /*goldenpoppy*/
     --golden-poppy: #FFC412;
     --lemon: #FFEB0E;
     --malachite-green: #A0975A;
@@ -58,10 +58,11 @@ REUSABLE COMPONENTS
   border-top-right-radius: 20px;
   border-bottom-left-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: var(--componentBackground);
+  background-color: var(--text);
   border-width: 10px;
   border-style: solid;
-  border-color: var(--text);
+  border-color: var(--button);
+  color: var(--button);
 }
 
 @keyframes slidein {
@@ -102,7 +103,7 @@ BUTTONS
 ===================================================
 */
 
-button, a{
+button {
   font-size: 30px;
   font-family: "Mario";
   background-color: var(--button);
@@ -111,6 +112,7 @@ button, a{
   box-shadow: 0 5px #FF9900;
   margin-top: 6.5px;
   margin-left: 6px;
+  color: var(--text);
 }
 
 button:hover,
@@ -131,8 +133,6 @@ body {
   font-family: "Luigi";
   color: var(--text);
   background-color: var(--appBackground);
-
-  /*background-color: #F0F9FF;*/
   font-size: 18px;
 }
 
@@ -169,14 +169,6 @@ LOGIN
   width: 100px;
 }
 
-/*#userImage {
-  float: left;
-}
-
-#userInfo {
-  float: right;
-}*/
-
 .login-banner {
   margin-top: -35px;
 }
@@ -206,7 +198,9 @@ ROOMLIST
   animation-duration: 1s;
 
   font-family: "Luigi";
-  background-color: #FFFFBA;
+  border-color: var(--button);
+  background-color: var(--text);
+  color: var(--button);
 }
 
 .roomName:hover {
