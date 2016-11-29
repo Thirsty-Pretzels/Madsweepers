@@ -29,6 +29,8 @@ GameManager.prototype.createRoom = function(roomName, row, col, dangerFactor, io
   var currentScores = [];
   var gameRecord = {};
   var gameStatus = 'staging';
+
+  //filter for invalid room names
   if (roomName.match(/[A-Z]/gi)){
     roomName = roomName.split('').filter(function(a){
       return a.match(/[A-Z]/gi) || a === ' ';
@@ -49,7 +51,7 @@ GameManager.prototype.listRoom = function() {
      minesLeft: (this.rooms[roomName].board) ? this.rooms[roomName].board.minesLeft : 0,
      minesCount: (this.rooms[roomName].board) ? this.rooms[roomName].board.minesCount : 0,
      host: this.rooms[roomName].players.listPlayers()[0]
-   })
+   });
  }
 
  return roomList;
@@ -71,15 +73,15 @@ GameManager.prototype.roomDetail = function(roomName, users, clients) {
 
 GameManager.prototype.addRecordEntry = function(roomName, event, scorer) {
   // Event List:
-  // 'OpenSpace':            
-  // 'StepOnMine':           
-  // 'FlagRight':            
-  // 'FlagWrong':           
-  // 'GetShot':              
-  // 'PlaceBanana':          
-  // 'StepOnBanana':         
-  // 'Shield':               
-  // 'FireDance':            
+  // 'OpenSpace':
+  // 'StepOnMine':
+  // 'FlagRight':
+  // 'FlagWrong':
+  // 'GetShot':
+  // 'PlaceBanana':
+  // 'StepOnBanana':
+  // 'Shield':
+  // 'FireDance':
   if (this.rooms[roomName].gameRecord[scorer][event]) {
     this.rooms[roomName].gameRecord[scorer][event]++;
   } else {
@@ -111,7 +113,7 @@ GameManager.prototype.startGame = function(roomName) {
 
 GameManager.prototype.endGame = function(roomName) {
   this.rooms[roomName].gameStatus = 'staging';
-  
+
   return this.rooms[roomName].gameRecord;
 }
 

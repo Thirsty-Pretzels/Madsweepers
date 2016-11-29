@@ -11,7 +11,7 @@ module.exports = function(io, roomName, players, data, boardSize, clients, socke
     console.log('player loc',playerLoc)
     if (board.board[playerLoc.y][playerLoc.x]['surface']['banana'] === true) {
       board.removeBanana(playerLoc.x, playerLoc.y);
-      io.to(roomName).emit('broadcast', 'uhh oh, ' + playerId + ' just slipped on a banana peal!!!');
+      io.to(roomName).emit('broadcast', 'uh oh, ' + playerId + ' just slipped on a banana!!');
       io.to(roomName).emit('bananaUsed', {x: playerLoc.x, y: playerLoc.y});
       if (playerLoc.x > 0 && playerLoc.y > 0 && playerLoc.y < board.board.length && playerLoc.x < board.board[0].length){
         players.move(playerId, direction, boardSize);
