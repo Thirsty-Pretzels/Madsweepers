@@ -87,7 +87,7 @@ Board.prototype.uncover = function(data, io, roomName, gameManager) {
 
 //flag a mine
 Board.prototype.flag = function(data, io, roomName, gameManager, client) {
-  let score = 0;
+  var score = 0;
   var loc = data[1];
   var status = 0;
   var loot = ['ammo', 'shield', 'banana', 'party'];
@@ -99,18 +99,22 @@ Board.prototype.flag = function(data, io, roomName, gameManager, client) {
     score = scoreRightFlag;
     status = 1;
     this.board[loc.y][loc.x]['status'] = 1;
+
     if (Math.random() > .5 && Date.now() - client['wrongFlag'] > 1000){
       loot = loot[Math.floor(Math.random() * loot.length)];
       client['loot'][loot]++;
+      gameManager.addRecordEntry(roomName, 'FlagRight', data[0]);
       console.log('loot: ', client['loot'], loot, client.id);
       io.to(client.id).emit('updateLoot', client['loot']);
     }
 
   } else {
     client['wrongFlag'] = Date.now();
+     gameManager.addRecordEntry(roomName, 'FlagWrong', data[0]);
     score = scoreWrongFlag;
     this.board[loc.y][loc.x]['status'] = 3;
     status = 3;
+
     setTimeout(()=>{
       this.board[loc.y][loc.x]['status'] = 0;
       io.to(roomName).emit('updateBoard', {'type': 1, 'locationX': data[1].x, 'locationY': data[1].y, 'status': 0});
