@@ -149,6 +149,7 @@ io.on('connection', function(socket){
 
   socket.on('bananaOut', function(data){
     var roomName = clients[socket.id]['roomName'];
+    console.log('data: ', data);
     if(clients[socket.id]['loot']['banana'] > 0 && gameManager.rooms[roomName].board.placeBanana(data.x, data.y)){
       clients[socket.id]['loot']['banana']--;
       io.to(socket.id).emit('bananaPlaced', {x: data.x, y: data.y});
@@ -159,7 +160,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('shoot', function(data){
-    if(clients[socket.id]['loot']['ammo'] > 0){
+    if(clients[socket.id]['loot']['ammo'] > 0 && !clients[socket.id]['stun']){
       clients[socket.id]['loot']['ammo']--;
       io.to(clients[socket.id]['roomName']).emit('bulletOut', data, Math.floor(Math.random() * 100000000000).toString(36));
       io.to(socket.id).emit('updateLoot', clients[socket.id]['loot']);
