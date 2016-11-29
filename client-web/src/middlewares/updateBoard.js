@@ -7,6 +7,7 @@ import * as actions from '../actions/index';
 export function boardMiddleware(store) {
   return next => action => {
     if (action.type === 'LOGIN-TEMP-USER') {
+      console.log('I am here, haha: ', action.payload);
       socket.emit('loginTempUser', action.payload);
     }
 
