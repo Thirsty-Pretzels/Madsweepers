@@ -37,8 +37,12 @@ var gameManager = new GameManager();
 gameManager.createRoom('HR48');
 gameManager.createRoom('Trump Not President');
 // This keeps track of active player and its socket
+<<<<<<< HEAD
 var clients = {};
 // {'template': {'roomName': null, 'wrongFlag': 0, 'user': null, 'loot': {'banana': 1, 'ammo': 10, 'shield': 0, 'party': 0}, 'stun': false}};
+=======
+var clients = {'template': {'roomName': null, 'wrongFlag': 0, 'user': null, 'id': null, 'loot': {'banana': 1, 'ammo': 10, 'shield': 0, 'party': 0}, 'stun': false}};
+>>>>>>> 1f2712f8ac4a0232b0429a1a25e7c20c344834e5
 
 // This keeps track of active users and its socket
 var users = {};
@@ -55,7 +59,7 @@ io.on('connection', function(socket){
 
   io.to(socket.id).emit('directToMainPage');
 
-  clients[socket.id] = {roomName: null}
+  clients[socket.id] = {'roomName': null, 'id': socket.id};
 
 
   socket.on('loginTempUser', username => {
@@ -152,8 +156,12 @@ io.on('connection', function(socket){
     if(clients[socket.id]['loot']['banana'] > 0 && gameManager.rooms[roomName].board.placeBanana(data.x, data.y)){
       clients[socket.id]['loot']['banana']--;
       io.to(socket.id).emit('bananaPlaced', {x: data.x, y: data.y});
+      io.to(roomName).emit('broadcast', 'Be careful, ' + ['evil', 'sneaky', 'bad-ass'][Math.floor(Math.random()*3)] + ' '+ clients[socket.id].user + ' put a banana on the floor!');
     }
+<<<<<<< HEAD
     io.to(roomName).emit('broadcast', 'Be careful, ' + ['evil', 'sneaky', 'bad-ass'][Math.floor(Math.random()*3)] + ' '+ clients[socket.id].user + ' just put a banana peal on the floor!');
+=======
+>>>>>>> 1f2712f8ac4a0232b0429a1a25e7c20c344834e5
     io.to(socket.id).emit('updateLoot', clients[socket.id]['loot']);
   });
 
@@ -176,7 +184,13 @@ io.on('connection', function(socket){
 
   socket.on('dropFlag', function(data){
     var roomName = clients[socket.id]['roomName'];
-    dropFlagHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, socket, clients, gameManager);
+    var score = gameManager.rooms[roomName].board.flag(data, io, roomName, gameManager, clients[socket.id]);
+    if (score !== 0){
+      updateCurrentScores(gameManager.rooms[roomName]['currentScores'], {id: data[0], scoreChange: score}, io, roomName, gameManager);
+      io.to(roomName).emit('updateScore', {id: data[0], scoreChange: score});
+    }
+
+    // dropFlagHandler(io, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, socket, clients, gameManager);
   });
 
   socket.on('getHighScores', function(){
