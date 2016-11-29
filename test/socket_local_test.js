@@ -23,6 +23,16 @@ describe('socket server testing', function() {
 		client.disconnect();
 	});
 
+  it ('Echos message: bidirectional data flow between client and server', () => {
+    client.on('connect', () => {
+      client.on('echo', function (msg) {
+        msg.should.equal ('Hello World');
+        done();
+      });
+      client.emit('echo', 'Hello World');
+    })
+  });
+
   it('Server should send back an object with basic userInfo, when user tries to login with a new username', (done) => {
     var playerId = 'traderJoe';
 
