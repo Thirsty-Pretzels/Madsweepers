@@ -41,8 +41,4 @@ describe('socket server testing', function() {
 	  	}); 
     });
   });
-
-  // it('', (done) => {
-  // 	done();
-  // });
 });
