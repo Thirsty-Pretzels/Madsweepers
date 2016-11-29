@@ -37,12 +37,8 @@ var gameManager = new GameManager();
 gameManager.createRoom('HR48');
 gameManager.createRoom('Trump Not President');
 // This keeps track of active player and its socket
-<<<<<<< HEAD
-var clients = {};
-// {'template': {'roomName': null, 'wrongFlag': 0, 'user': null, 'loot': {'banana': 1, 'ammo': 10, 'shield': 0, 'party': 0}, 'stun': false}};
-=======
+
 var clients = {'template': {'roomName': null, 'wrongFlag': 0, 'user': null, 'id': null, 'loot': {'banana': 1, 'ammo': 10, 'shield': 0, 'party': 0}, 'stun': false}};
->>>>>>> 1f2712f8ac4a0232b0429a1a25e7c20c344834e5
 
 // This keeps track of active users and its socket
 var users = {};
