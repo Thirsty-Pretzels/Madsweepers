@@ -90,7 +90,7 @@ Board.prototype.flag = function(data, io, roomName, gameManager, client) {
   var score = 0;
   var loc = data[1];
   var status = 0;
-  var loot = ['ammo', 'shield', 'banana', 'party'];
+  var loot = [['ammo', 5], ['shield', 1, 'ammo', 2], ['shield', 1], ['banana', 2], ['party', 1]];
   if (this.board[loc.y][loc.x]['status'] !== 0){
     return 0;
   }
@@ -102,9 +102,8 @@ Board.prototype.flag = function(data, io, roomName, gameManager, client) {
 
     if (Math.random() > .5 && Date.now() - client['wrongFlag'] > 1000){
       loot = loot[Math.floor(Math.random() * loot.length)];
-      client['loot'][loot]++;
-      if (loot === 'ammo'){
-        client['loot'][loot] += 4;
+      for (var i = 0; i < loot.length; i += 2){
+        client['loot'][loot[i]] += loot[i + 1];
       }
       gameManager.addRecordEntry(roomName, 'FlagRight', data[0]);
       io.to(client.id).emit('updateLoot', client['loot']);
