@@ -1,10 +1,10 @@
 var defaultState = {
-  username: '', 
-  tempUniqUserId: '', 
-  status: false, 
-  userCode: 1, 
-  room: '', 
-  inRoom: false, 
+  username: '',
+  tempUniqUserId: '',
+  status: false,
+  userCode: 1,
+  room: '',
+  inRoom: false,
   isReady: false,
   showCreatePanel: false
 };
@@ -17,13 +17,15 @@ export default function(state = defaultState, action) {
     newState.tempUniqUserId = action.payload.tempUniqUserId;
     newState.userCode = action.payload.userCode;
 
+
     return newState;
   } else if (action.type === 'ENTERED-ROOM') {
   	newState.room = action.room;
   	newState.inRoom = true;
     newState.isReady = false;
 
-  	return newState; 
+
+  	return newState;
   } else if (action.type === 'LEFT-ROOM') {
   	newState.room = '';
   	newState.inRoom = false;

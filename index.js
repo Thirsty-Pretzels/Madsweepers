@@ -1,8 +1,8 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var Board = require('./board.js');
-var Players = require('./players.js');
+// var Board = require('./board.js');
+// var Players = require('./players.js');
 var GameManager = require('./gameManager.js');
 // // To uncomment when running db
 // var {runDataBase, db, getHighScoresFromDb, saveHighScoresInDb} = require('./redis.js');
@@ -37,6 +37,7 @@ var gameManager = new GameManager();
 gameManager.createRoom('HR48');
 gameManager.createRoom('Trump Not President');
 // This keeps track of active player and its socket
+
 var clients = {'template': {'roomName': null, 'wrongFlag': 0, 'user': null, 'id': null, 'loot': {'banana': 1, 'ammo': 10, 'shield': 0, 'party': 0}, 'stun': false}};
 
 // This keeps track of active users and its socket
@@ -55,6 +56,7 @@ io.on('connection', function(socket){
   io.to(socket.id).emit('directToMainPage');
 
   clients[socket.id] = {'roomName': null, 'id': socket.id};
+
 
   socket.on('loginTempUser', username => {
     loginTempUserHandler(io, socket, users, username, gameManager.listRoom());
@@ -142,7 +144,7 @@ io.on('connection', function(socket){
     setTimeout(function(){
       clients[socket.id]['stun'] = false;
     }, 5000);
-  
+
   });
 
   socket.on('bananaOut', function(data){
@@ -152,6 +154,7 @@ io.on('connection', function(socket){
       io.to(socket.id).emit('bananaPlaced', {x: data.x, y: data.y});
       io.to(roomName).emit('broadcast', 'Be careful, ' + ['evil', 'sneaky', 'bad-ass'][Math.floor(Math.random()*3)] + ' '+ clients[socket.id].user + ' put a banana on the floor!');
     }
+
     io.to(socket.id).emit('updateLoot', clients[socket.id]['loot']);
   });
 

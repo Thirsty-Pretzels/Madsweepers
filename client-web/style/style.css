@@ -142,7 +142,7 @@ body {
 
 li {
   font-family: "Luigi";
-  color: var(--text);
+  color: var(--button);
   font-size: 18px;
 }
 
@@ -208,9 +208,9 @@ ROOMLIST
 }
 
 .roomName:hover {
+  font-family: 'Mario';
   font-style: italic;
   cursor: pointer;
-  color: var(--dark-blue);
 }
 
 .roomList {
@@ -427,7 +427,32 @@ ROOMLIST
   z-index: 2;
 }
 
+.player-up {
+  position: absolute;
+  width: var(--gridSize);
+  height: var(--gridSize);
+  background-image: url('../images/robot-up.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: .2s;
+  border-width: 0;
+  z-index: 2;
+}
+
+.player-down {
+  position: absolute;
+  width: var(--gridSize);
+  height: var(--gridSize);
+  background-image: url('../images/robot-down.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition-duration: .2s;
+  border-width: 0;
+  z-index: 2;
+}
+
 .player-text {
+  transition-duration: .2s;
   z-index: 2;
   position: absolute;
 }

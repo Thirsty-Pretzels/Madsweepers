@@ -16,6 +16,10 @@ class Player extends Component {
       status = 'player-left';
     } else if ( this.props.playerLocation.status === 2 ) {
       status = 'player-right';
+    } else if ( this.props.playerLocation.status === 3 ) {
+      status = 'player-up';
+    } else if ( this.props.playerLocation.status === 4 ) {
+      status = 'player-down';
     } else if ( this.props.playerLocation.status === 5 ) {
       status = 'player player-dance';
       setTimeout( (() => this.props.endDance(this.props.username)), 5000)
@@ -30,7 +34,7 @@ class Player extends Component {
           className='player-text'
           style={{
             marginLeft: (this.props.playerLocation.x - this.props.currentBoardView[0][0][0]) * 50 + 1,
-            marginTop: (this.props.playerLocation.y - this.props.currentBoardView[0][0][1]) * 50 + 1
+            marginTop: (this.props.playerLocation.y - this.props.currentBoardView[0][0][1]) * 50 + 1 - 13
           }}
         >{this.props.username}</text>
         <div

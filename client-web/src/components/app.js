@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import Board from '../containers/board';
-import PlayGround from '../containers/playGround';
-import ScoreBoard from '../containers/scoreBoard';
-import GameStatus from '../containers/gameStatus';
+import { directToMainPage } from '../actions/index';
+import { bindActionCreators } from 'redux';
+
+var count = 0;
 
 export class App extends Component {
-  // this is the router on the App component
   redirect(pageTo) {
     browserHistory.push('/' + pageTo);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // to prevent server crashing on actions from non-existing users
+    // on every socket 'connection' reload the page,
+    // so after server restart, clients will automatically restart as well
+    if (count > 0 && nextProps.shouldReload) {
+      location.reload(true);
+    }
+    count++;
   }
 
   render() {
@@ -18,11 +27,11 @@ export class App extends Component {
         <div className="row center-block">
           <div className="text-center" id='header-text'>
             {
-              this.props.userInfo.inRoom && this.props.broadcast.refresh ? 
+              this.props.userInfo.inRoom && this.props.broadcast.refresh ?
               this.props.broadcast.message :
               <div><image id='MadIcon'/> Mad Sweepers</div>
             }
-          </div> 
+          </div>
         </div>
           {this.props.children && React.cloneElement(this.props.children, {
             // this is where to pass props to all children components
@@ -36,8 +45,13 @@ export class App extends Component {
 var mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
-    broadcast: state.broadcast
+    broadcast: state.broadcast,
+    shouldReload: state.directToMainPage
   }
 };
 
-export default connect(mapStateToProps)(App);
+var mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ directToMainPage: directToMainPage }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

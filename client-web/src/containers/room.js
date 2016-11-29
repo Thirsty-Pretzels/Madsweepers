@@ -6,7 +6,7 @@ import UserEntry from './userEntry';
 
 export class RoomList extends Component {
 	leaveRoom() {
-    if(this.props.userInfo.inRoom) {
+    if (this.props.userInfo.inRoom) {
       this.props.leaveRoom(this.props.userInfo.room, this.props.userInfo.username);
     }
   }

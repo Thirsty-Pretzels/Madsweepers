@@ -149,4 +149,8 @@ export default function(store) {
       store.dispatch(actions.checkOutdatedMessage());
     }, 3000);
   });
+
+  socket.on('directToMainPage', () => {
+    store.dispatch(actions.directToMainPage(true));
+  });
 }

@@ -18,6 +18,7 @@ import bulletLocationReducer from './reducer_bullet_location';
 import bananaLocationReducer from './reducer_banana_location';
 import lootReducer from './reducer_loot';
 import broadcastReducer from './reducer_broadcast';
+import directToMainPageReducer from './reducer_direct_to_main_page';
 
 //combineReducers takes in an object
 // the name of the key allows you to access the state in the redux state store
@@ -40,7 +41,8 @@ const rootReducer = combineReducers({
   bulletLocation: bulletLocationReducer,
   bananaLocation: bananaLocationReducer,
   loot: lootReducer,
-  broadcast: broadcastReducer
+  broadcast: broadcastReducer,
+  directToMainPage: directToMainPageReducer
 });
 
 export default rootReducer;
