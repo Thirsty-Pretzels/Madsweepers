@@ -19,6 +19,9 @@ class Player extends Component {
     } else if ( this.props.playerLocation.status === 5 ) {
       status = 'player player-dance';
       setTimeout( (() => this.props.endDance(this.props.username)), 5000)
+    } else if ( this.props.playerLocation.status === 6 ) {
+      status = 'player player-stun';
+      setTimeout( (() => this.props.endDance(this.props.username)), 5000)
     }
 
     return (

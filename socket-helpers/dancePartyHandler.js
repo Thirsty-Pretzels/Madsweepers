@@ -2,6 +2,7 @@ module.exports = function(io, socket, gameManager, roomName, myUserName, users, 
   // object containing username, location, status
 
   if (clients[socket.id]['loot']['party'] > 0){
+    io.to(roomName).emit('broadcast', myUserName + ' said: Sometimes, You just gotta dance!!!');
     clients[socket.id]['loot']['party']--;
     io.to(socket.id).emit('updateLoot', clients[socket.id]['loot']);
     var status = gameManager.rooms[roomName].players.playerLocations;

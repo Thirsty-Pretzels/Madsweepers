@@ -126,9 +126,23 @@ io.on('connection', function(socket){
     io.to(roomName).emit('updateScore', {id: playerId, scoreChange: scoreGetShot});
     gameManager.addRecordEntry(roomName, 'GetShot', playerId);
     updateCurrentScores(gameManager.rooms[roomName]['currentScores'], {id: playerId, scoreChange: scoreGetShot}, io, roomName, gameManager);
+
+    // add CSS on stunned player by changing status to 5
+    var status = gameManager.rooms[roomName].players.playerLocations;
+    for (var user in status) {
+      if (user === playerId) {
+        status[user].status = 6;
+      }
+    }
+
+    // use danceParty handler to add CSS for stunned player
+    const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
+    io.to(roomName).emit('danceParty', status, boardSize);
+
     setTimeout(function(){
       clients[socket.id]['stun'] = false;
     }, 5000);
+  
   });
 
   socket.on('bananaOut', function(data){
