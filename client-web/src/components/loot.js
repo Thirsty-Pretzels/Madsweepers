@@ -17,5 +17,11 @@ export default Loot = ({loot}) => (
       <image className='lootShield' />
       <span>{ loot.shield }</span>
     </div>
+
+    <div className='lootItem'>
+      <image className='lootParty' />
+      <span>{ loot.party }</span>
+    </div>
+
   </div>
 );

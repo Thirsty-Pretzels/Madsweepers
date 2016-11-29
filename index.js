@@ -43,12 +43,12 @@ var clients = {};
 // This keeps track of active users and its socket
 var users = {};
 
-// io.use((socket, next) => {
-//   if ( clients. clients[socket.id] ) {
-//     next();
-//   } else {
-//   }
-// });
+var verify = function(socket, room){
+  if(arguments.length > 1){
+    return clients[socket.id].hasOwnProperty('user') && gameManager.rooms.hasOwnProperty(room);
+  }
+  return clients[socket.id].hasOwnProperty('user');
+}
 
 io.on('connection', function(socket){
   console.log('a user connected');
@@ -128,9 +128,23 @@ io.on('connection', function(socket){
     io.to(roomName).emit('updateScore', {id: playerId, scoreChange: scoreGetShot});
     gameManager.addRecordEntry(roomName, 'GetShot', playerId);
     updateCurrentScores(gameManager.rooms[roomName]['currentScores'], {id: playerId, scoreChange: scoreGetShot}, io, roomName, gameManager);
+
+    // add CSS on stunned player by changing status to 5
+    var status = gameManager.rooms[roomName].players.playerLocations;
+    for (var user in status) {
+      if (user === playerId) {
+        status[user].status = 6;
+      }
+    }
+
+    // use danceParty handler to add CSS for stunned player
+    const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
+    io.to(roomName).emit('danceParty', status, boardSize);
+
     setTimeout(function(){
       clients[socket.id]['stun'] = false;
     }, 5000);
+
   });
 
   socket.on('bananaOut', function(data){
@@ -153,7 +167,11 @@ io.on('connection', function(socket){
 
   socket.on('openSpace', function(data){
     var roomName = clients[socket.id]['roomName'];
-    openSpaceHandler(io, socket, clients, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, gameManager);
+    var score = gameManager.rooms[roomName].board.uncover(data, io, roomName, gameManager);
+    updateCurrentScores(gameManager.rooms[roomName]['currentScores'], {id: data[0], scoreChange: score}, io, roomName, gameManager);
+    io.to(roomName).emit('updateScore', {id: data[0], scoreChange: score});
+
+    // openSpaceHandler(io, socket, clients, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, gameManager);
   });
 
   socket.on('dropFlag', function(data){
