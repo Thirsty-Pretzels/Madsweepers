@@ -103,8 +103,10 @@ Board.prototype.flag = function(data, io, roomName, gameManager, client) {
     if (Math.random() > .5 && Date.now() - client['wrongFlag'] > 1000){
       loot = loot[Math.floor(Math.random() * loot.length)];
       client['loot'][loot]++;
+      if (loot === 'ammo'){
+        client['loot'][loot] += 4;
+      }
       gameManager.addRecordEntry(roomName, 'FlagRight', data[0]);
-      console.log('loot: ', client['loot'], loot, client.id);
       io.to(client.id).emit('updateLoot', client['loot']);
     }
 
