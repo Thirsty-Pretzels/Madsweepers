@@ -314,8 +314,9 @@ export function checkOutdatedMessage() {
   }
 }
 
-export function directToMainPage() {
+export function directToMainPage(bool) {
   return {
-    type: 'DIRECT-TO-MAIN-PAGE'
+    type: 'DIRECT-TO-MAIN-PAGE',
+    payload: bool
   }
 }

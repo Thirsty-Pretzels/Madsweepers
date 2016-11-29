@@ -13,7 +13,6 @@ export class RoomList extends Component {
   }
 
   render() {
-    console.log(this.props.roomList);
     return (
       <div className="row roomList" id='roomListRender'>
 

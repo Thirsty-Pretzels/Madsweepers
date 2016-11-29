@@ -1,6 +1,6 @@
-export default function(state, action) {
+export default function(state=false, action) {
   if ( action.type === 'DIRECT-TO-MAIN-PAGE' ) {
-    return true;
+    return action.payload;
   }
 
   return false;

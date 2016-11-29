@@ -151,6 +151,6 @@ export default function(store) {
   });
 
   socket.on('directToMainPage', () => {
-    store.dispatch(actions.directToMainPage());
+    store.dispatch(actions.directToMainPage(true));
   });
 }

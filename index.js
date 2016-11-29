@@ -37,15 +37,25 @@ var gameManager = new GameManager();
 gameManager.createRoom('HR48');
 gameManager.createRoom('Trump Not President');
 // This keeps track of active player and its socket
-var clients = {roomName: null};
+var clients = {};
+// {'template': {'roomName': null, 'wrongFlag': 0, 'user': null, 'loot': {'banana': 1, 'ammo': 10, 'shield': 0, 'party': 0}, 'stun': false}};
 
 // This keeps track of active users and its socket
 var users = {};
 
+// io.use((socket, next) => {
+//   if ( clients. clients[socket.id] ) {
+//     next();
+//   } else {
+//   }
+// });
+
 io.on('connection', function(socket){
   console.log('a user connected');
 
-  clients[socket.id] = {};
+  io.to(socket.id).emit('directToMainPage');
+
+  clients[socket.id] = {roomName: null}
 
 
   socket.on('loginTempUser', username => {

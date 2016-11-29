@@ -33,7 +33,7 @@ class GamePlay extends Component {
         </div>
       </div>
       :
-      <div>{ this.props.redirect('') }</div>
+      <div>{ location.replace('http://localhost:8080') }</div>
     );
   }
 }
