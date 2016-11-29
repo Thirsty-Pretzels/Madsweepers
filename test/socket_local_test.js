@@ -4,6 +4,7 @@
 var should = require('should');
 var io = require('socket.io-client');
 var expect = require('chai').expect;
+var server = require('../index');
 
 var socketURL = 'http://localhost:3000';
 var options ={
@@ -40,8 +41,4 @@ describe('socket server testing', function() {
 	  	}); 
     });
   });
-
-  // it('', (done) => {
-  // 	done();
-  // });
 });
