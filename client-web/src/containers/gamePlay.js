@@ -31,10 +31,11 @@ class GamePlay extends Component {
           <ScoreBoard />
           <GameStatus />
           <audio
-            ref="audio_tag" 
-            src="../../music/Mars.wav" 
-            //autoPlay="autoplay"
-            controls="controls"
+            ref="audio_tag"
+            src="../../music/Mars.wav"
+            autoPlay="autoplay"
+            // controls="controls"
+            muted={ false }
             loop="loop"
           />
         </div>
