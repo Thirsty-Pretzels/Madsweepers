@@ -22,7 +22,7 @@ Board.prototype.generate = function (n, m, d, timeStamp) {
   for (var i = 0; i < n; i++){
     this.board.push([]);
     for (var j = 0; j < m; j++){
-      this.board[i].push({'val': 0, 'status': 0, 'flaggedBy': null, 'surface': {banana: false}});
+      this.board[i].push({'val': 0, 'status': 0, 'surface': {banana: false}});
     }
   }
 
@@ -61,20 +61,32 @@ Board.prototype.generate = function (n, m, d, timeStamp) {
 }
 
 //reveal a tile
-Board.prototype.uncover = function(x, y) {
-  if (this.board[x][y]['revealed'] === false) {
-    this.board[x][y]['revealed'] = true;
-    this.todos--;
+Board.prototype.uncover = function(data, io, roomName, gameManager) {
+  var score = 0;
+  console.log('io, ', io)
+  if(this.board[data[1].y][data[1].x]['status'] === 0){
+    this.board[data[1].y][data[1].x]['status'] = 2;
+    if (this.board[data[1].y][data[1].x]['val'] === 9){
+      this.minesLeft --;
+      score = scoreRevealMine;
+      gameManager.addRecordEntry(roomName, 'StepOnMine', data[0]);
+    } else {
+      score = scoreRevealspace;
+      gameManager.addRecordEntry(roomName, 'OpenSpace', data[0]);
+    }
+    if (this.minesLeft === 0){
+      this.generate(this.board.length, this.board[0].length);
+      setTimeout(function(){
+        io.to(roomName).emit('updateBoard', {type: 0, board: this.board});
+      }, 300);
+    }
   }
-  if (this.board[x][y]['val'] === 9){
-    this.minesLeft --;
-  }
-  return this.board[x][y]['val'];
+  io.to(roomName).emit('updateBoard', {type: 1, locationX: data[1].x, locationY: data[1].y, status: 2});
+  return score;
 }
 
 Board.prototype.explode = function(x, y){
   this.board[x][y]['status'] = 4;
-  this.board[x][y]['flaggedBy'] = null;
   this.board[x][y]['surface'] = null;
   for (var i = -1; i < 2; i++){
     for (var j = -1; j < 2; j++){
@@ -93,9 +105,7 @@ Board.prototype.loot = function(x, y) {
 
 //flag a mine
 Board.prototype.flag = function(x, y){
-  if (this.board[x][y]['flaggedBy'] === null){
-    this.board[x][y]['status'] = 1;
-  }
+  this.board[x][y]['status'] = 1;
   if (this.board[x][y]['val'] === 9) {
     this.minesLeft --;
   }
@@ -130,28 +140,28 @@ Board.prototype.removeBanana = function(x, y) {
   this.board[y][x]['surface']['banana'] = false;
 }
 
-//get tallies for flagged mines
-Board.prototype.tally = function(){
-  var tallies = {};
-  var name;
-  var err = 0;
-  for (var i = 0; i < this.board.length; i++){
-    for (var j = 0; j < this.board[i].length; j++){
-      name = this.board[i][j]['flaggedBy'];
-      if (this.board[i][j]['val'] === 9 && name !== null){
-        tallies[name] = tallies.hasOwnProperty(name) ? tallies[name] + 1 : 1;
-      }
-      if (this.board[i][j]['revealed'] === false && this.board[i][j]['val'] !== 9){
-        err ++;
-      }
-    }
-  }
-  if (err) {
-    this.todos = err;
-    return err
-  }
-  return tallies;
-}
+// //get tallies for flagged mines
+// Board.prototype.tally = function(){
+//   var tallies = {};
+//   var name;
+//   var err = 0;
+//   for (var i = 0; i < this.board.length; i++){
+//     for (var j = 0; j < this.board[i].length; j++){
+//       name = this.board[i][j]['flaggedBy'];
+//       if (this.board[i][j]['val'] === 9 && name !== null){
+//         tallies[name] = tallies.hasOwnProperty(name) ? tallies[name] + 1 : 1;
+//       }
+//       if (this.board[i][j]['revealed'] === false && this.board[i][j]['val'] !== 9){
+//         err ++;
+//       }
+//     }
+//   }
+//   if (err) {
+//     this.todos = err;
+//     return err
+//   }
+//   return tallies;
+// }
 
 // uncomment to generate a sample board on startup
 // var hjk = new Board();

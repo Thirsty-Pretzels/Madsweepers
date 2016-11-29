@@ -42,6 +42,13 @@ var clients = {'template': {'roomName': null, 'wrongFlag': 0, 'user': null, 'loo
 // This keeps track of active users and its socket
 var users = {};
 
+var verify = function(socket, room){
+  if(arguments.length > 1){
+    return clients[socket.id].hasOwnProperty('user') && gameManager.rooms.hasOwnProperty(room);
+  }
+  return clients[socket.id].hasOwnProperty('user');
+}
+
 io.on('connection', function(socket){
   console.log('a user connected');
 
@@ -144,7 +151,11 @@ io.on('connection', function(socket){
 
   socket.on('openSpace', function(data){
     var roomName = clients[socket.id]['roomName'];
-    openSpaceHandler(io, socket, clients, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, gameManager);
+    var score = gameManager.rooms[roomName].board.uncover(data, io, roomName, gameManager);
+    updateCurrentScores(gameManager.rooms[roomName]['currentScores'], {id: data[0], scoreChange: score}, io, roomName, gameManager);
+    io.to(roomName).emit('updateScore', {id: data[0], scoreChange: score});
+
+    // openSpaceHandler(io, socket, clients, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, gameManager);
   });
 
   socket.on('dropFlag', function(data){

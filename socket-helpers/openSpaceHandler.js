@@ -20,7 +20,6 @@ module.exports = function(io, socket, clients, roomName, board, currentScores, d
       gameManager.addRecordEntry(roomName, 'OpenSpace', clients[socket.id]['user']);
       updateCurrentScores(currentScores, {id: playerId, scoreChange: scoreRevealspace}, io, roomName, gameManager);
       io.to(roomName).emit('updateScore', {id: playerId, scoreChange: scoreRevealspace});
-      board.todos--;
     }
     if (board.minesLeft === 0){
       board.generate(20, 30);
