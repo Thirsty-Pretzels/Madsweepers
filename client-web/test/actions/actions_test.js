@@ -4,6 +4,11 @@ import * as actionCreator from '../../src/actions/index.js';
 
 describe('Test Unit for Action Creator' , () => {
 
+  it('returns payload using action creator template', () => {
+    var output = actionCreator.action('FOO', 'bar');
+    expect(output).to.deep.equal({ type: 'FOO', payload: 'bar' });
+  });
+
   it('when user tries to login the website, returns action with the username that user tries to Login with', () => {
   	let action = actionCreator.loginTempUser('ThirstyPretzelsRock');
 
