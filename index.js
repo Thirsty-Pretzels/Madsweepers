@@ -95,7 +95,6 @@ io.on('connection', function(socket){
   socket.on('danceParty', function(){
     var roomName = clients[socket.id]['roomName'];
     var myUserName = clients[socket.id].user;
-    io.to(roomName).emit('broadcast', myUserName + ' said: Sometimes, You just gotta dance!!!');
     dancePartyHandler(io, socket, gameManager, roomName, myUserName, users, clients);
   });
 
