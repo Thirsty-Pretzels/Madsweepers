@@ -63,7 +63,7 @@ Board.prototype.generate = function (n, m, d, timeStamp) {
 //reveal a tile
 Board.prototype.uncover = function(data, io, roomName, gameManager) {
   var score = 0;
-  console.log('io, ', io)
+  //set tile status to 2, check if mine, return appropriate score change
   if(this.board[data[1].y][data[1].x]['status'] === 0){
     this.board[data[1].y][data[1].x]['status'] = 2;
     if (this.board[data[1].y][data[1].x]['val'] === 9){
@@ -85,46 +85,39 @@ Board.prototype.uncover = function(data, io, roomName, gameManager) {
   return score;
 }
 
-Board.prototype.explode = function(x, y){
-  this.board[x][y]['status'] = 4;
-  this.board[x][y]['surface'] = null;
-  for (var i = -1; i < 2; i++){
-    for (var j = -1; j < 2; j++){
-      if (x + i >= 0 && x + i < this.board.length && y + j >= 0 && y + j < this.board[0].length){
-        this.board[x+i][y+j]['surface'] = null;
-      }
-    }
-  }
-}
-
-//generate loot on board
-Board.prototype.loot = function(x, y) {
-  var items = [{name: 'banana'}, {name: 'shield'}, {name: 'cannon'}];
-  this.board[x][y]['surface'] = items[Math.floor(Math.random * items.length)];
-}
-
 //flag a mine
-Board.prototype.flag = function(x, y){
-  this.board[x][y]['status'] = 1;
-  if (this.board[x][y]['val'] === 9) {
-    this.minesLeft --;
+Board.prototype.flag = function(data, io, roomName, gameManager, client) {
+  let score = 0;
+  var loc = data[1];
+  var status = 0;
+  var loot = ['ammo', 'shield', 'banana', 'party'];
+  if (this.board[loc.y][loc.x]['status'] !== 0){
+    return 0;
   }
-}
+  if (this.board[loc.y][loc.x]['val'] === 9) {
+    this.minesLeft --;
+    score = scoreRightFlag;
+    status = 1;
+    this.board[loc.y][loc.x]['status'] = 1;
+    if (Math.random() > .5 && Date.now() - client['wrongFlag'] > 1000){
+      loot = loot[Math.floor(Math.random() * loot.length)];
+      client['loot'][loot]++;
+      console.log('loot: ', client['loot'], loot, client.id);
+      io.to(client.id).emit('updateLoot', client['loot']);
+    }
 
-//unflag a mine, can only be performed by person who originally flagged.
-Board.prototype.unflag = function(x, y){
-  this.board[x][y]['status'] = 0;
-}
-
-//remove loot from board
-Board.prototype.unloot = function(x, y, loot){
-  var temp = this.board[x][y]['surface'];
-  this.board[x][y]['surface'] = null;
-  return temp;
-}
-
-Board.prototype.tileVal = function(x, y){
-  return this.board[x][y]['val'];
+  } else {
+    client['wrongFlag'] = Date.now();
+    score = scoreWrongFlag;
+    this.board[loc.y][loc.x]['status'] = 3;
+    status = 3;
+    setTimeout(()=>{
+      this.board[loc.y][loc.x]['status'] = 0;
+      io.to(roomName).emit('updateBoard', {'type': 1, 'locationX': data[1].x, 'locationY': data[1].y, 'status': 0});
+    }, 300)
+  }
+  io.to(roomName).emit('updateBoard', {'type': 1, 'locationX': data[1].x, 'locationY': data[1].y, 'status': status});
+  return score;
 }
 
 Board.prototype.placeBanana = function(x, y) {
@@ -139,29 +132,6 @@ Board.prototype.removeBanana = function(x, y) {
   console.log('removing', x, y)
   this.board[y][x]['surface']['banana'] = false;
 }
-
-// //get tallies for flagged mines
-// Board.prototype.tally = function(){
-//   var tallies = {};
-//   var name;
-//   var err = 0;
-//   for (var i = 0; i < this.board.length; i++){
-//     for (var j = 0; j < this.board[i].length; j++){
-//       name = this.board[i][j]['flaggedBy'];
-//       if (this.board[i][j]['val'] === 9 && name !== null){
-//         tallies[name] = tallies.hasOwnProperty(name) ? tallies[name] + 1 : 1;
-//       }
-//       if (this.board[i][j]['revealed'] === false && this.board[i][j]['val'] !== 9){
-//         err ++;
-//       }
-//     }
-//   }
-//   if (err) {
-//     this.todos = err;
-//     return err
-//   }
-//   return tallies;
-// }
 
 // uncomment to generate a sample board on startup
 // var hjk = new Board();
