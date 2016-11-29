@@ -154,10 +154,7 @@ io.on('connection', function(socket){
       io.to(socket.id).emit('bananaPlaced', {x: data.x, y: data.y});
       io.to(roomName).emit('broadcast', 'Be careful, ' + ['evil', 'sneaky', 'bad-ass'][Math.floor(Math.random()*3)] + ' '+ clients[socket.id].user + ' put a banana on the floor!');
     }
-<<<<<<< HEAD
-    io.to(roomName).emit('broadcast', 'Be careful, ' + ['evil', 'sneaky', 'bad-ass'][Math.floor(Math.random()*3)] + ' '+ clients[socket.id].user + ' just put a banana peal on the floor!');
-=======
->>>>>>> 1f2712f8ac4a0232b0429a1a25e7c20c344834e5
+
     io.to(socket.id).emit('updateLoot', clients[socket.id]['loot']);
   });
 
