@@ -142,7 +142,7 @@ io.on('connection', function(socket){
 
     setTimeout(function(){
       clients[socket.id]['stun'] = false;
-    }, 5000);
+    }, 2500);
 
   });
 
