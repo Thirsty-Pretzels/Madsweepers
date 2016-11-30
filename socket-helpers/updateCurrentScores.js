@@ -5,11 +5,11 @@ module.exports = function(currentScores, scoreChange, io, roomName, gameManger) 
   	if (currentScores[i].id === scoreChange.id) {
       console.log('current scores: ', currentScores)
   	  currentScores[i].scoreChange += scoreChange.scoreChange;
-      if (currentScores[i].scoreChange >= 100){
-        console.log('max score reached')
-        gameManger.endGame(roomName);
-        io.to(roomName).emit('endification', gameManger.endGame(roomName));
-      }
+      // if (currentScores[i].scoreChange >= 100){
+      //   console.log('max score reached')
+      //   gameManger.endGame(roomName);
+      //   io.to(roomName).emit('endification', gameManger.endGame(roomName));
+      // }
   	  break;
   	}
   }
