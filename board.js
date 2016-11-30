@@ -90,7 +90,7 @@ Board.prototype.flag = function(data, io, roomName, gameManager, client) {
   var score = 0;
   var loc = data[1];
   var status = 0;
-  var loot = [['ammo', 5], ['shield', 1, 'ammo', 2], ['shield', 1], ['banana', 2], ['party', 1]];
+  var loot = [['shield', 2], ['ammo', 10], ['ammo', 5], ['banana', 1, 'ammo', 2], ['party', 1, 'banana', 2] ['ammo', 2], ['shield', 1], ['banana', 2], ['party', 1]];
   if (this.board[loc.y][loc.x]['status'] !== 0){
     return 0;
   }
