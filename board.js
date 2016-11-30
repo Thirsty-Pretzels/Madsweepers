@@ -80,6 +80,8 @@ Board.prototype.uncover = function(data, io, roomName, gameManager) {
         io.to(roomName).emit('updateBoard', {type: 0, board: this.board});
       }, 300);
     }
+  } else {
+    return 0;
   }
   io.to(roomName).emit('updateBoard', {type: 1, locationX: data[1].x, locationY: data[1].y, status: 2});
   return score;
@@ -90,7 +92,7 @@ Board.prototype.flag = function(data, io, roomName, gameManager, client) {
   var score = 0;
   var loc = data[1];
   var status = 0;
-  var loot = [['shield', 2], ['ammo', 10], ['ammo', 5], ['banana', 1, 'ammo', 2], ['party', 1, 'banana', 2] ['ammo', 2], ['shield', 1], ['banana', 2], ['party', 1]];
+  var loot = _loot;
   if (this.board[loc.y][loc.x]['status'] !== 0){
     return 0;
   }
@@ -99,13 +101,13 @@ Board.prototype.flag = function(data, io, roomName, gameManager, client) {
     score = scoreRightFlag;
     status = 1;
     this.board[loc.y][loc.x]['status'] = 1;
+    gameManager.addRecordEntry(roomName, 'FlagRight', data[0]);
 
     if (Math.random() > .5 && Date.now() - client['wrongFlag'] > 1000){
       loot = loot[Math.floor(Math.random() * loot.length)];
       for (var i = 0; i < loot.length; i += 2){
         client['loot'][loot[i]] += loot[i + 1];
       }
-      gameManager.addRecordEntry(roomName, 'FlagRight', data[0]);
       io.to(client.id).emit('updateLoot', client['loot']);
     }
 

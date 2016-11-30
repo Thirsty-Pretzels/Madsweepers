@@ -30,6 +30,7 @@ global.scoreRevealspace = 1;
 global.scoreRightFlag = 10;
 global.scoreWrongFlag = -5;
 global.scoreGetShot = -3;
+global._loot = [['shield', 2], ['ammo', 10], ['ammo', 5], ['banana', 1, 'ammo', 2], ['party', 1, 'banana', 2] ['ammo', 2], ['shield', 1], ['banana', 2], ['party', 1]];
 
 // Create gameManager when server starts
 var gameManager = new GameManager();
@@ -171,9 +172,10 @@ io.on('connection', function(socket){
   socket.on('openSpace', function(data){
     var roomName = clients[socket.id]['roomName'];
     var score = gameManager.rooms[roomName].board.uncover(data, io, roomName, gameManager);
-    updateCurrentScores(gameManager.rooms[roomName]['currentScores'], {id: data[0], scoreChange: score}, io, roomName, gameManager);
-    io.to(roomName).emit('updateScore', {id: data[0], scoreChange: score});
-
+    if (score !== 0){
+      updateCurrentScores(gameManager.rooms[roomName]['currentScores'], {id: data[0], scoreChange: score}, io, roomName, gameManager);
+      io.to(roomName).emit('updateScore', {id: data[0], scoreChange: score});
+    }
     // openSpaceHandler(io, socket, clients, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, gameManager);
   });
 
