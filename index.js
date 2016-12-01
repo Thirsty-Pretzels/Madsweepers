@@ -7,6 +7,11 @@ var GameManager = require('./gameManager.js');
 // // To uncomment when running db
 // var {runDataBase, db, getHighScoresFromDb, saveHighScoresInDb} = require('./redis.js');
 
+// for aws health check
+app.get('*', (req, res) => {
+  res.send('welcome to madsweepers backend server');
+});
+
 // import helper function
 var loginTempUserHandler = require('./socket-helpers/loginTempUserHandler');
 var enterRoomHandler = require('./socket-helpers/enterRoomHandler');

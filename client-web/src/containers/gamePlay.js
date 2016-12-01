@@ -41,7 +41,8 @@ class GamePlay extends Component {
         </div>
       </div>
       :
-      <div>{ location.replace('http://localhost:8080') }</div>
+      //<div>{ location.replace('http://localhost:8080') }</div>
+      <div>{ location.replace('http://madsweepers-load-balancer-627185340.us-west-2.elb.amazonaws.com/') }</div>
     );
   }
 }
