@@ -1,5 +1,6 @@
 var Board = require('./board.js');
 var Players = require('./players.js');
+var {saveHighScoresInDb} = require('./db/redis.js')
 
 function createBoard(rows, columns, dangerFactor) {
   rows = rows ? rows : 20;
@@ -111,9 +112,11 @@ GameManager.prototype.startGame = function(roomName, io) {
     });
   }
   var checkify = () => {
-    if ((Date.now() - this.rooms[roomName].time) / 1000 >= 60){
+    if ((Date.now() - this.rooms[roomName].time) / 1000 >= 10){
       console.log('time\'s up');
       io.to(roomName).emit('endification', this.endGame(roomName));
+      console.log(JSON.stringify(saveHighScoresInDb));
+      saveHighScoresInDb(this.rooms[roomName].currentScores);
     } else {
       setTimeout(checkify, 1000);
     }

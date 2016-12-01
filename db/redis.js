@@ -34,11 +34,11 @@ var getHighScoresFromDb = (io) => {
 }
 
 var saveHighScoresInDb = (scores) => {
-  // finalScores: [ { id: 'mj', score: -15 } ]
+  // finalScores: [ { id: 'mj', scoreChange: -15 } ]
   console.log(scores, 'received scores to save into DB');
   // prevent function from executing if no scores are sent
-  if (scores) {
-    scores.forEach(({id, score}) => {db.zadd("leaderboard", score, id)});
+  if (scores.length > 0) {
+    scores.forEach(({id, scoreChange}) => {db.zadd("leaderboard", scoreChange, id)});
   }
 }
 
