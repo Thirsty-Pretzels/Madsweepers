@@ -40,7 +40,7 @@ class GamePlay extends Component {
         </div>
       </div>
       :
-      <div>{ location.replace('http://madsweepers-client-load-balancer-190463600.us-west-2.elb.amazonaws.com/') }</div>
+      <div>{ location.replace('http://www.madsweepers.com/') }</div>
     );
   }
 }
