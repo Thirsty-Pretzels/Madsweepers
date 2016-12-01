@@ -203,11 +203,12 @@ io.on('connection', function(socket){
     getHighScoresFromDb(io);
   });
 
-  socket.on('saveHighScores', function(scores){
-    //MJ: save scores, then broadcast new scores to everyone across rooms
-    saveHighScoresInDb(scores);
-    getHighScoresFromDb(io);
-  });
+  // socket.on('saveHighScores', function(scores){
+  //   console.log(scores, 'saving into db')
+  //   saveHighScoresInDb(scores);
+  //   //MJ: save scores, then broadcast new scores to everyone across rooms
+  //   //getHighScoresFromDb(io);
+  // });
 
   socket.on('disconnect', function(){
     var roomName = clients[socket.id]['roomName'];

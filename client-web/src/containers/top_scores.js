@@ -15,13 +15,6 @@ export class TopScores extends Component {
     });
   }
 
-  saveHighScore() {
-    var finalScores = this.props.scores; //finalScores: [ { id: 'mj', score: -15 } ]
-    console.log(finalScores, 'component sending final scores')
-    // save high scores in redis
-    socket.emit('saveHighScores', finalScores);
-  }
-
   renderScore() {
 
     var rows = [];
@@ -34,11 +27,6 @@ export class TopScores extends Component {
   }
 
   render() {
-
-    // To uncomment when running db
-    if (this.props.endification) {
-      this.saveHighScore();
-    }
 
     return (
       <div id='topScores'>
@@ -57,7 +45,6 @@ var mapStateToProps = (state) => {
   return {
     scores: state.scores,
     highScores: state.highScores,
-    endification: state.endification
   }
 };
 
