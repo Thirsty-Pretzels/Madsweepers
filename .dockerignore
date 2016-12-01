@@ -1,2 +1,10 @@
-node_modules
 npm-debug.log
+.git
+.gitignore
+.editorconfig
+node_modules
+*.log
+*.md
+client-web
+test
+documentation
