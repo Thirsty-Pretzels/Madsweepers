@@ -15,8 +15,6 @@ module.exports = function(io, socket, room, user, gameManager, users, clients, c
   io.to(room).emit('roomInfoUpdate', gameManager.roomDetail(room, users));
   io.emit('roomListUpdate', gameManager.listRoom());
 
-  // console.log('what is players\' locations', gameManager.rooms[room].players.playerLocations);
-  // gameManager.rooms[room].players.playerLocations.length !== 0 &&
   var playerList = Object.keys(gameManager.rooms[room].players.playerLocations);
   var isAllPlayersReady = playerList.length !==0 && playerList.reduce(function(a, b) {
     return a && gameManager.rooms[room].players.playerLocations[b].ready;

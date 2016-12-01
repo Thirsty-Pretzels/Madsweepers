@@ -8,15 +8,6 @@ module.exports = function(io, gameManager, players, currentScores, clients, sock
   io.to(clients[socket.id['roomName']]).emit('updateScore', currentScores);
   delete users[clients[socket.id]['user']];
   delete clients[socket.id];
-  // clients.forEach(function(x, i){
-  //   if (x['socket'] === socket){
-  //     players.removePlayer(x['playerId']);
-  //     clients.splice(i, 1);
-  //     // when one client is disconnected, delete his score in this set of game
-  //     // then emit to the client, force other client to update the newest scoreBoard
-  //     currentScores.splice(i, 1);
-  //     io.to(roomName).emit('updateScore', currentScores);
-  //   }
-  // });
+
   console.log('user disconnected');
 }

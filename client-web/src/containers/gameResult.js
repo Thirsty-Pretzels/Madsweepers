@@ -20,26 +20,24 @@ class GameResult extends Component {
   }
 
   render() {
-    const winnerScore = this.props.scores.sort((a, b) => a.score < b.score)[0];
+    const sortedScores = this.props.scores.sort((a, b) => a.score < b.score);
     return (
       <div className='gameResult'>
-        <h2>We have a winner!!</h2>
-        <p>{winnerScore.id} {winnerScore.score}</p>
         <button onClick={ this.leaveRoom.bind(this) }>leave room</button>
         <button onClick={ this.restart.bind(this) }>restart</button>
         { this.props.userInfo.isReady ? <p>Waiting for other player to be ready...</p> : null}
         <br />
-        <br />
-        <h3>Game Result</h3>
+        <h3>Game Result: </h3>
         <table className='gameResultTable'>
-          { Object.keys(this.props.gameResult).map((user) => 
+          { sortedScores.map(score =>
             <tr>
-              <td>{user}</td>
-              <td><img src='../../images/number.png' className='gameResultImage'/>x{ this.props.gameResult[user].OpenSpace ? this.props.gameResult[user].OpenSpace : 0 }</td>
-              <td><img src='../../images/assets/explosion.png' className='gameResultImage'/>x{ this.props.gameResult[user].StepOnMine ? this.props.gameResult[user].StepOnMine : 0 }</td>
-              <td><img src='../../images/assets/flag3Copy.png' className='gameResultImage'/>x{ this.props.gameResult[user].FlagRight ? this.props.gameResult[user].FlagRight : 0 }</td>
-              <td><img src='../../images/assets/x.png' className='gameResultImage'/>x{ this.props.gameResult[user].FlagWrong ? this.props.gameResult[user].FlagWrong : 0 }</td>
-              <td><img src='../../images/assets/arrowR.png' className='gameResultImage gameResultImageArrow'/>x{ this.props.gameResult[user].GetShot ? this.props.gameResult[user].GetShot : 0 }</td>
+              <td>{score.id}: </td>
+              <td>({score.score})</td>
+              <td><img src='../../images/number.png' className='gameResultImage'/>x{ this.props.gameResult[score.id].OpenSpace ? this.props.gameResult[score.id].OpenSpace : 0 }</td>
+              <td><img src='../../images/assets/explosion.png' className='gameResultImage'/>x{ this.props.gameResult[score.id].StepOnMine ? this.props.gameResult[score.id].StepOnMine : 0 }</td>
+              <td><img src='../../images/assets/flag3Copy.png' className='gameResultImage'/>x{ this.props.gameResult[score.id].FlagRight ? this.props.gameResult[score.id].FlagRight : 0 }</td>
+              <td><img src='../../images/assets/x.png' className='gameResultImage'/>x{ this.props.gameResult[score.id].FlagWrong ? this.props.gameResult[score.id].FlagWrong : 0 }</td>
+              <td><img src='../../images/assets/arrowR.png' className='gameResultImage gameResultImageArrow'/>x{ this.props.gameResult[score.id].GetShot ? this.props.gameResult[score.id].GetShot : 0 }</td>
             </tr>
           )}
         </table>
