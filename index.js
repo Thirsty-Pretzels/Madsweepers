@@ -35,6 +35,7 @@ global.scoreRevealspace = 1;
 global.scoreRightFlag = 10;
 global.scoreWrongFlag = -5;
 global.scoreGetShot = -3;
+global._loot = [['shield', 2], ['ammo', 10], ['ammo', 5], ['banana', 1, 'ammo', 2], ['party', 1, 'banana', 2] ['ammo', 2], ['shield', 1], ['banana', 2], ['party', 1]];
 
 // Create gameManager when server starts
 var gameManager = new GameManager();
@@ -113,10 +114,10 @@ io.on('connection', function(socket){
     const boardSize = [gameManager.rooms[roomName].board.board[0].length, gameManager.rooms[roomName].board.board.length];
     movePlayerHandler(io, roomName, gameManager.rooms[roomName].players, data, boardSize, clients, socket, gameManager.rooms[roomName].board);
 
-    if ((Date.now() - gameManager.rooms[roomName].board.time) / 1000 / 60 >= 1){
-      console.log('time\'s up');
-      io.to(roomName).emit('endification', gameManager.endGame(roomName));
-    }
+    // if ((Date.now() - gameManager.rooms[roomName].board.time) / 1000 / 60 >= 1){
+    //   console.log('time\'s up');
+    //   io.to(roomName).emit('endification', gameManager.endGame(roomName));
+    // }
   });
 
   socket.on('getStun', function(data){
@@ -153,6 +154,8 @@ io.on('connection', function(socket){
 
   socket.on('bananaOut', function(data){
     var roomName = clients[socket.id]['roomName'];
+
+    //check if the client has a banana and a banana can be placed, then place the banana
     if(clients[socket.id]['loot']['banana'] > 0 && gameManager.rooms[roomName].board.placeBanana(data.x, data.y)){
       clients[socket.id]['loot']['banana']--;
       io.to(socket.id).emit('bananaPlaced', {x: data.x, y: data.y});
@@ -162,7 +165,9 @@ io.on('connection', function(socket){
     io.to(socket.id).emit('updateLoot', clients[socket.id]['loot']);
   });
 
+
   socket.on('shoot', function(data){
+    //pick a random direction if direction is invalid
     if(data.direction < 1 || data.direction > 4 ){
       data.direction = Math.floor(Math.random() * 4) + 1;
     }
@@ -176,9 +181,10 @@ io.on('connection', function(socket){
   socket.on('openSpace', function(data){
     var roomName = clients[socket.id]['roomName'];
     var score = gameManager.rooms[roomName].board.uncover(data, io, roomName, gameManager);
-    updateCurrentScores(gameManager.rooms[roomName]['currentScores'], {id: data[0], scoreChange: score}, io, roomName, gameManager);
-    io.to(roomName).emit('updateScore', {id: data[0], scoreChange: score});
-
+    if (score !== 0){
+      updateCurrentScores(gameManager.rooms[roomName]['currentScores'], {id: data[0], scoreChange: score}, io, roomName, gameManager);
+      io.to(roomName).emit('updateScore', {id: data[0], scoreChange: score});
+    }
     // openSpaceHandler(io, socket, clients, roomName, gameManager.rooms[roomName].board, gameManager.rooms[roomName]['currentScores'], data, gameManager);
   });
 

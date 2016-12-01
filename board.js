@@ -68,20 +68,23 @@ Board.prototype.uncover = function(data, io, roomName, gameManager) {
     this.board[data[1].y][data[1].x]['status'] = 2;
     if (this.board[data[1].y][data[1].x]['val'] === 9){
       this.minesLeft --;
+      io.to(roomName).emit('countMines', [this.minesLeft, this.minesCount]);
       score = scoreRevealMine;
       gameManager.addRecordEntry(roomName, 'StepOnMine', data[0]);
     } else {
       score = scoreRevealspace;
       gameManager.addRecordEntry(roomName, 'OpenSpace', data[0]);
     }
-    if (this.minesLeft === 0){
-      this.generate(this.board.length, this.board[0].length);
-      setTimeout(function(){
-        io.to(roomName).emit('updateBoard', {type: 0, board: this.board});
-      }, 300);
-    }
+  } else {
+    return 0;
   }
-  io.to(roomName).emit('updateBoard', {type: 1, locationX: data[1].x, locationY: data[1].y, status: 2});
+  // io.to(roomName).emit('updateBoard', {type: 1, locationX: data[1].x, locationY: data[1].y, status: 2});
+  if (this.minesLeft === 0){
+    this.generate(this.board.length, this.board[0].length);
+    io.to(roomName).emit('updateBoard', {'type': 0, 'board': this.board});
+  } else {
+    io.to(roomName).emit('updateBoard', {type: 1, locationX: data[1].x, locationY: data[1].y, status: 2});
+  }
   return score;
 }
 
@@ -90,26 +93,26 @@ Board.prototype.flag = function(data, io, roomName, gameManager, client) {
   var score = 0;
   var loc = data[1];
   var status = 0;
-  var loot = ['ammo', 'shield', 'banana', 'party'];
+  var loot = _loot;
   if (this.board[loc.y][loc.x]['status'] !== 0){
     return 0;
   }
   if (this.board[loc.y][loc.x]['val'] === 9) {
     this.minesLeft --;
+    io.to(roomName).emit('countMines', [this.minesLeft, this.minesCount]);
+
     score = scoreRightFlag;
     status = 1;
     this.board[loc.y][loc.x]['status'] = 1;
+    gameManager.addRecordEntry(roomName, 'FlagRight', data[0]);
 
     if (Math.random() > .5 && Date.now() - client['wrongFlag'] > 1000){
       loot = loot[Math.floor(Math.random() * loot.length)];
-      client['loot'][loot]++;
-      if (loot === 'ammo'){
-        client['loot'][loot] += 4;
+      for (var i = 0; i < loot.length; i += 2){
+        client['loot'][loot[i]] += loot[i + 1];
       }
-      gameManager.addRecordEntry(roomName, 'FlagRight', data[0]);
       io.to(client.id).emit('updateLoot', client['loot']);
     }
-
   } else {
     client['wrongFlag'] = Date.now();
      gameManager.addRecordEntry(roomName, 'FlagWrong', data[0]);
@@ -122,7 +125,13 @@ Board.prototype.flag = function(data, io, roomName, gameManager, client) {
       io.to(roomName).emit('updateBoard', {'type': 1, 'locationX': data[1].x, 'locationY': data[1].y, 'status': 0});
     }, 300)
   }
-  io.to(roomName).emit('updateBoard', {'type': 1, 'locationX': data[1].x, 'locationY': data[1].y, 'status': status});
+  // io.to(roomName).emit('updateBoard', {'type': 1, 'locationX': data[1].x, 'locationY': data[1].y, 'status': status});
+  if (this.minesLeft === 0){
+    this.generate(this.board.length, this.board[0].length);
+    io.to(roomName).emit('updateBoard', {'type': 0, 'board': this.board});
+  } else {
+    io.to(roomName).emit('updateBoard', {'type': 1, 'locationX': data[1].x, 'locationY': data[1].y, 'status': status});
+  }
   return score;
 }
 
