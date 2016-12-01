@@ -72,16 +72,6 @@ GameManager.prototype.roomDetail = function(roomName, users, clients) {
 }
 
 GameManager.prototype.addRecordEntry = function(roomName, event, scorer) {
-  // Event List:
-  // 'OpenSpace':
-  // 'StepOnMine':
-  // 'FlagRight':
-  // 'FlagWrong':
-  // 'GetShot':
-  // 'PlaceBanana':
-  // 'StepOnBanana':
-  // 'Shield':
-  // 'FireDance':
   if (this.rooms[roomName].gameRecord[scorer][event]) {
     this.rooms[roomName].gameRecord[scorer][event]++;
   } else {
@@ -126,6 +116,7 @@ GameManager.prototype.endGame = function(roomName) {
 
   return this.rooms[roomName].gameRecord;
 }
+
 
 GameManager.prototype.removeRoom = function(roomName) {
   delete this.rooms[roomName];

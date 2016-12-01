@@ -17,9 +17,6 @@ var loginTempUserHandler = require('./socket-helpers/loginTempUserHandler');
 var enterRoomHandler = require('./socket-helpers/enterRoomHandler');
 var leaveRoomHandler = require('./socket-helpers/leaveRoomHandler');
 var toggleReadyHandler = require('./socket-helpers/toggleReadyHandler');
-
-var dropFlagHandler = require('./socket-helpers/dropFlagHandler');
-var openSpaceHandler = require('./socket-helpers/openSpaceHandler');
 var movePlayerHandler = require('./socket-helpers/movePlayerHandler');
 var disconnectHandler = require('./socket-helpers/disconnectHandler');
 var dancePartyHandler = require('./socket-helpers/dancePartyHandler');
