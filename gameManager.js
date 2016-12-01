@@ -95,7 +95,7 @@ GameManager.prototype.joinGame = function(roomName, scorer) {
   }
 }
 
-GameManager.prototype.startGame = function(roomName) {
+GameManager.prototype.startGame = function(roomName, io) {
   if ( this.rooms[roomName].gameStatus === 'staging' ) {
     const row = this.rooms[roomName].row;
     const col = this.rooms[roomName].col;
@@ -105,10 +105,20 @@ GameManager.prototype.startGame = function(roomName) {
     this.rooms[roomName].currentScores.forEach(score => score.scoreChange = 0);
     // when the game start, reset the game record
     this.rooms[roomName].gameRecord = {};
+    this.rooms[roomName].time = Date.now()
     this.rooms[roomName].players.listPlayers().forEach((username) => {
       this.rooms[roomName].gameRecord[username] = {};
     });
   }
+  var checkify = () => {
+    if ((Date.now() - this.rooms[roomName].time) / 1000 >= 60){
+      console.log('time\'s up');
+      io.to(roomName).emit('endification', this.endGame(roomName));
+    } else {
+      setTimeout(checkify, 1000);
+    }
+  }
+  setTimeout(checkify, 1000);
 };
 
 GameManager.prototype.endGame = function(roomName) {

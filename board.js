@@ -68,22 +68,21 @@ Board.prototype.uncover = function(data, io, roomName, gameManager) {
     this.board[data[1].y][data[1].x]['status'] = 2;
     if (this.board[data[1].y][data[1].x]['val'] === 9){
       this.minesLeft --;
+      io.to(roomName).emit('countMines', [this.minesLeft, this.minesCount]);
       score = scoreRevealMine;
       gameManager.addRecordEntry(roomName, 'StepOnMine', data[0]);
     } else {
       score = scoreRevealspace;
       gameManager.addRecordEntry(roomName, 'OpenSpace', data[0]);
     }
-    if (this.minesLeft === 0){
-      this.generate(this.board.length, this.board[0].length);
-      setTimeout(function(){
-        io.to(roomName).emit('updateBoard', {type: 0, board: this.board});
-      }, 300);
-    }
   } else {
     return 0;
   }
   io.to(roomName).emit('updateBoard', {type: 1, locationX: data[1].x, locationY: data[1].y, status: 2});
+  if (this.minesLeft === 0){
+    this.generate(this.board.length, this.board[0].length);
+    io.to(roomName).emit('updateBoard', {'type': 0, 'board': this.board});
+  }
   return score;
 }
 
@@ -98,6 +97,8 @@ Board.prototype.flag = function(data, io, roomName, gameManager, client) {
   }
   if (this.board[loc.y][loc.x]['val'] === 9) {
     this.minesLeft --;
+    io.to(roomName).emit('countMines', [this.minesLeft, this.minesCount]);
+
     score = scoreRightFlag;
     status = 1;
     this.board[loc.y][loc.x]['status'] = 1;
@@ -110,7 +111,6 @@ Board.prototype.flag = function(data, io, roomName, gameManager, client) {
       }
       io.to(client.id).emit('updateLoot', client['loot']);
     }
-
   } else {
     client['wrongFlag'] = Date.now();
      gameManager.addRecordEntry(roomName, 'FlagWrong', data[0]);
@@ -124,6 +124,10 @@ Board.prototype.flag = function(data, io, roomName, gameManager, client) {
     }, 300)
   }
   io.to(roomName).emit('updateBoard', {'type': 1, 'locationX': data[1].x, 'locationY': data[1].y, 'status': status});
+  if (this.minesLeft === 0){
+    this.generate(this.board.length, this.board[0].length);
+    io.to(roomName).emit('updateBoard', {'type': 0, 'board': this.board});
+  }
   return score;
 }
 
