@@ -78,10 +78,12 @@ Board.prototype.uncover = function(data, io, roomName, gameManager) {
   } else {
     return 0;
   }
-  io.to(roomName).emit('updateBoard', {type: 1, locationX: data[1].x, locationY: data[1].y, status: 2});
+  // io.to(roomName).emit('updateBoard', {type: 1, locationX: data[1].x, locationY: data[1].y, status: 2});
   if (this.minesLeft === 0){
     this.generate(this.board.length, this.board[0].length);
     io.to(roomName).emit('updateBoard', {'type': 0, 'board': this.board});
+  } else {
+    io.to(roomName).emit('updateBoard', {type: 1, locationX: data[1].x, locationY: data[1].y, status: 2});
   }
   return score;
 }
@@ -123,10 +125,12 @@ Board.prototype.flag = function(data, io, roomName, gameManager, client) {
       io.to(roomName).emit('updateBoard', {'type': 1, 'locationX': data[1].x, 'locationY': data[1].y, 'status': 0});
     }, 300)
   }
-  io.to(roomName).emit('updateBoard', {'type': 1, 'locationX': data[1].x, 'locationY': data[1].y, 'status': status});
+  // io.to(roomName).emit('updateBoard', {'type': 1, 'locationX': data[1].x, 'locationY': data[1].y, 'status': status});
   if (this.minesLeft === 0){
     this.generate(this.board.length, this.board[0].length);
     io.to(roomName).emit('updateBoard', {'type': 0, 'board': this.board});
+  } else {
+    io.to(roomName).emit('updateBoard', {'type': 1, 'locationX': data[1].x, 'locationY': data[1].y, 'status': status});
   }
   return score;
 }
