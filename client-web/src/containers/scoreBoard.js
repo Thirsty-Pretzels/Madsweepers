@@ -7,18 +7,19 @@ class ScoreBoard extends Component {
   renderScore() {
     return this.props.scores.sort((a, b) => a.score < b.score)
     .map(score => {
+      var id = score.id.length > 10 ? score.id.substring(0, 8) + '...' : score.id;
       if ( score.id === this.props.username ) {
         return (
           <div key={score.id} id='playerScore' className='scoreItem'>
             <div className='scoreboard-score'>{score.score} </div>
-            <div className='scoreboard-id'>{score.id}</div>
+            <div className='scoreboard-id'>{id}</div>
           </div>
         )
       } else {
         return (
           <div key={score.id} className='scoreItem'>
             <div className='scoreboard-score'>{score.score} </div>
-            <div className='scoreboard-id'>{score.id}</div>
+            <div className='scoreboard-id'>{id}</div>
           </div>
         )
       }

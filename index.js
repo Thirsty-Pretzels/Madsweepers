@@ -4,8 +4,12 @@ var io = require('socket.io')(http);
 // var Board = require('./board.js');
 // var Players = require('./players.js');
 var GameManager = require('./gameManager.js');
-// // To uncomment when running db
-// var {runDataBase, db, getHighScoresFromDb, saveHighScoresInDb} = require('./redis.js');
+// To uncomment when running db
+var {runDataBase, db, getHighScoresFromDb, saveHighScoresInDb} = require('./db/redis.js');
+
+// To uncomment when running db
+// MJ: initialize redisDatabase.
+runDataBase();
 
 // for aws health check
 app.get('*', (req, res) => {
@@ -21,10 +25,6 @@ var movePlayerHandler = require('./socket-helpers/movePlayerHandler');
 var disconnectHandler = require('./socket-helpers/disconnectHandler');
 var dancePartyHandler = require('./socket-helpers/dancePartyHandler');
 var updateCurrentScores = require('./socket-helpers/updateCurrentScores.js');
-
-// // To uncomment when running db
-// // MJ: initialize redisDatabase.
-// runDataBase();
 
 // define score amounts by each operation
 global.scoreRevealMine = -10;
@@ -200,11 +200,12 @@ io.on('connection', function(socket){
     getHighScoresFromDb(io);
   });
 
-  socket.on('saveHighScores', function(scores){
-    //MJ: save scores, then broadcast new scores to everyone across rooms
-    saveHighScoresInDb(scores);
-    getHighScoresFromDb(io);
-  });
+  // socket.on('saveHighScores', function(scores){
+  //   console.log(scores, 'saving into db')
+  //   saveHighScoresInDb(scores);
+  //   //MJ: save scores, then broadcast new scores to everyone across rooms
+  //   //getHighScoresFromDb(io);
+  // });
 
   socket.on('disconnect', function(){
     var roomName = clients[socket.id]['roomName'];

@@ -28,7 +28,7 @@ export class App extends Component {
           <div className="text-center" id='header-text'>
             {
               this.props.userInfo.inRoom && this.props.broadcast.refresh ?
-              this.props.broadcast.message :
+              <div className='broadcast'><image id='broadcastIcon'/>: { this.props.broadcast.message }</div> :
               <div><image id='MadIcon'/> Mad Sweepers</div>
             }
           </div>

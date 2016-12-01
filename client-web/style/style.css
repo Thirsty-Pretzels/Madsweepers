@@ -164,6 +164,19 @@ LOGIN
   content: url(../images/mad_icon.png);
 }
 
+#broadcastIcon {
+  width: 24px;
+  height: 24px;
+  size: cover;
+  z-index: 13;
+  content: url(../images/mad_icon.png);
+}
+
+.broadcast {
+  margin: 29px 0 28px 0;
+  font-size: 24px;
+}
+
 /* from this line: classes and ids from loginPage */
 .userProfile {
   display: inline-block;
