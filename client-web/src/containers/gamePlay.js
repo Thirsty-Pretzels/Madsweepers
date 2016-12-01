@@ -34,15 +34,13 @@ class GamePlay extends Component {
             ref="audio_tag"
             src="../../music/Mars.wav"
             autoPlay="autoplay"
-            // controls="controls"
             muted={ false }
             loop="loop"
           />
         </div>
       </div>
       :
-      //<div>{ location.replace('http://localhost:8080') }</div>
-      <div>{ location.replace('http://madsweepers-load-balancer-627185340.us-west-2.elb.amazonaws.com/') }</div>
+      <div>{ location.replace('http://madsweepers-client-load-balancer-190463600.us-west-2.elb.amazonaws.com/') }</div>
     );
   }
 }
