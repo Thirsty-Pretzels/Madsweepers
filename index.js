@@ -5,7 +5,7 @@ var io = require('socket.io')(http);
 // var Players = require('./players.js');
 var GameManager = require('./gameManager.js');
 // To uncomment when running db
-var {runDataBase, db, getHighScoresFromDb, saveHighScoresInDb} = require('./db/redis.js');
+var {runDataBase, db, getHighScoresFromDb} = require('./db/redis.js');
 
 // To uncomment when running db
 // MJ: initialize redisDatabase.
@@ -199,13 +199,6 @@ io.on('connection', function(socket){
   socket.on('getHighScores', function(){
     getHighScoresFromDb(io);
   });
-
-  // socket.on('saveHighScores', function(scores){
-  //   console.log(scores, 'saving into db')
-  //   saveHighScoresInDb(scores);
-  //   //MJ: save scores, then broadcast new scores to everyone across rooms
-  //   //getHighScoresFromDb(io);
-  // });
 
   socket.on('disconnect', function(){
     var roomName = clients[socket.id]['roomName'];
