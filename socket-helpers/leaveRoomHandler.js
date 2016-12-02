@@ -22,7 +22,7 @@ module.exports = function(io, socket, room, user, gameManager, users, clients, c
 
   if(isAllPlayersReady) {
     // calculate board size
-    gameManager.startGame(room);
+    gameManager.startGame(room, io);
 
     console.log('trying to restart the game for room ', room);
 
