@@ -1,0 +1,6 @@
+npm-debug.log
+.git
+.gitignore
+.editorconfig
+*.log
+*.md
