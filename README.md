@@ -1,32 +1,34 @@
-# Project Name
-
-MadSweeper
-
-## Team
-
-  - __Product Owner__: Tim Zeng
-  - __Scrum Master__: Bruce Yang
-  - __Development Team Members__: MJ Png, David Minehan
+# MadSweeper
+Demo: www.madsweepers.com
 
 ## Table of Contents
 
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
-1. [Team](#team)
-1. [Contributing](#contributing)
+1. [Game](#Game)
+2. [Stack](#stack)
+3. [Development](#development)
+  -  [Installing Dependencies](#installing-dependencies)
+4. [Team](#team)
+5. [Contributing](#contributing)
 
-## Usage
+## Game
 
-Connect to the server and play!  Use the arrow keys to move, space to reveal tiles and 'f' to mark mines.
+Connect and play minesweeper on steroids! Multi-player, sabotage your friends edition.
 
-## Requirements
+- Arrow keys to move
+- Space to reveal tiles
+- 'a' to make the other players dance
+- 's' to plant a banana
+- 'd' to shoot bullets
+- 'f' to mark mines.
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
+[insert gif here]
+
+
+## Stack
+
+- Front End: React, Redux, Babel, Webpack
+- Back End: Node, Express, Socket.io
+- Test Suite: Chai, Mocha, Sinon, JsDom
 
 ## Development
 
@@ -36,17 +38,21 @@ From within the root directory:
 
 ```sh
 npm install
+npm start
 ```
 
 From within the client-web directory:
 
 ```sh
 npm install
+npm run dev
 ```
 
-### Roadmap
+## Team
 
-View the project roadmap [here](https://github.com/Thirsty-Pretzels/thesis/issues)
+  - __Product Owner__: Tim Zeng
+  - __Scrum Master__: Bruce Yang
+  - __Development Team Members__: MJ Png, David Minehan
 
 
 ## Contributing
