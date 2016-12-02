@@ -105,7 +105,7 @@ GameManager.prototype.startGame = function(roomName, io) {
     if ((Date.now() - this.rooms[roomName].time) / 1000 >= 60){
       console.log('time\'s up');
       io.to(roomName).emit('endification', this.endGame(roomName));
-      saveHighScoresInDb(this.rooms[roomName].currentScores);
+      // saveHighScoresInDb(this.rooms[roomName].currentScores);
     } else {
       setTimeout(checkify, 1000);
     }
