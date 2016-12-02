@@ -3,7 +3,8 @@ var bluebird = require("bluebird");
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
-var db = redis.createClient();
+// default way of connecting to host files
+var db = redis.createClient('6379', 'redis');
 
 var runDataBase = () => {
   // if you'd like to select database 3, instead of 0 (default), call
