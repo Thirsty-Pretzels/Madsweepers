@@ -1,5 +1,9 @@
 module.exports = function(io, socket, room, user, gameManager, users, currentScores, clients) {
   console.log('new user enter room');
+  if (!gameManager.rooms.hasOwnProperty(room)){
+    io.to(socket.id).emit('roomListUpdate', gameManager.listRoom());
+    return;
+  }
   gameManager.rooms[room].players.addPlayer(user);
   gameManager.joinGame(room, user);
   socket.join(room);
