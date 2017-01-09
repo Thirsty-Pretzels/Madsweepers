@@ -37,8 +37,8 @@ global._loot = [['shield', 2], ['ammo', 10], ['ammo', 5], ['banana', 1, 'ammo', 
 // Create gameManager when server starts
 var gameManager = new GameManager();
 // Generate two default rooms
-gameManager.createRoom('HR48');
-gameManager.createRoom('Trump Not President');
+gameManager.createRoom('HR48', true);
+gameManager.createRoom('Trump Not President', true);
 // This keeps track of active player and its socket
 
 var clients = {'template': {'roomName': null, 'wrongFlag': 0, 'user': null, 'id': null, 'loot': {'banana': 1, 'ammo': 10, 'shield': 0, 'party': 0}, 'stun': false}};
