@@ -14,17 +14,17 @@ module.exports = function(io, socket, room, user, gameManager, users, clients, c
     return a && gameManager.rooms[room].players.playerLocations[b].ready;
   }, true);
 
-  if (!playerList.length && !gameManager.rooms[room].defau) {
-    setTimeout(function(){
-      if (!gameManager.rooms.hasOwnProperty(room)){
-        return;
-      }
-      if (!Object.keys(gameManager.rooms[room].players.playerLocations).length) {
-        delete gameManager.rooms[room];
-        io.emit('roomListUpdate', gameManager.listRoom());
-      }
-    }, 60000);
-  }
+  // if (!playerList.length && !gameManager.rooms[room].defau) {
+  //   setTimeout(function(){
+  //     if (!gameManager.rooms.hasOwnProperty(room)){
+  //       return;
+  //     }
+  //     if (!Object.keys(gameManager.rooms[room].players.playerLocations).length) {
+  //       delete gameManager.rooms[room];
+  //       io.emit('roomListUpdate', gameManager.listRoom());
+  //     }
+  //   }, 60000);
+  // }
 
   socket.emit('allPlayersReady', false);
   socket.emit('hasLeftRoom', room);
