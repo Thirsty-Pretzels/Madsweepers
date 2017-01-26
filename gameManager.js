@@ -102,7 +102,11 @@ GameManager.prototype.startGame = function(roomName, io) {
     });
   }
   var checkify = () => {
-    if (this.rooms.hasOwnProperty(roomName) && (Date.now() - this.rooms[roomName].time) / 1000 >= 60){
+    if (!this.rooms.hasOwnProperty(roomName)){
+      return;
+    }
+
+    if ((Date.now() - this.rooms[roomName].time) / 1000 >= 60){
       console.log('time\'s up');
       io.to(roomName).emit('endification', this.endGame(roomName));
       saveHighScoresInDb(this.rooms[roomName].currentScores);
