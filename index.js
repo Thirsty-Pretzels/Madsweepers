@@ -83,7 +83,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('createNewRoom', (info) => {
-    gameManager.createRoom(info.roomName, info.row, info.col, info.mineDensity, io, socket.id);
+    gameManager.createRoom(info.roomName, false, info.row, info.col, info.mineDensity, io, socket.id);
     io.emit('roomListUpdate', gameManager.listRoom());
   });
 
