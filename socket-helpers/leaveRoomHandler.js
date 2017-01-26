@@ -9,16 +9,20 @@ module.exports = function(io, socket, room, user, gameManager, users, clients, c
   currentScores = currentScores.reduce(function(a,c){ return c['id'] === clients[socket.id]['user'] ? a : a.concat(c) }, []);
   gameManager['rooms'][clients[socket.id]['roomName']]['currentScores'] = currentScores;
 
+  var playerList = Object.keys(gameManager.rooms[room].players.playerLocations);
+  var isAllPlayersReady = !!playerList.length && playerList.reduce(function(a, b) {
+    return a && gameManager.rooms[room].players.playerLocations[b].ready;
+  }, true);
+
+  if (!playerList.length && !gameManager.rooms[room].default) {
+    delete gameManager.rooms[room];
+  }
+
   socket.emit('allPlayersReady', false);
   socket.emit('hasLeftRoom', room);
 
   io.to(room).emit('roomInfoUpdate', gameManager.roomDetail(room, users));
   io.emit('roomListUpdate', gameManager.listRoom());
-
-  var playerList = Object.keys(gameManager.rooms[room].players.playerLocations);
-  var isAllPlayersReady = playerList.length !==0 && playerList.reduce(function(a, b) {
-    return a && gameManager.rooms[room].players.playerLocations[b].ready;
-  }, true);
 
   if(isAllPlayersReady) {
     // calculate board size
