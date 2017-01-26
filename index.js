@@ -41,7 +41,10 @@ gameManager.createRoom('HR48', true);
 gameManager.createRoom('Trump Not President', true);
 // This keeps track of active player and its socket
 
-var clients = {'template': {'roomName': null, 'wrongFlag': 0, 'user': null, 'id': null, 'loot': {'banana': 1, 'ammo': 10, 'shield': 0, 'party': 0}, 'stun': false}};
+var clients = {};
+/*
+  {'template': {'roomName': null, 'wrongFlag': 0, 'user': null, 'id': null, 'loot': {'banana': 1, 'ammo': 10, 'shield': 0, 'party': 0}, 'stun': false}}
+*/
 
 // This keeps track of active users and its socket
 var users = {};
@@ -214,5 +217,16 @@ var port = process.env.PORT || 3000;
 http.listen(port, function(){
   console.log(`IAM listening on *:${port}, AMA`);
 });
+
+setInterval(function(){
+  if (!Object.keys(users).length){
+    var rooms = Object.keys(gameManager.rooms);
+    rooms.forEach(function(room){
+      if (!gameManager.rooms[room].defau){
+        delete gameManager.rooms[room]
+      }
+    })
+  }
+}, (1000 /* * 60 * 60 * 4 */))
 
 // module.exports = board;
