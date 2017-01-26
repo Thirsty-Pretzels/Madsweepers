@@ -24,7 +24,7 @@ var GameManager = function() {
   this.roomCount = 0;
 };
 
-GameManager.prototype.createRoom = function(roomName, default, row, col, dangerFactor, io, id) {
+GameManager.prototype.createRoom = function(roomName, defau, row, col, dangerFactor, io, id) {
 
   var players = createPlayers();
   var currentScores = [];
@@ -36,7 +36,7 @@ GameManager.prototype.createRoom = function(roomName, default, row, col, dangerF
     roomName = roomName.split('').filter(function(a){
       return a.match(/[A-Z]/gi) || a === ' ';
     }).join('');
-    this.rooms[roomName] = {row, col, default, dangerFactor, players, currentScores, gameRecord, gameStatus};
+    this.rooms[roomName] = {row, col, defau, dangerFactor, players, currentScores, gameRecord, gameStatus};
   } else {
     io.to(id).emit('badRoomName');
   }
