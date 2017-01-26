@@ -16,7 +16,10 @@ module.exports = function(io, socket, room, user, gameManager, users, clients, c
 
   if (!playerList.length && !gameManager.rooms[room].defau) {
     setTimeout(function(){
-      if (!playerList.length && !gameManager.rooms[room].defau) {
+      if (!gameManager.rooms.hasOwnProperty(room)){
+        return;
+      }
+      if (!Object.keys(gameManager.rooms[room].players.playerLocations).length) {
         delete gameManager.rooms[room];
         io.emit('roomListUpdate', gameManager.listRoom());
       }
