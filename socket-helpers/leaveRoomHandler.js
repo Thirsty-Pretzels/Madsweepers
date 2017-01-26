@@ -15,12 +15,12 @@ module.exports = function(io, socket, room, user, gameManager, users, clients, c
   }, true);
 
   if (!playerList.length && !gameManager.rooms[room].defau) {
-    setTimeout(60000, function(){
+    setTimeout(function(){
       if (!playerList.length && !gameManager.rooms[room].defau) {
         delete gameManager.rooms[room];
         io.emit('roomListUpdate', gameManager.listRoom());
       }
-    })
+    }, 60000);
   }
 
   socket.emit('allPlayersReady', false);
